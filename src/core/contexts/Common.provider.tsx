@@ -1,0 +1,74 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { API } from "@core/api"
+import { useApp } from "@core/stores"
+import { AppRoutes } from "@core/utilities"
+import type { FC, ReactNode } from "react"
+import { createContext, useContext } from "react"
+import { useNavigate } from "react-router-dom"
+
+interface I_Props {
+    children: ReactNode
+}
+
+interface I_Context {
+    fetchCurrentUser: Function
+    fetchParkingInfo: Function
+}
+
+const Initials: I_Context = {
+    fetchCurrentUser: () => undefined,
+    fetchParkingInfo: () => undefined,
+}
+
+const Context = createContext<I_Context>(Initials)
+
+const useCommon = () => useContext(Context)
+
+const CommonProvider: FC<I_Props> = ({ children }) => {
+    // States and Hooks
+    const { setCurrentUser, setPermissions, setParking } = useApp()
+    const navigate = useNavigate()
+
+    // Methods
+    const fetchCurrentUser = async () => {
+        const { data, error } = await API.User.CurrentUser()
+        if (data) {
+            setCurrentUser(data.currentUser)
+
+            // TODO: Uncomment after API integration
+            // const permissions = data.currentUser.role.permissions.map(_ => _.link)
+
+            const permissions = [
+                "/",
+                "/management/users/list",
+                "/management/owners/list",
+                "/vehicles/list",
+                "/reports/traffic/list",
+                "/settings/software/list",
+                "/settings/devices/list",
+                "/settings/pos/list",
+            ]
+            setPermissions(permissions)
+        }
+        if (error) {
+            setPermissions([])
+            navigate(AppRoutes.auth.login, { replace: true })
+        }
+    }
+
+    const fetchParkingInfo = async () => {
+        const { data } = await API.Parking.ParkingInfo()
+        if (data) setParking(data.parkingInfo)
+    }
+
+    // Data binding
+    const value = {
+        fetchCurrentUser,
+        fetchParkingInfo,
+    }
+
+    // Render
+    return <Context.Provider value={value}>{children}</Context.Provider>
+}
+
+export { CommonProvider, useCommon }

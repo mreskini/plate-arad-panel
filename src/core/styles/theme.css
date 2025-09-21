@@ -1,0 +1,116 @@
+@import "tailwindcss" important;
+
+@theme {
+    /* Button [Primary] */
+    --color-button-primary-bg: var(--color-blue-500);
+    --color-button-primary-border: var(--color-blue-500);
+    --color-button-primary-text: var(--color-white);
+    --color-button-primary-outline-text: var(--color-blue-500);
+
+    /* Button [Primary] Hover */
+    --color-button-primary-bg-hover: var(--color-blue-700);
+    --color-button-primary-border-hover: var(--color-blue-700);
+    --color-button-primary-text-hover: var(--color-white);
+
+    /* Button [Primary] Disabled */
+    --color-button-primary-bg-disabled: var(--color-zinc-400);
+    --color-button-primary-border-disabled: var(--color-zinc-400);
+    --color-button-primary-text-disabled: var(--color-white);
+    --color-button-primary-text-outline-disabled: var(--color-zinc-400);
+
+    /* Button [Red] */
+    --color-button-red-bg: var(--color-red-400);
+    --color-button-red-border: var(--color-red-400);
+    --color-button-red-text: var(--color-white);
+    --color-button-red-outline-text: var(--color-red-400);
+
+    /* Button [Red] Hover */
+    --color-button-red-bg-hover: var(--color-red-600);
+    --color-button-red-border-hover: var(--color-red-600);
+    --color-button-red-text-hover: var(--color-white);
+
+    /* Button [Red] Disabled */
+    --color-button-red-bg-disabled: var(--color-zinc-400);
+    --color-button-red-border-disabled: var(--color-zinc-400);
+    --color-button-red-text-disabled: var(--color-white);
+    --color-button-red-text-outline-disabled: var(--color-zinc-400);
+
+    /* Button [Gray-Outline] */
+    --color-button-gray-border: var(--color-slate-300);
+    --color-button-gray-outline-text: var(--color-slate-500);
+
+    /* Button [Gray-Outline] Hover */
+    --color-button-gray-border-hover: var(--color-slate-700);
+    --color-button-gray-text-hover: var(--color-slate-700);
+
+    /* Button [Gray-Outline] Disabled */
+    --color-button-gray-border-disabled: var(--color-zinc-300);
+    --color-button-gray-text-outline-disabled: var(--color-zinc-300);
+
+    /* Button [White] */
+    --color-button-white-bg: var(--color-white);
+    --color-button-white-border: var(--color-white);
+    --color-button-white-text: var(--color-blue-500);
+
+    /* Button [White] Hover */
+    --color-button-white-bg-hover: var(--color-zinc-200);
+    --color-button-white-border-hover: var(--color-zinc-200);
+    --color-button-white-text-hover: var(--color-blue-700);
+
+    /* Button [White] Disabled */
+    --color-button-white-bg-disabled: var(--color-zinc-400);
+    --color-button-white-border-disabled: var(--color-zinc-400);
+    --color-button-white-text-disabled: var(--color-white);
+
+    /* Button [Ghost] */
+    --color-button-ghost-text: var(--color-zinc-800);
+
+    /* Button [Ghost] Hover */
+    --color-button-ghost-text-hover: var(--color-zinc-500);
+
+    /* Button [Ghost] Disabled */
+    --color-button-ghost-text-disabled: var(--color-zinc-500);
+
+    /* Progress Bar */
+    --color-progress-track-empty: var(--color-blue-200);
+    --color-progress-track-filled: var(--color-blue-500);
+    --color-progress-indicator-fill: var(--color-blue-500);
+    --color-progress-indicator-border: var(--color-white);
+
+    /* Switch */
+    --color-switch-unchecked-fill: var(--color-stone-300);
+    --color-switch-unchecked-fill-disabled: var(--color-stone-200);
+    --color-switch-checked-fill: var(--color-blue-500);
+    --color-switch-checked-fill-disabled: var(--color-blue-200);
+    --color-switch-handle-fill: var(--color-white);
+    --color-switch-unchecked-handle-border: var(--color-white);
+    --color-switch-checked-handle-border: var(--color-white);
+
+    /* Spinner */
+    --color-spinner-track-primary: var(--color-white);
+    --color-spinner-fill-primary: var(--color-zinc-500);
+    --color-spinner-track-light: var(--color-zinc-400);
+    --color-spinner-fill-light: var(--color-zinc-100);
+
+    /* Table */
+    --color-table-head-bg: var(--color-white);
+    --color-table-head-text: var(--color-neutral-400);
+    --color-table-row-bg: var(--color-white);
+    --color-table-row-text: var(--color-neutral-800);
+    --color-table-row-striped-bg: var(--color-neutral-50);
+    --color-table-row-striped-text: var(--color-neutral-800);
+
+    /* Toast */
+    --color-toast-container-success-bg: var(--color-emerald-600);
+    --color-toast-container-error-bg: var(--color-red-500);
+    --color-toast-container-warning-bg: var(--color-amber-500);
+    --color-toast-container-info-bg: var(--color-blue-600);
+    --color-toast-container-success-text: var(--color-zinc-50);
+    --color-toast-container-error-text: var(--color-zinc-50);
+    --color-toast-container-warning-text: var(--color-zinc-50);
+    --color-toast-container-info-text: var(--color-zinc-50);
+    --color-toast-progress-success-fill: #FAFAFA;
+    --color-toast-progress-error-fill: #FAFAFA;
+    --color-toast-progress-warning-fill: #FAFAFA;
+    --color-toast-progress-info-fill: #FAFAFA;
+}

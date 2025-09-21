@@ -1,0 +1,14 @@
+query ParkingInfo {
+  parkingInfo {
+    name
+    code
+    capacity
+    cash_adjustment
+    card_issuance_fee
+    default_cash_group {
+      token
+      title
+      type
+    }
+  }
+}

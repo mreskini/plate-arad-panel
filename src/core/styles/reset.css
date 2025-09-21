@@ -1,0 +1,155 @@
+* {
+    font-family: "IRANSansX";
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    direction: rtl !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    outline: none;
+    border: none;
+    padding: 0px;
+    background-color: transparent;
+}
+
+svg {
+    display: flex;
+}
+
+input.plate-number-input {
+    direction: ltr !important;
+    font-family: "IRANSansX-FaNum" !important;
+}
+
+input.number-input {
+    font-family: "IRANSansX-FaNum" !important;
+}
+
+.font-num-fa {
+    font-family: "IRANSansX-FaNum" !important;
+}
+
+.Toastify__progress-bar {
+    opacity: 1 !important;
+}
+
+.Toastify__progress-bar--success {
+    background: var(--color-toast-progress-success-fill) !important;
+}
+
+.Toastify__progress-bar--error {
+    background: var(--color-toast-progress-error-fill) !important;
+}
+
+.Toastify__progress-bar--warning {
+    background: var(--color-toast-progress-warning-fill) !important;
+}
+
+.Toastify__progress-bar--info {
+    background: var(--color-toast-progress-info-fill) !important;
+}
+
+.rdt_Pagination {
+    justify-content: center !important;
+}
+
+.rdt_Pagination > span {
+    padding-top: 2px !important;
+}
+
+.rmdp-input {
+    @apply w-full focus:shadow-none focus:outline-0 rounded-md border border-solid border-neutral-300 bg-white py-5 my-0 px-4 text-base font-light text-neutral-800 outline-none placeholder:text-base placeholder:font-light placeholder:text-neutral-300 focus:border-blue-300 focus:outline-none disabled:bg-zinc-100 disabled:text-neutral-300;
+}
+
+.rmdp-day.rmdp-today span {
+    @apply bg-blue-200;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+    @apply shadow-none;
+}
+
+.rmdp-time-picker {
+    direction: ltr !important;
+}
+
+.rmdp-h3,
+.rmdp-h6,
+.rmdp-h9,
+.rmdp-h12 {
+    font-family: "IRANSansX" !important;
+    font-size: 12px !important;
+}
+
+.rmdp-hour {
+    @apply bg-blue-400;
+}
+
+.rmdp-minute {
+    @apply bg-blue-200;
+}
+
+.rmdp-analog-clock {
+    @apply border border-dashed border-blue-500 bg-white;
+}
+
+
+.rmdp-analog-clock > div > div.dial-lines {
+    display: none !important;
+}
+
+.rmdp-time-picker > div > input {
+    @apply w-8;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+/* Other numbers */
+.ip-flex p {
+    font-family: "IranSansNumber" !important;
+    font-weight: 600 !important;
+    @apply text-[40px];
+}
+
+/* Letter code */
+.ip-flex.ip-flex-col.ip-h-full.ip-leading-none.ip-justify-center p{
+    @apply text-2xl;
+}
+
+/* City code */
+.ip-grid.ip-h-fit.ip-px-1  p{
+    @apply text-4xl leading-0;
+}
+
+/* White text */
+.ip-w-full.ip-flex.ip-flex-col.ip-items-start.ip-mt-auto.ip-text-white{
+    display: none !important;
+}
+
+.ip-grid svg{
+    width: 45px;
+    height: 10px;
+}

@@ -1,0 +1,5 @@
+/node_modules/
+**/generated
+codegen.ts
+/dist/*
+vite.config.ts

@@ -1,0 +1,110 @@
+import { Button, Text } from "@components/template"
+import { useApp, useLayout } from "@core/stores"
+import { AppRoutes, Icons, Images } from "@core/utilities"
+import clsx from "clsx"
+import { LogoutCurve } from "iconsax-reactjs"
+import { intersection } from "lodash"
+import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
+import type { T_MenuCategory } from "./static"
+import { HeaderItems, SidebarItems } from "./static"
+
+export const Header = () => {
+    // States and hooks
+    const navigate = useNavigate()
+    const { currentUser, parking, permissions } = useApp()
+    const [parkingName, setParkingName] = useState(parking?.name ?? "")
+    const { setIsSidebarOverlayOpen, category, setCategory, isAuthenticating } = useLayout()
+    const fullname = currentUser?.fullname ?? ""
+
+    // Methods
+    const isCategoryAvailable = (cat: T_MenuCategory): boolean => {
+        const sidebarItem = SidebarItems.find(_ => _.category === cat)!
+
+        const links = sidebarItem.items.flatMap(_ => {
+            if (_.link) return _.link
+            if (_.subItems) return _.subItems?.filter($ => !$.hidden).map($ => $.link)
+            return ""
+        })
+
+        const common = intersection<string>(links, permissions)
+
+        return common.length !== 0
+    }
+
+    const headerItems = HeaderItems.filter(_ => isCategoryAvailable(_.category))
+
+    useEffect(() => {
+        if (parking) setParkingName(parking.name)
+    }, [parking])
+
+    // Render
+    return (
+        <div className="relative z-50 flex items-center justify-between px-4 pt-6 lg:px-8 lg:py-[31px] border-b border-zinc-200 bg-zinc-50">
+            {isAuthenticating && (
+                <>
+                    <div className="bg-zinc-200 w-4xl h-[42px] rounded-xl animate-pulse" />
+                    <div className="bg-zinc-200 w-48 h-[42px] rounded-xl animate-pulse" />
+                </>
+            )}
+
+            {!isAuthenticating && (
+                <>
+                    <div className="flex items-center gap-2">
+                        <Button variant="ghost" onClick={() => setIsSidebarOverlayOpen(true)} className="lg:hidden">
+                            <img src={Icons.HamburgerMenu} alt="Hamburger menu icon" className="size-8" />
+                        </Button>
+                    </div>
+
+                    <div className="flex items-center justify-start grow">
+                        {headerItems.map(_ => {
+                            const isActive = _.category === category
+                            return (
+                                <Button
+                                    key={_.titleContentKey}
+                                    variant="ghost"
+                                    onClick={() => setCategory(_.category)}
+                                    className={clsx([
+                                        "first:ps-0 last:pe-0 border-0 last:border-e-0",
+                                        "px-5 border-e border-neutral-300 flex items-center gap-2",
+                                        isActive ? "text-blue-500" : "text-zinc-600",
+                                    ])}
+                                >
+                                    <div>{_.icon}</div>
+                                    <Text contentKey={_.titleContentKey} ns="common" variant="button" />
+                                </Button>
+                            )
+                        })}
+                    </div>
+
+                    <Button
+                        variant="ghost"
+                        className="flex items-center gap-6"
+                        onClick={() => navigate(AppRoutes.logout)}
+                    >
+                        <div className={clsx(["flex size-10 items-center justify-center rounded-full lg:me-2"])}>
+                            <img src={Images.UserProfilePlaceholder} alt="User profile placeholder" />
+                        </div>
+                        <div>
+                            <div className="me-3 hidden flex-col items-start lg:flex">
+                                <Text
+                                    content={fullname}
+                                    variant="meta-1"
+                                    className="block text-neutral-600"
+                                    weight={600}
+                                />
+                            </div>
+                            <div className="me-3 hidden flex-col items-start lg:flex">
+                                <Text content={parkingName} variant="meta-2" className="block text-blue-500" />
+                            </div>
+                        </div>
+                        <Link to={AppRoutes.logout} className="flex items-center justify-center">
+                            <LogoutCurve className="text-neutral-600" />
+                        </Link>
+                    </Button>
+                </>
+            )}
+        </div>
+    )
+}
