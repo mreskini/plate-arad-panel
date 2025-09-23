@@ -1,0 +1,65 @@
+name: CI | CD Pipeline (Main)
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DEPLOY_HOST: ${{ secrets.SSH_HOST }}
+  DEPLOY_USER: ${{ secrets.SSH_USER }}
+  DEPLOY_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+  DEPLOY_DIR: "/home/arad-plate-panel"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add GitHub SSH Key to Agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_GITHUB_KEY }}
+
+      - name: SSH & Deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ env.DEPLOY_DIR }}
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/plate-arad-panel-github
+            git pull origin main
+
+      - name: Install deps
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ env.DEPLOY_DIR }}
+            npm install
+
+      - name: Building the app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ env.DEPLOY_DIR }}
+            npm run build
+
+      - name: Restart or start app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ env.DEPLOY_DIR }}
+            npm run build
+            rm -rf /var/www/html/arad-plate-panel/*
+            cp -r dist/* /var/www/html/arad-plate-panel/
