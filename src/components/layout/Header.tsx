@@ -3,38 +3,18 @@ import { useApp, useLayout } from "@core/stores"
 import { AppRoutes, Icons, Images } from "@core/utilities"
 import clsx from "clsx"
 import { LogoutCurve } from "iconsax-reactjs"
-import { intersection } from "lodash"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
-import type { T_MenuCategory } from "./static"
-import { HeaderItems, SidebarItems } from "./static"
 
 export const Header = () => {
     // States and hooks
     const navigate = useNavigate()
-    const { currentUser, parking, permissions } = useApp()
+    const { currentUser, parking } = useApp()
     const [parkingName, setParkingName] = useState(parking?.name ?? "")
-    const { setIsSidebarOverlayOpen, category, setCategory, isAuthenticating } = useLayout()
+    const { setIsSidebarOverlayOpen, isAuthenticating } = useLayout()
     const fullname = currentUser?.fullname ?? ""
 
     // Methods
-    const isCategoryAvailable = (cat: T_MenuCategory): boolean => {
-        const sidebarItem = SidebarItems.find(_ => _.category === cat)!
-
-        const links = sidebarItem.items.flatMap(_ => {
-            if (_.link) return _.link
-            if (_.subItems) return _.subItems?.filter($ => !$.hidden).map($ => $.link)
-            return ""
-        })
-
-        const common = intersection<string>(links, permissions)
-
-        return common.length !== 0
-    }
-
-    const headerItems = HeaderItems.filter(_ => isCategoryAvailable(_.category))
-
     useEffect(() => {
         if (parking) setParkingName(parking.name)
     }, [parking])
@@ -55,27 +35,6 @@ export const Header = () => {
                         <Button variant="ghost" onClick={() => setIsSidebarOverlayOpen(true)} className="lg:hidden">
                             <img src={Icons.HamburgerMenu} alt="Hamburger menu icon" className="size-8" />
                         </Button>
-                    </div>
-
-                    <div className="flex items-center justify-start grow">
-                        {headerItems.map(_ => {
-                            const isActive = _.category === category
-                            return (
-                                <Button
-                                    key={_.titleContentKey}
-                                    variant="ghost"
-                                    onClick={() => setCategory(_.category)}
-                                    className={clsx([
-                                        "first:ps-0 last:pe-0 border-0 last:border-e-0",
-                                        "px-5 border-e border-neutral-300 flex items-center gap-2",
-                                        isActive ? "text-blue-500" : "text-zinc-600",
-                                    ])}
-                                >
-                                    <div>{_.icon}</div>
-                                    <Text contentKey={_.titleContentKey} ns="common" variant="button" />
-                                </Button>
-                            )
-                        })}
                     </div>
 
                     <Button
