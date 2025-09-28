@@ -2,5 +2,6 @@
   "continue": "ادامه",
   "login": "ورود",
   "logout": "خروج از سیستم",
-  "cancel": "لغو"
+  "cancel": "لغو",
+  "connect": "اتصال"
 }
