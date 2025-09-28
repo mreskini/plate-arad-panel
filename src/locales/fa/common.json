@@ -17,5 +17,7 @@
   "traffic_without_plate": "تردد بدون پلاک",
   "normal_traffic": "تردد عادی",
   "roles": "نقش‌ها",
-  "connect_camera": "اتصال دوربین"
+  "connect_camera": "اتصال دوربین",
+  "creating_file": "در حال تولید فایل",
+  "please_wait": "لطفا صبر کنید"
 }

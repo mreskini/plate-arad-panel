@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+import type { T_InputDropdownOption } from "@components/template"
 import { API } from "@core/api"
+import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
 import { AppRoutes } from "@core/utilities"
 import type { FC, ReactNode } from "react"
@@ -13,11 +15,13 @@ interface I_Props {
 interface I_Context {
     fetchCurrentUser: Function
     fetchParkingInfo: Function
+    onOwnerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
 }
 
 const Initials: I_Context = {
     fetchCurrentUser: () => undefined,
     fetchParkingInfo: () => undefined,
+    onOwnerSearch: async (): Promise<T_InputDropdownOption[]> => [],
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -61,10 +65,23 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         if (data) setParking(data.parkingInfo)
     }
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const onOwnerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        // const { data } = await API.Owner.SearchOwnersByFullname({ body: { search: searchTerm } })
+
+        // if (data && data.searchOwnersByFullname)
+        //     return data.searchOwnersByFullname.map(_ => ({ label: _.fullname, value: _.token }))
+
+        await sleep(2000)
+
+        return []
+    }
+
     // Data binding
     const value = {
         fetchCurrentUser,
         fetchParkingInfo,
+        onOwnerSearch,
     }
 
     // Render
