@@ -21,3 +21,19 @@ export type T_FetchTraffic = {
 }
 
 export type T_Traffic = T_FetchTraffic["items"][number]
+
+export type T_FetchWithoutPlateTraffic = {
+    count: number
+    items: {
+        camera_name: string
+        owner_name: string
+        entrance: any
+        exit?: any
+        entrance_image?: string | null | undefined
+        exit_image?: string | null | undefined
+        direction: string
+        permission: string
+    }[]
+}
+
+export type T_WithoutPlateTraffic = T_FetchWithoutPlateTraffic["items"][number]
