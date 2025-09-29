@@ -11,5 +11,16 @@
   "connection_string": "رشته اتصال",
   "rtsp_example": "مثال: rtsp://89458ybduifbruiebfrufe9ufbvg",
   "camera_name": "نام دوربین",
-  "camera_name_example": "مثال: آوا"
+  "camera_name_example": "مثال: آوا",
+  "please_search_owner_fullname": "لطفا نام مالک را جستجو کنید",
+  "start_date_and_time": "تاریخ و زمان شروع",
+  "end_date_and_time": "تاریخ و زمان پایان",
+  "permission": "مجوز",
+  "direction": "جهت",
+  "all": "همه",
+  "entrance": "ورود",
+  "exit": "خروج",
+  "plate_number": "شماره پلاک",
+  "owner": "مالک",
+  "camera": "دوربین"
 }

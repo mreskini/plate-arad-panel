@@ -8,6 +8,8 @@ import Dashboard from "./pages"
 import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
 import { PlaceholderPage } from "./pages/PlaceholderPage"
+import { ReportsTrafficList } from "./pages/reports/traffic-list"
+import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
 
 const CommonProviderWrapper = () => {
     // Render
@@ -31,8 +33,8 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.logout} element={<Logout />} />
 
                 {/* Reports */}
-                <Route path={AppRoutes.reports.traffic} element={<PlaceholderPage />} />
-                <Route path={AppRoutes.reports.trafficWithoutPlate} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.reports.traffic} element={<ReportsTrafficList />} />
+                <Route path={AppRoutes.reports.trafficWithoutPlate} element={<ReportsWithoutPlateTrafficList />} />
 
                 {/* Management */}
                 <Route path={AppRoutes.management.users} element={<PlaceholderPage />} />

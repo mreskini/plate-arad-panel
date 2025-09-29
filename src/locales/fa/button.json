@@ -3,5 +3,7 @@
   "login": "ورود",
   "logout": "خروج از سیستم",
   "cancel": "لغو",
-  "connect": "اتصال"
+  "connect": "اتصال",
+  "excel_export": "خروجی اکسل",
+  "apply": "اعمال"
 }
