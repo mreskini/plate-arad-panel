@@ -67,6 +67,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const onOwnerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        console.log(searchTerm)
         // const { data } = await API.Owner.SearchOwnersByFullname({ body: { search: searchTerm } })
 
         // if (data && data.searchOwnersByFullname)
