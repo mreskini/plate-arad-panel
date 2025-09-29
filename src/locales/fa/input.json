@@ -7,5 +7,9 @@
   "please_wait": "لطفا صبر کنید",
   "no_options_found": "هیچ گزینه‌ای یافت نشد",
   "example_number": "مثال: ۱۲۳۴",
-  "iran": "ایران"
+  "iran": "ایران",
+  "connection_string": "رشته اتصال",
+  "rtsp_example": "مثال: rtsp://89458ybduifbruiebfrufe9ufbvg",
+  "camera_name": "نام دوربین",
+  "camera_name_example": "مثال: آوا"
 }

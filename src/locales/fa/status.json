@@ -23,5 +23,7 @@
   "default": "پیش فرض",
   "not_available": "غیر قابل تبدیل",
   "entrance": "ورود",
-  "exit": "خروج"
+  "exit": "خروج",
+  "allowed": "مجاز",
+  "not_allowed": "غیر مجاز"
 }
