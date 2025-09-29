@@ -1,5 +1,4 @@
 import { Loading } from "@components/common"
-import { Breadcrumb } from "@components/template"
 import { useCommon } from "@core/contexts"
 import { fetchErrorsFromApi } from "@core/functions"
 import { useError, useLayout } from "@core/stores"
@@ -81,11 +80,7 @@ const Dashboard: FC<I_Dashboard> = ({ children, breadcrumb = true, className = "
 
                 <div className="z-10 flex size-full overflow-auto flex-col">
                     <Header />
-                    {!isAuthenticating && breadcrumb && (
-                        <div className="px-4 lg:px-8 pt-8 pb-4">
-                            <Breadcrumb />
-                        </div>
-                    )}
+
                     <div
                         className={clsx([
                             "relative h-full grow overflow-auto px-4 lg:px-8",

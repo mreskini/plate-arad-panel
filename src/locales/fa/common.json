@@ -13,5 +13,8 @@
   "loading": "در حال بارگذاری",
   "no_data": "داده‌ای یافت نشد",
   "traffic": "تردد",
-  "pos": "کارتخوان"
+  "pos": "کارتخوان",
+  "traffic_without_plate": "تردد بدون پلاک",
+  "normal_traffic": "تردد عادی",
+  "roles": "نقش‌ها"
 }

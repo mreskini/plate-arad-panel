@@ -30,20 +30,18 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.index} element={<Dashboard />} />
                 <Route path={AppRoutes.logout} element={<Logout />} />
 
-                {/* Management */}
-                <Route path={AppRoutes.management.users.list} element={<PlaceholderPage />} />
-                <Route path={AppRoutes.management.owners.list} element={<PlaceholderPage />} />
-
                 {/* Reports */}
-                <Route path={AppRoutes.reports.traffic.list} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.reports.traffic} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.reports.trafficWithoutPlate} element={<PlaceholderPage />} />
+
+                {/* Management */}
+                <Route path={AppRoutes.management.users} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.management.roles} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.management.owners} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.management.vehicles} element={<PlaceholderPage />} />
 
                 {/* Settings */}
-                <Route path={AppRoutes.settings.software.list} element={<PlaceholderPage />} />
-                <Route path={AppRoutes.settings.pos.list} element={<PlaceholderPage />} />
-                <Route path={AppRoutes.settings.devices.list} element={<PlaceholderPage />} />
-
-                {/* Vehicles */}
-                <Route path={AppRoutes.vehicles.list} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.settings} element={<PlaceholderPage />} />
             </Route>
         </Route>
     )

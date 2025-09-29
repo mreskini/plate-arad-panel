@@ -6,34 +6,17 @@ export const AppRoutes = {
         login: "/auth/login",
     },
 
-    management: {
-        users: {
-            list: "/management/users/list",
-        },
-        owners: {
-            list: "/management/owners/list",
-        },
-    },
-
-    vehicles: {
-        list: "/vehicles/list",
-    },
-
     reports: {
-        traffic: {
-            list: "/reports/traffic/list",
-        },
+        traffic: "/reports/traffic",
+        trafficWithoutPlate: "/reports/traffic-without-plate",
     },
 
-    settings: {
-        software: {
-            list: "/settings/software/list",
-        },
-        devices: {
-            list: "/settings/devices/list",
-        },
-        pos: {
-            list: "/settings/pos/list",
-        },
+    management: {
+        roles: "/management/roles",
+        users: "/management/users",
+        owners: "/management/owners",
+        vehicles: "/management/vehicles",
     },
+
+    settings: "/settings",
 } as const

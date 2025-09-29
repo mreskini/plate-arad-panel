@@ -1,24 +1,9 @@
 import { AppRoutes } from "@core/utilities"
 import type { FlatNamespace, KeysWithoutReturnObjects } from "i18next"
-import {
-    Car,
-    CardPos,
-    Code1,
-    Devices,
-    Element4,
-    Profile,
-    SecurityUser,
-    Setting2,
-    Signpost,
-    TableDocument,
-    UserTag,
-} from "iconsax-reactjs"
+import { Book, Element4, Setting2, UserSquare } from "iconsax-reactjs"
 import type { JSXElementConstructor, ReactElement } from "react"
 
-// Note: The hidden property in T_SidebarSubItem will be set `true` only for the pages that are in the app
-// but they won't be listed in the sidebar. This is to make sure the category and sidebar logics won't break.
-
-export type T_MenuCategory = "dashboard" | "management" | "vehicles" | "reports" | "settings"
+export type T_MenuCategory = "dashboard"
 
 export type T_SidebarSubItem = {
     titleContentKey: KeysWithoutReturnObjects[FlatNamespace]
@@ -46,27 +31,6 @@ export const HeaderItems: T_HeaderItem[] = [
         titleContentKey: "dashboard",
         icon: <Element4 className="size-5" />,
     },
-    {
-        category: "management",
-        titleContentKey: "management",
-        icon: <SecurityUser className="size-5" />,
-    },
-    {
-        category: "vehicles",
-        titleContentKey: "vehicles",
-        icon: <Car className="size-5" />,
-    },
-    {
-        category: "reports",
-        titleContentKey: "reports",
-        icon: <TableDocument className="size-5" />,
-    },
-
-    {
-        category: "settings",
-        titleContentKey: "settings",
-        icon: <Setting2 className="size-5" />,
-    },
 ]
 
 export type T_Sidebar = {
@@ -77,61 +41,52 @@ export type T_Sidebar = {
 export const SidebarItems: T_Sidebar[] = [
     {
         category: "dashboard",
-        items: [{ icon: <Element4 className="size-6" />, titleContentKey: "dashboard", link: AppRoutes.index }],
-    },
-    {
-        category: "management",
         items: [
             {
-                icon: <Profile className="size-6" />,
-                titleContentKey: "users",
-                link: AppRoutes.management.users.list,
+                icon: <Element4 className="size-6" />,
+                titleContentKey: "dashboard",
+                link: AppRoutes.index,
             },
             {
-                icon: <UserTag className="size-6" />,
-                titleContentKey: "owners",
-                link: AppRoutes.management.owners.list,
-            },
-        ],
-    },
-    {
-        category: "vehicles",
-        items: [
-            {
-                icon: <Car className="size-6" />,
-                titleContentKey: "vehicles",
-                link: AppRoutes.vehicles.list,
-            },
-        ],
-    },
-    {
-        category: "reports",
-        items: [
-            {
-                icon: <Signpost className="size-6" />,
-                titleContentKey: "traffic",
-                link: AppRoutes.reports.traffic.list,
-            },
-        ],
-    },
-
-    {
-        category: "settings",
-        items: [
-            {
-                icon: <Code1 className="size-6" />,
-                titleContentKey: "software",
-                link: AppRoutes.settings.software.list,
+                icon: <Book className="size-6" />,
+                titleContentKey: "reports",
+                subItems: [
+                    {
+                        titleContentKey: "normal_traffic",
+                        link: AppRoutes.reports.traffic,
+                    },
+                    {
+                        titleContentKey: "traffic_without_plate",
+                        link: AppRoutes.reports.trafficWithoutPlate,
+                    },
+                ],
             },
             {
-                icon: <Devices className="size-6" />,
-                titleContentKey: "devices",
-                link: AppRoutes.settings.devices.list,
+                icon: <UserSquare className="size-6" />,
+                titleContentKey: "management",
+                subItems: [
+                    {
+                        titleContentKey: "roles",
+                        link: AppRoutes.management.roles,
+                    },
+                    {
+                        titleContentKey: "users",
+                        link: AppRoutes.management.users,
+                    },
+                    {
+                        titleContentKey: "owners",
+                        link: AppRoutes.management.owners,
+                    },
+                    {
+                        titleContentKey: "vehicles",
+                        link: AppRoutes.management.vehicles,
+                    },
+                ],
             },
             {
-                icon: <CardPos className="size-6" />,
-                titleContentKey: "pos",
-                link: AppRoutes.settings.pos.list,
+                icon: <Setting2 className="size-6" />,
+                titleContentKey: "settings",
+                link: AppRoutes.settings,
             },
         ],
     },
