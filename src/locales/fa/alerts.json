@@ -1,5 +1,7 @@
 {
   "successful_login": "با موفقیت وارد شدید، در حال انتقال...",
   "user_added_successfully": "کاربر جدید با موفقیت ایجاد شد",
-  "user_edited_successfully": "کاربر با موفقیت ویرایش شد"
+  "user_edited_successfully": "کاربر با موفقیت ویرایش شد",
+  "invalid_image_file_type_error": "فرمت فایل انتخابی صحیح نیست",
+  "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست"
 }

@@ -27,5 +27,9 @@
   "fullname_here": "نام و نام خانوادگی را وارد کنید",
   "user_role": "نقش کاربر",
   "descriptions": "توضیحات",
-  "enter_descriptions": "توضیحات را وارد کنید"
+  "enter_descriptions": "توضیحات را وارد کنید",
+  "drag_your_image_here": "عکس را اینجا بکشید",
+  "image_valid_formats": "فرمت‌های مجاز: png, jpg, jpeg",
+  "image_valid_size": "حداکثر سایز عکس: 1mb",
+  "upload_image": "آپلود عکس"
 }

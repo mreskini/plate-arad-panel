@@ -1,8 +1,10 @@
-import { Button, Input, Spinner } from "@components/template"
+import { Button, Divider, Input, Spinner } from "@components/template"
 import type { T_Role, T_User } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+
+import { UploadUserProfileImage } from "./UploadUserProfileImage"
 
 interface I_Props {
     onSubmit: (data: I_UserFormData) => Promise<void>
@@ -16,6 +18,8 @@ export interface I_UserFormData {
     password: string
     roleToken: string
     description: string
+    profileImageUrl?: string
+    profileImageFile: File | null
 }
 
 export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
@@ -29,6 +33,7 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
         handleSubmit,
         getValues,
         setValue,
+        watch,
         formState: { isSubmitting },
     } = useForm<I_UserFormData>({
         mode: "onChange",
@@ -48,6 +53,7 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
         setValue("username", user.username)
         setValue("roleToken", user.role.token)
         setValue("description", user.fullname)
+        setValue("profileImageUrl", user.profile_image ?? "")
     }
 
     useEffect(() => {
@@ -58,56 +64,52 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
     return (
         <>
             {isFetching && (
-                <div className="sm:min-w-4xl flex items-center justify-center py-10">
+                <div className="sm:min-w-lg flex items-center justify-center py-10">
                     <Spinner />
                 </div>
             )}
             {!isFetching && (
-                <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-4xl">
-                    <div className="flex items-center gap-8">
-                        <div className="flex w-full items-center gap-2 mb-4">
-                            <Input.Label labelKey="username" className="min-w-32" required />
-                            <Input
-                                placeholder="your_username_here"
-                                disabled={isSubmitting}
-                                className="w-full"
-                                {...register("username", { required: true })}
-                            />
-                        </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-lg">
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="username" className="min-w-32" required />
+                        <Input
+                            placeholder="your_username_here"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            {...register("username", { required: true })}
+                        />
+                    </div>
 
-                        <div className="flex w-full items-center gap-2 mb-4">
-                            <Input.Label labelKey="password" className="min-w-32" required={!user} />
-                            <div className="w-full">
-                                <Input.Password
-                                    placeholder="your_password_here"
-                                    disabled={isSubmitting}
-                                    {...register("password", { required: !user })}
-                                />
-                            </div>
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="password" className="min-w-32" required={!user} />
+                        <div className="w-full">
+                            <Input.Password
+                                placeholder="your_password_here"
+                                disabled={isSubmitting}
+                                {...register("password", { required: !user })}
+                            />
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-8">
-                        <div className="flex w-full items-center gap-2 mb-4">
-                            <Input.Label labelKey="fullname" className="min-w-32" required />
-                            <Input
-                                placeholder="fullname_here"
-                                disabled={isSubmitting}
-                                className="w-full"
-                                {...register("fullname", { required: true })}
-                            />
-                        </div>
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="fullname" className="min-w-32" required />
+                        <Input
+                            placeholder="fullname_here"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            {...register("fullname", { required: true })}
+                        />
+                    </div>
 
-                        <div className="flex w-full items-center gap-2 mb-4">
-                            <Input.Label labelKey="user_role" className="min-w-32" required />
-                            <Input.DropDown
-                                options={roles.map(_ => ({ value: _.token, label: _.name }))}
-                                value={getValues("roleToken")}
-                                setValue={(value: string) => setValue("roleToken", value)}
-                                loading={isFetching}
-                                disabled={isSubmitting || isFetching}
-                            />
-                        </div>
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="user_role" className="min-w-32" required />
+                        <Input.DropDown
+                            options={roles.map(_ => ({ value: _.token, label: _.name }))}
+                            value={getValues("roleToken")}
+                            setValue={(value: string) => setValue("roleToken", value)}
+                            loading={isFetching}
+                            disabled={isSubmitting || isFetching}
+                        />
                     </div>
 
                     <div className="flex w-full items-center gap-2 mb-4">
@@ -120,11 +122,23 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                         />
                     </div>
 
+                    <Divider className="mb-4" />
+
+                    <div className="mb-4">
+                        <Input.Label labelKey="upload_image" className="grow" />
+                        <UploadUserProfileImage
+                            file={watch("profileImageFile")}
+                            setFile={file => setValue("profileImageFile", file)}
+                            imageUrl={watch("profileImageUrl")}
+                            onDelete={() => setValue("profileImageUrl", "")}
+                        />
+                    </div>
+
                     <div className="flex items-center gap-4 mt-4">
                         <Button
                             contentKey={user ? "save" : "add"}
                             type="submit"
-                            className="w-40"
+                            className="w-full"
                             loading={isSubmitting}
                             disabled={isSubmitting}
                         />
@@ -133,7 +147,7 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                             contentKey="cancel"
                             variant="gray-outline"
                             onClick={() => onClose()}
-                            className="w-40"
+                            className="w-full"
                             disabled={isSubmitting}
                         />
                     </div>
