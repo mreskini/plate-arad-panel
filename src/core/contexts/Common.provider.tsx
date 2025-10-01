@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import type { T_InputDropdownOption } from "@components/template"
+import type { T_Role } from "@core/api"
 import { API } from "@core/api"
 import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
@@ -16,12 +17,14 @@ interface I_Context {
     fetchCurrentUser: Function
     fetchParkingInfo: Function
     onOwnerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    fetchRoles: Function
 }
 
 const Initials: I_Context = {
     fetchCurrentUser: () => undefined,
     fetchParkingInfo: () => undefined,
     onOwnerSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    fetchRoles: () => undefined,
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -78,11 +81,18 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
+    const fetchRoles = async (): Promise<T_Role[]> => {
+        const { data } = await API.Role.FetchRoles()
+        if (data) return data.fetchRoles
+        return []
+    }
+
     // Data binding
     const value = {
         fetchCurrentUser,
         fetchParkingInfo,
         onOwnerSearch,
+        fetchRoles,
     }
 
     // Render

@@ -9,5 +9,14 @@
   "exit_date_time": "تاریخ و زمان خروج",
   "exit_image": "تصویر خروج",
   "direction": "جهت",
-  "permission": "مجوز"
+  "permission": "مجوز",
+  "image": "عکس",
+  "username": "نام کاربری",
+  "fullname": "نام و نام خانوادگی",
+  "role": "نقش",
+  "expiry_date": "تاریخ اعتبار",
+  "status": "وضعیت",
+  "active": "فعال",
+  "inactive": "غیر فعال",
+  "activation": "فعالسازی"
 }

@@ -1,0 +1,10 @@
+query FetchRoles{
+  fetchRoles {
+    token
+    name
+    is_default
+    permissions {
+      link
+    }
+  }
+}

@@ -17,7 +17,6 @@ interface I_Wrapper {
 interface I_Dashboard {
     children: ReactNode
     className?: string
-    breadcrumb?: boolean
 }
 
 interface I_Auth {
@@ -48,7 +47,7 @@ const Wrapper: FC<I_Wrapper> = ({ children }) => {
     )
 }
 
-const Dashboard: FC<I_Dashboard> = ({ children, breadcrumb = true, className = "" }) => {
+const Dashboard: FC<I_Dashboard> = ({ children, className = "" }) => {
     // States and hooks
     const { isSidebarOverlayOpen, isAuthenticating, setIsAuthenticating } = useLayout()
     const { fetchCurrentUser } = useCommon()
@@ -81,13 +80,7 @@ const Dashboard: FC<I_Dashboard> = ({ children, breadcrumb = true, className = "
                 <div className="z-10 flex size-full overflow-auto flex-col">
                     <Header />
 
-                    <div
-                        className={clsx([
-                            "relative h-full grow overflow-auto px-4 lg:px-8",
-                            !breadcrumb && "pt-8",
-                            className,
-                        ])}
-                    >
+                    <div className={clsx(["relative h-full grow overflow-auto px-4 lg:px-8 pt-8", className])}>
                         {isAuthenticating && <Loading.Screen />}
                         {!isAuthenticating && children}
                     </div>

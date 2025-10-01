@@ -19,5 +19,8 @@
   "roles": "نقش‌ها",
   "connect_camera": "اتصال دوربین",
   "creating_file": "در حال تولید فایل",
-  "please_wait": "لطفا صبر کنید"
+  "please_wait": "لطفا صبر کنید",
+  "users_management": "مدیریت کاربران",
+  "add_user": "افزودن کاربر",
+  "edit_user": "ویرایش کاربر"
 }

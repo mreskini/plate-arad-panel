@@ -1,3 +1,5 @@
 {
-  "successful_login": "با موفقیت وارد شدید، در حال انتقال..."
+  "successful_login": "با موفقیت وارد شدید، در حال انتقال...",
+  "user_added_successfully": "کاربر جدید با موفقیت ایجاد شد",
+  "user_edited_successfully": "کاربر با موفقیت ویرایش شد"
 }

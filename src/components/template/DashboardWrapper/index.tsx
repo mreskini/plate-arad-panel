@@ -12,7 +12,7 @@ interface I_Props {
 
 export const DashboardWrapper: FC<I_Props> = ({ title, children, className }) => {
     return (
-        <div className={clsx(["rounded-2xl border border-neutral-200 p-5 mt-8", className])}>
+        <div className={clsx(["rounded-2xl border border-neutral-200 p-5", className])}>
             {title && (
                 <div className="mb-10">
                     <Text className="text-blue-500" weight={700} variant="heading-6" contentKey={title} ns="common" />
