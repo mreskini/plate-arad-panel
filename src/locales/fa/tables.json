@@ -18,5 +18,9 @@
   "status": "وضعیت",
   "active": "فعال",
   "inactive": "غیر فعال",
-  "activation": "فعالسازی"
+  "activation": "فعالسازی",
+  "firstname": "نام",
+  "lastname": "نام خانوادگی",
+  "date": "تاریخ",
+  "descriptions": "توضیحات"
 }

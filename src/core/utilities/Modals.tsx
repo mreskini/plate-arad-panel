@@ -7,5 +7,9 @@ export const Modals = {
             AddUser: "management-add-user",
             EditUser: "management-edit-user",
         },
+        Owner: {
+            AddOwner: "management-add-owner",
+            EditOwner: "management-edit-owner",
+        },
     },
 }

@@ -40,3 +40,18 @@ export type T_WithoutPlateTraffic = T_FetchWithoutPlateTraffic["items"][number]
 
 export type T_FetchUsersList = FetchUsersListQuery["fetchUsersList"]
 export type T_Role = FetchRolesQuery["fetchRoles"][number]
+
+export type T_FetchOwners = {
+    count: number
+    items: {
+        firstname: string
+        lastname: string
+        national_code: string
+        phone_number: string
+        descriptions: string
+        profile_image?: string
+        created_at: any
+    }[]
+}
+
+export type T_Owner = T_FetchOwners["items"][number]

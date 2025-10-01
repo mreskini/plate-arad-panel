@@ -3,5 +3,7 @@
   "user_added_successfully": "کاربر جدید با موفقیت ایجاد شد",
   "user_edited_successfully": "کاربر با موفقیت ویرایش شد",
   "invalid_image_file_type_error": "فرمت فایل انتخابی صحیح نیست",
-  "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست"
+  "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست",
+  "owner_added_successfully": "مالک جدید با موفقیت ایجاد شد",
+  "owner_edited_successfully": "مالک با موفقیت ویرایش شد"
 }
