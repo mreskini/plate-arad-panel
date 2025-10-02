@@ -31,5 +31,13 @@
   "drag_your_image_here": "عکس را اینجا بکشید",
   "image_valid_formats": "فرمت‌های مجاز: png, jpg, jpeg",
   "image_valid_size": "حداکثر سایز عکس: 1mb",
-  "upload_image": "آپلود عکس"
+  "upload_image": "آپلود عکس",
+  "firstname": "نام",
+  "your_firstname_here": "نام خود را وارد کنید",
+  "lastname": "نام خانوادگی",
+  "your_lastname_here": "نام خانوادگی خود را وارد کنید",
+  "national_code": "کد ملی",
+  "your_national_code_here": "کد ملی خود را وارد کنید",
+  "phone_number": "شماره همراه",
+  "your_phone_number_here": "شماره همراه خود را وارد کنید"
 }
