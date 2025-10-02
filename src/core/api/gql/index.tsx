@@ -3,6 +3,7 @@ import { getSystemErrorMessages, getUserAccessToken } from "@core/functions"
 import { GraphQLClient } from "graphql-request"
 
 import { getSdk as getParkingSdk } from "./generated/Parking"
+import { getSdk as getRoleSdk } from "./generated/Role"
 import { getSdk as getUserSdk } from "./generated/User"
 
 export const StaticGlobalErrorMessage = "مشکلی رخ داده است"
@@ -53,6 +54,7 @@ function createAsyncProxy<T_Original extends Record<string, (...args: any[]) => 
 export const API = {
     User: createAsyncProxy(getUserSdk(gqlClient)),
     Parking: createAsyncProxy(getParkingSdk(gqlClient)),
+    Role: createAsyncProxy(getRoleSdk(gqlClient)),
 }
 
 export * from "./generated"

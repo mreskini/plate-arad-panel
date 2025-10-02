@@ -22,5 +22,14 @@
   "exit": "خروج",
   "plate_number": "شماره پلاک",
   "owner": "مالک",
-  "camera": "دوربین"
+  "camera": "دوربین",
+  "fullname": "نام و نام خانوادگی",
+  "fullname_here": "نام و نام خانوادگی را وارد کنید",
+  "user_role": "نقش کاربر",
+  "descriptions": "توضیحات",
+  "enter_descriptions": "توضیحات را وارد کنید",
+  "drag_your_image_here": "عکس را اینجا بکشید",
+  "image_valid_formats": "فرمت‌های مجاز: png, jpg, jpeg",
+  "image_valid_size": "حداکثر سایز عکس: 1mb",
+  "upload_image": "آپلود عکس"
 }

@@ -31,6 +31,12 @@ export type AddOffDayRq = {
   day: Scalars['DateTime']['input'];
 };
 
+export type Backup = {
+  created_at: Scalars['DateTime']['output'];
+  path: Scalars['String']['output'];
+  token: Scalars['String']['output'];
+};
+
 export type BlockedCar = {
   created_at: Scalars['DateTime']['output'];
   created_by: User;
@@ -158,9 +164,12 @@ export type CreateCustomerRq = {
 };
 
 export type CreateDeviceRq = {
+  brand_name?: InputMaybe<Scalars['String']['input']>;
   ip: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  password?: InputMaybe<Scalars['String']['input']>;
   type: E_DeviceType;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateDiscountCodesRq = {
@@ -200,10 +209,13 @@ export type CreatePosRq = {
 };
 
 export type CreateSubTxRq = {
+  card_to_card_amount?: InputMaybe<Scalars['Float']['input']>;
   card_token: Scalars['String']['input'];
+  cash_amount?: InputMaybe<Scalars['Float']['input']>;
   customer_token: Scalars['String']['input'];
   group_token: Scalars['String']['input'];
   payment_method: E_TransactionType;
+  pos_amount?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type CreateUserRq = {
@@ -554,10 +566,13 @@ export type EditCustomerRq = {
 };
 
 export type EditDeviceRq = {
+  brand_name?: InputMaybe<Scalars['String']['input']>;
   ip?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
   token: Scalars['String']['input'];
   type?: InputMaybe<E_DeviceType>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type EditDiscountRq = {
@@ -800,7 +815,7 @@ export type Mutation = {
   bulkCreateCards: Scalars['Boolean']['output'];
   calculateGroupPrice: Scalars['Float']['output'];
   calculateGroupPriceOld: Scalars['Float']['output'];
-  createBackup: Scalars['String']['output'];
+  createBackup: Scalars['Boolean']['output'];
   createCard: Scalars['Boolean']['output'];
   createCardIssuanceTx: Scalars['String']['output'];
   createClient: Scalars['Boolean']['output'];
@@ -854,6 +869,7 @@ export type Mutation = {
   exportReportUserActivity: DownloadReportRs;
   exportReportUserPerformance: DownloadReportRs;
   exportReportUserPresence: DownloadReportRs;
+  restoreBackup: Scalars['Boolean']['output'];
   searchCashTrafficByPlate: Scalars['String']['output'];
   searchCustomersByPlate: Customer;
   submitCustomerEntrance: Scalars['String']['output'];
@@ -874,6 +890,7 @@ export type Mutation = {
   toggleUserStatus: Scalars['Boolean']['output'];
   unassignCustomerCard: Scalars['Boolean']['output'];
   unblockCar: Scalars['Boolean']['output'];
+  unlinkPath: Scalars['Boolean']['output'];
   updateCustomerSub: Scalars['Boolean']['output'];
   updateDefaultCashGroup: Scalars['Boolean']['output'];
   updateFund: Scalars['Boolean']['output'];
@@ -1169,6 +1186,11 @@ export type MutationExportReportUserPresenceArgs = {
 };
 
 
+export type MutationRestoreBackupArgs = {
+  body: RestoreBackupRq;
+};
+
+
 export type MutationSearchCashTrafficByPlateArgs = {
   body: SearchByPlateRq;
 };
@@ -1266,6 +1288,11 @@ export type MutationUnassignCustomerCardArgs = {
 
 export type MutationUnblockCarArgs = {
   body: UnblockCarRq;
+};
+
+
+export type MutationUnlinkPathArgs = {
+  path: Scalars['String']['input'];
 };
 
 
@@ -1369,6 +1396,13 @@ export type Permission = {
   link: Scalars['String']['output'];
 };
 
+export type PingAllDevicesRs = {
+  ip: Scalars['String']['output'];
+  is_alive: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  type: E_DeviceType;
+};
+
 export type Query = {
   checkCustomerByCardToken: CheckCustomerSubByCardTokenRs;
   currentUser: User;
@@ -1377,6 +1411,7 @@ export type Query = {
   fetchActiveTrafficsByPlate: Array<FetchActiveTrafficsRs>;
   fetchActiveUsers: Array<User>;
   fetchAllFunds: FetchAllFundsRs;
+  fetchBackups: Array<Backup>;
   fetchBlockedCars: Array<BlockedCar>;
   fetchCardByCsn: Card;
   fetchCards: FetchCardsRs;
@@ -1404,6 +1439,7 @@ export type Query = {
   fetchTrafficByToken: Traffic;
   fetchUsersList: FetchUsersListRs;
   parkingInfo: Parking;
+  pingAllDevices: Array<PingAllDevicesRs>;
   reportCustomerAverage: ReportCustomerAverageRs;
   reportCustomerExpired: ReportCustomerExpiredRs;
   reportCustomerExtend: ReportCustomerExtendRs;
@@ -2118,6 +2154,10 @@ export type ReportUserPresenceRs = {
   items: Array<ReportUserPresenceItem>;
 };
 
+export type RestoreBackupRq = {
+  token: Scalars['String']['input'];
+};
+
 export type Role = {
   is_default: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
@@ -2168,6 +2208,7 @@ export type SubmitEditedPlateTrafficRq = {
 export type SubmitExtraTrafficTxRq = {
   card_to_card_amount: Scalars['Float']['input'];
   cash_amount: Scalars['Float']['input'];
+  is_non_payment?: InputMaybe<Scalars['Boolean']['input']>;
   method: E_TransactionType;
   pos_amount: Scalars['Float']['input'];
   tax_amount: Scalars['Float']['input'];

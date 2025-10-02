@@ -7,6 +7,7 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "re
 import Dashboard from "./pages"
 import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
+import { UsersList } from "./pages/management/users-list"
 import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
@@ -37,7 +38,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.reports.trafficWithoutPlate} element={<ReportsWithoutPlateTrafficList />} />
 
                 {/* Management */}
-                <Route path={AppRoutes.management.users} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.management.users} element={<UsersList />} />
                 <Route path={AppRoutes.management.roles} element={<PlaceholderPage />} />
                 <Route path={AppRoutes.management.owners} element={<PlaceholderPage />} />
                 <Route path={AppRoutes.management.vehicles} element={<PlaceholderPage />} />

@@ -31,6 +31,32 @@ export const UserLoginDocument = gql`
   userLogin(body: $body)
 }
     `;
+export const FetchUsersListDocument = gql`
+    query FetchUsersList($body: FetchUsersListRq!) {
+  fetchUsersList(body: $body) {
+    count
+    items {
+      token
+      is_active
+      username
+      fullname
+      profile_image
+      manual_exit_daily_limit
+      manual_exit_monthly_limit
+      expiration_date
+      rate_limit
+      role {
+        token
+        name
+        is_default
+        permissions {
+          link
+        }
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -44,6 +70,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UserLogin(variables: Types.UserLoginMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UserLoginMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.UserLoginMutation>(UserLoginDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UserLogin', 'mutation');
+    },
+    FetchUsersList(variables: Types.FetchUsersListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchUsersListQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchUsersListQuery>(FetchUsersListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchUsersList', 'query');
     }
   };
 }

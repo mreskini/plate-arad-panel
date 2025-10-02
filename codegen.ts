@@ -1,6 +1,6 @@
 import type { CodegenConfig } from "@graphql-codegen/cli"
 
-const Entities = ["User", "Parking"];
+const Entities = ["User", "Parking", "Role"];
 
 const EntitiesDictionary: { [key: string]: Object } = {}
 Entities.forEach(entity => {
