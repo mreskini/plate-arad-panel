@@ -4,7 +4,7 @@
   "user_edited_successfully": "کاربر با موفقیت ویرایش شد",
   "invalid_image_file_type_error": "فرمت فایل انتخابی صحیح نیست",
   "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست",
-  "owner_added_successfully": "مالک جدید با موفقیت ایجاد شد",
-  "owner_vehicle_added_successfully": "خودرو با موفقیت به مالک تخصیص داده شد",
-  "owner_edited_successfully": "مالک با موفقیت ویرایش شد"
+  "owner_added_successfully": "مراجع جدید با موفقیت ایجاد شد",
+  "owner_vehicle_added_successfully": "خودرو با موفقیت به مراجع تخصیص داده شد",
+  "owner_edited_successfully": "مراجع با موفقیت ویرایش شد"
 }

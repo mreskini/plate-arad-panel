@@ -105,7 +105,7 @@ export const OwnersList = () => {
                     lastname: "اکبری",
                     national_code: `${formatNumber(971234560)}${formatNumber(_)}`,
                     phone_number: `${formatNumber(912100100)}${formatNumber(_)}`,
-                    descriptions: `توضیحات مالک شماره ${formatNumber(_)}`,
+                    descriptions: `توضیحات مراجع شماره ${formatNumber(_)}`,
                     created_at: new Date(),
                     vehicles: range(1, 4).map(v => ({
                         plate_number: "IR15-546b55",

@@ -119,7 +119,7 @@ export const ReportsTrafficList = () => {
                     id: _,
                     camera_name: `دوربین ${formatNumber(_)}`,
                     plate_serial: `IR15-546b55`,
-                    owner_name: `مالک ${formatNumber(_)}`,
+                    owner_name: `مراجع ${formatNumber(_)}`,
                     entrance: new Date(),
                     entrance_image: Images.UserProfilePlaceholder,
                     exit: new Date(),
