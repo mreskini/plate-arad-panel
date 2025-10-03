@@ -39,5 +39,22 @@
   "national_code": "کد ملی",
   "your_national_code_here": "کد ملی خود را وارد کنید",
   "phone_number": "شماره همراه",
-  "your_phone_number_here": "شماره همراه خود را وارد کنید"
+  "your_phone_number_here": "شماره همراه خود را وارد کنید",
+  "vehicle_model": "مدل خودرو",
+  "vehicle_model_here": "مدل خودرو را وارد کنید",
+  "vehicle_color": "رنگ خودرو",
+  "vehicle_color_here": "رنگ خودرو را وارد کنید",
+  "vehicle_year": "سال ساخت خودرو",
+  "vehicle_year_here": "سال ساخت خودرو را وارد کنید",
+  "vehicle_image": "تصویر خودرو",
+  "owner_image": "تصویر مالک",
+  "image": "تصویر",
+  "submission_date": "تاریخ ثبت",
+  "owner_firstname_here": "نام مالک را وارد کنید",
+  "owner_lastname_here": "نام خانوادگی مالک را وارد کنید",
+  "owner_firstname": "نام مالک",
+  "owner_lastname": "نام خانوادگی مالک",
+  "model": "مدل",
+  "color": "رنگ",
+  "production_year": "سال ساخت"
 }

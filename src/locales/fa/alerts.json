@@ -5,5 +5,6 @@
   "invalid_image_file_type_error": "فرمت فایل انتخابی صحیح نیست",
   "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست",
   "owner_added_successfully": "مالک جدید با موفقیت ایجاد شد",
+  "owner_vehicle_added_successfully": "خودرو با موفقیت به مالک تخصیص داده شد",
   "owner_edited_successfully": "مالک با موفقیت ویرایش شد"
 }

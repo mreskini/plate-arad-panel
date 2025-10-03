@@ -10,6 +10,8 @@ export const Modals = {
         Owner: {
             AddOwner: "management-add-owner",
             EditOwner: "management-edit-owner",
+            AddVehicle: "management-add-owner-vehicle",
+            ViewVehicles: "management-view-owner-vehicles",
         },
     },
 }

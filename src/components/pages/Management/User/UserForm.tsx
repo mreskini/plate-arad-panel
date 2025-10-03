@@ -112,6 +112,8 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                         />
                     </div>
 
+                    <Divider className="mb-4" />
+
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="descriptions" className="min-w-32" />
                         <Input.Textarea
@@ -122,16 +124,16 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                         />
                     </div>
 
-                    <Divider className="mb-4" />
-
-                    <div className="mb-4">
-                        <Input.Label labelKey="upload_image" className="grow" />
-                        <UploadUserProfileImage
-                            file={watch("profileImageFile")}
-                            setFile={file => setValue("profileImageFile", file)}
-                            imageUrl={watch("profileImageUrl")}
-                            onDelete={() => setValue("profileImageUrl", "")}
-                        />
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="upload_image" className="min-w-32" />
+                        <div className="w-full">
+                            <UploadUserProfileImage
+                                file={watch("profileImageFile")}
+                                setFile={file => setValue("profileImageFile", file)}
+                                imageUrl={watch("profileImageUrl")}
+                                onDelete={() => setValue("profileImageUrl", "")}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-4 mt-4">

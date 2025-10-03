@@ -106,6 +106,8 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                         />
                     </div>
 
+                    <Divider className="mb-4" />
+
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="descriptions" className="min-w-32" />
                         <Input.Textarea
@@ -116,16 +118,16 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                         />
                     </div>
 
-                    <Divider className="mb-4" />
-
-                    <div className="mb-4">
-                        <Input.Label labelKey="upload_image" className="grow" />
-                        <UploadOwnerProfileImage
-                            file={watch("profileImageFile")}
-                            setFile={file => setValue("profileImageFile", file)}
-                            imageUrl={watch("profileImageUrl")}
-                            onDelete={() => setValue("profileImageUrl", "")}
-                        />
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="image" className="min-w-32" />
+                        <div className="w-full">
+                            <UploadOwnerProfileImage
+                                file={watch("profileImageFile")}
+                                setFile={file => setValue("profileImageFile", file)}
+                                imageUrl={watch("profileImageUrl")}
+                                onDelete={() => setValue("profileImageUrl", "")}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-4 mt-4">

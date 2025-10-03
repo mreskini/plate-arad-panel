@@ -51,6 +51,13 @@ export type T_FetchOwners = {
         descriptions: string
         profile_image?: string
         created_at: any
+        vehicles: {
+            plate_number: string
+            vehicle_model: string
+            vehicle_color: string
+            vehicle_year: string
+            vehicle_image?: string
+        }[]
     }[]
 }
 
