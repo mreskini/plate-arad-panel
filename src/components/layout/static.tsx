@@ -77,10 +77,6 @@ export const SidebarItems: T_Sidebar[] = [
                         titleContentKey: "owners",
                         link: AppRoutes.management.owners,
                     },
-                    {
-                        titleContentKey: "vehicles",
-                        link: AppRoutes.management.vehicles,
-                    },
                 ],
             },
             {

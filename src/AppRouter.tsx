@@ -42,7 +42,6 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.users} element={<UsersList />} />
                 <Route path={AppRoutes.management.roles} element={<PlaceholderPage />} />
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
-                <Route path={AppRoutes.management.vehicles} element={<PlaceholderPage />} />
 
                 {/* Settings */}
                 <Route path={AppRoutes.settings} element={<PlaceholderPage />} />

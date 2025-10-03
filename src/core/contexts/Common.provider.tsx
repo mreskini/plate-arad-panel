@@ -52,7 +52,6 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
                 "/management/roles",
                 "/management/users",
                 "/management/owners",
-                "/management/vehicles",
                 "/settings",
             ]
             setPermissions(permissions)

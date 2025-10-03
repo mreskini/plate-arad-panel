@@ -15,7 +15,6 @@ export const AppRoutes = {
         roles: "/management/roles",
         users: "/management/users",
         owners: "/management/owners",
-        vehicles: "/management/vehicles",
     },
 
     settings: "/settings",
