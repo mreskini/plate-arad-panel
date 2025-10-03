@@ -36,11 +36,11 @@ export const ReportsWithoutPlateTrafficList = () => {
             cell: (row: T_WithoutPlateTraffic) => row.owner_name,
         },
         {
-            name: t("entrance_date_time"),
+            name: t("traffic_date_and_time"),
             cell: (row: T_WithoutPlateTraffic) => formatDateTime(new Date(row.entrance)),
         },
         {
-            name: t("entrance_image"),
+            name: t("traffic_image"),
             cell: (row: T_WithoutPlateTraffic) =>
                 row.entrance_image && (
                     <Link
@@ -49,23 +49,6 @@ export const ReportsWithoutPlateTrafficList = () => {
                         className="flex items-center justify-center rounded-full size-8 bg-blue-100"
                     >
                         <img src={Images.UserProfilePlaceholder} alt={`${row.owner_name} entrance`} />
-                    </Link>
-                ),
-        },
-        {
-            name: t("exit_date_time"),
-            cell: (row: T_WithoutPlateTraffic) => (row.exit ? formatDateTime(new Date(row.exit)) : ""),
-        },
-        {
-            name: t("exit_image"),
-            cell: (row: T_WithoutPlateTraffic) =>
-                row.exit_image && (
-                    <Link
-                        to={row.exit_image}
-                        target="_blank"
-                        className="flex items-center justify-center rounded-full size-8 bg-blue-100"
-                    >
-                        <img src={Images.UserProfilePlaceholder} alt={`${row.owner_name} exit`} />
                     </Link>
                 ),
         },
@@ -131,41 +114,34 @@ export const ReportsWithoutPlateTrafficList = () => {
             <ReportsFiltersWrapper>
                 <div className="grid grid-cols-3 gap-6">
                     <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="start_date_and_time" className="min-w-32" />
+                        <Input.Label labelKey="traffic_date_and_time" className="min-w-24" />
                         <div className="w-full">
                             <Input.DateTimePicker disabled={isFetching} clearable />
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="end_date_and_time" className="min-w-32" />
-                        <div className="w-full">
-                            <Input.DateTimePicker disabled={isFetching} clearable />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="owner" className="min-w-32" />
+                        <Input.Label labelKey="owner" className="min-w-24" />
                         <OwnerFieldFilter {...OwnerFieldFilterProps} />
                     </div>
 
                     <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="permission" className="min-w-32" />
+                        <Input.Label labelKey="permission" className="min-w-24" />
                         <Input.DropDown options={[]} setValue={() => {}} disabled={isFetching} clearable />
                     </div>
 
                     <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="direction" className="min-w-32" />
+                        <Input.Label labelKey="direction" className="min-w-24" />
                         <Input.DropDown options={[]} setValue={() => {}} disabled={isFetching} clearable />
                     </div>
 
                     <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="camera" className="min-w-32" />
+                        <Input.Label labelKey="camera" className="min-w-24" />
                         <Input.DropDown options={[]} setValue={() => {}} disabled={isFetching} clearable />
                     </div>
 
-                    <div className="flex items-center w-full col-span-3">
-                        <div className="w-full col-span-1 flex justify-end">
+                    <div className="flex items-center w-full col-span-1">
+                        <div className="w-full col-span-1 flex">
                             <Button
                                 contentKey="apply"
                                 loading={isFetching}
