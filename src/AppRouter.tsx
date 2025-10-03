@@ -12,6 +12,7 @@ import { UsersList } from "./pages/management/users-list"
 import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
+import { Settings } from "./pages/settings"
 
 const CommonProviderWrapper = () => {
     // Render
@@ -45,7 +46,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.vehicles} element={<PlaceholderPage />} />
 
                 {/* Settings */}
-                <Route path={AppRoutes.settings} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.settings} element={<Settings />} />
             </Route>
         </Route>
     )
