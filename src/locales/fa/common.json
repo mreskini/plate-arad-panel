@@ -30,5 +30,8 @@
   "edit_owner": "ویرایش مراجع",
   "add_owner_vehicle": "افزودن خودرو مراجع",
   "owner_vehicles": "خودروهای مراجع",
-  "vehicles_list_of": "لیست خودروهای"
+  "vehicles_list_of": "لیست خودروهای",
+  "roles_management": "مدیریت نقش‌ها",
+  "add_new_role": "افزودن نقش جدید",
+  "edit_role": "ویرایش نقش"
 }
