@@ -27,5 +27,8 @@
   "national_code": "کد ملی",
   "phone_number": "شماره همراه",
   "add_owner": "افزودن مالک",
-  "edit_owner": "ویرایش مالک"
+  "edit_owner": "ویرایش مالک",
+  "roles_management": "مدیریت نقش‌ها",
+  "add_new_role": "افزودن نقش جدید",
+  "edit_role": "ویرایش نقش"
 }

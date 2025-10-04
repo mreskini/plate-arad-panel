@@ -12,7 +12,11 @@ export const AppRoutes = {
     },
 
     management: {
-        roles: "/management/roles",
+        roles: {
+            index: "/management/roles",
+            add: "/management/roles/add",
+            edit: "/management/roles/edit",
+        },
         users: "/management/users",
         owners: "/management/owners",
         vehicles: "/management/vehicles",

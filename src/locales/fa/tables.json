@@ -23,6 +23,8 @@
   "lastname": "نام خانوادگی",
   "date": "تاریخ",
   "descriptions": "توضیحات",
+  "row": "ردیف",
+  "default": "پیش فرض",
   "traffic_date_and_time": "زمان تردد",
   "traffic_image": "تصویر تردد"
 }
