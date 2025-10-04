@@ -19,7 +19,6 @@ export const AppRoutes = {
         },
         users: "/management/users",
         owners: "/management/owners",
-        vehicles: "/management/vehicles",
     },
 
     settings: "/settings",

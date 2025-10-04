@@ -12,7 +12,7 @@ interface I_Props {
     setFile: (file: File | null) => void
 }
 
-export const UploadOwnerProfileImage = ({ file, setFile, imageUrl, onDelete }: I_Props) => {
+export const UploadOwnerVehicleImage = ({ file, setFile, imageUrl, onDelete }: I_Props) => {
     // States and Hooks
     const [isDragging, setIsDragging] = useState(false)
     const [error, setError] = useState<KeysWithoutReturnObjects["alerts"] | null>(null)

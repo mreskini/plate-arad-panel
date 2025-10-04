@@ -69,7 +69,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="firstname" className="min-w-32" required />
                         <Input
-                            placeholder="your_firstname_here"
+                            placeholder="owner_firstname_here"
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("firstname", { required: true })}
@@ -79,7 +79,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="lastname" className="min-w-32" required />
                         <Input
-                            placeholder="your_lastname_here"
+                            placeholder="owner_lastname_here"
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("lastname", { required: true })}
@@ -89,7 +89,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="national_code" className="min-w-32" required />
                         <Input
-                            placeholder="your_national_code_here"
+                            placeholder="owner_national_code_here"
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("nationalCode", { required: true })}
@@ -99,12 +99,14 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="phone_number" className="min-w-32" required />
                         <Input
-                            placeholder="your_phone_number_here"
+                            placeholder="owner_phone_number_here"
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("phoneNumber", { required: true })}
                         />
                     </div>
+
+                    <Divider className="mb-4" />
 
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="descriptions" className="min-w-32" />
@@ -116,16 +118,16 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                         />
                     </div>
 
-                    <Divider className="mb-4" />
-
-                    <div className="mb-4">
-                        <Input.Label labelKey="upload_image" className="grow" />
-                        <UploadOwnerProfileImage
-                            file={watch("profileImageFile")}
-                            setFile={file => setValue("profileImageFile", file)}
-                            imageUrl={watch("profileImageUrl")}
-                            onDelete={() => setValue("profileImageUrl", "")}
-                        />
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="image" className="min-w-32" />
+                        <div className="w-full">
+                            <UploadOwnerProfileImage
+                                file={watch("profileImageFile")}
+                                setFile={file => setValue("profileImageFile", file)}
+                                imageUrl={watch("profileImageUrl")}
+                                onDelete={() => setValue("profileImageUrl", "")}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-4 mt-4">

@@ -87,7 +87,7 @@ export const ReportsWithoutPlateTrafficList = () => {
                 return {
                     id: _,
                     camera_name: `دوربین ${formatNumber(_)}`,
-                    owner_name: `مالک ${formatNumber(_)}`,
+                    owner_name: `مراجع ${formatNumber(_)}`,
                     entrance: new Date(),
                     entrance_image: Images.UserProfilePlaceholder,
                     exit: new Date(),

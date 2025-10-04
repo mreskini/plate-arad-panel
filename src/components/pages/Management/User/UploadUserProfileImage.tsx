@@ -72,7 +72,7 @@ export const UploadUserProfileImage = ({ file, setFile, imageUrl, onDelete }: I_
         <label htmlFor="file-upload" className="cursor-pointer">
             <div
                 className={clsx([
-                    "flex flex-col items-center justify-center border rounded-2xl border-neutral-300 border-dashed p-4 mt-2",
+                    "flex flex-col items-center justify-center border rounded-2xl border-neutral-300 border-dashed p-4",
                     isDragging && "bg-blue-100",
                 ])}
                 onDragOver={handleDragOver}
