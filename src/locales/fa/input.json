@@ -40,5 +40,10 @@
   "your_national_code_here": "کد ملی خود را وارد کنید",
   "phone_number": "شماره همراه",
   "your_phone_number_here": "شماره همراه خود را وارد کنید",
+  "prevent_submission_of_similar_plate": "جلوگیری از ثبت پلاک مشابه",
+  "compare_only_to_last_plate": "مقایسه فقط با پلاک آخر",
+  "minimum_difference_between_two_adjacent_plates": "حداقل تفاوت بین دو پلاک پشت سر هم",
+  "enter_value": "مقدار را وارد کنید",
+  "how_many_minutes_is_permitted_to_submit_similar_plates": "تا چند دقیقه ثبت پلاک مشابه انجام شود؟",
   "traffic_date_and_time": "زمان تردد"
 }
