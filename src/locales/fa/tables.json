@@ -22,5 +22,7 @@
   "firstname": "نام",
   "lastname": "نام خانوادگی",
   "date": "تاریخ",
-  "descriptions": "توضیحات"
+  "descriptions": "توضیحات",
+  "traffic_date_and_time": "زمان تردد",
+  "traffic_image": "تصویر تردد"
 }
