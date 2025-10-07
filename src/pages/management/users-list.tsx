@@ -127,7 +127,7 @@ export const UsersList = () => {
             )}
 
             <Table
-                title="users_management"
+                title="users_list"
                 data={tableData.items}
                 columns={tableColumns}
                 rowsPerPage={PageSize}

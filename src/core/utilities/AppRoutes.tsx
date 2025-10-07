@@ -21,5 +21,13 @@ export const AppRoutes = {
         owners: "/management/owners",
     },
 
-    settings: "/settings",
+    software: {
+        settings: "/software/settings",
+        license: "/software/license",
+    },
+
+    hardware: {
+        devices: "/hardware/devices",
+        clients: "/hardware/clients",
+    },
 } as const

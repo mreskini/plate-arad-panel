@@ -47,12 +47,18 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
 
             const permissions = [
                 "/",
+                "/logout",
                 "/reports/traffic",
                 "/reports/traffic-without-plate",
                 "/management/roles",
+                "/management/roles/add",
+                "/management/roles/edit",
                 "/management/users",
                 "/management/owners",
-                "/settings",
+                "/software/settings",
+                "/software/license",
+                "/hardware/devices",
+                "/hardware/clients",
             ]
             setPermissions(permissions)
         }
