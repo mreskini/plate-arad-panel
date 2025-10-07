@@ -12,9 +12,10 @@ import { EditRole } from "./pages/management/edit-role"
 import { OwnersList } from "./pages/management/owners-list"
 import { UsersList } from "./pages/management/users-list"
 import { UsersRoles } from "./pages/management/users-roles"
+import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
-import { Settings } from "./pages/settings"
+import { Settings } from "./pages/software/settings"
 
 const CommonProviderWrapper = () => {
     // Render
@@ -50,8 +51,13 @@ export const AppRouter = createBrowserRouter(
 
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
 
-                {/* Settings */}
-                <Route path={AppRoutes.settings} element={<Settings />} />
+                {/* Software */}
+                <Route path={AppRoutes.software.settings} element={<Settings />} />
+                <Route path={AppRoutes.software.license} element={<PlaceholderPage />} />
+
+                {/* Hardware */}
+                <Route path={AppRoutes.hardware.clients} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.hardware.devices} element={<PlaceholderPage />} />
             </Route>
         </Route>
     )
