@@ -74,7 +74,7 @@ export const UsersRoles = () => {
     return (
         <Layout.Dashboard>
             <Table
-                title="roles_management"
+                title="users_roles"
                 data={tableData}
                 columns={tableColumns}
                 rowsPerPage={7}
