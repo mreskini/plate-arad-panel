@@ -869,9 +869,11 @@ export type Mutation = {
   exportReportUserActivity: DownloadReportRs;
   exportReportUserPerformance: DownloadReportRs;
   exportReportUserPresence: DownloadReportRs;
+  generateLicense: Scalars['String']['output'];
   restoreBackup: Scalars['Boolean']['output'];
   searchCashTrafficByPlate: Scalars['String']['output'];
   searchCustomersByPlate: Customer;
+  startPayment: Scalars['Boolean']['output'];
   submitCustomerEntrance: Scalars['String']['output'];
   submitEditedPlateTraffic: Scalars['Boolean']['output'];
   submitExtraTrafficTx: Scalars['Boolean']['output'];
@@ -896,6 +898,7 @@ export type Mutation = {
   updateFund: Scalars['Boolean']['output'];
   updateGroupInfo: Scalars['Boolean']['output'];
   updateParkingInfo: Scalars['Boolean']['output'];
+  updateParkingLicense: Scalars['Boolean']['output'];
   updateParkingOccupied: Scalars['Boolean']['output'];
   updateRole: Scalars['Boolean']['output'];
   updateUserRole: Scalars['Boolean']['output'];
@@ -1201,6 +1204,11 @@ export type MutationSearchCustomersByPlateArgs = {
 };
 
 
+export type MutationStartPaymentArgs = {
+  body: StartPaymentRq;
+};
+
+
 export type MutationSubmitCustomerEntranceArgs = {
   body: SubmitCustomerEntranceRq;
 };
@@ -1321,6 +1329,11 @@ export type MutationUpdateParkingInfoArgs = {
 };
 
 
+export type MutationUpdateParkingLicenseArgs = {
+  body: UpdateParkingLicenseRq;
+};
+
+
 export type MutationUpdateParkingOccupiedArgs = {
   body: UpdateParkingOccupiedRq;
 };
@@ -1384,12 +1397,15 @@ export type Parking = {
   capacity: Scalars['Float']['output'];
   card_issuance_fee: Scalars['Float']['output'];
   cash_adjustment: Scalars['Float']['output'];
+  clients_count: Scalars['Float']['output'];
   code: Scalars['String']['output'];
   default_cash_group?: Maybe<Group>;
   in_traffic_count: Scalars['Float']['output'];
+  license?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   occupied: Scalars['Float']['output'];
   out_traffic_count: Scalars['Float']['output'];
+  server_uuid?: Maybe<Scalars['String']['output']>;
 };
 
 export type Permission = {
@@ -2192,6 +2208,11 @@ export type Session = {
   user: User;
 };
 
+export type StartPaymentRq = {
+  amount: Scalars['Float']['input'];
+  terminal_id: Scalars['String']['input'];
+};
+
 export type SubmitCustomerEntranceRq = {
   card_token: Scalars['String']['input'];
   customer_token: Scalars['String']['input'];
@@ -2434,6 +2455,12 @@ export type UpdateParkingInfoRq = {
   capacity: Scalars['Float']['input'];
   code: Scalars['String']['input'];
   name: Scalars['String']['input'];
+};
+
+export type UpdateParkingLicenseRq = {
+  clients: Scalars['Float']['input'];
+  license: Scalars['String']['input'];
+  server_uuid: Scalars['String']['input'];
 };
 
 export type UpdateParkingOccupiedRq = {

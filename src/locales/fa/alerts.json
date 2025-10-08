@@ -6,5 +6,7 @@
   "invalid_image_file_size_error": "سایز فایل انتخابی مناسب نیست",
   "owner_added_successfully": "مراجع جدید با موفقیت ایجاد شد",
   "owner_vehicle_added_successfully": "خودرو با موفقیت به مراجع تخصیص داده شد",
-  "owner_edited_successfully": "مراجع با موفقیت ویرایش شد"
+  "owner_edited_successfully": "مراجع با موفقیت ویرایش شد",
+  "device_created_successfully": "دستگاه با موفقیت ایجاد شد",
+  "device_updated_successfully": "دستگاه با موفقیت ویرایش شد"
 }

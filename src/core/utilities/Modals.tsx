@@ -14,4 +14,12 @@ export const Modals = {
             ViewVehicles: "management-view-owner-vehicles",
         },
     },
+
+    Hardware: {
+        Devices: {
+            View: "hardware-view-device",
+            Add: "hardware-add-device",
+            Edit: "hardware-edit-device",
+        },
+    },
 }

@@ -1,4 +1,11 @@
-import type { CurrentUserQuery, FetchRolesQuery, FetchUsersListQuery, ParkingInfoQuery } from "./generated"
+import type {
+    CurrentUserQuery,
+    FetchDevicesQuery,
+    FetchRolesQuery,
+    FetchUsersListQuery,
+    ParkingInfoQuery,
+    PingAllDevicesQuery,
+} from "./generated"
 
 // User
 export type T_User = CurrentUserQuery["currentUser"]
@@ -62,3 +69,6 @@ export type T_FetchOwners = {
 }
 
 export type T_Owner = T_FetchOwners["items"][number]
+
+export type T_Device = FetchDevicesQuery["fetchDevices"][number]
+export type T_PingAllDevices = PingAllDevicesQuery["pingAllDevices"][number]
