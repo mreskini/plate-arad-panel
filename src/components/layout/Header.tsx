@@ -21,13 +21,8 @@ export const Header = () => {
 
     // Render
     return (
-        <div className="relative z-50 flex items-center justify-between px-4 pt-6 lg:px-8 lg:py-[31px] border-b border-zinc-200 bg-zinc-50">
-            {isAuthenticating && (
-                <>
-                    <div className="bg-zinc-200 w-4xl h-[42px] rounded-xl animate-pulse" />
-                    <div className="bg-zinc-200 w-48 h-[42px] rounded-xl animate-pulse" />
-                </>
-            )}
+        <div className="relative z-50 flex items-center justify-end px-4 pt-6 lg:px-8 lg:py-[31px] border-b border-zinc-200 bg-zinc-50">
+            {isAuthenticating && <div className="bg-zinc-200 w-48 h-[42px] rounded-xl animate-pulse" />}
 
             {!isAuthenticating && (
                 <>
