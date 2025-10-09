@@ -1,8 +1,7 @@
+import { Text } from "@components/template"
 import clsx from "clsx"
 import type { KeysWithoutReturnObjects } from "i18next"
 import type { FC, ReactNode } from "react"
-
-import { Text } from "../Text"
 
 interface I_Props {
     title?: KeysWithoutReturnObjects["common"]
@@ -10,9 +9,9 @@ interface I_Props {
     className?: string
 }
 
-export const DashboardWrapper: FC<I_Props> = ({ title, children, className }) => {
+export const SettingsWrapper: FC<I_Props> = ({ title, children, className }) => {
     return (
-        <div className={clsx(["rounded-2xl border border-neutral-200 p-5", className])}>
+        <div className={clsx(["rounded-2xl h-full border border-neutral-200 p-5", className])}>
             {title && (
                 <div className="mb-10">
                     <Text className="text-blue-500" weight={700} variant="heading-6" contentKey={title} ns="common" />
