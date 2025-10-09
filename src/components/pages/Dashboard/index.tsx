@@ -1,1 +1,1 @@
-export * from "./DashboardComponent"
+export * from "./DashboardWrapper"

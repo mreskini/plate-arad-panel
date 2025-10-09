@@ -1,1 +1,1 @@
-export * from "./SettingsComponent"
+export * from "./SettingsWrapper"
