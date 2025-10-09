@@ -40,5 +40,7 @@
   "license": "لایسنس",
   "clients": "کلاینت‌ها",
   "cameras": "دوربین‌ها",
-  "cards_list": "لیست کارت‌ها"
+  "cards_list": "لیست کارت‌ها",
+  "please_download_excel_like_example": "لطفا فایل اکسل را مطابق نمونه زیر آماده و آپلود کنید:",
+  "edit_card": "ویرایش کارت"
 }

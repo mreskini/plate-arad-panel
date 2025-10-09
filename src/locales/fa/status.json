@@ -25,5 +25,7 @@
   "entrance": "ورود",
   "exit": "خروج",
   "allowed": "مجاز",
-  "not_allowed": "غیر مجاز"
+  "not_allowed": "غیر مجاز",
+  "RFID": "RFID",
+  "CSN": "CSN"
 }

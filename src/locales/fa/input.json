@@ -63,5 +63,20 @@
   "minimum_difference_between_two_adjacent_plates": "حداقل تفاوت بین دو پلاک پشت سر هم",
   "enter_value": "مقدار را وارد کنید",
   "how_many_minutes_is_permitted_to_submit_similar_plates": "تا چند دقیقه ثبت پلاک مشابه انجام شود؟",
-  "traffic_date_and_time": "زمان تردد"
+  "traffic_date_and_time": "زمان تردد",
+  "search_by_card_number": "جستجوی شماره کارت",
+  "drag_your_excel_file_here": "فایل اکسل را اینجا بکشید",
+  "excel_valid_formats": "فرمت‌های مجاز: xls, xlsx",
+  "excel_valid_size": "حداکثر سایز فایل: 128kb",
+  "card_number": "شماره کارت",
+  "enter_card_number": "شماره کارت را وارد کنید",
+  "card_serial": "شماره سریال کارت",
+  "enter_card_serial": "شماره سریال کارت را وارد کنید",
+  "CSN": "CSN",
+  "RFID": "RFID",
+  "add_card": "افزودن کارت",
+  "add_type": "نحوه افزودن",
+  "single": "تکی",
+  "group": "گروهی",
+  "card_type": "نوع کارت"
 }
