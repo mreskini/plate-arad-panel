@@ -29,5 +29,6 @@
   "traffic_image": "تصویر تردد",
   "card_number": "شماره کارت",
   "type": "نوع",
-  "serial": "سریال"
+  "serial": "سریال",
+  "card_type": "نوع کارت"
 }

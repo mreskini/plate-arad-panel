@@ -58,6 +58,7 @@ export type T_FetchOwners = {
             vehicle_year: string
             vehicle_image?: string
         }[]
+        card?: T_Card | null
     }[]
 }
 

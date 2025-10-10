@@ -27,5 +27,6 @@
   "allowed": "مجاز",
   "not_allowed": "غیر مجاز",
   "RFID": "RFID",
-  "CSN": "CSN"
+  "CSN": "CSN",
+  "card_type": "نوع کارت"
 }
