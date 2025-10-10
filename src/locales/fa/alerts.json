@@ -9,5 +9,7 @@
   "owner_edited_successfully": "مراجع با موفقیت ویرایش شد",
   "excel_parse_error": "خطا در پردازش فایل",
   "invalid_excel_file_type_error": "فرمت غیر مجاز",
-  "invalid_excel_file_size_error": "حجم فایل بیش از حد مجاز"
+  "invalid_excel_file_size_error": "حجم فایل بیش از حد مجاز",
+  "owner_card_assigned_successfully": "کارت با موفقیت به مراجع تخصیص داده شد",
+  "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد"
 }

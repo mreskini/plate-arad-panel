@@ -3,10 +3,12 @@
 import { Status } from "@components/common"
 import { Layout } from "@components/layout"
 import {
+    AddOwnerCardModal,
     AddOwnerModal,
     AddOwnerVehicleModal,
     EditOwnerModal,
     ManagementFiltersWrapper,
+    RemoveOwnerCardModal,
 } from "@components/pages/Management"
 import { ViewOwnerVehiclesModal } from "@components/pages/Management/Owner/ViewOwnerVehiclesModal"
 import { Button, Input, Table } from "@components/template"
@@ -15,7 +17,7 @@ import { E_CardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
+import { Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -72,7 +74,7 @@ export const OwnersList = () => {
             },
         },
         {
-            width: "120px",
+            width: "150px",
             name: t("actions"),
             cell: (row: T_Owner) => (
                 <div className="flex items-center gap-2">
@@ -86,6 +88,32 @@ export const OwnersList = () => {
                             }}
                         />
                     </Button>
+
+                    {!row.card?.token && (
+                        <Button variant="ghost">
+                            <CardAdd
+                                size={20}
+                                className="text-neutral-700"
+                                onClick={() => {
+                                    setSelected(row)
+                                    openModal(Modals.Management.Owner.AddCard)
+                                }}
+                            />
+                        </Button>
+                    )}
+
+                    {row.card?.token && (
+                        <Button variant="ghost">
+                            <CardRemove1
+                                size={20}
+                                className="text-neutral-700"
+                                onClick={() => {
+                                    setSelected(row)
+                                    openModal(Modals.Management.Owner.RemoveCard)
+                                }}
+                            />
+                        </Button>
+                    )}
 
                     <Button variant="ghost">
                         <Car
@@ -171,6 +199,14 @@ export const OwnersList = () => {
             )}
 
             {modalVisibility[Modals.Management.Owner.AddVehicle] && <AddOwnerVehicleModal callback={fetchOwners} />}
+
+            {modalVisibility[Modals.Management.Owner.AddCard] && (
+                <AddOwnerCardModal callback={fetchOwners} owner={selected!} />
+            )}
+
+            {modalVisibility[Modals.Management.Owner.RemoveCard] && (
+                <RemoveOwnerCardModal callback={fetchOwners} owner={selected!} />
+            )}
             {modalVisibility[Modals.Management.Owner.ViewVehicles] && <ViewOwnerVehiclesModal owner={selected!} />}
 
             <ManagementFiltersWrapper>

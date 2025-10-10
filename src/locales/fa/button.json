@@ -8,5 +8,7 @@
   "apply": "اعمال",
   "add": "افزودن",
   "save": "ذخیره",
-  "download_example": "دانلود فایل نمونه"
+  "download_example": "دانلود فایل نمونه",
+  "assign": "تخصیص",
+  "unassign": "حذف"
 }

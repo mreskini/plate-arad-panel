@@ -12,6 +12,8 @@ export const Modals = {
             EditOwner: "management-edit-owner",
             AddVehicle: "management-add-owner-vehicle",
             ViewVehicles: "management-view-owner-vehicles",
+            AddCard: "management-add-owner-card",
+            RemoveCard: "management-remove-owner-card",
         },
         Card: {
             AddCard: "management-add-card",
