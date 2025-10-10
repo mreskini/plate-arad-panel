@@ -123,6 +123,7 @@ export const EditRole = () => {
             "/management/roles",
             "/management/users",
             "/management/owners",
+            "/management/cards",
             "/settings",
         ]
 
