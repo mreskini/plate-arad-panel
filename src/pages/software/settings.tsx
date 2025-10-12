@@ -1,11 +1,12 @@
 import { Layout } from "@components/layout"
-import { Button, DashboardWrapper, Input } from "@components/template"
+import { SettingsWrapper } from "@components/pages/Settings"
+import { Button, Input } from "@components/template"
 import { formatNumber } from "@core/functions"
 
 export const Settings = () => {
     return (
         <Layout.Dashboard>
-            <DashboardWrapper title="settings">
+            <SettingsWrapper title="settings">
                 <div className="w-full flex gap-4">
                     <div className="w-full flex flex-col gap-4">
                         <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
@@ -73,7 +74,7 @@ export const Settings = () => {
                 <div className="flex w-full justify-end">
                     <Button contentKey="save" className="mt-4" />
                 </div>
-            </DashboardWrapper>
+            </SettingsWrapper>
         </Layout.Dashboard>
     )
 }
