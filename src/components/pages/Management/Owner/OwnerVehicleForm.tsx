@@ -81,6 +81,13 @@ export const OwnerVehicleForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         />
                     </div>
 
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="plate_number" className="min-w-32" required />
+                        <div className="flex items-center gap-2">
+                            <Input.PlateNumber disabled={isFetching} clearable />
+                        </div>
+                    </div>
+
                     <Divider className="mb-4" />
 
                     <div className="flex w-full items-center gap-2 mb-4">
