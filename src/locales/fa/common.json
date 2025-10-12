@@ -39,5 +39,7 @@
   "hardware": "سخت‌افزار",
   "license": "لایسنس",
   "clients": "کلاینت‌ها",
-  "cameras": "دوربین‌ها"
+  "cameras": "دوربین‌ها",
+  "edit": "ویرایش",
+  "device_details": "جزئیات دستگاه"
 }

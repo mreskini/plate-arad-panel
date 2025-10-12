@@ -1,0 +1,28 @@
+query FetchDevices{
+  fetchDevices {
+    token
+    type
+    ip
+    name
+    brand_name
+    username
+    password
+  }
+}
+
+mutation CreateDevice($body: CreateDeviceRq!){
+  createDevice(body: $body)
+}
+
+mutation EditDevice($body: EditDeviceRq!){
+  editDevice(body: $body)
+}
+
+query PingAllDevices {
+  pingAllDevices {
+    name
+    ip
+    type
+    is_alive
+  }
+}
