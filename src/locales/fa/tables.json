@@ -26,5 +26,8 @@
   "row": "ردیف",
   "default": "پیش فرض",
   "traffic_date_and_time": "زمان تردد",
-  "traffic_image": "تصویر تردد"
+  "traffic_image": "تصویر تردد",
+  "device_name": "نام دستگاه",
+  "type": "نوع",
+  "ip_address": "آدرس IP"
 }

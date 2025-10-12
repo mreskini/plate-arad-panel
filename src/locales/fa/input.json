@@ -63,5 +63,14 @@
   "minimum_difference_between_two_adjacent_plates": "حداقل تفاوت بین دو پلاک پشت سر هم",
   "enter_value": "مقدار را وارد کنید",
   "how_many_minutes_is_permitted_to_submit_similar_plates": "تا چند دقیقه ثبت پلاک مشابه انجام شود؟",
-  "traffic_date_and_time": "زمان تردد"
+  "traffic_date_and_time": "زمان تردد",
+  "hik_vision": "هایک ویژن",
+  "dahua": "داهوا",
+  "device_name": "نام دستگاه",
+  "type": "نوع",
+  "ip_address": "آدرس IP",
+  "ip_address_placeholder": "123.456.78.90",
+  "brand": "برند",
+  "enter_username": "نام کاربری را وارد کنید",
+  "choose_camera_brand": "برند دوربین را انتخاب کنید"
 }

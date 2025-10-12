@@ -1,6 +1,6 @@
 import { AppRoutes } from "@core/utilities"
 import type { FlatNamespace, KeysWithoutReturnObjects } from "i18next"
-import { Book, Element4, Setting2, UserSquare } from "iconsax-reactjs"
+import { Book, Camera, Code, Element4, UserSquare } from "iconsax-reactjs"
 import type { JSXElementConstructor, ReactElement } from "react"
 
 export type T_MenuCategory = "dashboard"
@@ -66,11 +66,11 @@ export const SidebarItems: T_Sidebar[] = [
                 titleContentKey: "management",
                 subItems: [
                     {
-                        titleContentKey: "roles",
+                        titleContentKey: "users_roles",
                         link: AppRoutes.management.roles.index,
                     },
                     {
-                        titleContentKey: "users",
+                        titleContentKey: "users_list",
                         link: AppRoutes.management.users,
                     },
                     {
@@ -80,9 +80,32 @@ export const SidebarItems: T_Sidebar[] = [
                 ],
             },
             {
-                icon: <Setting2 className="size-6" />,
-                titleContentKey: "settings",
-                link: AppRoutes.settings,
+                icon: <Code className="size-6" />,
+                titleContentKey: "software",
+                subItems: [
+                    {
+                        titleContentKey: "settings",
+                        link: AppRoutes.software.settings,
+                    },
+                    {
+                        titleContentKey: "license",
+                        link: AppRoutes.software.license,
+                    },
+                ],
+            },
+            {
+                icon: <Camera className="size-6" />,
+                titleContentKey: "hardware",
+                subItems: [
+                    {
+                        titleContentKey: "devices",
+                        link: AppRoutes.hardware.devices,
+                    },
+                    {
+                        titleContentKey: "clients",
+                        link: AppRoutes.hardware.clients,
+                    },
+                ],
             },
         ],
     },

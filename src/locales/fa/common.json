@@ -33,5 +33,13 @@
   "vehicles_list_of": "لیست خودروهای",
   "roles_management": "مدیریت نقش‌ها",
   "add_new_role": "افزودن نقش جدید",
-  "edit_role": "ویرایش نقش"
+  "edit_role": "ویرایش نقش",
+  "users_list": "لیست کاربران",
+  "users_roles": "دسترسی کاربران",
+  "hardware": "سخت‌افزار",
+  "license": "لایسنس",
+  "clients": "کلاینت‌ها",
+  "cameras": "دوربین‌ها",
+  "edit": "ویرایش",
+  "device_details": "جزئیات دستگاه"
 }
