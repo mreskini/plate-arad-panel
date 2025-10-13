@@ -9,8 +9,8 @@ import {
     EditOwnerModal,
     ManagementFiltersWrapper,
     RemoveOwnerCardModal,
+    ViewOwnerVehiclesModal,
 } from "@components/pages/Management"
-import { ViewOwnerVehiclesModal } from "@components/pages/Management/Owner/ViewOwnerVehiclesModal"
 import { Button, Input, Table } from "@components/template"
 import { type T_FetchOwners, type T_Owner } from "@core/api"
 import { E_CardType } from "@core/api/gql/types"
