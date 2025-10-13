@@ -20,4 +20,12 @@ export const Modals = {
             EditCard: "management-edit-card",
         },
     },
+
+    Hardware: {
+        Devices: {
+            View: "hardware-view-device",
+            Add: "hardware-add-device",
+            Edit: "hardware-edit-device",
+        },
+    },
 }

@@ -28,7 +28,9 @@
   "traffic_date_and_time": "زمان تردد",
   "traffic_image": "تصویر تردد",
   "card_number": "شماره کارت",
-  "type": "نوع",
   "serial": "سریال",
-  "card_type": "نوع کارت"
+  "card_type": "نوع کارت",
+  "device_name": "نام دستگاه",
+  "type": "نوع",
+  "ip_address": "آدرس IP"
 }

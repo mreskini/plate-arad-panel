@@ -79,5 +79,14 @@
   "single": "تکی",
   "group": "گروهی",
   "card_type": "نوع کارت",
-  "please_search_card_number": "لطفا شماره کارت را جستجو کنید"
+  "please_search_card_number": "لطفا شماره کارت را جستجو کنید",
+  "hik_vision": "هایک ویژن",
+  "dahua": "داهوا",
+  "device_name": "نام دستگاه",
+  "type": "نوع",
+  "ip_address": "آدرس IP",
+  "ip_address_placeholder": "123.456.78.90",
+  "brand": "برند",
+  "enter_username": "نام کاربری را وارد کنید",
+  "choose_camera_brand": "برند دوربین را انتخاب کنید"
 }
