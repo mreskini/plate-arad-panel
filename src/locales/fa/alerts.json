@@ -7,6 +7,11 @@
   "owner_added_successfully": "مراجع جدید با موفقیت ایجاد شد",
   "owner_vehicle_added_successfully": "خودرو با موفقیت به مراجع تخصیص داده شد",
   "owner_edited_successfully": "مراجع با موفقیت ویرایش شد",
+  "excel_parse_error": "خطا در پردازش فایل",
+  "invalid_excel_file_type_error": "فرمت غیر مجاز",
+  "invalid_excel_file_size_error": "حجم فایل بیش از حد مجاز",
+  "owner_card_assigned_successfully": "کارت با موفقیت به مراجع تخصیص داده شد",
+  "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد",
   "device_created_successfully": "دستگاه با موفقیت ایجاد شد",
   "device_updated_successfully": "دستگاه با موفقیت ویرایش شد"
 }

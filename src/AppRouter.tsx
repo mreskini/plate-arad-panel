@@ -9,6 +9,7 @@ import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
 import { HardwareDevices } from "./pages/hardware/devices"
 import { AddRole } from "./pages/management/add-role"
+import { CardsList } from "./pages/management/cards-list"
 import { EditRole } from "./pages/management/edit-role"
 import { OwnersList } from "./pages/management/owners-list"
 import { UsersList } from "./pages/management/users-list"
@@ -51,6 +52,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={`${AppRoutes.management.roles.edit}/:token`} element={<EditRole />} />
 
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
+                <Route path={AppRoutes.management.cards} element={<CardsList />} />
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />

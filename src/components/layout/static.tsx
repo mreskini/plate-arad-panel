@@ -74,6 +74,10 @@ export const SidebarItems: T_Sidebar[] = [
                         link: AppRoutes.management.users,
                     },
                     {
+                        titleContentKey: "cards_list",
+                        link: AppRoutes.management.cards,
+                    },
+                    {
                         titleContentKey: "owners",
                         link: AppRoutes.management.owners,
                     },

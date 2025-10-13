@@ -1,18 +1,23 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/no-unstable-nested-components */
+import { Status } from "@components/common"
 import { Layout } from "@components/layout"
 import {
+    AddOwnerCardModal,
     AddOwnerModal,
     AddOwnerVehicleModal,
     EditOwnerModal,
     ManagementFiltersWrapper,
+    RemoveOwnerCardModal,
+    ViewOwnerVehiclesModal,
 } from "@components/pages/Management"
-import { ViewOwnerVehiclesModal } from "@components/pages/Management/Owner/ViewOwnerVehiclesModal"
 import { Button, Input, Table } from "@components/template"
-import type { T_FetchOwners, T_Owner } from "@core/api"
+import { type T_FetchOwners, type T_Owner } from "@core/api"
+import { E_CardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, Edit2, Eye } from "iconsax-reactjs"
+import { Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -46,7 +51,30 @@ export const OwnersList = () => {
             selector: (row: T_Owner) => row.descriptions,
         },
         {
-            width: "120px",
+            name: t("card_number"),
+            selector: (row: T_Owner) => (row.card?.token ? row.card.card_number : ""),
+        },
+        {
+            name: t("card_type"),
+            cell: (row: T_Owner) => {
+                const isRfid = row.card?.type === E_CardType.RFID && Number(row.card?.token) % 3 === 0
+                return (
+                    <>
+                        {row.card?.token ? (
+                            <Status
+                                contentKey={isRfid ? "RFID" : "CSN"}
+                                variant={isRfid ? "info" : "warning"}
+                                icon={isRfid ? <Money size={20} /> : <Cards size={20} />}
+                            />
+                        ) : (
+                            ""
+                        )}
+                    </>
+                )
+            },
+        },
+        {
+            width: "150px",
             name: t("actions"),
             cell: (row: T_Owner) => (
                 <div className="flex items-center gap-2">
@@ -60,6 +88,32 @@ export const OwnersList = () => {
                             }}
                         />
                     </Button>
+
+                    {!row.card?.token && (
+                        <Button variant="ghost">
+                            <CardAdd
+                                size={20}
+                                className="text-neutral-700"
+                                onClick={() => {
+                                    setSelected(row)
+                                    openModal(Modals.Management.Owner.AddCard)
+                                }}
+                            />
+                        </Button>
+                    )}
+
+                    {row.card?.token && (
+                        <Button variant="ghost">
+                            <CardRemove1
+                                size={20}
+                                className="text-neutral-700"
+                                onClick={() => {
+                                    setSelected(row)
+                                    openModal(Modals.Management.Owner.RemoveCard)
+                                }}
+                            />
+                        </Button>
+                    )}
 
                     <Button variant="ghost">
                         <Car
@@ -113,6 +167,16 @@ export const OwnersList = () => {
                         vehicle_color: `رنگ خودرو ${formatNumber(v)}`,
                         vehicle_year: `${1400 + v}`,
                     })),
+                    card:
+                        _ % 2 === 0
+                            ? {
+                                  card_number: `CARD-1034${_}`,
+                                  type: E_CardType.RFID,
+                                  is_active: true,
+                                  serial: `SERIAL-1034${_}`,
+                                  token: _.toString(),
+                              }
+                            : null,
                 }
             }),
         }
@@ -135,6 +199,14 @@ export const OwnersList = () => {
             )}
 
             {modalVisibility[Modals.Management.Owner.AddVehicle] && <AddOwnerVehicleModal callback={fetchOwners} />}
+
+            {modalVisibility[Modals.Management.Owner.AddCard] && (
+                <AddOwnerCardModal callback={fetchOwners} owner={selected!} />
+            )}
+
+            {modalVisibility[Modals.Management.Owner.RemoveCard] && (
+                <RemoveOwnerCardModal callback={fetchOwners} owner={selected!} />
+            )}
             {modalVisibility[Modals.Management.Owner.ViewVehicles] && <ViewOwnerVehiclesModal owner={selected!} />}
 
             <ManagementFiltersWrapper>
