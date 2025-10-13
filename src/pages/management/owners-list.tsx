@@ -13,7 +13,7 @@ import {
 } from "@components/pages/Management"
 import { Button, Input, Table } from "@components/template"
 import { type T_FetchOwners, type T_Owner } from "@core/api"
-import { E_CardType } from "@core/api/gql/types"
+import { E_OwnerCardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
@@ -57,7 +57,7 @@ export const OwnersList = () => {
         {
             name: t("card_type"),
             cell: (row: T_Owner) => {
-                const isRfid = row.card?.type === E_CardType.RFID && Number(row.card?.token) % 3 === 0
+                const isRfid = row.card?.type === E_OwnerCardType.RFID && Number(row.card?.token) % 3 === 0
                 return (
                     <>
                         {row.card?.token ? (
@@ -171,7 +171,7 @@ export const OwnersList = () => {
                         _ % 2 === 0
                             ? {
                                   card_number: `CARD-1034${_}`,
-                                  type: E_CardType.RFID,
+                                  type: E_OwnerCardType.RFID,
                                   is_active: true,
                                   serial: `SERIAL-1034${_}`,
                                   token: _.toString(),

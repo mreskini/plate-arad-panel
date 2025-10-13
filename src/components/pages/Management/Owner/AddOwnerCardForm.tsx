@@ -1,5 +1,5 @@
 import { Button, Divider, Input, Spinner } from "@components/template"
-import { E_CardType } from "@core/api/gql/types"
+import { E_OwnerCardType } from "@core/api/gql/types"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -9,7 +9,7 @@ interface I_Props {
 }
 
 export interface I_AddOwnerCardFormData {
-    cardType: E_CardType
+    cardType: E_OwnerCardType
     cardToken: string
 }
 
@@ -54,23 +54,23 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         <Input.DropDown
                             options={[
                                 {
-                                    value: E_CardType.CSN,
+                                    value: E_OwnerCardType.CSN,
                                     labelKey: "CSN",
                                 },
                                 {
-                                    value: E_CardType.RFID,
+                                    value: E_OwnerCardType.RFID,
                                     labelKey: "RFID",
                                 },
                             ]}
                             value={getValues("cardType")}
-                            setValue={(_: string) => setValue("cardType", _ as E_CardType)}
+                            setValue={(_: string) => setValue("cardType", _ as E_OwnerCardType)}
                             wrapperClassName="max-w-lg"
                         />
                     </div>
 
                     <Divider className="mb-4" />
 
-                    {watch("cardType") === E_CardType.CSN && (
+                    {watch("cardType") === E_OwnerCardType.CSN && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card_number" className="min-w-24" />
                             <Input.DropDown
@@ -84,7 +84,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_CardType.RFID && (
+                    {watch("cardType") === E_OwnerCardType.RFID && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card_number" className="min-w-24" />
                             <Input.DropDown

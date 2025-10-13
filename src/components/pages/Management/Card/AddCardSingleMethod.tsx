@@ -1,12 +1,12 @@
 import { Button, Input } from "@components/template"
-import { E_CardType } from "@core/api/gql/types"
+import { E_OwnerCardType } from "@core/api/gql/types"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC, useState } from "react"
 import { useForm } from "react-hook-form"
 
 interface I_FormData {
-    type: E_CardType
+    type: E_OwnerCardType
     cardNumber: string
     serial: string
 }
@@ -20,7 +20,7 @@ const CurrentModal = Modals.Management.Card.AddCard
 export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     // States and Hooks
     const { closeModal } = useModal()
-    const [cardType, setCardType] = useState<E_CardType>(E_CardType.CSN)
+    const [cardType, setCardType] = useState<E_OwnerCardType>(E_OwnerCardType.CSN)
 
     const {
         register,
@@ -44,16 +44,16 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                 <Input.DropDown
                     options={[
                         {
-                            value: E_CardType.CSN,
+                            value: E_OwnerCardType.CSN,
                             labelKey: "CSN",
                         },
                         {
-                            value: E_CardType.RFID,
+                            value: E_OwnerCardType.RFID,
                             labelKey: "RFID",
                         },
                     ]}
                     value={cardType}
-                    setValue={(_: string) => setCardType(_ as E_CardType)}
+                    setValue={(_: string) => setCardType(_ as E_OwnerCardType)}
                     wrapperClassName="max-w-lg"
                 />
             </div>

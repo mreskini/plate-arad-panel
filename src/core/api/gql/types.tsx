@@ -71,7 +71,7 @@ export type T_FetchOwners = {
 
 export type T_Owner = T_FetchOwners["items"][number]
 
-export enum E_CardType {
+export enum E_OwnerCardType {
     RFID = "RFID",
     CSN = "CSN",
 }
@@ -80,7 +80,7 @@ export type T_FetchCards = {
     count: number
     items: {
         token: string
-        type: E_CardType
+        type: E_OwnerCardType
         serial: string
         is_active: boolean
         card_number: string

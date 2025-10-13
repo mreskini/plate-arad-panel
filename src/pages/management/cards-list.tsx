@@ -4,7 +4,7 @@ import { Layout } from "@components/layout"
 import { AddCardModal, EditCardModal } from "@components/pages/Management"
 import { Button, Input, Switch, Table } from "@components/template"
 import type { T_Card, T_FetchCards } from "@core/api"
-import { E_CardType } from "@core/api/gql/types"
+import { E_OwnerCardType } from "@core/api/gql/types"
 import { sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
@@ -36,7 +36,7 @@ export const CardsList = () => {
         {
             name: t("type"),
             cell: (row: T_Card) => {
-                const isRfid = row.type === E_CardType.RFID
+                const isRfid = row.type === E_OwnerCardType.RFID
                 return (
                     <Status
                         contentKey={isRfid ? "RFID" : "CSN"}
@@ -83,7 +83,7 @@ export const CardsList = () => {
             count: 10,
             items: range(0, 7).map(_ => ({
                 token: `${_}`,
-                type: _ % 2 === 0 ? E_CardType.CSN : E_CardType.RFID,
+                type: _ % 2 === 0 ? E_OwnerCardType.CSN : E_OwnerCardType.RFID,
                 serial: `TestSerial000${_}`,
                 is_active: _ % 2 === 0,
                 card_number: `1000${_}`,
