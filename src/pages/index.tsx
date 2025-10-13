@@ -13,7 +13,7 @@ const Dashboard = () => {
     const { fetchParkingInfo, fetchCurrentUser } = useCommon()
 
     // TODO: Remove testing camerasCount after API integration
-    const [camerasCount] = useState<number>(1)
+    const [camerasCount] = useState<number>(4)
 
     // Methods
     const initialization = async () => {
