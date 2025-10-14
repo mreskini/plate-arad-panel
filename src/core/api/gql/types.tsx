@@ -66,6 +66,7 @@ export type T_FetchOwners = {
             vehicle_image?: string
         }[]
         card?: T_Card | null
+        apb: boolean
     }[]
 }
 

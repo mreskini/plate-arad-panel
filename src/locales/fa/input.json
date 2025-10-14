@@ -88,5 +88,6 @@
   "ip_address_placeholder": "123.456.78.90",
   "brand": "برند",
   "enter_username": "نام کاربری را وارد کنید",
-  "choose_camera_brand": "برند دوربین را انتخاب کنید"
+  "choose_camera_brand": "برند دوربین را انتخاب کنید",
+  "disable_apb": "غیرفعال‌سازی APB"
 }
