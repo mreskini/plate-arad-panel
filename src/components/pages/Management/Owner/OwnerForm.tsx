@@ -109,6 +109,14 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                         />
                     </div>
 
+                    <div className="flex items-center gap-2 mb-4">
+                        <Input.Checkbox
+                            labelKey="disable_apb"
+                            checked={watch("antiPassBack")}
+                            onChange={e => setValue("antiPassBack", e.target.checked)}
+                        />
+                    </div>
+
                     <Divider className="mb-4 col-span-2" />
 
                     <div className="col-span-2 flex items-center gap-4">
@@ -119,14 +127,6 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                                 defaultValue={getValues("descriptions")}
                                 onChange={e => setValue("descriptions", e.target.value)}
                                 disabled={isSubmitting}
-                            />
-                        </div>
-
-                        <div className="flex items-center gap-2 mb-4">
-                            <Input.Checkbox
-                                labelKey="disable_apb"
-                                checked={watch("antiPassBack")}
-                                onChange={e => setValue("antiPassBack", e.target.checked)}
                             />
                         </div>
                     </div>
