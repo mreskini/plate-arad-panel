@@ -1,4 +1,6 @@
+import { Status } from "@components/common"
 import { Button, Text } from "@components/template"
+import { useCommon } from "@core/contexts"
 import { useApp, useLayout } from "@core/stores"
 import { AppRoutes, Icons, Images } from "@core/utilities"
 import clsx from "clsx"
@@ -10,6 +12,7 @@ export const Header = () => {
     // States and hooks
     const navigate = useNavigate()
     const { currentUser, parking } = useApp()
+    const { isLicenseAvailable } = useCommon()
     const [parkingName, setParkingName] = useState(parking?.name ?? "")
     const { setIsSidebarOverlayOpen, isAuthenticating } = useLayout()
     const fullname = currentUser?.fullname ?? ""
@@ -31,6 +34,14 @@ export const Header = () => {
                             <img src={Icons.HamburgerMenu} alt="Hamburger menu icon" className="size-8" />
                         </Button>
                     </div>
+
+                    {!isLicenseAvailable && (
+                        <Status
+                            contentKey="license_not_available"
+                            variant="error"
+                            wrapperClassName="animate-pulse me-6"
+                        />
+                    )}
 
                     <Button
                         variant="ghost"

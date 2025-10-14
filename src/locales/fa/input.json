@@ -88,5 +88,9 @@
   "ip_address_placeholder": "123.456.78.90",
   "brand": "برند",
   "enter_username": "نام کاربری را وارد کنید",
-  "choose_camera_brand": "برند دوربین را انتخاب کنید"
+  "choose_camera_brand": "برند دوربین را انتخاب کنید",
+  "drag_license_file_here": "فایل لایسنس را اینجا بکشید و یا انتخاب کنید",
+  "plate_reader": "پلاک‌خوان",
+  "pos": "کارتخوان",
+  "UHF": "UHF"
 }

@@ -17,6 +17,9 @@ export const ParkingInfoDocument = gql`
       title
       type
     }
+    license
+    server_uuid
+    clients_count
   }
 }
     `;
