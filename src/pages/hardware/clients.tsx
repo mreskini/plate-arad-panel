@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Status } from "@components/common"
 import { Layout } from "@components/layout"
-import { AddClientModal, ClientTypeKeyMap } from "@components/pages/Hardware"
+import { AddClientModal, ClientTypeKeyMap, EditClientModal } from "@components/pages/Hardware"
 import { Button, Table, useNotify } from "@components/template"
 import { E_ClientType, E_DeviceType, type T_Client } from "@core/api"
 import { formatNumber, sleep } from "@core/functions"
@@ -137,9 +137,9 @@ export const Clients = () => {
         <Layout.Dashboard>
             {modalVisibility[Modals.Hardware.Client.Add] && <AddClientModal callback={fetchClients} />}
 
-            {/* {modalVisibility[Modals.Hardware.Client.Edit] && (
+            {modalVisibility[Modals.Hardware.Client.Edit] && (
                 <EditClientModal callback={fetchClients} client={selected!} />
-            )} */}
+            )}
 
             {/* {modalVisibility[Modals.Hardware.Client.View] && <ViewClientModal client={selected!} />} */}
 

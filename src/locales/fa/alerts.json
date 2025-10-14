@@ -15,5 +15,6 @@
   "device_created_successfully": "دستگاه با موفقیت ایجاد شد",
   "device_updated_successfully": "دستگاه با موفقیت ویرایش شد",
   "client_deleted_successfully": "کلاینت با موفقیت حذف شد",
-  "client_added_successfully": "کلاینت جدید با موفقیت ایجاد شد"
+  "client_added_successfully": "کلاینت جدید با موفقیت ایجاد شد",
+  "client_edited_successfully": "کلاینت با موفقیت ویرایش شد"
 }
