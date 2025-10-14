@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form"
 interface I_FormData {
     type: E_OwnerCardType
     cardNumber: string
-    serial: string
+    code: string
 }
 
 interface I_Props {
@@ -30,6 +30,9 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
         mode: "onChange",
     })
 
+    // Flags
+    const isCSN = cardType === E_OwnerCardType.CSN
+
     // Methods
     const onSubmitSingle = async () => {
         await callback()
@@ -40,7 +43,7 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     return (
         <form onSubmit={handleSubmit(onSubmitSingle)} className="sm:min-w-3xl">
             <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="card_type" className="grow" />
+                <Input.Label labelKey="card_type" className="grow" required />
                 <Input.DropDown
                     options={[
                         {
@@ -48,8 +51,8 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                             labelKey: "CSN",
                         },
                         {
-                            value: E_OwnerCardType.RFID,
-                            labelKey: "RFID",
+                            value: E_OwnerCardType.UHF,
+                            labelKey: "UHF",
                         },
                     ]}
                     value={cardType}
@@ -71,18 +74,35 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                 />
             </div>
 
-            <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="card_serial" className="grow" required />
-                <Input
-                    placeholder="enter_card_serial"
-                    disabled={isSubmitting}
-                    className="w-full max-w-lg"
-                    {...register("serial", {
-                        required: true,
-                        minLength: 1,
-                    })}
-                />
-            </div>
+            {isCSN && (
+                <div className="flex w-full items-center gap-4 mb-4">
+                    <Input.Label labelKey="CSN" className="grow" required />
+                    <Input
+                        placeholder="CSN_example"
+                        disabled={isSubmitting}
+                        className="w-full max-w-lg"
+                        {...register("code", {
+                            required: true,
+                            minLength: 1,
+                        })}
+                    />
+                </div>
+            )}
+
+            {!isCSN && (
+                <div className="flex w-full items-center gap-4 mb-4">
+                    <Input.Label labelKey="UHF" className="grow" required />
+                    <Input
+                        placeholder="UHF_example"
+                        disabled={isSubmitting}
+                        className="w-full max-w-lg"
+                        {...register("code", {
+                            required: true,
+                            minLength: 1,
+                        })}
+                    />
+                </div>
+            )}
 
             <div className="flex items-center gap-4 mt-4">
                 <Button

@@ -58,8 +58,8 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                     labelKey: "CSN",
                                 },
                                 {
-                                    value: E_OwnerCardType.RFID,
-                                    labelKey: "RFID",
+                                    value: E_OwnerCardType.UHF,
+                                    labelKey: "UHF",
                                 },
                             ]}
                             value={getValues("cardType")}
@@ -84,7 +84,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.RFID && (
+                    {watch("cardType") === E_OwnerCardType.UHF && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card_number" className="min-w-24" />
                             <Input.DropDown

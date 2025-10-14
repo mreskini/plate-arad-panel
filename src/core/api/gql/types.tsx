@@ -86,13 +86,14 @@ export type T_FetchOwners = {
             vehicle_image?: string
         }[]
         card?: T_Card | null
+        apb: boolean
     }[]
 }
 
 export type T_Owner = T_FetchOwners["items"][number]
 
 export enum E_OwnerCardType {
-    RFID = "RFID",
+    UHF = "UHF",
     CSN = "CSN",
 }
 

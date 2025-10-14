@@ -74,6 +74,7 @@
   "enter_card_serial": "شماره سریال کارت را وارد کنید",
   "CSN": "CSN",
   "RFID": "RFID",
+  "UHF": "UHF",
   "add_card": "افزودن کارت",
   "add_type": "نحوه افزودن",
   "single": "تکی",
@@ -92,5 +93,7 @@
   "drag_license_file_here": "فایل لایسنس را اینجا بکشید و یا انتخاب کنید",
   "plate_reader": "پلاک‌خوان",
   "pos": "کارتخوان",
-  "UHF": "UHF"
+  "CSN_example": "مثال: 12345678",
+  "UHF_example": "مثال: 0000000012345678",
+  "disable_apb": "غیرفعال‌سازی APB"
 }

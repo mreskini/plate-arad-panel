@@ -17,7 +17,7 @@ import { E_OwnerCardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
+import { AddCircle, Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money, TickCircle } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -57,14 +57,14 @@ export const OwnersList = () => {
         {
             name: t("card_type"),
             cell: (row: T_Owner) => {
-                const isRfid = row.card?.type === E_OwnerCardType.RFID && Number(row.card?.token) % 3 === 0
+                const isUHF = row.card?.type === E_OwnerCardType.UHF && Number(row.card?.token) % 3 === 0
                 return (
                     <>
                         {row.card?.token ? (
                             <Status
-                                contentKey={isRfid ? "RFID" : "CSN"}
-                                variant={isRfid ? "info" : "warning"}
-                                icon={isRfid ? <Money size={20} /> : <Cards size={20} />}
+                                contentKey={isUHF ? "UHF" : "CSN"}
+                                variant={isUHF ? "info" : "warning"}
+                                icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
                             />
                         ) : (
                             ""
@@ -72,6 +72,16 @@ export const OwnersList = () => {
                     </>
                 )
             },
+        },
+        {
+            name: "APB",
+            cell: (row: T_Owner) => (
+                <Status
+                    contentKey={row.apb ? "active" : "inactive"}
+                    variant={row.apb ? "success" : "error"}
+                    icon={row.apb ? <TickCircle size={20} /> : <AddCircle className="rotate-45" size={20} />}
+                />
+            ),
         },
         {
             width: "150px",
@@ -171,12 +181,13 @@ export const OwnersList = () => {
                         _ % 2 === 0
                             ? {
                                   card_number: `CARD-1034${_}`,
-                                  type: E_OwnerCardType.RFID,
+                                  type: E_OwnerCardType.UHF,
                                   is_active: true,
                                   serial: `SERIAL-1034${_}`,
                                   token: _.toString(),
                               }
                             : null,
+                    apb: _ % 2 === 0,
                 }
             }),
         }

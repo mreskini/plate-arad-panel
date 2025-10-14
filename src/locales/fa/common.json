@@ -51,5 +51,6 @@
   "server_uuid": "UUID سرور",
   "clients_count": "تعداد کلاینت‌ها",
   "plate_reader": "پلاک‌خوان",
-  "available": "در دسترس"
+  "available": "در دسترس",
+  "add_card": "افزودن کارت"
 }

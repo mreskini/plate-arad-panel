@@ -36,12 +36,12 @@ export const CardsList = () => {
         {
             name: t("type"),
             cell: (row: T_Card) => {
-                const isRfid = row.type === E_OwnerCardType.RFID
+                const isUHF = row.type === E_OwnerCardType.UHF
                 return (
                     <Status
-                        contentKey={isRfid ? "RFID" : "CSN"}
-                        variant={isRfid ? "info" : "warning"}
-                        icon={isRfid ? <Money size={20} /> : <Cards size={20} />}
+                        contentKey={isUHF ? "UHF" : "CSN"}
+                        variant={isUHF ? "info" : "warning"}
+                        icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
                     />
                 )
             },
@@ -83,7 +83,7 @@ export const CardsList = () => {
             count: 10,
             items: range(0, 7).map(_ => ({
                 token: `${_}`,
-                type: _ % 2 === 0 ? E_OwnerCardType.CSN : E_OwnerCardType.RFID,
+                type: _ % 2 === 0 ? E_OwnerCardType.CSN : E_OwnerCardType.UHF,
                 serial: `TestSerial000${_}`,
                 is_active: _ % 2 === 0,
                 card_number: `1000${_}`,

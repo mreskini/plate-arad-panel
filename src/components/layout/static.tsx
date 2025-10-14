@@ -66,12 +66,12 @@ export const SidebarItems: T_Sidebar[] = [
                 titleContentKey: "management",
                 subItems: [
                     {
-                        titleContentKey: "users_roles",
-                        link: AppRoutes.management.roles.index,
-                    },
-                    {
                         titleContentKey: "users_list",
                         link: AppRoutes.management.users,
+                    },
+                    {
+                        titleContentKey: "users_roles",
+                        link: AppRoutes.management.roles.index,
                     },
                     {
                         titleContentKey: "cards_list",
