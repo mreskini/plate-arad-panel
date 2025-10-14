@@ -74,6 +74,7 @@
   "enter_card_serial": "شماره سریال کارت را وارد کنید",
   "CSN": "CSN",
   "RFID": "RFID",
+  "UHF": "UHF",
   "add_card": "افزودن کارت",
   "add_type": "نحوه افزودن",
   "single": "تکی",
@@ -89,5 +90,7 @@
   "brand": "برند",
   "enter_username": "نام کاربری را وارد کنید",
   "choose_camera_brand": "برند دوربین را انتخاب کنید",
+  "CSN_example": "مثال: 12345678",
+  "UHF_example": "مثال: 0000000012345678",
   "disable_apb": "غیرفعال‌سازی APB"
 }

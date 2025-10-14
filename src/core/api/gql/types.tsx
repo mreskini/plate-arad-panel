@@ -73,7 +73,7 @@ export type T_FetchOwners = {
 export type T_Owner = T_FetchOwners["items"][number]
 
 export enum E_OwnerCardType {
-    RFID = "RFID",
+    UHF = "UHF",
     CSN = "CSN",
 }
 

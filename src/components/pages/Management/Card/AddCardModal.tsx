@@ -28,7 +28,7 @@ export const AddCardModal: FC<I_Props> = ({ callback }) => {
             closeButton
         >
             <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="add_type" className="grow" />
+                <Input.Label labelKey="add_type" className="grow" required />
                 <Input.DropDown
                     options={[
                         {

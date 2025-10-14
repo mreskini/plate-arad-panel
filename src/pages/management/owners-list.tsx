@@ -57,14 +57,14 @@ export const OwnersList = () => {
         {
             name: t("card_type"),
             cell: (row: T_Owner) => {
-                const isRfid = row.card?.type === E_OwnerCardType.RFID && Number(row.card?.token) % 3 === 0
+                const isUHF = row.card?.type === E_OwnerCardType.UHF && Number(row.card?.token) % 3 === 0
                 return (
                     <>
                         {row.card?.token ? (
                             <Status
-                                contentKey={isRfid ? "RFID" : "CSN"}
-                                variant={isRfid ? "info" : "warning"}
-                                icon={isRfid ? <Money size={20} /> : <Cards size={20} />}
+                                contentKey={isUHF ? "UHF" : "CSN"}
+                                variant={isUHF ? "info" : "warning"}
+                                icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
                             />
                         ) : (
                             ""
@@ -181,7 +181,7 @@ export const OwnersList = () => {
                         _ % 2 === 0
                             ? {
                                   card_number: `CARD-1034${_}`,
-                                  type: E_OwnerCardType.RFID,
+                                  type: E_OwnerCardType.UHF,
                                   is_active: true,
                                   serial: `SERIAL-1034${_}`,
                                   token: _.toString(),
