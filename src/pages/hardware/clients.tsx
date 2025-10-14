@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Status } from "@components/common"
 import { Layout } from "@components/layout"
-import { AddClientModal, ClientTypeKeyMap, EditClientModal } from "@components/pages/Hardware"
+import { AddClientModal, ClientTypeKeyMap, EditClientModal, ViewClientModal } from "@components/pages/Hardware"
 import { Button, Table, useNotify } from "@components/template"
 import { E_ClientType, E_DeviceType, type T_Client } from "@core/api"
 import { formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Edit2, More, Trash } from "iconsax-reactjs"
+import { Edit2, Eye, Trash } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -61,7 +61,7 @@ export const Clients = () => {
                             openModal(Modals.Hardware.Client.View)
                         }}
                     >
-                        <More size={20} className="text-neutral-700" />
+                        <Eye size={20} className="text-neutral-700" />
                     </Button>
                     <Button
                         variant="ghost"
@@ -141,7 +141,7 @@ export const Clients = () => {
                 <EditClientModal callback={fetchClients} client={selected!} />
             )}
 
-            {/* {modalVisibility[Modals.Hardware.Client.View] && <ViewClientModal client={selected!} />} */}
+            {modalVisibility[Modals.Hardware.Client.View] && <ViewClientModal client={selected!} />}
 
             {/* {!isLicenseAvailable && (
                 <Notice
