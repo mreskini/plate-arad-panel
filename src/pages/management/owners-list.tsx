@@ -17,7 +17,7 @@ import { E_OwnerCardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
+import { AddCircle, Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money, TickCircle } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -72,6 +72,16 @@ export const OwnersList = () => {
                     </>
                 )
             },
+        },
+        {
+            name: "APB",
+            cell: (row: T_Owner) => (
+                <Status
+                    contentKey={row.apb ? "active" : "inactive"}
+                    variant={row.apb ? "success" : "error"}
+                    icon={row.apb ? <TickCircle size={20} /> : <AddCircle className="rotate-45" size={20} />}
+                />
+            ),
         },
         {
             width: "150px",
@@ -177,6 +187,7 @@ export const OwnersList = () => {
                                   token: _.toString(),
                               }
                             : null,
+                    apb: _ % 2 === 0,
                 }
             }),
         }
