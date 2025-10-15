@@ -32,5 +32,6 @@
   "card_type": "نوع کارت",
   "device_name": "نام دستگاه",
   "type": "نوع",
-  "ip_address": "آدرس IP"
+  "ip_address": "آدرس IP",
+  "card": "کارت"
 }

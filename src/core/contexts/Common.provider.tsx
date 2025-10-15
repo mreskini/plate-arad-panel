@@ -50,6 +50,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
                 "/logout",
                 "/reports/traffic",
                 "/reports/traffic-without-plate",
+                "/reports/traffic-with-card",
                 "/management/roles",
                 "/management/roles/add",
                 "/management/roles/edit",
@@ -76,6 +77,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const onOwnerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        // eslint-disable-next-line no-console
         console.log(searchTerm)
         // const { data } = await API.Owner.SearchOwnersByFullname({ body: { search: searchTerm } })
 
