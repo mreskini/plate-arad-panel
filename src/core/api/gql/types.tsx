@@ -91,3 +91,5 @@ export type T_FetchCards = {
 export type T_Card = T_FetchCards["items"][number]
 export type T_Device = FetchDevicesQuery["fetchDevices"][number]
 export type T_PingAllDevices = PingAllDevicesQuery["pingAllDevices"][number]
+
+export type T_Door = { token: string; name: string }

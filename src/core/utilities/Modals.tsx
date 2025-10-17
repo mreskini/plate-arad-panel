@@ -2,6 +2,10 @@ export const Modals = {
     ExportFile: "export_file",
     Logout: "logout",
 
+    Monitoring: {
+        OpenDoor: "monitoring-open-door",
+    },
+
     Management: {
         User: {
             AddUser: "management-add-user",

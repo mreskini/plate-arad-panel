@@ -92,5 +92,7 @@
   "choose_camera_brand": "برند دوربین را انتخاب کنید",
   "CSN_example": "مثال: 12345678",
   "UHF_example": "مثال: 0000000012345678",
-  "disable_apb": "غیرفعال‌سازی APB"
+  "disable_apb": "غیرفعال‌سازی APB",
+  "reason": "علت",
+  "enter_reason": "علت را وارد کنید"
 }
