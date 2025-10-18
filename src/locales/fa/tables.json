@@ -37,5 +37,7 @@
   "client_type": "نوع کلاینت",
   "has_operator": "اپراتور",
   "pos_device": "دستگاه پوز",
-  "card": "کارت"
+  "card": "کارت",
+  "id_number": "شماره شناسه",
+  "id_type": "نوع شناسه"
 }
