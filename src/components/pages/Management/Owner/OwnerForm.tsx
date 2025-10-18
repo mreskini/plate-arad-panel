@@ -17,7 +17,6 @@ export interface I_OwnerFormData {
     nationalCode: string
     phoneNumber: string
     descriptions?: string
-    antiPassBack: boolean
     profileImageUrl?: string
     profileImageFile: File | null
 }
@@ -50,7 +49,6 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
         setValue("nationalCode", owner.national_code)
         setValue("phoneNumber", owner.phone_number)
         setValue("descriptions", owner.descriptions)
-        setValue("antiPassBack", owner.apb)
         setValue("profileImageUrl", owner.profile_image ?? "")
     }
 
@@ -106,14 +104,6 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("phoneNumber", { required: true })}
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-4">
-                        <Input.Checkbox
-                            labelKey="disable_apb"
-                            checked={watch("antiPassBack")}
-                            onChange={e => setValue("antiPassBack", e.target.checked)}
                         />
                     </div>
 
