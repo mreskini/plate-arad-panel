@@ -17,6 +17,7 @@ import { UsersRoles } from "./pages/management/users-roles"
 import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
+import { License } from "./pages/software/license"
 import { Settings } from "./pages/software/settings"
 
 const CommonProviderWrapper = () => {
@@ -56,7 +57,7 @@ export const AppRouter = createBrowserRouter(
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />
-                <Route path={AppRoutes.software.license} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.software.license} element={<License />} />
 
                 {/* Hardware */}
                 <Route path={AppRoutes.hardware.clients} element={<PlaceholderPage />} />

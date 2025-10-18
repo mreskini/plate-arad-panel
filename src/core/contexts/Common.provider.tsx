@@ -6,7 +6,7 @@ import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
 import { AppRoutes } from "@core/utilities"
 import type { FC, ReactNode } from "react"
-import { createContext, useContext } from "react"
+import { createContext, useContext, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 
 interface I_Props {
@@ -18,6 +18,7 @@ interface I_Context {
     fetchParkingInfo: Function
     onOwnerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     fetchRoles: Function
+    isLicenseAvailable: boolean
 }
 
 const Initials: I_Context = {
@@ -25,6 +26,7 @@ const Initials: I_Context = {
     fetchParkingInfo: () => undefined,
     onOwnerSearch: async (): Promise<T_InputDropdownOption[]> => [],
     fetchRoles: () => undefined,
+    isLicenseAvailable: false,
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -33,8 +35,12 @@ const useCommon = () => useContext(Context)
 
 const CommonProvider: FC<I_Props> = ({ children }) => {
     // States and Hooks
-    const { setCurrentUser, setPermissions, setParking } = useApp()
+    const { setCurrentUser, setPermissions, setParking, parking } = useApp()
     const navigate = useNavigate()
+
+    const isLicenseAvailable = useMemo(() => {
+        return !!(parking?.license && parking?.server_uuid && parking?.clients_count > 0)
+    }, [parking?.license, parking?.server_uuid, parking?.clients_count])
 
     // Methods
     const fetchCurrentUser = async () => {
@@ -76,6 +82,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
 
     // eslint-disable-next-line unused-imports/no-unused-vars
     const onOwnerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        // eslint-disable-next-line no-console
         console.log(searchTerm)
         // const { data } = await API.Owner.SearchOwnersByFullname({ body: { search: searchTerm } })
 
@@ -99,6 +106,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         fetchParkingInfo,
         onOwnerSearch,
         fetchRoles,
+        isLicenseAvailable,
     }
 
     // Render
