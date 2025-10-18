@@ -39,7 +39,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
     const navigate = useNavigate()
 
     const isLicenseAvailable = useMemo(() => {
-        return !!(parking?.license && parking?.server_uuid && parking?.clients_count > 0)
+        return !!(parking?.license && parking?.server_uuid && (parking?.clients_count ?? 0) > 0)
     }, [parking?.license, parking?.server_uuid, parking?.clients_count])
 
     // Methods

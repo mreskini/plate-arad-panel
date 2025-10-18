@@ -162,7 +162,7 @@ export type T_Client = {
     } | null
 }
 
-export enum E_PosBrand {
+export enum E_PosBrandName {
     Parsian = "PARSIAN",
     Sep = "SEP",
 }
@@ -171,6 +171,6 @@ export type T_POS = {
     token: string
     num: number
     terminal: number
-    brand_name: E_PosBrand
+    brand_name: E_PosBrandName
     ip: string
 }
