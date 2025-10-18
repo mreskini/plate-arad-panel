@@ -110,5 +110,8 @@
   "has_operator": "اپراتور",
   "pos_number": "شماره پوز",
   "reason": "علت",
-  "enter_reason": "علت را وارد کنید"
+  "enter_reason": "علت را وارد کنید",
+  "id_type": "نوع شناسه",
+  "plate": "پلاک",
+  "please_enter_id": "لطفا شناسه را وارد کنید"
 }

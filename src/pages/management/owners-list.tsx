@@ -17,7 +17,7 @@ import { E_OwnerCardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { AddCircle, Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money, TickCircle } from "iconsax-reactjs"
+import { AddCircle, Car, CardAdd, Cards, Edit2, Money, TickCircle } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -51,11 +51,11 @@ export const OwnersList = () => {
             selector: (row: T_Owner) => row.descriptions,
         },
         {
-            name: t("card_number"),
+            name: t("id_number"),
             selector: (row: T_Owner) => (row.card?.token ? row.card.card_number : ""),
         },
         {
-            name: t("card_type"),
+            name: t("id_type"),
             cell: (row: T_Owner) => {
                 const isUHF = row.card?.type === E_OwnerCardType.UHF && Number(row.card?.token) % 3 === 0
                 return (
@@ -89,7 +89,7 @@ export const OwnersList = () => {
             cell: (row: T_Owner) => (
                 <div className="flex items-center gap-2">
                     <Button variant="ghost">
-                        <Eye
+                        <Car
                             size={20}
                             className="text-neutral-700"
                             onClick={() => {
@@ -99,39 +99,13 @@ export const OwnersList = () => {
                         />
                     </Button>
 
-                    {!row.card?.token && (
-                        <Button variant="ghost">
-                            <CardAdd
-                                size={20}
-                                className="text-neutral-700"
-                                onClick={() => {
-                                    setSelected(row)
-                                    openModal(Modals.Management.Owner.AddCard)
-                                }}
-                            />
-                        </Button>
-                    )}
-
-                    {row.card?.token && (
-                        <Button variant="ghost">
-                            <CardRemove1
-                                size={20}
-                                className="text-neutral-700"
-                                onClick={() => {
-                                    setSelected(row)
-                                    openModal(Modals.Management.Owner.RemoveCard)
-                                }}
-                            />
-                        </Button>
-                    )}
-
                     <Button variant="ghost">
-                        <Car
+                        <CardAdd
                             size={20}
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.Owner.AddVehicle)
+                                openModal(Modals.Management.Owner.AddCard)
                             }}
                         />
                     </Button>

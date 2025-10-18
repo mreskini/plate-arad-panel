@@ -60,5 +60,6 @@
   "plate_reader": "پلاک‌خوان",
   "available": "در دسترس",
   "are_you_sure_you_want_to_open_door": "آیا از باز کردن درب \"{{0}}\" مطمئن هستید؟",
-  "open_door": "باز کردن درب"
+  "open_door": "باز کردن درب",
+  "assign_id_to": "تخصیص شناسه به"
 }

@@ -22,7 +22,7 @@ export const AddOwnerCardModal: FC<I_Props> = ({ callback, owner }) => {
     const onSubmit = async () => {
         await callback()
         closeModal(CurrentModal)
-        notify("owner_card_assigned_successfully", "success")
+        notify("owner_id_assigned_successfully", "success")
     }
 
     // Render
@@ -31,7 +31,7 @@ export const AddOwnerCardModal: FC<I_Props> = ({ callback, owner }) => {
             name={CurrentModal}
             title={
                 <div className="flex items-center gap-1">
-                    <Text contentKey="assign_card_to" variant="title-1" className="text-neutral-700" weight={600} />
+                    <Text contentKey="assign_id_to" variant="title-1" className="text-neutral-700" weight={600} />
                     <Text
                         content={`${owner.firstname} ${owner.lastname}`}
                         variant="title-1"
