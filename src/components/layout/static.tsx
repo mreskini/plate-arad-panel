@@ -44,7 +44,7 @@ export const SidebarItems: T_Sidebar[] = [
         items: [
             {
                 icon: <Element4 className="size-6" />,
-                titleContentKey: "dashboard",
+                titleContentKey: "monitoring",
                 link: AppRoutes.index,
             },
             {
@@ -58,6 +58,10 @@ export const SidebarItems: T_Sidebar[] = [
                     {
                         titleContentKey: "traffic_without_plate",
                         link: AppRoutes.reports.trafficWithoutPlate,
+                    },
+                    {
+                        titleContentKey: "traffic_with_card",
+                        link: AppRoutes.reports.trafficWithCard,
                     },
                 ],
             },

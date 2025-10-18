@@ -10,5 +10,8 @@ query ParkingInfo {
       title
       type
     }
+    license
+    server_uuid
+    clients_count
   }
 }

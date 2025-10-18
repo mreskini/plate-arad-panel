@@ -28,6 +28,7 @@
   "not_allowed": "غیر مجاز",
   "RFID": "RFID",
   "CSN": "CSN",
+  "license_not_available": "لایسنس در دسترس نیست",
   "UHF": "UHF",
   "card_type": "نوع کارت"
 }
