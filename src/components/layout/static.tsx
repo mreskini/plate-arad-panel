@@ -44,7 +44,7 @@ export const SidebarItems: T_Sidebar[] = [
         items: [
             {
                 icon: <Element4 className="size-6" />,
-                titleContentKey: "dashboard",
+                titleContentKey: "monitoring",
                 link: AppRoutes.index,
             },
             {
