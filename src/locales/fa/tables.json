@@ -37,5 +37,6 @@
   "client_type": "نوع کلاینت",
   "has_operator": "اپراتور",
   "pos_device": "دستگاه پوز",
-  "card": "کارت"
+  "card": "کارت",
+  "reason": "علت"
 }

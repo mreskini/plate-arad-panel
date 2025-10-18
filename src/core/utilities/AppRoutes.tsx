@@ -10,6 +10,7 @@ export const AppRoutes = {
         traffic: "/reports/traffic",
         trafficWithoutPlate: "/reports/traffic-without-plate",
         trafficWithCard: "/reports/traffic-with-card",
+        trafficWithEmergency: "/reports/traffic-with-emergency",
     },
 
     management: {
