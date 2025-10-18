@@ -2,16 +2,36 @@ import type {
     CurrentUserQuery,
     E_ClientType,
     E_DeviceType,
+    E_GroupType,
     FetchDevicesQuery,
     FetchRolesQuery,
     FetchUsersListQuery,
-    ParkingInfoQuery,
     PingAllDevicesQuery,
 } from "./generated"
 
 // User
 export type T_User = CurrentUserQuery["currentUser"]
-export type T_Parking = ParkingInfoQuery["parkingInfo"]
+export type T_Parking = {
+    name: string
+    code: string
+    capacity: number
+    cash_adjustment: number
+    card_issuance_fee: number
+    license?: string | null | undefined
+    server_uuid?: string | null | undefined
+    clients_count?: number
+    plate_reader?: boolean
+    pos?: boolean
+    UHF?: boolean
+    default_cash_group?:
+        | {
+              token: string
+              title: string
+              type: E_GroupType
+          }
+        | null
+        | undefined
+}
 
 // Report
 export type T_FetchTraffic = {

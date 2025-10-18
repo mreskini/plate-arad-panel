@@ -92,6 +92,7 @@ export type CheckCustomerSubByCardTokenRs = {
 export type Client = {
   controller?: Maybe<Device>;
   driver_cam?: Maybe<Device>;
+  has_operator: Scalars['Boolean']['output'];
   ip_address: Scalars['String']['output'];
   name: Scalars['String']['output'];
   plate_cam?: Maybe<Device>;
@@ -136,6 +137,7 @@ export type CreateCardRq = {
 export type CreateClientRq = {
   controller_token?: InputMaybe<Scalars['String']['input']>;
   driver_cam_token?: InputMaybe<Scalars['String']['input']>;
+  has_operator?: Scalars['Boolean']['input'];
   ip_address: Scalars['String']['input'];
   name: Scalars['String']['input'];
   plate_cam_token?: InputMaybe<Scalars['String']['input']>;
@@ -203,6 +205,7 @@ export type CreateNewRoleRq = {
 };
 
 export type CreatePosRq = {
+  brand_name: E_PosBrand;
   ip: Scalars['String']['input'];
   num: Scalars['Float']['input'];
   terminal: Scalars['Float']['input'];
@@ -451,7 +454,6 @@ export enum E_CardType {
 
 export enum E_ClientType {
   Input = 'INPUT',
-  InputOutput = 'INPUT_OUTPUT',
   Output = 'OUTPUT'
 }
 
@@ -494,6 +496,11 @@ export enum E_GroupType {
   CashDaily = 'CASH_DAILY',
   CashNormal = 'CASH_NORMAL',
   CreditTime = 'CREDIT_TIME'
+}
+
+export enum E_PosBrand {
+  Parsian = 'PARSIAN',
+  Sep = 'SEP'
 }
 
 export enum E_TemporalExitType {
@@ -542,6 +549,7 @@ export type EditCardRq = {
 export type EditClientRq = {
   controller_token?: InputMaybe<Scalars['String']['input']>;
   driver_cam_token?: InputMaybe<Scalars['String']['input']>;
+  has_operator?: InputMaybe<Scalars['Boolean']['input']>;
   ip_address?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   plate_cam_token?: InputMaybe<Scalars['String']['input']>;
@@ -605,6 +613,7 @@ export type EditInactiveCarRq = {
 };
 
 export type EditPosRq = {
+  brand_name?: InputMaybe<E_PosBrand>;
   ip?: InputMaybe<Scalars['String']['input']>;
   num?: InputMaybe<Scalars['Float']['input']>;
   terminal?: InputMaybe<Scalars['Float']['input']>;
@@ -1387,6 +1396,7 @@ export type OffDay = {
 };
 
 export type Pos = {
+  brand_name: E_PosBrand;
   ip: Scalars['String']['output'];
   num: Scalars['Float']['output'];
   terminal: Scalars['Float']['output'];

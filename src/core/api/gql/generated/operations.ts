@@ -27,7 +27,7 @@ export type PingAllDevicesQuery = { pingAllDevices: Array<{ name: string, ip: st
 export type ParkingInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type ParkingInfoQuery = { parkingInfo: { name: string, code: string, capacity: number, cash_adjustment: number, card_issuance_fee: number, default_cash_group?: { token: string, title: string, type: Types.E_GroupType } | null } };
+export type ParkingInfoQuery = { parkingInfo: { name: string, code: string, capacity: number, cash_adjustment: number, card_issuance_fee: number, license?: string | null, server_uuid?: string | null, clients_count: number, default_cash_group?: { token: string, title: string, type: Types.E_GroupType } | null } };
 
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
