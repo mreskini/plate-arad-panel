@@ -58,5 +58,7 @@
   "server_uuid": "UUID سرور",
   "clients_count": "تعداد کلاینت‌ها",
   "plate_reader": "پلاک‌خوان",
-  "available": "در دسترس"
+  "available": "در دسترس",
+  "are_you_sure_you_want_to_open_door": "آیا از باز کردن درب \"{{0}}\" مطمئن هستید؟",
+  "open_door": "باز کردن درب"
 }

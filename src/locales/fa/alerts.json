@@ -21,5 +21,6 @@
   "invalid_license_file_size_error": "سایز فایل انتخابی مناسب نیست",
   "license_updated_successfully": "لایسنس با موفقیت به‌روزرسانی شد",
   "license_update_failed": "خطا در به‌روزرسانی لایسنس",
-  "license_not_available_please_upload_license_file": "لایسنس در دسترس نیست. لطفا فایل لایسنس را آپلود کنید."
+  "license_not_available_please_upload_license_file": "لایسنس در دسترس نیست. لطفا فایل لایسنس را آپلود کنید.",
+  "door_opened_successfully": "درب با موفقیت باز شد"
 }

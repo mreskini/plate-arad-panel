@@ -108,5 +108,7 @@
   "plate_camera": "دوربین پلاک",
   "relay_board": "برد رله",
   "has_operator": "اپراتور",
-  "pos_number": "شماره پوز"
+  "pos_number": "شماره پوز",
+  "reason": "علت",
+  "enter_reason": "علت را وارد کنید"
 }
