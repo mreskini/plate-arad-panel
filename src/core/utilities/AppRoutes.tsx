@@ -9,6 +9,7 @@ export const AppRoutes = {
     reports: {
         traffic: "/reports/traffic",
         trafficWithoutPlate: "/reports/traffic-without-plate",
+        trafficWithCard: "/reports/traffic-with-card",
     },
 
     management: {

@@ -114,6 +114,28 @@ export type T_Card = T_FetchCards["items"][number]
 export type T_Device = FetchDevicesQuery["fetchDevices"][number]
 export type T_PingAllDevices = PingAllDevicesQuery["pingAllDevices"][number]
 
+export type T_FetchTrafficWithCard = {
+    count: number
+    items: {
+        camera_name: string
+        plate_serial?: string | null | undefined
+        owner_name: string
+        entrance: any
+        exit?: any
+        entrance_image?: string | null | undefined
+        exit_image?: string | null | undefined
+        direction: string
+        permission: string
+        card: {
+            token: string
+            type: E_OwnerCardType
+            card_number: string
+        }
+    }[]
+}
+
+export type T_TrafficWithCard = T_FetchTrafficWithCard["items"][number]
+
 export type T_Client = {
     token: string
     type: E_ClientType

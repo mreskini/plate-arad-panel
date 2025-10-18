@@ -59,6 +59,10 @@ export const SidebarItems: T_Sidebar[] = [
                         titleContentKey: "traffic_without_plate",
                         link: AppRoutes.reports.trafficWithoutPlate,
                     },
+                    {
+                        titleContentKey: "traffic_with_card",
+                        link: AppRoutes.reports.trafficWithCard,
+                    },
                 ],
             },
             {

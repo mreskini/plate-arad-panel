@@ -36,5 +36,6 @@
   "client_name": "نام کلاینت",
   "client_type": "نوع کلاینت",
   "has_operator": "اپراتور",
-  "pos_device": "دستگاه پوز"
+  "pos_device": "دستگاه پوز",
+  "card": "کارت"
 }
