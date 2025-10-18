@@ -10,5 +10,7 @@
   "save": "ذخیره",
   "download_example": "دانلود فایل نمونه",
   "assign": "تخصیص",
-  "unassign": "حذف"
+  "unassign": "حذف",
+  "close": "بستن",
+  "update_license": "به‌روزرسانی لایسنس"
 }

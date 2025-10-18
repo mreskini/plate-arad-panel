@@ -49,5 +49,13 @@
   "edit": "ویرایش",
   "device_details": "جزئیات دستگاه",
   "add_card": "افزودن کارت",
-  "traffic_with_card": "تردد با کارت"
+  "traffic_with_card": "تردد با کارت",
+  "input": "ورودی",
+  "output": "خروجی",
+  "input_output": "ورودی و خروجی",
+  "add_new_client": "افزودن کلاینت جدید",
+  "server_uuid": "UUID سرور",
+  "clients_count": "تعداد کلاینت‌ها",
+  "plate_reader": "پلاک‌خوان",
+  "available": "در دسترس"
 }

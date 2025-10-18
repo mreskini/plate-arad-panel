@@ -7,6 +7,7 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "re
 import Dashboard from "./pages"
 import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
+import { Clients } from "./pages/hardware/clients"
 import { HardwareDevices } from "./pages/hardware/devices"
 import { AddRole } from "./pages/management/add-role"
 import { CardsList } from "./pages/management/cards-list"
@@ -18,6 +19,7 @@ import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsTrafficWithCardList } from "./pages/reports/traffic-with-card-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
+import { License } from "./pages/software/license"
 import { Settings } from "./pages/software/settings"
 
 const CommonProviderWrapper = () => {
@@ -58,10 +60,10 @@ export const AppRouter = createBrowserRouter(
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />
-                <Route path={AppRoutes.software.license} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.software.license} element={<License />} />
 
                 {/* Hardware */}
-                <Route path={AppRoutes.hardware.clients} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.hardware.clients} element={<Clients />} />
                 <Route path={AppRoutes.hardware.devices} element={<HardwareDevices />} />
             </Route>
         </Route>

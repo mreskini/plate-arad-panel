@@ -1,15 +1,37 @@
 import type {
     CurrentUserQuery,
+    E_ClientType,
+    E_DeviceType,
+    E_GroupType,
     FetchDevicesQuery,
     FetchRolesQuery,
     FetchUsersListQuery,
-    ParkingInfoQuery,
     PingAllDevicesQuery,
 } from "./generated"
 
 // User
 export type T_User = CurrentUserQuery["currentUser"]
-export type T_Parking = ParkingInfoQuery["parkingInfo"]
+export type T_Parking = {
+    name: string
+    code: string
+    capacity: number
+    cash_adjustment: number
+    card_issuance_fee: number
+    license?: string | null | undefined
+    server_uuid?: string | null | undefined
+    clients_count?: number
+    plate_reader?: boolean
+    pos?: boolean
+    UHF?: boolean
+    default_cash_group?:
+        | {
+              token: string
+              title: string
+              type: E_GroupType
+          }
+        | null
+        | undefined
+}
 
 // Report
 export type T_FetchTraffic = {
@@ -113,3 +135,42 @@ export type T_FetchTrafficWithCard = {
 }
 
 export type T_TrafficWithCard = T_FetchTrafficWithCard["items"][number]
+
+export type T_Client = {
+    token: string
+    type: E_ClientType
+    name: string
+    ip_address: string
+    has_operator: boolean
+    pos?: {
+        token: string
+        ip: string
+        num: number
+        terminal: number
+    } | null
+    relay?: {
+        token: string
+        type: E_DeviceType
+        name: string
+        ip: string
+    } | null
+    plate_cam?: {
+        token: string
+        type: E_DeviceType
+        name: string
+        ip: string
+    } | null
+}
+
+export enum E_PosBrand {
+    Parsian = "PARSIAN",
+    Sep = "SEP",
+}
+
+export type T_POS = {
+    token: string
+    num: number
+    terminal: number
+    brand_name: E_PosBrand
+    ip: string
+}

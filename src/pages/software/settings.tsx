@@ -1,5 +1,5 @@
 import { Layout } from "@components/layout"
-import { SettingsWrapper } from "@components/pages/Settings"
+import { SettingsWrapper } from "@components/pages/Software"
 import { Button, Input } from "@components/template"
 import { formatNumber } from "@core/functions"
 

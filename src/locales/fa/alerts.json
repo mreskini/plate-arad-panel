@@ -13,5 +13,13 @@
   "owner_card_assigned_successfully": "کارت با موفقیت به مراجع تخصیص داده شد",
   "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد",
   "device_created_successfully": "دستگاه با موفقیت ایجاد شد",
-  "device_updated_successfully": "دستگاه با موفقیت ویرایش شد"
+  "device_updated_successfully": "دستگاه با موفقیت ویرایش شد",
+  "client_deleted_successfully": "کلاینت با موفقیت حذف شد",
+  "client_added_successfully": "کلاینت جدید با موفقیت ایجاد شد",
+  "client_edited_successfully": "کلاینت با موفقیت ویرایش شد",
+  "invalid_license_file_type_error": "فرمت فایل انتخابی صحیح نیست",
+  "invalid_license_file_size_error": "سایز فایل انتخابی مناسب نیست",
+  "license_updated_successfully": "لایسنس با موفقیت به‌روزرسانی شد",
+  "license_update_failed": "خطا در به‌روزرسانی لایسنس",
+  "license_not_available_please_upload_license_file": "لایسنس در دسترس نیست. لطفا فایل لایسنس را آپلود کنید."
 }
