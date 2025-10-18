@@ -7,6 +7,7 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "re
 import Dashboard from "./pages"
 import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
+import { Clients } from "./pages/hardware/clients"
 import { HardwareDevices } from "./pages/hardware/devices"
 import { AddRole } from "./pages/management/add-role"
 import { CardsList } from "./pages/management/cards-list"
@@ -60,7 +61,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.software.license} element={<License />} />
 
                 {/* Hardware */}
-                <Route path={AppRoutes.hardware.clients} element={<PlaceholderPage />} />
+                <Route path={AppRoutes.hardware.clients} element={<Clients />} />
                 <Route path={AppRoutes.hardware.devices} element={<HardwareDevices />} />
             </Route>
         </Route>

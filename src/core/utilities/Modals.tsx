@@ -27,5 +27,10 @@ export const Modals = {
             Add: "hardware-add-device",
             Edit: "hardware-edit-device",
         },
+        Client: {
+            Add: "hardware-add-client",
+            Edit: "hardware-edit-client",
+            View: "hardware-view-client",
+        },
     },
 }

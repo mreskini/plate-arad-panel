@@ -1,5 +1,7 @@
 import type {
     CurrentUserQuery,
+    E_ClientType,
+    E_DeviceType,
     E_GroupType,
     FetchDevicesQuery,
     FetchRolesQuery,
@@ -111,3 +113,42 @@ export type T_FetchCards = {
 export type T_Card = T_FetchCards["items"][number]
 export type T_Device = FetchDevicesQuery["fetchDevices"][number]
 export type T_PingAllDevices = PingAllDevicesQuery["pingAllDevices"][number]
+
+export type T_Client = {
+    token: string
+    type: E_ClientType
+    name: string
+    ip_address: string
+    has_operator: boolean
+    pos?: {
+        token: string
+        ip: string
+        num: number
+        terminal: number
+    } | null
+    relay?: {
+        token: string
+        type: E_DeviceType
+        name: string
+        ip: string
+    } | null
+    plate_cam?: {
+        token: string
+        type: E_DeviceType
+        name: string
+        ip: string
+    } | null
+}
+
+export enum E_PosBrand {
+    Parsian = "PARSIAN",
+    Sep = "SEP",
+}
+
+export type T_POS = {
+    token: string
+    num: number
+    terminal: number
+    brand_name: E_PosBrand
+    ip: string
+}
