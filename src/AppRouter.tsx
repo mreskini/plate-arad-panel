@@ -17,6 +17,7 @@ import { UsersList } from "./pages/management/users-list"
 import { UsersRoles } from "./pages/management/users-roles"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
 import { ReportsTrafficWithCardList } from "./pages/reports/traffic-with-card-list"
+import { ReportsTrafficWithEmergencyList } from "./pages/reports/traffic-with-emergency-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
 import { License } from "./pages/software/license"
 import { Settings } from "./pages/software/settings"
@@ -46,6 +47,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.reports.traffic} element={<ReportsTrafficList />} />
                 <Route path={AppRoutes.reports.trafficWithoutPlate} element={<ReportsWithoutPlateTrafficList />} />
                 <Route path={AppRoutes.reports.trafficWithCard} element={<ReportsTrafficWithCardList />} />
+                <Route path={AppRoutes.reports.trafficWithEmergency} element={<ReportsTrafficWithEmergencyList />} />
 
                 {/* Management */}
                 <Route path={AppRoutes.management.users} element={<UsersList />} />
