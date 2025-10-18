@@ -11,13 +11,13 @@ import {
     RemoveOwnerCardModal,
     ViewOwnerVehiclesModal,
 } from "@components/pages/Management"
-import { Button, Input, Table } from "@components/template"
+import { Button, Input, Switch, Table } from "@components/template"
 import { type T_FetchOwners, type T_Owner } from "@core/api"
 import { E_OwnerCardType } from "@core/api/gql/types"
 import { formatDate, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { AddCircle, Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money, TickCircle } from "iconsax-reactjs"
+import { Car, CardAdd, CardRemove1, Cards, Edit2, Eye, Money } from "iconsax-reactjs"
 import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
@@ -76,11 +76,7 @@ export const OwnersList = () => {
         {
             name: "APB",
             cell: (row: T_Owner) => (
-                <Status
-                    contentKey={row.apb ? "active" : "inactive"}
-                    variant={row.apb ? "success" : "error"}
-                    icon={row.apb ? <TickCircle size={20} /> : <AddCircle className="rotate-45" size={20} />}
-                />
+                <Switch checked={row.apb} onSwitchToggle={() => toggleAntiPassBack(row.national_code)} />
             ),
         },
         {
@@ -196,6 +192,21 @@ export const OwnersList = () => {
         setIsFetching(false)
     }
 
+    const toggleAntiPassBack = async (nationalCode: string) => {
+        await sleep(1000)
+
+        setTableData(prevState => {
+            const updatedItems = prevState.items.map(item => {
+                if (item.national_code === nationalCode) {
+                    return { ...item, apb: !item.apb }
+                }
+                return item
+            })
+            return { ...prevState, items: updatedItems }
+        })
+    }
+
+    // Use effects
     useEffect(() => {
         fetchOwners()
     }, [])
