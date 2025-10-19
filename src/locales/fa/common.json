@@ -62,5 +62,8 @@
   "are_you_sure_you_want_to_open_door": "آیا از باز کردن درب \"{{0}}\" مطمئن هستید؟",
   "open_door": "باز کردن درب",
   "assign_id_to": "تخصیص شناسه به",
-  "traffic_with_emergency": "تردد اورژانسی"
+  "traffic_with_emergency": "تردد اورژانسی",
+  "schedule": "برنامه زمان‌بندی",
+  "edit_schedule": "ویرایش برنامه زمان‌بندی",
+  "add_schedule": "افزودن برنامه زمان‌بندی"
 }

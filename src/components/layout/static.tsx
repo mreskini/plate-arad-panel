@@ -89,6 +89,10 @@ export const SidebarItems: T_Sidebar[] = [
                         titleContentKey: "owners",
                         link: AppRoutes.management.owners,
                     },
+                    {
+                        titleContentKey: "schedule",
+                        link: AppRoutes.management.schedule,
+                    },
                 ],
             },
             {

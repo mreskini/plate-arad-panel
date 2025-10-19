@@ -22,5 +22,7 @@
   "license_update_failed": "خطا در به‌روزرسانی لایسنس",
   "license_not_available_please_upload_license_file": "لایسنس در دسترس نیست. لطفا فایل لایسنس را آپلود کنید.",
   "door_opened_successfully": "درب با موفقیت باز شد",
-  "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد"
+  "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد",
+  "schedule_edited_successfully": "برنامه زمان‌بندی با موفقیت ویرایش شد",
+  "schedule_added_successfully": "برنامه زمان‌بندی با موفقیت اضافه شد"
 }
