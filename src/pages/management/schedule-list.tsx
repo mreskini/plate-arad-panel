@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddScheduleModal, EditScheduleModal } from "@components/pages/Management/Schedule"
+import { AddScheduleModal, EditScheduleModal } from "@components/pages/Management"
 import { Button, Switch, Table } from "@components/template"
 import type { T_FetchScheduleList, T_Schedule } from "@core/api"
 import { formatDate, formatTime, sleep } from "@core/functions"

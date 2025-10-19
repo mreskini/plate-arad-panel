@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Management/AccessControl"
+import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Management"
 import { Button, Table } from "@components/template"
 import type { T_AccessControl, T_FetchAccessControl } from "@core/api"
 import { sleep } from "@core/functions"
