@@ -27,6 +27,10 @@ export const Modals = {
             AddSchedule: "management-add-schedule",
             EditSchedule: "management-edit-schedule",
         },
+        AccessControl: {
+            AddAccessControl: "management-add-access-control",
+            EditAccessControl: "management-edit-access-control",
+        },
     },
 
     Hardware: {
