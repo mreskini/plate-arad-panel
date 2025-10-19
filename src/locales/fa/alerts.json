@@ -24,5 +24,7 @@
   "door_opened_successfully": "درب با موفقیت باز شد",
   "owner_card_unassigned_successfully": "کارت با موفقیت از مراجع حذف شد",
   "schedule_edited_successfully": "برنامه زمان‌بندی با موفقیت ویرایش شد",
-  "schedule_added_successfully": "برنامه زمان‌بندی با موفقیت اضافه شد"
+  "schedule_added_successfully": "برنامه زمان‌بندی با موفقیت اضافه شد",
+  "access_control_added_successfully": "کنترل دسترسی با موفقیت اضافه شد",
+  "access_control_edited_successfully": "کنترل دسترسی با موفقیت ویرایش شد"
 }

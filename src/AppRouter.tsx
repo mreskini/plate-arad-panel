@@ -9,6 +9,7 @@ import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
 import { Clients } from "./pages/hardware/clients"
 import { HardwareDevices } from "./pages/hardware/devices"
+import { AccessControl } from "./pages/management/access-control"
 import { AddRole } from "./pages/management/add-role"
 import { CardsList } from "./pages/management/cards-list"
 import { EditRole } from "./pages/management/edit-role"
@@ -59,6 +60,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
                 <Route path={AppRoutes.management.cards} element={<CardsList />} />
                 <Route path={AppRoutes.management.schedule} element={<ScheduleList />} />
+                <Route path={AppRoutes.management.accessControl} element={<AccessControl />} />
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />

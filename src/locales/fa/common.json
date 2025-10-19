@@ -65,5 +65,8 @@
   "traffic_with_emergency": "تردد اورژانسی",
   "schedule": "برنامه زمان‌بندی",
   "edit_schedule": "ویرایش برنامه زمان‌بندی",
-  "add_schedule": "افزودن برنامه زمان‌بندی"
+  "add_schedule": "افزودن برنامه زمان‌بندی",
+  "access_control": "کنترل دسترسی",
+  "add_access_control": "افزودن کنترل دسترسی",
+  "edit_access_control": "ویرایش کنترل دسترسی"
 }
