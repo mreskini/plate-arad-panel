@@ -64,6 +64,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
                 "/management/users",
                 "/management/owners",
                 "/management/cards",
+                "/management/schedule",
                 "/software/settings",
                 "/software/license",
                 "/hardware/devices",

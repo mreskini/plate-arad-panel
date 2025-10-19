@@ -113,5 +113,11 @@
   "enter_reason": "علت را وارد کنید",
   "id_type": "نوع شناسه",
   "plate": "پلاک",
-  "please_enter_id": "لطفا شناسه را وارد کنید"
+  "please_enter_id": "لطفا شناسه را وارد کنید",
+  "title": "عنوان",
+  "enter_schedule_title_here": "عنوان برنامه زمانی را وارد کنید",
+  "start_date": "تاریخ شروع",
+  "end_date": "تاریخ پایان",
+  "start_time": "زمان شروع",
+  "end_time": "زمان پایان"
 }

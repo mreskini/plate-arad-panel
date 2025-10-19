@@ -22,6 +22,7 @@ export const AppRoutes = {
         users: "/management/users",
         owners: "/management/owners",
         cards: "/management/cards",
+        schedule: "/management/schedule",
     },
 
     software: {

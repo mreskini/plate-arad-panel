@@ -23,6 +23,10 @@ export const Modals = {
             AddCard: "management-add-card",
             EditCard: "management-edit-card",
         },
+        Schedule: {
+            AddSchedule: "management-add-schedule",
+            EditSchedule: "management-edit-schedule",
+        },
     },
 
     Hardware: {

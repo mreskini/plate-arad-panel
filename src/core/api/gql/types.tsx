@@ -193,3 +193,14 @@ export type T_FetchTrafficWithEmergency = {
 }
 
 export type T_TrafficWithEmergency = T_FetchTrafficWithEmergency["items"][number]
+
+export type T_FetchScheduleList = {
+    title: string
+    start_date: string
+    end_date: string
+    start_time: string
+    end_time: string
+    is_active: boolean
+}[]
+
+export type T_Schedule = T_FetchScheduleList[number]

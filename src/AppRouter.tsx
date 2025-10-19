@@ -13,6 +13,7 @@ import { AddRole } from "./pages/management/add-role"
 import { CardsList } from "./pages/management/cards-list"
 import { EditRole } from "./pages/management/edit-role"
 import { OwnersList } from "./pages/management/owners-list"
+import { ScheduleList } from "./pages/management/schedule-list"
 import { UsersList } from "./pages/management/users-list"
 import { UsersRoles } from "./pages/management/users-roles"
 import { ReportsTrafficList } from "./pages/reports/traffic-list"
@@ -55,9 +56,9 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.roles.index} element={<UsersRoles />} />
                 <Route path={AppRoutes.management.roles.add} element={<AddRole />} />
                 <Route path={`${AppRoutes.management.roles.edit}/:token`} element={<EditRole />} />
-
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
                 <Route path={AppRoutes.management.cards} element={<CardsList />} />
+                <Route path={AppRoutes.management.schedule} element={<ScheduleList />} />
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />
