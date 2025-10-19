@@ -204,3 +204,23 @@ export type T_FetchScheduleList = {
 }[]
 
 export type T_Schedule = T_FetchScheduleList[number]
+
+export type T_FetchAccessControl = {
+    count: number
+    items: {
+        token: string
+        title: string
+        client: {
+            token: string
+            name: string
+        }
+        schedule: T_Schedule
+        control: {
+            plate: boolean
+            UHF: boolean
+            CSN: boolean
+        }
+    }[]
+}
+
+export type T_AccessControl = T_FetchAccessControl["items"][number]

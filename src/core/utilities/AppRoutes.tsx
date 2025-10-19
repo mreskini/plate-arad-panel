@@ -23,6 +23,7 @@ export const AppRoutes = {
         owners: "/management/owners",
         cards: "/management/cards",
         schedule: "/management/schedule",
+        accessControl: "/management/access-control",
     },
 
     software: {
