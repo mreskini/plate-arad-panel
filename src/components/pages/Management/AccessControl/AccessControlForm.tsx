@@ -99,7 +99,7 @@ export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessContro
                         />
                     </div>
 
-                    <div className="flex items-center gap-4 mt-4">
+                    <div className="flex items-center gap-4 mt-10">
                         <Button
                             contentKey={accessControl ? "save" : "add"}
                             type="submit"
