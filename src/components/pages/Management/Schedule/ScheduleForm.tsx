@@ -110,7 +110,7 @@ export const ScheduleForm: FC<I_Props> = ({ onSubmit, onClose, schedule }) => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-4 mt-10">
+                    <div className="flex items-center gap-4 mt-16">
                         <Button
                             contentKey={schedule ? "save" : "add"}
                             type="submit"
