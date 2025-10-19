@@ -3,6 +3,8 @@ import { E_OwnerCardType } from "@core/api/gql/types"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
+import { UploadOwnerVehicleImage } from "./UploadOwnerVehicleImage"
+
 interface I_Props {
     onSubmit: (data: I_AddOwnerCardFormData) => Promise<void>
     onClose: Function
@@ -11,6 +13,12 @@ interface I_Props {
 export interface I_AddOwnerCardFormData {
     cardType: E_OwnerCardType
     cardToken: string
+    plate: string
+    model: string
+    color: string
+    year: string
+    imageUrl?: string
+    imageFile: File | null
 }
 
 export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
@@ -22,13 +30,11 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
         setValue,
         getValues,
         watch,
+        register,
         formState: { isSubmitting },
     } = useForm<I_AddOwnerCardFormData>({
         mode: "onChange",
     })
-
-    // Flags
-    const isValid = watch("cardToken") && watch("cardType")
 
     // Methods
     const init = async () => {
@@ -50,7 +56,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
             {!isFetching && (
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-lg">
                     <div className="flex w-full items-center gap-4 mb-4">
-                        <Input.Label labelKey="card_type" className="min-w-24" />
+                        <Input.Label labelKey="id_type" className="min-w-24" />
                         <Input.DropDown
                             options={[
                                 {
@@ -60,6 +66,10 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                 {
                                     value: E_OwnerCardType.UHF,
                                     labelKey: "UHF",
+                                },
+                                {
+                                    value: E_OwnerCardType.PLATE,
+                                    labelKey: "plate",
                                 },
                             ]}
                             value={getValues("cardType")}
@@ -72,30 +82,79 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
 
                     {watch("cardType") === E_OwnerCardType.CSN && (
                         <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="card_number" className="min-w-24" />
-                            <Input.DropDown
-                                placeholder="please_search_card_number"
-                                options={[{ value: "1234567890", label: "Card-32456" }]}
+                            <Input.Label labelKey="CSN" className="min-w-24" required />
+                            <Input
+                                placeholder="please_enter_id"
                                 value={getValues("cardToken")}
-                                setValue={(_: string) => setValue("cardToken", _)}
-                                wrapperClassName="max-w-lg"
-                                onSearch={() => {}}
+                                onChange={e => setValue("cardToken", e.target.value)}
+                                className="w-full"
                             />
                         </div>
                     )}
 
                     {watch("cardType") === E_OwnerCardType.UHF && (
                         <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="card_number" className="min-w-24" />
-                            <Input.DropDown
-                                placeholder="please_search_card_number"
-                                options={[{ value: "1234567890", label: "Card-32456" }]}
+                            <Input.Label labelKey="UHF" className="min-w-24" required />
+                            <Input
+                                placeholder="please_enter_id"
                                 value={getValues("cardToken")}
-                                setValue={(_: string) => setValue("cardToken", _)}
-                                wrapperClassName="max-w-lg"
-                                onSearch={() => {}}
+                                onChange={e => setValue("cardToken", e.target.value)}
+                                className="w-full"
                             />
                         </div>
+                    )}
+
+                    {watch("cardType") === E_OwnerCardType.PLATE && (
+                        <>
+                            <div className="flex w-full items-center gap-2 mb-4">
+                                <Input.Label labelKey="plate_number" className="min-w-32" required />
+                                <div className="flex items-center gap-2">
+                                    <Input.PlateNumber disabled={isFetching} clearable />
+                                </div>
+                            </div>
+
+                            <div className="flex w-full items-center gap-2 mb-4">
+                                <Input.Label labelKey="model" className="min-w-32" />
+                                <Input
+                                    placeholder="vehicle_model_here"
+                                    disabled={isSubmitting}
+                                    className="w-full"
+                                    {...register("model")}
+                                />
+                            </div>
+
+                            <div className="flex w-full items-center gap-2 mb-4">
+                                <Input.Label labelKey="color" className="min-w-32" />
+                                <Input
+                                    placeholder="vehicle_color_here"
+                                    disabled={isSubmitting}
+                                    className="w-full"
+                                    {...register("color")}
+                                />
+                            </div>
+
+                            <div className="flex w-full items-center gap-2 mb-4">
+                                <Input.Label labelKey="production_year" className="min-w-32" />
+                                <Input
+                                    placeholder="vehicle_year_here"
+                                    disabled={isSubmitting}
+                                    className="w-full"
+                                    {...register("year")}
+                                />
+                            </div>
+
+                            <div className="flex w-full items-center gap-2 mb-4">
+                                <Input.Label labelKey="image" className="min-w-32" />
+                                <div className="w-full">
+                                    <UploadOwnerVehicleImage
+                                        file={watch("imageFile")}
+                                        setFile={file => setValue("imageFile", file)}
+                                        imageUrl={watch("imageUrl")}
+                                        onDelete={() => setValue("imageUrl", "")}
+                                    />
+                                </div>
+                            </div>
+                        </>
                     )}
 
                     <div className="flex items-center gap-4 mt-4">
@@ -104,7 +163,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                             type="submit"
                             className="w-full"
                             loading={isSubmitting}
-                            disabled={isSubmitting || !isValid}
+                            disabled={isSubmitting}
                         />
 
                         <Button

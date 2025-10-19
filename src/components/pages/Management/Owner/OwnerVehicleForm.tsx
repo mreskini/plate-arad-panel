@@ -52,36 +52,6 @@ export const OwnerVehicleForm: FC<I_Props> = ({ onSubmit, onClose }) => {
             {!isFetching && (
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-lg">
                     <div className="flex w-full items-center gap-2 mb-4">
-                        <Input.Label labelKey="model" className="min-w-32" required />
-                        <Input
-                            placeholder="vehicle_model_here"
-                            disabled={isSubmitting}
-                            className="w-full"
-                            {...register("model", { required: true })}
-                        />
-                    </div>
-
-                    <div className="flex w-full items-center gap-2 mb-4">
-                        <Input.Label labelKey="color" className="min-w-32" required />
-                        <Input
-                            placeholder="vehicle_color_here"
-                            disabled={isSubmitting}
-                            className="w-full"
-                            {...register("color", { required: true })}
-                        />
-                    </div>
-
-                    <div className="flex w-full items-center gap-2 mb-4">
-                        <Input.Label labelKey="production_year" className="min-w-32" required />
-                        <Input
-                            placeholder="vehicle_year_here"
-                            disabled={isSubmitting}
-                            className="w-full"
-                            {...register("year", { required: true })}
-                        />
-                    </div>
-
-                    <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="plate_number" className="min-w-32" required />
                         <div className="flex items-center gap-2">
                             <Input.PlateNumber disabled={isFetching} clearable />
@@ -89,6 +59,36 @@ export const OwnerVehicleForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                     </div>
 
                     <Divider className="mb-4" />
+
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="model" className="min-w-32" />
+                        <Input
+                            placeholder="vehicle_model_here"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            {...register("model")}
+                        />
+                    </div>
+
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="color" className="min-w-32" />
+                        <Input
+                            placeholder="vehicle_color_here"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            {...register("color")}
+                        />
+                    </div>
+
+                    <div className="flex w-full items-center gap-2 mb-4">
+                        <Input.Label labelKey="production_year" className="min-w-32" />
+                        <Input
+                            placeholder="vehicle_year_here"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            {...register("year")}
+                        />
+                    </div>
 
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="image" className="min-w-32" />

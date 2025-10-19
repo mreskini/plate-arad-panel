@@ -38,5 +38,7 @@
   "has_operator": "اپراتور",
   "pos_device": "دستگاه پوز",
   "card": "کارت",
+  "id_number": "شماره شناسه",
+  "id_type": "نوع شناسه",
   "reason": "علت"
 }
