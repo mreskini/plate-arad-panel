@@ -57,6 +57,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
                 "/reports/traffic",
                 "/reports/traffic-without-plate",
                 "/reports/traffic-with-card",
+                "/reports/traffic-with-emergency",
                 "/management/roles",
                 "/management/roles/add",
                 "/management/roles/edit",

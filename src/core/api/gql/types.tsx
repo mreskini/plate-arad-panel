@@ -177,3 +177,19 @@ export type T_POS = {
     brand_name: E_PosBrandName
     ip: string
 }
+
+export type T_FetchTrafficWithEmergency = {
+    count: number
+    items: {
+        camera_name: string
+        plate_serial?: string | null | undefined
+        entrance: any
+        exit?: any
+        entrance_image?: string | null | undefined
+        exit_image?: string | null | undefined
+        direction: string
+        descriptions: string
+    }[]
+}
+
+export type T_TrafficWithEmergency = T_FetchTrafficWithEmergency["items"][number]
