@@ -68,7 +68,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                     labelKey: "UHF",
                                 },
                                 {
-                                    value: E_OwnerCardType.Plate,
+                                    value: E_OwnerCardType.PLATE,
                                     labelKey: "plate",
                                 },
                             ]}
@@ -104,7 +104,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.Plate && (
+                    {watch("cardType") === E_OwnerCardType.PLATE && (
                         <>
                             <div className="flex w-full items-center gap-2 mb-4">
                                 <Input.Label labelKey="plate_number" className="min-w-32" required />

@@ -97,7 +97,7 @@ export type T_Owner = T_FetchOwners["items"][number]
 export enum E_OwnerCardType {
     UHF = "UHF",
     CSN = "CSN",
-    Plate = "PLATE",
+    PLATE = "PLATE",
 }
 
 export type T_FetchCards = {
