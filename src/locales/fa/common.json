@@ -68,5 +68,7 @@
   "add_schedule": "افزودن برنامه زمان‌بندی",
   "access_control": "کنترل دسترسی",
   "add_access_control": "افزودن کنترل دسترسی",
-  "edit_access_control": "ویرایش کنترل دسترسی"
+  "edit_access_control": "ویرایش کنترل دسترسی",
+  "has": "دارد",
+  "does_not_have": "ندارد"
 }

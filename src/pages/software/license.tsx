@@ -1,7 +1,7 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
 import { LicenseFileInput } from "@components/pages/Software"
-import { Button, Input, Notice, Text, useNotify } from "@components/template"
+import { Button, Notice, Text, useNotify } from "@components/template"
 import { useCommon } from "@core/contexts"
 import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
@@ -63,39 +63,42 @@ export const License = () => {
                     )}
 
                     {parking && isLicenseAvailable && (
-                        <div className="flex flex-col gap-6 p-4 rounded-lg bg-emerald-400 text-white mb-4">
-                            <div className="flex items-center w-full justify-between">
-                                <Text contentKey="license" className="text-white" />
+                        <div className="flex flex-col gap-4 p-4 rounded-lg border border-emerald-400 mb-4">
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
+                                <Text contentKey="license" />
 
                                 {parking.license && (
                                     <Text content={parking.license} className="font-courier" variant="meta-1" />
                                 )}
                             </div>
 
-                            <div className="flex items-center w-full justify-between">
-                                <Text contentKey="server_uuid" className="text-white" />
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
+                                <Text contentKey="server_uuid" />
 
                                 {parking.server_uuid && (
                                     <Text content={parking.server_uuid} className="font-courier" variant="meta-1" />
                                 )}
                             </div>
 
-                            <div className="flex items-center w-full justify-between">
-                                <Text contentKey="clients_count" className="text-white" />
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
+                                <Text contentKey="clients_count" />
 
-                                {parking.clients_count && <Text content={parking.clients_count} />}
+                                {parking.clients_count && <Text content={parking.clients_count} variant="meta-1" />}
                             </div>
 
-                            <div className="flex items-center w-full gap-12">
-                                <Input.Checkbox
-                                    labelKey="plate_reader"
-                                    className="text-white"
-                                    disabled
-                                    checked={!parking.plate_reader}
-                                />
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
+                                <Text contentKey="plate_reader" />
+                                <Text contentKey={parking.plate_reader ? "has" : "does_not_have"} variant="meta-1" />
+                            </div>
 
-                                <Input.Checkbox labelKey="pos" className="text-white" disabled checked={parking.pos} />
-                                <Input.Checkbox labelKey="UHF" className="text-white" disabled checked={!parking.UHF} />
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
+                                <Text contentKey="pos" />
+                                <Text contentKey={parking.pos ? "has" : "does_not_have"} variant="meta-1" />
+                            </div>
+
+                            <div className="flex items-center w-full justify-between px-4">
+                                <Text contentKey="UHF" />
+                                <Text contentKey={parking.UHF ? "has" : "does_not_have"} variant="meta-1" />
                             </div>
                         </div>
                     )}

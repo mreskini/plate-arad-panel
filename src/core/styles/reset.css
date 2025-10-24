@@ -153,3 +153,7 @@ input.number-input {
     width: 45px;
     height: 10px;
 }
+
+.font-courier {
+    font-family: "courier" !important
+}
