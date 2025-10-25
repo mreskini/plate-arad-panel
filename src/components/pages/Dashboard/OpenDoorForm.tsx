@@ -71,10 +71,10 @@ export const OpenDoorForm: FC<I_Props> = ({ onSubmit, onClose, door }) => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-4 mt-4">
+                    <div className="flex items-center gap-4 mt-8">
                         <Button
                             contentKey="open"
-                            variant="red-outline"
+                            variant="primary"
                             type="submit"
                             className="w-full"
                             loading={isSubmitting}

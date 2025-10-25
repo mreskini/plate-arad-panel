@@ -13,5 +13,6 @@
   "unassign": "حذف",
   "close": "بستن",
   "update_license": "به‌روزرسانی لایسنس",
-  "open": "باز کردن"
+  "open": "باز کردن",
+  "capacity_full": "تکمیل ظرفیت"
 }

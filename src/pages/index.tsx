@@ -62,16 +62,16 @@ const Dashboard = () => {
                                     <div className="w-full h-full rounded-xl bg-zinc-200 flex items-center justify-center" />
                                 </div>
 
-                                <div className="flex items-center justify-end gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">
+                                <div className="flex items-end justify-end gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">
                                     <Button
                                         variant="ghost"
                                         onClick={() => {
                                             setSelectedDoor({ token: "door-token", name: "گذرگاه اصلی" })
                                             openModal(Modals.Monitoring.OpenDoor)
                                         }}
-                                        className="bg-red-400 rounded-2xl p-4 me-auto h-full w-auto aspect-square flex items-center justify-center"
+                                        className="bg-red-400 rounded-lg p-1 me-auto w-8 h-8 flex items-center justify-center"
                                     >
-                                        <Key size={24} variant="Bold" className="text-white" />
+                                        <Key size={16} variant="Bold" className="text-white" />
                                     </Button>
 
                                     <div className="w-auto aspect-square h-full bg-zinc-200 rounded-lg flex-shrink-0" />

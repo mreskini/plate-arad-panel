@@ -4,8 +4,9 @@ import { Layout } from "@components/layout"
 import { AddClientModal, ClientTypeKeyMap, EditClientModal, ViewClientModal } from "@components/pages/Hardware"
 import { Button, Table, useNotify } from "@components/template"
 import { E_ClientType, E_DeviceType, type T_Client } from "@core/api"
+import { useCommon } from "@core/contexts"
 import { formatNumber, sleep } from "@core/functions"
-import { useModal } from "@core/stores"
+import { useApp, useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2, Eye, Trash } from "iconsax-reactjs"
 import { range } from "lodash"
@@ -15,12 +16,15 @@ import { useTranslation } from "react-i18next"
 export const Clients = () => {
     // States and hooks
     const { notify } = useNotify()
+    const { parking } = useApp()
+    const { fetchParkingInfo } = useCommon()
     const { t } = useTranslation("tables")
     const { t: tCommon } = useTranslation("common")
     const { openModal, modalVisibility } = useModal()
     const [clients, setClients] = useState<T_Client[]>([])
     const [selected, setSelected] = useState<T_Client | null>(null)
     const [isFetching, setIsFetching] = useState(true)
+    const [isAddClientButtonDisabled, setIsAddClientButtonDisabled] = useState<boolean>(false)
     // const { isLicenseAvailable } = useCommon()
 
     const tableColumns = [
@@ -82,7 +86,12 @@ export const Clients = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Hardware.Client.Add)} />
+            <Button
+                variant="primary"
+                contentKey={isAddClientButtonDisabled ? "capacity_full" : "add"}
+                onClick={() => openModal(Modals.Hardware.Client.Add)}
+                disabled={isAddClientButtonDisabled || isFetching}
+            />
         </div>
     )
 
@@ -90,7 +99,7 @@ export const Clients = () => {
         await sleep(2000)
 
         setClients(
-            range(1, 10).map(i => ({
+            range(1, 3).map(i => ({
                 token: `client-token-${i}`,
                 type: i % 2 === 0 ? E_ClientType.Input : E_ClientType.Output,
                 name: `کلاینت ${i}`,
@@ -128,9 +137,15 @@ export const Clients = () => {
         notify("client_deleted_successfully", "success")
     }
 
+    // Use effects
     useEffect(() => {
         fetchClients()
+        fetchParkingInfo()
     }, [])
+
+    useEffect(() => {
+        setIsAddClientButtonDisabled(!!parking?.clients_count && clients.length >= parking?.clients_count)
+    }, [clients, parking])
 
     // Render
     return (
