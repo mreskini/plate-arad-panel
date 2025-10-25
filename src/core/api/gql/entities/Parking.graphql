@@ -9,3 +9,7 @@ query ParkingInfo {
     plate_recognition
   }
 }
+
+mutation UpdateParkingLicense($body: UpdateParkingLicenseRq!) {
+  updateParkingLicense(body: $body)
+}

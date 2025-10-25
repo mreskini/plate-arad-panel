@@ -2,8 +2,8 @@ import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
 import { LicenseFileInput } from "@components/pages/Software"
 import { Button, Notice, Text, useNotify } from "@components/template"
+import { API } from "@core/api"
 import { useCommon } from "@core/contexts"
-import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
 import { useEffect, useState } from "react"
 
@@ -18,6 +18,7 @@ export const License = () => {
     const { notify } = useNotify()
 
     const isValid = licenseFile !== null
+
     // Methods
     const fetchParking = async () => {
         setIsFetching(true)
@@ -31,15 +32,31 @@ export const License = () => {
         setIsSubmitting(true)
 
         const fileText = await licenseFile.text()
-        const { clients, license, server_uuid } = JSON.parse(fileText)
+        const { clients, license, server_uuid, uhf, csn, plate_recognition } = JSON.parse(fileText)
 
         if (!clients || !license || !server_uuid) return
 
-        await sleep(2000)
+        const { data } = await API.Parking.UpdateParkingLicense({
+            body: {
+                clients,
+                license,
+                server_uuid,
+                uhf: uhf || false,
+                csn: csn || false,
+                plate_recognition: plate_recognition || false,
+            },
+        })
+
+        if (data) {
+            notify("license_updated_successfully", "success")
+            setLicenseFile(null)
+            await fetchParkingInfo()
+            setIsSubmitting(false)
+            return
+        }
 
         setIsSubmitting(false)
-        notify("license_updated_successfully", "success")
-        // notify("license_update_failed", "error")
+        notify("license_update_failed", "error")
     }
 
     // Use effects
@@ -94,7 +111,7 @@ export const License = () => {
                                 />
                             </div>
 
-                            <div className="flex items-center w-full justify-between px-4">
+                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
                                 <Text contentKey="CSN" />
                                 <Text contentKey={parking.csn ? "has" : "does_not_have"} variant="meta-1" />
                             </div>

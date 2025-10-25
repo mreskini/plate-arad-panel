@@ -29,6 +29,13 @@ export type ParkingInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 export type ParkingInfoQuery = { parkingInfo: { name: string, server_uuid?: string | null, clients_count: number, license?: string | null, uhf: boolean, csn: boolean, plate_recognition: boolean } };
 
+export type UpdateParkingLicenseMutationVariables = Types.Exact<{
+  body: Types.UpdateParkingLicenseRq;
+}>;
+
+
+export type UpdateParkingLicenseMutation = { updateParkingLicense: boolean };
+
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

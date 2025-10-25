@@ -17,6 +17,11 @@ export const ParkingInfoDocument = gql`
   }
 }
     `;
+export const UpdateParkingLicenseDocument = gql`
+    mutation UpdateParkingLicense($body: UpdateParkingLicenseRq!) {
+  updateParkingLicense(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -27,6 +32,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     ParkingInfo(variables?: Types.ParkingInfoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ParkingInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ParkingInfoQuery>(ParkingInfoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ParkingInfo', 'query');
+    },
+    UpdateParkingLicense(variables: Types.UpdateParkingLicenseMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UpdateParkingLicenseMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.UpdateParkingLicenseMutation>(UpdateParkingLicenseDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateParkingLicense', 'mutation');
     }
   };
 }
