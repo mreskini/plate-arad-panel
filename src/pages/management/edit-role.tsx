@@ -2,17 +2,21 @@
 import { Loading } from "@components/common"
 import type { T_SidebarItem, T_SidebarSubItem } from "@components/layout"
 import { Layout, SidebarItems } from "@components/layout"
-import { Button, Divider, Input, Text } from "@components/template"
-import { sleep } from "@core/functions"
+import { Button, Divider, Input, Text, useNotify } from "@components/template"
+import { API } from "@core/api"
+import { useCommon } from "@core/contexts"
 import { AppRoutes } from "@core/utilities"
 import clsx from "clsx"
 import { xor } from "lodash"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export const EditRole = () => {
     // States and Hooks
     const navigate = useNavigate()
+    const { notify } = useNotify()
+    const { fetchCurrentUser } = useCommon()
     const { token } = useParams<{ token: string }>()
     const [roles, setRoles] = useState(new Set<string>())
     const [roleName, setRoleName] = useState<string>("")
@@ -70,25 +74,21 @@ export const EditRole = () => {
         if (!token) return
         setIsSubmitting(true)
 
-        await sleep(2000)
-        navigateToRolesPage()
+        const { data, error } = await API.Role.UpdateRole({
+            body: {
+                token,
+                name: roleName,
+                permissions: [...roles],
+            },
+        })
 
-        // const { data, error } = await API.Role.UpdateRole({
-        //     body: {
-        //         token,
-        //         name: roleName,
-        //         permissions: [...roles],
-        //     },
-        // })
+        if (data?.updateRole) {
+            await fetchCurrentUser()
+            notify("role_edited_successfully", "success")
+            navigateToRolesPage()
+        }
 
-        // if (data?.updateRole) {
-        //     await fetchCurrentUser()
-        //     notify("role_edited_successfully", "success")
-        //     navigate(-1)
-        // }
-
-        // // TODO: Error handling by key value pair
-        // if (error) notify("something_went_wrong", "error")
+        if (error) toast.error(error)
 
         setIsSubmitting(false)
     }
@@ -96,38 +96,16 @@ export const EditRole = () => {
     const fetchRole = async () => {
         if (!token) return
 
-        await sleep(2000)
+        const { data } = await API.Role.FetchRoleByToken({ body: { token } })
+        if (!data?.fetchRoleByToken) navigateToRolesPage()
 
-        // const { data } = await API.Role.FetchRoleByToken({
-        //     body: {
-        //         token,
-        //     },
-        // })
+        if (data?.fetchRoleByToken) {
+            setRoleName(data.fetchRoleByToken.name)
+            setIsRoleDefault(data.fetchRoleByToken.is_default)
 
-        // if (!data?.fetchRoleByToken) navigateToRolesPage()
-
-        // if (data?.fetchRoleByToken) {
-        //     setRoleName(data.fetchRoleByToken.name)
-        //     setIsRoleDefault(data.fetchRoleByToken.is_default)
-
-        //     const arrayOfRoles = data.fetchRoleByToken.permissions.map(_ => _.link)
-        //     setRoles(new Set(arrayOfRoles))
-        // }
-
-        setRoleName("نقش تست")
-        setIsRoleDefault(true)
-
-        const arrayOfRoles = [
-            "/",
-            "/reports/traffic",
-            "/management/roles",
-            "/management/users",
-            "/management/owners",
-            "/management/cards",
-            "/settings",
-        ]
-
-        setRoles(new Set(arrayOfRoles))
+            const arrayOfRoles = data.fetchRoleByToken.permissions.map(_ => _.link)
+            setRoles(new Set(arrayOfRoles))
+        }
 
         setIsFetching(false)
     }

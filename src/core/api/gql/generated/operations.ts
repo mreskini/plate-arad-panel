@@ -34,6 +34,27 @@ export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 export type FetchRolesQuery = { fetchRoles: Array<{ token: string, name: string, is_default: boolean, permissions: Array<{ link: string }> }> };
 
+export type FetchRoleByTokenQueryVariables = Types.Exact<{
+  body: Types.FetchRoleByTokenRq;
+}>;
+
+
+export type FetchRoleByTokenQuery = { fetchRoleByToken: { token: string, name: string, is_default: boolean, permissions: Array<{ link: string }> } };
+
+export type CreateNewRoleMutationVariables = Types.Exact<{
+  body: Types.CreateNewRoleRq;
+}>;
+
+
+export type CreateNewRoleMutation = { createNewRole: boolean };
+
+export type UpdateRoleMutationVariables = Types.Exact<{
+  body: Types.UpdateRoleRq;
+}>;
+
+
+export type UpdateRoleMutation = { updateRole: boolean };
+
 export type CurrentUserQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

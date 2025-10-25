@@ -1,16 +1,18 @@
 // TODO: This page requires refactoring which will happen on api integration phase.
 import type { T_SidebarItem, T_SidebarSubItem } from "@components/layout"
 import { Layout, SidebarItems } from "@components/layout"
-import { Button, Divider, Input, Text } from "@components/template"
-import { sleep } from "@core/functions"
+import { Button, Divider, Input, Text, useNotify } from "@components/template"
+import { API } from "@core/api"
 import { AppRoutes } from "@core/utilities"
 import clsx from "clsx"
 import { xor } from "lodash"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export const AddRole = () => {
     // States and Hooks
+    const { notify } = useNotify()
     const navigate = useNavigate()
     const [roles, setRoles] = useState(new Set<string>())
     const [roleName, setRoleName] = useState<string>("")
@@ -38,6 +40,7 @@ export const AddRole = () => {
             return newSet
         })
     }
+
     const onSubItemClick = (item: T_SidebarSubItem, checked: boolean) => {
         setRoles(prev => {
             const newSet = new Set(prev)
@@ -46,25 +49,6 @@ export const AddRole = () => {
             return newSet
         })
     }
-
-    // const onCustomerSubItemClick = (item: "admin" | "operator") => {
-    //     if (item === "admin") {
-    //         setRoles(prev => {
-    //             const newSet = new Set(prev)
-    //             newSet.add(CustomersAdmin)
-    //             newSet.delete(CustomersOperator)
-    //             return newSet
-    //         })
-    //     }
-    //     if (item === "operator") {
-    //         setRoles(prev => {
-    //             const newSet = new Set(prev)
-    //             newSet.add(CustomersOperator)
-    //             newSet.delete(CustomersAdmin)
-    //             return newSet
-    //         })
-    //     }
-    // }
 
     const isChecked = (item: T_SidebarItem): boolean => {
         if (item.link) return roles.has(item.link)
@@ -83,23 +67,19 @@ export const AddRole = () => {
     const onSubmit = async () => {
         setIsSubmitting(true)
 
-        await sleep(2000)
-        navigateToRolesPage()
+        const { data, error } = await API.Role.CreateNewRole({
+            body: {
+                name: roleName,
+                permissions: [...roles],
+            },
+        })
 
-        // const { data, error } = await API.Role.CreateNewRole({
-        //     body: {
-        //         name: roleName,
-        //         permissions: [...roles],
-        //     },
-        // })
+        if (data?.createNewRole) {
+            notify("role_added_successfully", "success")
+            navigateToRolesPage()
+        }
 
-        // if (data?.createNewRole) {
-        //     notify("role_added_successfully", "success")
-        //     navigate(-1)
-        // }
-
-        // // TODO: Error handling by key value pair
-        // if (error) notify("something_went_wrong", "error")
+        if (error) toast.error(error)
 
         setIsSubmitting(false)
     }

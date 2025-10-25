@@ -26,5 +26,7 @@
   "schedule_edited_successfully": "برنامه زمان‌بندی با موفقیت ویرایش شد",
   "schedule_added_successfully": "برنامه زمان‌بندی با موفقیت اضافه شد",
   "access_control_added_successfully": "کنترل دسترسی با موفقیت اضافه شد",
-  "access_control_edited_successfully": "کنترل دسترسی با موفقیت ویرایش شد"
+  "access_control_edited_successfully": "کنترل دسترسی با موفقیت ویرایش شد",
+  "role_added_successfully": "نقش جدید با موفقیت ایجاد شد",
+  "role_edited_successfully": "نقش مورد نظر با موفقیت ویرایش شد"
 }
