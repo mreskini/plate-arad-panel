@@ -122,7 +122,7 @@ export const Clients = () => {
                     i % 2 !== 0
                         ? {
                               token: `device-token-${i}`,
-                              type: E_DeviceType.PlateCamera,
+                              type: E_DeviceType.Camera,
                               name: `Plate Cam ${i}`,
                               ip: `192.168.1.${i + 300}`,
                           }

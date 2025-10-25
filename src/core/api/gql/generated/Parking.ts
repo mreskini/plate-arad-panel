@@ -8,18 +8,12 @@ export const ParkingInfoDocument = gql`
     query ParkingInfo {
   parkingInfo {
     name
-    code
-    capacity
-    cash_adjustment
-    card_issuance_fee
-    default_cash_group {
-      token
-      title
-      type
-    }
-    license
     server_uuid
     clients_count
+    license
+    uhf
+    csn
+    plate_recognition
   }
 }
     `;

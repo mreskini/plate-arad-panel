@@ -10,19 +10,17 @@ export const CurrentUserDocument = gql`
     token
     username
     fullname
+    is_active
+    profile_image
+    expiration_date
     role {
       token
       name
+      is_default
       permissions {
         link
       }
     }
-    rate_limit
-    profile_image
-    manual_exit_monthly_limit
-    manual_exit_daily_limit
-    is_active
-    expiration_date
   }
 }
     `;
@@ -37,14 +35,11 @@ export const FetchUsersListDocument = gql`
     count
     items {
       token
-      is_active
       username
       fullname
+      is_active
       profile_image
-      manual_exit_daily_limit
-      manual_exit_monthly_limit
       expiration_date
-      rate_limit
       role {
         token
         name

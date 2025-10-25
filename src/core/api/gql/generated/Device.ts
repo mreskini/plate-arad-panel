@@ -14,6 +14,7 @@ export const FetchDevicesDocument = gql`
     brand_name
     username
     password
+    channel
   }
 }
     `;

@@ -88,17 +88,20 @@ export const License = () => {
 
                             <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
                                 <Text contentKey="plate_reader" />
-                                <Text contentKey={parking.plate_reader ? "has" : "does_not_have"} variant="meta-1" />
+                                <Text
+                                    contentKey={parking.plate_recognition ? "has" : "does_not_have"}
+                                    variant="meta-1"
+                                />
                             </div>
 
-                            <div className="flex items-center w-full justify-between border-b border-dashed border-emerald-200 pb-2 px-4">
-                                <Text contentKey="pos" />
-                                <Text contentKey={parking.pos ? "has" : "does_not_have"} variant="meta-1" />
+                            <div className="flex items-center w-full justify-between px-4">
+                                <Text contentKey="CSN" />
+                                <Text contentKey={parking.csn ? "has" : "does_not_have"} variant="meta-1" />
                             </div>
 
                             <div className="flex items-center w-full justify-between px-4">
                                 <Text contentKey="UHF" />
-                                <Text contentKey={parking.UHF ? "has" : "does_not_have"} variant="meta-1" />
+                                <Text contentKey={parking.uhf ? "has" : "does_not_have"} variant="meta-1" />
                             </div>
                         </div>
                     )}

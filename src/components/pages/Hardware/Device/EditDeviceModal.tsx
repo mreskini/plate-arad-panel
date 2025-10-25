@@ -51,7 +51,7 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
         },
     })
 
-    const isCameraType = watch("type") === E_DeviceType.DriverCamera || watch("type") === E_DeviceType.PlateCamera
+    const isCameraType = watch("type") === E_DeviceType.Camera
     const isValid = watch("name") && watch("type") && watch("ip")
 
     // Methods

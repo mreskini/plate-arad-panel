@@ -42,12 +42,12 @@ export const CreateDeviceModal: FC<I_Props> = ({ callback }) => {
         mode: "onChange",
         defaultValues: {
             name: "",
-            type: E_DeviceType.Controller,
+            type: E_DeviceType.Camera,
             ip: "",
         },
     })
 
-    const isCameraType = watch("type") === E_DeviceType.DriverCamera || watch("type") === E_DeviceType.PlateCamera
+    const isCameraType = watch("type") === E_DeviceType.Camera
 
     const isValid =
         watch("name") &&

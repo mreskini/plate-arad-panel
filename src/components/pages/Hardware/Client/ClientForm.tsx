@@ -123,7 +123,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                         <Input.Label labelKey="plate_camera" className="min-w-24" />
                         <Input.DropDown
                             options={devices
-                                .filter(_ => _.type === E_DeviceType.PlateCamera)
+                                .filter(_ => _.type === E_DeviceType.Camera)
                                 .map(_ => ({ label: _.name, value: _.token }))}
                             disabled={isSubmitting}
                             value={getValues("plate_cam_token")}

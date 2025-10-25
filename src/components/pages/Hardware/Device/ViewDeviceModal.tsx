@@ -17,7 +17,7 @@ export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
     // States and Hooks
     const { t } = useTranslation("status")
 
-    const isCameraType = device.type === E_DeviceType.DriverCamera || device.type === E_DeviceType.PlateCamera
+    const isCameraType = device.type === E_DeviceType.Camera
 
     // Render
     return (
