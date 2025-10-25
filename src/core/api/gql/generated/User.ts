@@ -57,6 +57,16 @@ export const ToggleUserStatusDocument = gql`
   toggleUserStatus(body: $body)
 }
     `;
+export const CreateUserDocument = gql`
+    mutation CreateUser($body: CreateUserRq!) {
+  createUser(body: $body)
+}
+    `;
+export const EditUserDocument = gql`
+    mutation EditUser($body: EditUserRq!) {
+  editUser(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -76,6 +86,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ToggleUserStatus(variables: Types.ToggleUserStatusMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleUserStatusMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleUserStatusMutation>(ToggleUserStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleUserStatus', 'mutation');
+    },
+    CreateUser(variables: Types.CreateUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateUserMutation>(CreateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUser', 'mutation');
+    },
+    EditUser(variables: Types.EditUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.EditUserMutation>(EditUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditUser', 'mutation');
     }
   };
 }

@@ -59,3 +59,17 @@ export type ToggleUserStatusMutationVariables = Types.Exact<{
 
 
 export type ToggleUserStatusMutation = { toggleUserStatus: boolean };
+
+export type CreateUserMutationVariables = Types.Exact<{
+  body: Types.CreateUserRq;
+}>;
+
+
+export type CreateUserMutation = { createUser: boolean };
+
+export type EditUserMutationVariables = Types.Exact<{
+  body: Types.EditUserRq;
+}>;
+
+
+export type EditUserMutation = { editUser: boolean };

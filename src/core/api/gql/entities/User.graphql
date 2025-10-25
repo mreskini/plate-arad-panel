@@ -46,3 +46,11 @@ query FetchUsersList($body: FetchUsersListRq!) {
 mutation ToggleUserStatus($body: ToggleUserStatus!){
   toggleUserStatus(body: $body)
 }
+
+mutation CreateUser($body: CreateUserRq!) {
+  createUser(body: $body)
+}
+
+mutation EditUser($body: EditUserRq!) {
+  editUser(body: $body)
+}

@@ -14,10 +14,10 @@ interface I_Props {
 
 export interface I_UserFormData {
     username: string
-    fullname: string
     password: string
+    fullname: string
     roleToken: string
-    description: string
+    expirationDate: Date
     profileImageUrl?: string
     profileImageFile: File | null
 }
@@ -49,10 +49,10 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
     const formDataBinding = () => {
         if (!user) return
 
-        setValue("fullname", user.fullname)
         setValue("username", user.username)
+        setValue("fullname", user.fullname)
         setValue("roleToken", user.role.token)
-        setValue("description", user.fullname)
+        setValue("expirationDate", new Date(user.expiration_date))
         setValue("profileImageUrl", user.profile_image ?? "")
     }
 
@@ -68,6 +68,7 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                     <Spinner />
                 </div>
             )}
+
             {!isFetching && (
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-lg">
                     <div className="flex w-full items-center gap-2 mb-4">
@@ -112,17 +113,17 @@ export const UserForm: FC<I_Props> = ({ onSubmit, onClose, user }) => {
                         />
                     </div>
 
-                    <Divider className="mb-4" />
-
                     <div className="flex w-full items-center gap-2 mb-4">
-                        <Input.Label labelKey="descriptions" className="min-w-32" />
-                        <Input.Textarea
-                            placeholder="enter_descriptions"
-                            defaultValue={getValues("description")}
-                            onChange={e => setValue("description", e.target.value)}
+                        <Input.Label labelKey="expiration_date" className="min-w-32" required />
+                        <Input.DatePicker
                             disabled={isSubmitting}
+                            className="w-full"
+                            value={getValues("expirationDate")}
+                            onChange={(e: Date) => setValue("expirationDate", e)}
                         />
                     </div>
+
+                    <Divider className="mb-4" />
 
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="upload_image" className="min-w-32" />
