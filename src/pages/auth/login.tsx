@@ -21,7 +21,6 @@ export const Login = () => {
     const { setAccessToken } = useAuth()
     const { notify } = useNotify()
 
-    // Initialize react-hook-form
     const {
         register,
         handleSubmit,

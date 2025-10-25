@@ -42,3 +42,7 @@ query FetchUsersList($body: FetchUsersListRq!) {
     }
   }
 }
+
+mutation ToggleUserStatus($body: ToggleUserStatus!){
+  toggleUserStatus(body: $body)
+}

@@ -52,3 +52,10 @@ export type FetchUsersListQueryVariables = Types.Exact<{
 
 
 export type FetchUsersListQuery = { fetchUsersList: { count: number, items: Array<{ token: string, username: string, fullname: string, is_active: boolean, profile_image?: string | null, expiration_date: string, role: { token: string, name: string, is_default: boolean, permissions: Array<{ link: string }> } }> } };
+
+export type ToggleUserStatusMutationVariables = Types.Exact<{
+  body: Types.ToggleUserStatus;
+}>;
+
+
+export type ToggleUserStatusMutation = { toggleUserStatus: boolean };

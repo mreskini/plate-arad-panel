@@ -52,6 +52,11 @@ export const FetchUsersListDocument = gql`
   }
 }
     `;
+export const ToggleUserStatusDocument = gql`
+    mutation ToggleUserStatus($body: ToggleUserStatus!) {
+  toggleUserStatus(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -68,6 +73,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     FetchUsersList(variables: Types.FetchUsersListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchUsersListQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchUsersListQuery>(FetchUsersListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchUsersList', 'query');
+    },
+    ToggleUserStatus(variables: Types.ToggleUserStatusMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleUserStatusMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleUserStatusMutation>(ToggleUserStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleUserStatus', 'mutation');
     }
   };
 }
