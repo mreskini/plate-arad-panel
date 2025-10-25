@@ -7,8 +7,8 @@ import {
     DeviceTypeKeyMap,
     EditDeviceModal,
     ViewDeviceModal,
-} from "@components/pages/Hardware/Device"
-import { Button, Table } from "@components/template"
+} from "@components/pages/Hardware"
+import { Button, Table, Text } from "@components/template"
 import type { T_Device } from "@core/api"
 import { API } from "@core/api"
 import { useModal } from "@core/stores"
@@ -29,19 +29,16 @@ export const HardwareDevices = () => {
         {
             name: t("device_name"),
             selector: (row: T_Device) => row.name,
-            width: "30%",
         },
         {
             name: t("type"),
             cell: (row: T_Device) => (
                 <Status variant={DeviceTypeColorMap[row.type]} contentKey={DeviceTypeKeyMap[row.type]} />
             ),
-            width: "30%",
         },
         {
             name: t("ip_address"),
-            selector: (row: T_Device) => row.ip,
-            width: "30%",
+            cell: (row: T_Device) => <Text content={row.ip} variant="meta-1" className="font-courier" />,
         },
         {
             name: t("actions"),
@@ -68,7 +65,7 @@ export const HardwareDevices = () => {
                     </Button>
                 </div>
             ),
-            width: "10%",
+            width: "120px",
         },
     ]
 

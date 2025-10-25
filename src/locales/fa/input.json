@@ -128,5 +128,7 @@
   "plate_and_CSN": "پلاک و CSN",
   "UHF_or_CSN": "UHF یا CSN",
   "plate_or_CSN": "پلاک یا CSN",
-  "expiration_date": " تاریخ اعتبار"
+  "expiration_date": " تاریخ اعتبار",
+  "channel_number": "شماره کانال‌",
+  "enter_channel_number": "شماره کانال را وارد کنید"
 }
