@@ -2,6 +2,7 @@
 import { getSystemErrorMessages, getUserAccessToken } from "@core/functions"
 import { GraphQLClient } from "graphql-request"
 
+import { getSdk as getClientSdk } from "./generated/Client"
 import { getSdk as getDeviceSdk } from "./generated/Device"
 import { getSdk as getParkingSdk } from "./generated/Parking"
 import { getSdk as getRoleSdk } from "./generated/Role"
@@ -57,6 +58,7 @@ export const API = {
     Parking: createAsyncProxy(getParkingSdk(gqlClient)),
     Role: createAsyncProxy(getRoleSdk(gqlClient)),
     Device: createAsyncProxy(getDeviceSdk(gqlClient)),
+    Client: createAsyncProxy(getClientSdk(gqlClient)),
 }
 
 export * from "./generated"

@@ -1,5 +1,31 @@
 import * as Types from './schemas';
 
+export type FetchClientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchClientsQuery = { fetchClients: Array<{ token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }> };
+
+export type CreateClientMutationVariables = Types.Exact<{
+  body: Types.CreateClientRq;
+}>;
+
+
+export type CreateClientMutation = { createClient: boolean };
+
+export type EditClientMutationVariables = Types.Exact<{
+  body: Types.EditClientRq;
+}>;
+
+
+export type EditClientMutation = { editClient: boolean };
+
+export type DeleteClientMutationVariables = Types.Exact<{
+  body: Types.DeleteClientRq;
+}>;
+
+
+export type DeleteClientMutation = { deleteClient: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

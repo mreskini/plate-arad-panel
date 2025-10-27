@@ -1,7 +1,6 @@
 import type {
     CurrentUserQuery,
-    E_ClientType,
-    E_DeviceType,
+    FetchClientsQuery,
     FetchDevicesQuery,
     FetchRolesQuery,
     FetchUsersListQuery,
@@ -118,32 +117,6 @@ export type T_FetchTrafficWithCard = {
 
 export type T_TrafficWithCard = T_FetchTrafficWithCard["items"][number]
 
-export type T_Client = {
-    token: string
-    type: E_ClientType
-    name: string
-    ip_address: string
-    has_operator: boolean
-    pos?: {
-        token: string
-        ip: string
-        num: number
-        terminal: number
-    } | null
-    relay?: {
-        token: string
-        type: E_DeviceType
-        name: string
-        ip: string
-    } | null
-    plate_cam?: {
-        token: string
-        type: E_DeviceType
-        name: string
-        ip: string
-    } | null
-}
-
 export enum E_PosBrandName {
     Parsian = "PARSIAN",
     Sep = "SEP",
@@ -205,3 +178,4 @@ export type T_FetchAccessControl = {
 export type T_AccessControl = T_FetchAccessControl["items"][number]
 
 export type T_Parking = ParkingInfoQuery["parkingInfo"]
+export type T_Client = FetchClientsQuery["fetchClients"][number]

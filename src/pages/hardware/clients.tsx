@@ -1,17 +1,24 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/no-unstable-nested-components */
-import { Status } from "@components/common"
 import { Layout } from "@components/layout"
-import { AddClientModal, ClientTypeKeyMap, EditClientModal, ViewClientModal } from "@components/pages/Hardware"
-import { Button, Table, useNotify } from "@components/template"
-import { E_ClientType, E_DeviceType, type T_Client } from "@core/api"
+import {
+    AddClientModal,
+    CameraBrandOptions,
+    ClientTypeKeyMap,
+    EditClientModal,
+    ViewClientModal,
+} from "@components/pages/Hardware"
+import { Button, Notice, Table, Text, useNotify } from "@components/template"
+import type { T_Client } from "@core/api"
+import { API } from "@core/api"
 import { useCommon } from "@core/contexts"
-import { formatNumber, sleep } from "@core/functions"
 import { useApp, useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2, Eye, Trash } from "iconsax-reactjs"
-import { range } from "lodash"
+import { find } from "lodash"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 export const Clients = () => {
     // States and hooks
@@ -25,7 +32,7 @@ export const Clients = () => {
     const [selected, setSelected] = useState<T_Client | null>(null)
     const [isFetching, setIsFetching] = useState(true)
     const [isAddClientButtonDisabled, setIsAddClientButtonDisabled] = useState<boolean>(false)
-    // const { isLicenseAvailable } = useCommon()
+    const { isLicenseAvailable } = useCommon()
 
     const tableColumns = [
         {
@@ -37,21 +44,36 @@ export const Clients = () => {
             selector: (row: T_Client) => tCommon(ClientTypeKeyMap[row.type]),
         },
         {
-            name: t("ip_address"),
-            selector: (row: T_Client) => row.ip_address,
+            name: t("camera_ip"),
+            cell: (row: T_Client) =>
+                row.camera?.ip ? <Text content={row.camera?.ip} variant="meta-1" className="font-courier" /> : "",
         },
         {
-            name: t("has_operator"),
+            name: t("camera_brand"),
+            cell: (row: T_Client) =>
+                row.camera?.brand_name ? (
+                    <Text
+                        contentKey={find(CameraBrandOptions, { value: row.camera.brand_name })?.labelKey}
+                        variant="meta-1"
+                        ns="input"
+                    />
+                ) : (
+                    ""
+                ),
+        },
+        {
+            name: t("relay_board_ip"),
+            cell: (row: T_Client) =>
+                row.relay?.ip ? <Text content={row.relay?.ip} variant="meta-1" className="font-courier" /> : "",
+        },
+        {
+            name: t("relay_board_channel_number"),
             cell: (row: T_Client) => (
-                <Status
-                    contentKey={row.has_operator ? "yes" : "no"}
-                    variant={row.has_operator ? "success" : "warning"}
-                />
+                <>
+                    {row.relay?.channel === 0 && <Text contentKey="zero" variant="meta-2" />}
+                    {row.relay?.channel === 1 && <Text contentKey="one" variant="meta-2" />}
+                </>
             ),
-        },
-        {
-            name: t("pos_device"),
-            cell: (row: T_Client) => (row.pos ? formatNumber(row.pos.num, "fa") : ""),
         },
         {
             width: "150px",
@@ -67,6 +89,7 @@ export const Clients = () => {
                     >
                         <Eye size={20} className="text-neutral-700" />
                     </Button>
+
                     <Button
                         variant="ghost"
                         onClick={() => {
@@ -76,8 +99,13 @@ export const Clients = () => {
                     >
                         <Edit2 size={20} className="text-neutral-700" />
                     </Button>
+
                     <Button variant="ghost">
-                        <Trash size={20} className="text-red-500 hover:text-red-600" onClick={() => deleteClient()} />
+                        <Trash
+                            size={20}
+                            className="text-red-500 hover:text-red-600"
+                            onClick={() => deleteClient(row.token)}
+                        />
                     </Button>
                 </div>
             ),
@@ -95,46 +123,23 @@ export const Clients = () => {
         </div>
     )
 
+    // Methods
     const fetchClients = async () => {
-        await sleep(2000)
-
-        setClients(
-            range(1, 3).map(i => ({
-                token: `client-token-${i}`,
-                type: i % 2 === 0 ? E_ClientType.Input : E_ClientType.Output,
-                name: `کلاینت ${i}`,
-                ip_address: `192.168.1.${i}`,
-                has_operator: i % 2 === 0,
-                pos:
-                    i % 3 === 0
-                        ? { token: `pos-token-${i}`, ip: `192.168.1.${i + 100}`, num: i, terminal: i + 10 }
-                        : null,
-                relay:
-                    i % 2 === 0
-                        ? {
-                              token: `device-token-${i}`,
-                              type: E_DeviceType.Relay,
-                              name: `Relay Device ${i}`,
-                              ip: `192.168.1.${i + 200}`,
-                          }
-                        : null,
-                plate_cam:
-                    i % 2 !== 0
-                        ? {
-                              token: `device-token-${i}`,
-                              type: E_DeviceType.Camera,
-                              name: `Plate Cam ${i}`,
-                              ip: `192.168.1.${i + 300}`,
-                          }
-                        : null,
-            }))
-        )
-
+        const { data, error } = await API.Client.FetchClients()
+        if (data) setClients(data.fetchClients)
+        if (error) toast.error(error)
         setIsFetching(false)
     }
-    const deleteClient = async () => {
-        await sleep(2000)
-        notify("client_deleted_successfully", "success")
+
+    const deleteClient = async (token: string) => {
+        const { data, error } = await API.Client.DeleteClient({ body: { token } })
+
+        if (data) {
+            await fetchClients()
+            notify("client_deleted_successfully", "success")
+        }
+
+        if (error) toast.error(error)
     }
 
     // Use effects
@@ -158,13 +163,13 @@ export const Clients = () => {
 
             {modalVisibility[Modals.Hardware.Client.View] && <ViewClientModal client={selected!} />}
 
-            {/* {!isLicenseAvailable && (
+            {!isLicenseAvailable && (
                 <Notice
                     contentKey="license_not_available_please_upload_license_file"
                     ns="alerts"
                     wrapperClassName="mb-4"
                 />
-            )} */}
+            )}
 
             <Table
                 title="clients"

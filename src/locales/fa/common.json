@@ -72,5 +72,11 @@
   "has": "دارد",
   "does_not_have": "ندارد",
   "add_device": "افزودن دستگاه",
-  "edit_device": "ویرایش دستگاه"
+  "edit_device": "ویرایش دستگاه",
+  "add_client": "افزودن کلاینت",
+  "edit_client": "ویرایش کلاینت",
+  "zero": "صفر",
+  "one": "یک",
+  "username": "نام کاربری",
+  "password": "رمز عبور"
 }
