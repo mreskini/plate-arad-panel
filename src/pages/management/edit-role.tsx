@@ -158,7 +158,7 @@ export const EditRole = () => {
                                                     onChange={e => onParentClick($, e.target.checked)}
                                                 />
 
-                                                <div className="grid grid-cols-3">
+                                                <div className="grid grid-cols-4">
                                                     {$.subItems?.map(subItem => {
                                                         if (subItem.hidden) return null
                                                         return (

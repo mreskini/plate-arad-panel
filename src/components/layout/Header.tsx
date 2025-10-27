@@ -5,16 +5,22 @@ import { useApp, useLayout } from "@core/stores"
 import { AppRoutes, Icons, Images } from "@core/utilities"
 import clsx from "clsx"
 import { LogoutCurve } from "iconsax-reactjs"
+import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 export const Header = () => {
     // States and hooks
     const navigate = useNavigate()
     const { currentUser } = useApp()
-    const { isLicenseAvailable } = useCommon()
+    const { isLicenseAvailable, fetchParkingInfo } = useCommon()
     const { setIsSidebarOverlayOpen, isAuthenticating } = useLayout()
     const fullname = currentUser?.fullname ?? ""
     const role = currentUser?.role.name ?? ""
+
+    // Use effects
+    useEffect(() => {
+        fetchParkingInfo()
+    }, [])
 
     // Render
     return (
@@ -29,7 +35,7 @@ export const Header = () => {
                         </Button>
                     </div>
 
-                    {!isLicenseAvailable && (
+                    {!isLicenseAvailable && !isAuthenticating && (
                         <Status
                             contentKey="license_not_available"
                             variant="error"

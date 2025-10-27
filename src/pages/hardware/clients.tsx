@@ -8,13 +8,13 @@ import {
     EditClientModal,
     ViewClientModal,
 } from "@components/pages/Hardware"
-import { Button, Notice, Table, Text, useNotify } from "@components/template"
+import { Button, Notice, Table, Text } from "@components/template"
 import type { T_Client } from "@core/api"
 import { API } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useApp, useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Edit2, Eye, Trash } from "iconsax-reactjs"
+import { Edit2, Eye } from "iconsax-reactjs"
 import { find } from "lodash"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -22,7 +22,6 @@ import { toast } from "react-toastify"
 
 export const Clients = () => {
     // States and hooks
-    const { notify } = useNotify()
     const { parking } = useApp()
     const { fetchParkingInfo } = useCommon()
     const { t } = useTranslation("tables")
@@ -99,14 +98,6 @@ export const Clients = () => {
                     >
                         <Edit2 size={20} className="text-neutral-700" />
                     </Button>
-
-                    <Button variant="ghost">
-                        <Trash
-                            size={20}
-                            className="text-red-500 hover:text-red-600"
-                            onClick={() => deleteClient(row.token)}
-                        />
-                    </Button>
                 </div>
             ),
         },
@@ -129,17 +120,6 @@ export const Clients = () => {
         if (data) setClients(data.fetchClients)
         if (error) toast.error(error)
         setIsFetching(false)
-    }
-
-    const deleteClient = async (token: string) => {
-        const { data, error } = await API.Client.DeleteClient({ body: { token } })
-
-        if (data) {
-            await fetchClients()
-            notify("client_deleted_successfully", "success")
-        }
-
-        if (error) toast.error(error)
     }
 
     // Use effects
