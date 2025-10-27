@@ -37,3 +37,22 @@ mutation EditClient($body: EditClientRq!) {
 mutation DeleteClient($body: DeleteClientRq!) {
   deleteClient(body: $body)
 }
+
+query FetchSchedules {
+  fetchSchedules {
+    token
+    title
+    start_date
+    end_date
+    start_time
+    end_time
+  }
+}
+
+mutation CreateSchedule($body: CreateScheduleRq!) {
+  createSchedule(body: $body)
+}
+
+mutation EditSchedule($body: EditScheduleRq!) {
+  editSchedule(body: $body)
+}
