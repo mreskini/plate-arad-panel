@@ -48,6 +48,28 @@ export const DeleteClientDocument = gql`
   deleteClient(body: $body)
 }
     `;
+export const FetchSchedulesDocument = gql`
+    query FetchSchedules {
+  fetchSchedules {
+    token
+    title
+    start_date
+    end_date
+    start_time
+    end_time
+  }
+}
+    `;
+export const CreateScheduleDocument = gql`
+    mutation CreateSchedule($body: CreateScheduleRq!) {
+  createSchedule(body: $body)
+}
+    `;
+export const EditScheduleDocument = gql`
+    mutation EditSchedule($body: EditScheduleRq!) {
+  editSchedule(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -67,6 +89,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     DeleteClient(variables: Types.DeleteClientMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.DeleteClientMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.DeleteClientMutation>(DeleteClientDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteClient', 'mutation');
+    },
+    FetchSchedules(variables?: Types.FetchSchedulesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchSchedulesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchSchedulesQuery>(FetchSchedulesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchSchedules', 'query');
+    },
+    CreateSchedule(variables: Types.CreateScheduleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateScheduleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateScheduleMutation>(CreateScheduleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSchedule', 'mutation');
+    },
+    EditSchedule(variables: Types.EditScheduleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditScheduleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.EditScheduleMutation>(EditScheduleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditSchedule', 'mutation');
     }
   };
 }

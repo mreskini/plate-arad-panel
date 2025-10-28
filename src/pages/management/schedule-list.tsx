@@ -1,16 +1,16 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
 import { AddScheduleModal, EditScheduleModal } from "@components/pages/Hardware"
-import { Button, Switch, Table } from "@components/template"
-import type { T_FetchScheduleList, T_Schedule } from "@core/api"
-import { formatDate, formatTime, sleep } from "@core/functions"
+import { Button, Table } from "@components/template"
+import { API, type T_Schedule } from "@core/api"
+import { formatDate, formatTime } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2 } from "iconsax-reactjs"
-import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const PageSize = 7
 
@@ -18,7 +18,7 @@ export const ScheduleList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
-    const [tableData, setTableData] = useState<T_FetchScheduleList>([])
+    const [tableData, setTableData] = useState<T_Schedule[]>([])
     const [selected, setSelected] = useState<T_Schedule | null>(null)
     const [isFetching, setIsFetching] = useState<boolean>(true)
 
@@ -33,20 +33,15 @@ export const ScheduleList = () => {
         },
         {
             name: t("end_date"),
-            selector: (row: T_Schedule) => formatDate(new Date(row.end_date)),
+            selector: (row: T_Schedule) => (row.end_date ? formatDate(new Date(row.end_date)) : ""),
         },
         {
             name: t("start_time"),
-            selector: (row: T_Schedule) => formatTime(new Date(row.start_time)),
+            selector: (row: T_Schedule) => formatTime(row.start_time),
         },
         {
             name: t("end_time"),
-            selector: (row: T_Schedule) => formatTime(new Date(row.end_time)),
-        },
-
-        {
-            name: t("status"),
-            cell: (row: T_Schedule) => <Switch checked={row.is_active} onSwitchToggle={() => {}} />,
+            selector: (row: T_Schedule) => formatTime(row.end_time),
         },
         {
             width: "80px",
@@ -80,18 +75,9 @@ export const ScheduleList = () => {
 
     // Methods
     const fetchSchedules = async () => {
-        await sleep(2000)
-
-        const MockScheduleItems: T_FetchScheduleList = range(1, 11).map(i => ({
-            title: `برنامه ${i}`,
-            start_date: "2024-01-01T00:00:00Z",
-            end_date: "2024-12-31T23:59:59Z",
-            start_time: "2024-01-01T08:00:00Z",
-            end_time: "2024-01-01T12:00:00Z",
-            is_active: i % 2 === 0,
-        }))
-
-        setTableData(MockScheduleItems)
+        const { data, error } = await API.Client.FetchSchedules()
+        if (data) setTableData(data.fetchSchedules)
+        if (error) toast.error(error)
         setIsFetching(false)
     }
 

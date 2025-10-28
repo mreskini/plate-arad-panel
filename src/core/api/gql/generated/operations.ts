@@ -26,6 +26,25 @@ export type DeleteClientMutationVariables = Types.Exact<{
 
 export type DeleteClientMutation = { deleteClient: boolean };
 
+export type FetchSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string }> };
+
+export type CreateScheduleMutationVariables = Types.Exact<{
+  body: Types.CreateScheduleRq;
+}>;
+
+
+export type CreateScheduleMutation = { createSchedule: boolean };
+
+export type EditScheduleMutationVariables = Types.Exact<{
+  body: Types.EditScheduleRq;
+}>;
+
+
+export type EditScheduleMutation = { editSchedule: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

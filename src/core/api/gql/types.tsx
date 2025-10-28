@@ -3,6 +3,7 @@ import type {
     FetchClientsQuery,
     FetchDevicesQuery,
     FetchRolesQuery,
+    FetchSchedulesQuery,
     FetchUsersListQuery,
     ParkingInfoQuery,
     PingAllDevicesQuery,
@@ -146,17 +147,6 @@ export type T_FetchTrafficWithEmergency = {
 
 export type T_TrafficWithEmergency = T_FetchTrafficWithEmergency["items"][number]
 
-export type T_FetchScheduleList = {
-    title: string
-    start_date: string
-    end_date: string
-    start_time: string
-    end_time: string
-    is_active: boolean
-}[]
-
-export type T_Schedule = T_FetchScheduleList[number]
-
 export type T_FetchAccessControl = {
     count: number
     items: {
@@ -179,3 +169,4 @@ export type T_AccessControl = T_FetchAccessControl["items"][number]
 
 export type T_Parking = ParkingInfoQuery["parkingInfo"]
 export type T_Client = FetchClientsQuery["fetchClients"][number]
+export type T_Schedule = FetchSchedulesQuery["fetchSchedules"][number]
