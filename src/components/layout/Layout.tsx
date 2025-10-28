@@ -26,11 +26,15 @@ interface I_Auth {
 const Wrapper: FC<I_Wrapper> = ({ children }) => {
     // States and Hooks
     const { setErrors } = useError()
+    const { fetchCurrentUser, fetchParkingInfo } = useCommon()
 
     // Methods
     const init = async () => {
         const errors = await fetchErrorsFromApi()
         if (errors) setErrors(errors)
+
+        await fetchCurrentUser()
+        await fetchParkingInfo()
     }
 
     useEffect(() => {

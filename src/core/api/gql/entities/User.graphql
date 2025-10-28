@@ -1,49 +1,56 @@
-query CurrentUser{
+query CurrentUser {
   currentUser {
     token
     username
     fullname
+    is_active
+    profile_image
+    expiration_date
     role {
       token
       name
+      is_default
       permissions {
         link
       }
     }
-    rate_limit
-    profile_image
-    manual_exit_monthly_limit
-    manual_exit_daily_limit
-    is_active
-    expiration_date
   }
 }
 
-mutation UserLogin($body: UserLoginRq!){
+mutation UserLogin($body: UserLoginRq!) {
   userLogin(body: $body)
 }
 
-query FetchUsersList($body: FetchUsersListRq!){
+query FetchUsersList($body: FetchUsersListRq!) {
   fetchUsersList(body: $body) {
     count
     items {
+      token
+      username
+      fullname
+      is_active
+      profile_image
+      expiration_date
+      role {
         token
-        is_active
-        username
-        fullname
-        profile_image
-        manual_exit_daily_limit
-        manual_exit_monthly_limit
-        expiration_date
-        rate_limit
-        role {
-            token
-            name
-            is_default
-            permissions {
-                link
-            }
+        name
+        is_default
+        permissions {
+          link
         }
+      }
     }
   }
+}
+
+mutation ToggleUserStatus($body: ToggleUserStatus!){
+  toggleUserStatus(body: $body)
+}
+
+mutation CreateUser($body: CreateUserRq!) {
+  createUser(body: $body)
+}
+
+mutation EditUser($body: EditUserRq!) {
+  editUser(body: $body)
 }

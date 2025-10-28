@@ -70,5 +70,13 @@
   "add_access_control": "افزودن کنترل دسترسی",
   "edit_access_control": "ویرایش کنترل دسترسی",
   "has": "دارد",
-  "does_not_have": "ندارد"
+  "does_not_have": "ندارد",
+  "add_device": "افزودن دستگاه",
+  "edit_device": "ویرایش دستگاه",
+  "add_client": "افزودن کلاینت",
+  "edit_client": "ویرایش کلاینت",
+  "zero": "صفر",
+  "one": "یک",
+  "username": "نام کاربری",
+  "password": "رمز عبور"
 }

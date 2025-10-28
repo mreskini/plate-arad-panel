@@ -2,6 +2,7 @@
 import { getSystemErrorMessages, getUserAccessToken } from "@core/functions"
 import { GraphQLClient } from "graphql-request"
 
+import { getSdk as getClientSdk } from "./generated/Client"
 import { getSdk as getDeviceSdk } from "./generated/Device"
 import { getSdk as getParkingSdk } from "./generated/Parking"
 import { getSdk as getRoleSdk } from "./generated/Role"
@@ -9,7 +10,7 @@ import { getSdk as getUserSdk } from "./generated/User"
 
 export const StaticGlobalErrorMessage = "مشکلی رخ داده است"
 export const USER_PROFILE_IMAGE_UPLOAD_ROUTE = `${import.meta.env.VITE_PUBLIC_BASE_UPLOAD_URL}/user/profile/image`
-export const gqlClient = new GraphQLClient("https://arad-graph-local.idealink.dev/graphql" as string, {})
+export const gqlClient = new GraphQLClient("https://arad-plate-graph.idealink.dev/graphql" as string, {})
 
 type T_AsyncResult<T_Res> =
     | {
@@ -57,6 +58,7 @@ export const API = {
     Parking: createAsyncProxy(getParkingSdk(gqlClient)),
     Role: createAsyncProxy(getRoleSdk(gqlClient)),
     Device: createAsyncProxy(getDeviceSdk(gqlClient)),
+    Client: createAsyncProxy(getClientSdk(gqlClient)),
 }
 
 export * from "./generated"

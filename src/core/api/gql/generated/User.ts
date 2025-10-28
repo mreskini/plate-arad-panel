@@ -10,19 +10,17 @@ export const CurrentUserDocument = gql`
     token
     username
     fullname
+    is_active
+    profile_image
+    expiration_date
     role {
       token
       name
+      is_default
       permissions {
         link
       }
     }
-    rate_limit
-    profile_image
-    manual_exit_monthly_limit
-    manual_exit_daily_limit
-    is_active
-    expiration_date
   }
 }
     `;
@@ -37,14 +35,11 @@ export const FetchUsersListDocument = gql`
     count
     items {
       token
-      is_active
       username
       fullname
+      is_active
       profile_image
-      manual_exit_daily_limit
-      manual_exit_monthly_limit
       expiration_date
-      rate_limit
       role {
         token
         name
@@ -55,6 +50,21 @@ export const FetchUsersListDocument = gql`
       }
     }
   }
+}
+    `;
+export const ToggleUserStatusDocument = gql`
+    mutation ToggleUserStatus($body: ToggleUserStatus!) {
+  toggleUserStatus(body: $body)
+}
+    `;
+export const CreateUserDocument = gql`
+    mutation CreateUser($body: CreateUserRq!) {
+  createUser(body: $body)
+}
+    `;
+export const EditUserDocument = gql`
+    mutation EditUser($body: EditUserRq!) {
+  editUser(body: $body)
 }
     `;
 
@@ -73,6 +83,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     FetchUsersList(variables: Types.FetchUsersListQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchUsersListQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchUsersListQuery>(FetchUsersListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchUsersList', 'query');
+    },
+    ToggleUserStatus(variables: Types.ToggleUserStatusMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleUserStatusMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleUserStatusMutation>(ToggleUserStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleUserStatus', 'mutation');
+    },
+    CreateUser(variables: Types.CreateUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateUserMutation>(CreateUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUser', 'mutation');
+    },
+    EditUser(variables: Types.EditUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.EditUserMutation>(EditUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditUser', 'mutation');
     }
   };
 }

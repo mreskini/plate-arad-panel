@@ -12,6 +12,7 @@ import { Edit2 } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const PageSize = 7
 
@@ -67,7 +68,9 @@ export const UsersList = () => {
         },
         {
             name: t("activation"),
-            cell: (row: T_User) => <Switch checked={row.is_active} onSwitchToggle={() => {}} />,
+            cell: (row: T_User) => (
+                <Switch checked={row.is_active} onSwitchToggle={() => toggleUserAvailability(row.token)} />
+            ),
         },
         {
             width: "80px",
@@ -107,11 +110,11 @@ export const UsersList = () => {
         setIsFetching(false)
     }
 
-    // const toggleUserAvailability = async (userToken: string) => {
-    //     const { data, error } = await API.User.ToggleUserStatus({ body: { token: userToken } })
-    //     if (data) await fetchUsers(current)
-    //     if (error) toast.error(error)
-    // }
+    const toggleUserAvailability = async (userToken: string) => {
+        const { data, error } = await API.User.ToggleUserStatus({ body: { token: userToken } })
+        if (data) await fetchUsers(current)
+        if (error) toast.error(error)
+    }
 
     useEffect(() => {
         fetchUsers()

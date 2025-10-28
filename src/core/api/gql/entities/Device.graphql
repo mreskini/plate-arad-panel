@@ -1,4 +1,4 @@
-query FetchDevices{
+query FetchDevices {
   fetchDevices {
     token
     type
@@ -7,14 +7,15 @@ query FetchDevices{
     brand_name
     username
     password
+    channel
   }
 }
 
-mutation CreateDevice($body: CreateDeviceRq!){
+mutation CreateDevice($body: CreateDeviceRq!) {
   createDevice(body: $body)
 }
 
-mutation EditDevice($body: EditDeviceRq!){
+mutation EditDevice($body: EditDeviceRq!) {
   editDevice(body: $body)
 }
 

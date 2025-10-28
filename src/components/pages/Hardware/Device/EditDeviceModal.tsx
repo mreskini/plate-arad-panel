@@ -6,6 +6,7 @@ import { Modals } from "@core/utilities"
 import { type FC } from "react"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 import type { E_CameraBrand } from "./static"
 import { CameraBrandOptions, DeviceTypeKeyMap } from "./static"
@@ -22,6 +23,7 @@ interface I_FormData {
     brand?: string
     username?: string
     password?: string
+    channel?: number
 }
 
 const CurrentModal = Modals.Hardware.Devices.Edit
@@ -46,17 +48,27 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
             type: device.type,
             ip: device.ip,
             brand: device.brand_name || "",
+            channel: device.channel || 0,
             username: device.username || "",
             password: device.password || "",
         },
     })
 
-    const isCameraType = watch("type") === E_DeviceType.DriverCamera || watch("type") === E_DeviceType.PlateCamera
-    const isValid = watch("name") && watch("type") && watch("ip")
+    const isCameraType = watch("type") === E_DeviceType.Camera
+    const isRelayType = watch("type") === E_DeviceType.Relay
+
+    const channel = watch("channel")
+
+    const isValid =
+        watch("name") &&
+        watch("type") &&
+        watch("ip") &&
+        (!isCameraType || (watch("brand") && watch("username") && watch("password"))) &&
+        (!isRelayType || (channel !== undefined && channel > -1 && watch("username") && watch("password")))
 
     // Methods
     const onSubmit = async (formData: I_FormData) => {
-        const { data } = await API.Device.EditDevice({
+        const { data, error } = await API.Device.EditDevice({
             body: {
                 token: device.token,
                 name: formData.name,
@@ -64,6 +76,11 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
                 ip: formData.ip,
                 ...(isCameraType && {
                     brand_name: formData.brand,
+                    username: formData.username,
+                    password: formData.password,
+                }),
+                ...(isRelayType && {
+                    channel: formData.channel,
                     username: formData.username,
                     password: formData.password,
                 }),
@@ -75,13 +92,15 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
             notify("device_updated_successfully", "success")
             closeModal(CurrentModal)
         }
+
+        if (error) toast.error(error)
     }
 
     // Render
     return (
         <Modal
             name={CurrentModal}
-            title={<Text contentKey="edit" variant="title-1" className="text-neutral-700" weight={600} />}
+            title={<Text contentKey="edit_device" variant="title-1" className="text-neutral-700" weight={600} />}
             closeButton
         >
             <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-xl">
@@ -165,7 +184,49 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
                     </>
                 )}
 
-                <div className="flex items-center gap-4">
+                {isRelayType && (
+                    <>
+                        <div className="flex w-full items-center gap-4 mb-4">
+                            <Input.Label labelKey="channel_number" className="min-w-20" required />
+                            <Input.Number
+                                placeholder="enter_channel_number"
+                                disabled={isSubmitting}
+                                className="w-full"
+                                value={getValues("channel")}
+                                setValue={value => setValue("channel", value)}
+                            />
+                        </div>
+
+                        <div className="flex w-full items-center gap-4 mb-4">
+                            <Input.Label labelKey="username" className="min-w-20" required />
+                            <Input
+                                placeholder="enter_username"
+                                disabled={isSubmitting}
+                                className="w-full"
+                                {...register("username", {
+                                    required: true,
+                                    minLength: 1,
+                                })}
+                            />
+                        </div>
+
+                        <div className="flex w-full items-center gap-4 mb-4">
+                            <Input.Label labelKey="password" className="min-w-20" required />
+                            <div className="w-full">
+                                <Input.Password
+                                    placeholder="your_password_here"
+                                    disabled={isSubmitting}
+                                    {...register("password", {
+                                        required: true,
+                                        minLength: 1,
+                                    })}
+                                />
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                <div className="flex items-center gap-4 mt-8">
                     <Button
                         contentKey="save"
                         type="submit"

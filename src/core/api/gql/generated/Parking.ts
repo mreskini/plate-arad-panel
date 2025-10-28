@@ -8,19 +8,18 @@ export const ParkingInfoDocument = gql`
     query ParkingInfo {
   parkingInfo {
     name
-    code
-    capacity
-    cash_adjustment
-    card_issuance_fee
-    default_cash_group {
-      token
-      title
-      type
-    }
-    license
     server_uuid
     clients_count
+    license
+    uhf
+    csn
+    plate_recognition
   }
+}
+    `;
+export const UpdateParkingLicenseDocument = gql`
+    mutation UpdateParkingLicense($body: UpdateParkingLicenseRq!) {
+  updateParkingLicense(body: $body)
 }
     `;
 
@@ -33,6 +32,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     ParkingInfo(variables?: Types.ParkingInfoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ParkingInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ParkingInfoQuery>(ParkingInfoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ParkingInfo', 'query');
+    },
+    UpdateParkingLicense(variables: Types.UpdateParkingLicenseMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UpdateParkingLicenseMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.UpdateParkingLicenseMutation>(UpdateParkingLicenseDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateParkingLicense', 'mutation');
     }
   };
 }

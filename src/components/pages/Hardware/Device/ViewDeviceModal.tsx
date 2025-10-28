@@ -2,10 +2,11 @@ import { Input, Modal, Text } from "@components/template"
 import type { T_Device } from "@core/api"
 import { E_DeviceType } from "@core/api"
 import { Modals } from "@core/utilities"
+import { find } from "lodash"
 import { type FC } from "react"
 import { useTranslation } from "react-i18next"
 
-import { DeviceTypeKeyMap } from "./static"
+import { CameraBrandOptions, DeviceTypeKeyMap } from "./static"
 
 interface I_Props {
     device: T_Device
@@ -17,7 +18,8 @@ export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
     // States and Hooks
     const { t } = useTranslation("status")
 
-    const isCameraType = device.type === E_DeviceType.DriverCamera || device.type === E_DeviceType.PlateCamera
+    const isCameraType = device.type === E_DeviceType.Camera
+    const isRelayType = device.type === E_DeviceType.Relay
 
     // Render
     return (
@@ -44,14 +46,36 @@ export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
 
                 <div className="flex w-full items-center justify-between gap-4 mb-4">
                     <Input.Label labelKey="ip_address" />
-                    <Text content={device.ip} />
+                    <Text content={device.ip} className="font-courier" />
                 </div>
 
                 {isCameraType && (
                     <>
                         <div className="flex w-full items-center justify-between gap-4 mb-4">
                             <Input.Label labelKey="brand" />
-                            <Text content={device.brand_name!} />
+                            <Text
+                                contentKey={find(CameraBrandOptions, { value: device.brand_name! })?.labelKey}
+                                ns="input"
+                            />
+                        </div>
+
+                        <div className="flex w-full items-center justify-between gap-4 mb-4">
+                            <Input.Label labelKey="username" />
+                            <Text content={device.username!} />
+                        </div>
+
+                        <div className="flex w-full items-center justify-between gap-4 mb-4">
+                            <Input.Label labelKey="password" />
+                            <Text content={device.password!} />
+                        </div>
+                    </>
+                )}
+
+                {isRelayType && (
+                    <>
+                        <div className="flex w-full items-center justify-between gap-4 mb-4">
+                            <Input.Label labelKey="channel_number" />
+                            <Text content={device.channel!} />
                         </div>
 
                         <div className="flex w-full items-center justify-between gap-4 mb-4">

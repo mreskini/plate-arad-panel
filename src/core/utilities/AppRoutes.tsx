@@ -22,8 +22,6 @@ export const AppRoutes = {
         users: "/management/users",
         owners: "/management/owners",
         cards: "/management/cards",
-        schedule: "/management/schedule",
-        accessControl: "/management/access-control",
     },
 
     software: {
@@ -34,5 +32,7 @@ export const AppRoutes = {
     hardware: {
         devices: "/hardware/devices",
         clients: "/hardware/clients",
+        schedule: "/hardware/schedule",
+        accessControl: "/hardware/access-control",
     },
 } as const

@@ -8,3 +8,22 @@ query FetchRoles{
     }
   }
 }
+
+query FetchRoleByToken($body: FetchRoleByTokenRq!) {
+  fetchRoleByToken(body: $body) {
+    token
+    name
+    permissions {
+      link
+    }
+    is_default
+  }
+}
+
+mutation CreateNewRole($body: CreateNewRoleRq!) {
+  createNewRole(body: $body)
+}
+
+mutation UpdateRole($body: UpdateRoleRq!) {
+  updateRole(body: $body)
+}

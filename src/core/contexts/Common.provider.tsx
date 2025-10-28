@@ -47,30 +47,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         const { data, error } = await API.User.CurrentUser()
         if (data) {
             setCurrentUser(data.currentUser)
-
-            // TODO: Uncomment after API integration
-            // const permissions = data.currentUser.role.permissions.map(_ => _.link)
-
-            const permissions = [
-                "/",
-                "/logout",
-                "/reports/traffic",
-                "/reports/traffic-without-plate",
-                "/reports/traffic-with-card",
-                "/reports/traffic-with-emergency",
-                "/management/roles",
-                "/management/roles/add",
-                "/management/roles/edit",
-                "/management/users",
-                "/management/owners",
-                "/management/cards",
-                "/management/schedule",
-                "/management/access-control",
-                "/software/settings",
-                "/software/license",
-                "/hardware/devices",
-                "/hardware/clients",
-            ]
+            const permissions = data.currentUser.role.permissions.map(_ => _.link)
             setPermissions(permissions)
         }
         if (error) {

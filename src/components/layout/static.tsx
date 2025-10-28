@@ -89,14 +89,6 @@ export const SidebarItems: T_Sidebar[] = [
                         titleContentKey: "owners",
                         link: AppRoutes.management.owners,
                     },
-                    {
-                        titleContentKey: "schedule",
-                        link: AppRoutes.management.schedule,
-                    },
-                    {
-                        titleContentKey: "access_control",
-                        link: AppRoutes.management.accessControl,
-                    },
                 ],
             },
             {
@@ -118,12 +110,20 @@ export const SidebarItems: T_Sidebar[] = [
                 titleContentKey: "hardware",
                 subItems: [
                     {
+                        titleContentKey: "schedule",
+                        link: AppRoutes.hardware.schedule,
+                    },
+                    {
                         titleContentKey: "devices",
                         link: AppRoutes.hardware.devices,
                     },
                     {
                         titleContentKey: "clients",
                         link: AppRoutes.hardware.clients,
+                    },
+                    {
+                        titleContentKey: "access_control",
+                        link: AppRoutes.hardware.accessControl,
                     },
                 ],
             },

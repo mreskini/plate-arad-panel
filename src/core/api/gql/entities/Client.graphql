@@ -1,0 +1,39 @@
+query FetchClients {
+  fetchClients {
+    token
+    name
+    type
+    camera {
+      token
+      name
+      ip
+      type
+      username
+      password
+      brand_name
+      channel
+    }
+    relay {
+      token
+      name
+      ip
+      type
+      username
+      password
+      brand_name
+      channel
+    }
+  }
+}
+
+mutation CreateClient($body: CreateClientRq!) {
+  createClient(body: $body)
+}
+
+mutation EditClient($body: EditClientRq!) {
+  editClient(body: $body)
+}
+
+mutation DeleteClient($body: DeleteClientRq!) {
+  deleteClient(body: $body)
+}

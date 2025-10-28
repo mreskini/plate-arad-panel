@@ -1,6 +1,6 @@
 import type { CodegenConfig } from "@graphql-codegen/cli"
 
-const Entities = ["User", "Parking", "Role", "Device"];
+const Entities = ["User", "Parking", "Role", "Device", "Client"];
 
 const EntitiesDictionary: { [key: string]: Object } = {}
 Entities.forEach(entity => {
@@ -18,7 +18,7 @@ const config: CodegenConfig = {
     overwrite: true,
     debug: true,
     verbose: true, // keep true for debugging
-    schema: "https://arad-graph-local.idealink.dev/graphql",
+    schema: "https://arad-plate-graph.idealink.dev/graphql",
     generates: {
         ...{
             "src/core/api/gql/generated/schemas.ts": {

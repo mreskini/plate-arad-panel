@@ -5,22 +5,22 @@ import { useApp, useLayout } from "@core/stores"
 import { AppRoutes, Icons, Images } from "@core/utilities"
 import clsx from "clsx"
 import { LogoutCurve } from "iconsax-reactjs"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 export const Header = () => {
     // States and hooks
     const navigate = useNavigate()
-    const { currentUser, parking } = useApp()
-    const { isLicenseAvailable } = useCommon()
-    const [parkingName, setParkingName] = useState(parking?.name ?? "")
+    const { currentUser } = useApp()
+    const { isLicenseAvailable, fetchParkingInfo } = useCommon()
     const { setIsSidebarOverlayOpen, isAuthenticating } = useLayout()
     const fullname = currentUser?.fullname ?? ""
+    const role = currentUser?.role.name ?? ""
 
-    // Methods
+    // Use effects
     useEffect(() => {
-        if (parking) setParkingName(parking.name)
-    }, [parking])
+        fetchParkingInfo()
+    }, [])
 
     // Render
     return (
@@ -35,7 +35,7 @@ export const Header = () => {
                         </Button>
                     </div>
 
-                    {!isLicenseAvailable && (
+                    {!isLicenseAvailable && !isAuthenticating && (
                         <Status
                             contentKey="license_not_available"
                             variant="error"
@@ -51,7 +51,7 @@ export const Header = () => {
                         <div className={clsx(["flex size-10 items-center justify-center rounded-full lg:me-2"])}>
                             <img src={Images.UserProfilePlaceholder} alt="User profile placeholder" />
                         </div>
-                        <div>
+                        <div className="flex flex-col gap-1">
                             <div className="me-3 hidden flex-col items-start lg:flex">
                                 <Text
                                     content={fullname}
@@ -61,7 +61,7 @@ export const Header = () => {
                                 />
                             </div>
                             <div className="me-3 hidden flex-col items-start lg:flex">
-                                <Text content={parkingName} variant="meta-2" className="block text-blue-500" />
+                                <Text content={role} variant="meta-2" className="block text-blue-500" />
                             </div>
                         </div>
                         <Link to={AppRoutes.logout} className="flex items-center justify-center">

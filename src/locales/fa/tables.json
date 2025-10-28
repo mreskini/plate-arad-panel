@@ -48,5 +48,9 @@
   "title": "عنوان",
   "client": "کلاینت",
   "schedule": "برنامه زمان‌بندی",
-  "access_type": "نوع دسترسی"
+  "access_type": "نوع دسترسی",
+  "camera_ip": "IP دوربین",
+  "relay_board_ip": "IP برد رله",
+  "camera_brand": "برند دوربین",
+  "relay_board_channel_number": "شماره کانال برد رله"
 }

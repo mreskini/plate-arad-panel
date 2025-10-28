@@ -6,18 +6,12 @@ import type { KeysWithoutReturnObjects } from "i18next"
 
 export const DeviceTypeColorMap: { [key in E_DeviceType]: T_StatusVariant } = {
     RELAY: "success",
-    CONTROLLER: "warning",
-    DRIVER_CAMERA: "info",
-    PLATE_CAMERA: "error",
-    READER: "success",
+    CAMERA: "info",
 }
 
 export const DeviceTypeKeyMap: { [key in E_DeviceType]: KeysWithoutReturnObjects["status"] } = {
     RELAY: "relay",
-    CONTROLLER: "controller",
-    DRIVER_CAMERA: "driver_cam",
-    PLATE_CAMERA: "plate_cam",
-    READER: "reader",
+    CAMERA: "camera",
 }
 
 export enum E_CameraBrand {

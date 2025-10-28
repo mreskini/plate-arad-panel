@@ -59,8 +59,6 @@ export const AppRouter = createBrowserRouter(
                 <Route path={`${AppRoutes.management.roles.edit}/:token`} element={<EditRole />} />
                 <Route path={AppRoutes.management.owners} element={<OwnersList />} />
                 <Route path={AppRoutes.management.cards} element={<CardsList />} />
-                <Route path={AppRoutes.management.schedule} element={<ScheduleList />} />
-                <Route path={AppRoutes.management.accessControl} element={<AccessControl />} />
 
                 {/* Software */}
                 <Route path={AppRoutes.software.settings} element={<Settings />} />
@@ -69,6 +67,8 @@ export const AppRouter = createBrowserRouter(
                 {/* Hardware */}
                 <Route path={AppRoutes.hardware.clients} element={<Clients />} />
                 <Route path={AppRoutes.hardware.devices} element={<HardwareDevices />} />
+                <Route path={AppRoutes.hardware.schedule} element={<ScheduleList />} />
+                <Route path={AppRoutes.hardware.accessControl} element={<AccessControl />} />
             </Route>
         </Route>
     )
