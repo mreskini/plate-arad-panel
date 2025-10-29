@@ -71,7 +71,7 @@ export const OpenDoorForm: FC<I_Props> = ({ onSubmit, onClose, door }) => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-4 mt-8">
+                    <div className="flex items-center gap-4 mt-16">
                         <Button
                             contentKey="open"
                             variant="primary"
