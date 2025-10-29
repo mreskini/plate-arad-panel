@@ -96,12 +96,12 @@ export const SidebarItems: T_Sidebar[] = [
                 titleContentKey: "software",
                 subItems: [
                     {
-                        titleContentKey: "settings",
-                        link: AppRoutes.software.settings,
-                    },
-                    {
                         titleContentKey: "license",
                         link: AppRoutes.software.license,
+                    },
+                    {
+                        titleContentKey: "settings",
+                        link: AppRoutes.software.settings,
                     },
                 ],
             },
