@@ -1,5 +1,6 @@
 import type {
     CurrentUserQuery,
+    FetchAccessControlsQuery,
     FetchClientsQuery,
     FetchDevicesQuery,
     FetchRolesQuery,
@@ -147,26 +148,10 @@ export type T_FetchTrafficWithEmergency = {
 
 export type T_TrafficWithEmergency = T_FetchTrafficWithEmergency["items"][number]
 
-export type T_FetchAccessControl = {
-    count: number
-    items: {
-        token: string
-        title: string
-        client: {
-            token: string
-            name: string
-        }
-        schedule: T_Schedule
-        control: {
-            plate: boolean
-            UHF: boolean
-            CSN: boolean
-        }
-    }[]
-}
-
-export type T_AccessControl = T_FetchAccessControl["items"][number]
+export type T_AccessControl = FetchAccessControlsQuery["fetchAccessControls"][number]
 
 export type T_Parking = ParkingInfoQuery["parkingInfo"]
 export type T_Client = FetchClientsQuery["fetchClients"][number]
+export type T_FlatClient = Pick<T_Client, "token" | "name" | "type">
 export type T_Schedule = FetchSchedulesQuery["fetchSchedules"][number]
+export type T_FlatSchedule = Pick<T_Schedule, "token" | "title">

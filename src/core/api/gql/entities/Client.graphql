@@ -26,6 +26,14 @@ query FetchClients {
   }
 }
 
+query FetchFlatClients {
+  fetchClients {
+    token
+    name
+    type
+  }
+}
+
 mutation CreateClient($body: CreateClientRq!) {
   createClient(body: $body)
 }
@@ -49,10 +57,65 @@ query FetchSchedules {
   }
 }
 
+query FetchFlatSchedules {
+  fetchSchedules {
+    token
+    title
+  }
+}
+
 mutation CreateSchedule($body: CreateScheduleRq!) {
   createSchedule(body: $body)
 }
 
 mutation EditSchedule($body: EditScheduleRq!) {
   editSchedule(body: $body)
+}
+
+mutation CreateAccessControl($body: CreateAccessControlRq!) {
+  createAccessControl(body: $body)
+}
+
+mutation EditAccessControl($body: EditAccessControlRq!) {
+  editAccessControl(body: $body)
+}
+
+query FetchAccessControls {
+  fetchAccessControls {
+    token
+    title
+    client {
+      token
+      name
+      type
+      camera {
+        token
+        name
+        ip
+        type
+        username
+        password
+        brand_name
+        channel
+      }
+      relay {
+        token
+        name
+        ip
+        type
+        username
+        password
+        brand_name
+        channel
+      }
+    }
+    schedule {
+      token
+      title
+      start_date
+      end_date
+      start_time
+      end_time
+    }
+  }
 }

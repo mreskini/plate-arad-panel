@@ -5,6 +5,11 @@ export type FetchClientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 export type FetchClientsQuery = { fetchClients: Array<{ token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }> };
 
+export type FetchFlatClientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchFlatClientsQuery = { fetchClients: Array<{ token: string, name: string, type: Types.E_ClientType }> };
+
 export type CreateClientMutationVariables = Types.Exact<{
   body: Types.CreateClientRq;
 }>;
@@ -31,6 +36,11 @@ export type FetchSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }
 
 export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string }> };
 
+export type FetchFlatSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchFlatSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string }> };
+
 export type CreateScheduleMutationVariables = Types.Exact<{
   body: Types.CreateScheduleRq;
 }>;
@@ -44,6 +54,25 @@ export type EditScheduleMutationVariables = Types.Exact<{
 
 
 export type EditScheduleMutation = { editSchedule: boolean };
+
+export type CreateAccessControlMutationVariables = Types.Exact<{
+  body: Types.CreateAccessControlRq;
+}>;
+
+
+export type CreateAccessControlMutation = { createAccessControl: boolean };
+
+export type EditAccessControlMutationVariables = Types.Exact<{
+  body: Types.EditAccessControlRq;
+}>;
+
+
+export type EditAccessControlMutation = { editAccessControl: boolean };
+
+export type FetchAccessControlsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchAccessControlsQuery = { fetchAccessControls: Array<{ token: string, title: string, client: { token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }, schedule: { token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string } }> };
 
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

@@ -1,8 +1,11 @@
 import { Modal, Text, useNotify } from "@components/template"
+import { API } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC } from "react"
+import { toast } from "react-toastify"
 
+import type { I_AccessControlFormData } from "./AccessControlForm"
 import { AccessControlForm } from "./AccessControlForm"
 
 interface I_Props {
@@ -17,10 +20,22 @@ export const AddAccessControlModal: FC<I_Props> = ({ callback }) => {
     const { notify } = useNotify()
 
     // Methods
-    const onSubmit = async () => {
-        await callback()
-        closeModal(CurrentModal)
-        notify("access_control_added_successfully", "success")
+    const onSubmit = async (form: I_AccessControlFormData) => {
+        const { data, error } = await API.Client.CreateAccessControl({
+            body: {
+                client_token: form.clientToken,
+                schedule_token: form.scheduleToken,
+                title: form.title,
+            },
+        })
+
+        if (data) {
+            await callback()
+            notify("access_control_added_successfully", "success")
+            closeModal(CurrentModal)
+        }
+
+        if (error) toast.error(error)
     }
 
     // Render
