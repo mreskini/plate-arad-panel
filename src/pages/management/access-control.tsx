@@ -2,15 +2,14 @@
 import { Layout } from "@components/layout"
 import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Hardware"
 import { Button, Table } from "@components/template"
-import type { T_AccessControl, T_FetchAccessControl } from "@core/api"
-import { sleep } from "@core/functions"
+import { API, type T_AccessControl } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2 } from "iconsax-reactjs"
-import { range } from "lodash"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const PageSize = 7
 
@@ -18,7 +17,7 @@ export const AccessControl = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
-    const [tableData, setTableData] = useState<T_FetchAccessControl>({ count: 0, items: [] })
+    const [tableData, setTableData] = useState<T_AccessControl[]>([])
     const [selected, setSelected] = useState<T_AccessControl | null>(null)
     const [isFetching, setIsFetching] = useState<boolean>(true)
 
@@ -71,35 +70,9 @@ export const AccessControl = () => {
 
     // Methods
     const fetchAccessControls = async () => {
-        await sleep(2000)
-
-        const MockAccessControlItems: T_FetchAccessControl = {
-            count: 23,
-            items: range(1, 8).map(i => ({
-                token: `access-control-token-${i}`,
-                title: `کنترل دسترسی شماره ${i}`,
-                client: {
-                    token: `client-token-${i}`,
-                    name: `کلاینت شماره ${i}`,
-                },
-                schedule: {
-                    token: `schedule-token-${i}`,
-                    title: `برنامه زمانبندی شماره ${i}`,
-                    start_date: "2024-01-01",
-                    end_date: "2024-12-31",
-                    start_time: "08:00",
-                    end_time: "18:00",
-                    is_active: true,
-                },
-                control: {
-                    plate: i % 2 === 0,
-                    UHF: i % 3 === 0,
-                    CSN: i % 4 === 0,
-                },
-            })),
-        }
-
-        setTableData(MockAccessControlItems)
+        const { data, error } = await API.Client.FetchAccessControls()
+        if (data) setTableData(data.fetchAccessControls)
+        if (error) toast.error(error)
         setIsFetching(false)
     }
 
@@ -120,14 +93,11 @@ export const AccessControl = () => {
 
             <Table
                 title="access_control"
-                data={tableData.items}
+                data={tableData}
                 columns={tableColumns}
                 rowsPerPage={PageSize}
                 actions={tableActions}
                 loading={isFetching}
-                totalRows={tableData.count}
-                paginationType="Remote"
-                onChangePage={fetchAccessControls}
             />
         </Layout.Dashboard>
     )

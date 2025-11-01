@@ -33,6 +33,15 @@ export const FetchClientsDocument = gql`
   }
 }
     `;
+export const FetchFlatClientsDocument = gql`
+    query FetchFlatClients {
+  fetchClients {
+    token
+    name
+    type
+  }
+}
+    `;
 export const CreateClientDocument = gql`
     mutation CreateClient($body: CreateClientRq!) {
   createClient(body: $body)
@@ -60,6 +69,14 @@ export const FetchSchedulesDocument = gql`
   }
 }
     `;
+export const FetchFlatSchedulesDocument = gql`
+    query FetchFlatSchedules {
+  fetchSchedules {
+    token
+    title
+  }
+}
+    `;
 export const CreateScheduleDocument = gql`
     mutation CreateSchedule($body: CreateScheduleRq!) {
   createSchedule(body: $body)
@@ -68,6 +85,57 @@ export const CreateScheduleDocument = gql`
 export const EditScheduleDocument = gql`
     mutation EditSchedule($body: EditScheduleRq!) {
   editSchedule(body: $body)
+}
+    `;
+export const CreateAccessControlDocument = gql`
+    mutation CreateAccessControl($body: CreateAccessControlRq!) {
+  createAccessControl(body: $body)
+}
+    `;
+export const EditAccessControlDocument = gql`
+    mutation EditAccessControl($body: EditAccessControlRq!) {
+  editAccessControl(body: $body)
+}
+    `;
+export const FetchAccessControlsDocument = gql`
+    query FetchAccessControls {
+  fetchAccessControls {
+    token
+    title
+    client {
+      token
+      name
+      type
+      camera {
+        token
+        name
+        ip
+        type
+        username
+        password
+        brand_name
+        channel
+      }
+      relay {
+        token
+        name
+        ip
+        type
+        username
+        password
+        brand_name
+        channel
+      }
+    }
+    schedule {
+      token
+      title
+      start_date
+      end_date
+      start_time
+      end_time
+    }
+  }
 }
     `;
 
@@ -81,6 +149,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     FetchClients(variables?: Types.FetchClientsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchClientsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchClientsQuery>(FetchClientsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchClients', 'query');
     },
+    FetchFlatClients(variables?: Types.FetchFlatClientsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchFlatClientsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchFlatClientsQuery>(FetchFlatClientsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchFlatClients', 'query');
+    },
     CreateClient(variables: Types.CreateClientMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateClientMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateClientMutation>(CreateClientDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateClient', 'mutation');
     },
@@ -93,11 +164,23 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     FetchSchedules(variables?: Types.FetchSchedulesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchSchedulesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchSchedulesQuery>(FetchSchedulesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchSchedules', 'query');
     },
+    FetchFlatSchedules(variables?: Types.FetchFlatSchedulesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchFlatSchedulesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchFlatSchedulesQuery>(FetchFlatSchedulesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchFlatSchedules', 'query');
+    },
     CreateSchedule(variables: Types.CreateScheduleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateScheduleMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateScheduleMutation>(CreateScheduleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateSchedule', 'mutation');
     },
     EditSchedule(variables: Types.EditScheduleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditScheduleMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.EditScheduleMutation>(EditScheduleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditSchedule', 'mutation');
+    },
+    CreateAccessControl(variables: Types.CreateAccessControlMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateAccessControlMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateAccessControlMutation>(CreateAccessControlDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateAccessControl', 'mutation');
+    },
+    EditAccessControl(variables: Types.EditAccessControlMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditAccessControlMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.EditAccessControlMutation>(EditAccessControlDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditAccessControl', 'mutation');
+    },
+    FetchAccessControls(variables?: Types.FetchAccessControlsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchAccessControlsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchAccessControlsQuery>(FetchAccessControlsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchAccessControls', 'query');
     }
   };
 }

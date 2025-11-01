@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import type { T_InputDropdownOption } from "@components/template"
-import type { T_Role } from "@core/api"
+import type { T_FlatClient, T_FlatSchedule, T_Role } from "@core/api"
 import { API } from "@core/api"
 import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
@@ -18,6 +18,8 @@ interface I_Context {
     fetchParkingInfo: Function
     onOwnerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     fetchRoles: Function
+    fetchFlatClients: Function
+    fetchFlatSchedules: Function
     isLicenseAvailable: boolean
 }
 
@@ -26,6 +28,8 @@ const Initials: I_Context = {
     fetchParkingInfo: () => undefined,
     onOwnerSearch: async (): Promise<T_InputDropdownOption[]> => [],
     fetchRoles: () => undefined,
+    fetchFlatClients: () => undefined,
+    fetchFlatSchedules: () => undefined,
     isLicenseAvailable: false,
 }
 
@@ -81,12 +85,25 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
+    const fetchFlatClients = async (): Promise<T_FlatClient[]> => {
+        const { data } = await API.Client.FetchFlatClients()
+        if (data) return data.fetchClients
+        return []
+    }
+
+    const fetchFlatSchedules = async (): Promise<T_FlatSchedule[]> => {
+        const { data } = await API.Client.FetchFlatSchedules()
+        if (data) return data.fetchSchedules
+        return []
+    }
     // Data binding
     const value = {
         fetchCurrentUser,
         fetchParkingInfo,
         onOwnerSearch,
         fetchRoles,
+        fetchFlatClients,
+        fetchFlatSchedules,
         isLicenseAvailable,
     }
 
