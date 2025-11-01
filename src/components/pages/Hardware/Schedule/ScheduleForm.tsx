@@ -38,7 +38,7 @@ export const ScheduleForm: FC<I_Props> = ({ onSubmit, onClose, schedule }) => {
     })
 
     // Flags
-    const isValid = watch("title")
+    const isValid = watch("title") && watch("startDate") && watch("startTime") && watch("endTime")
 
     // Methods
     const init = async () => {

@@ -1,9 +1,12 @@
 import { Modal, Text, useNotify } from "@components/template"
-import type { T_Schedule } from "@core/api"
+import { API, type T_Schedule } from "@core/api"
+import { convertDateToTimeString } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC } from "react"
+import { toast } from "react-toastify"
 
+import type { I_ScheduleFormData } from "./ScheduleForm"
 import { ScheduleForm } from "./ScheduleForm"
 
 interface I_Props {
@@ -19,10 +22,25 @@ export const EditScheduleModal: FC<I_Props> = ({ callback, schedule }) => {
     const { notify } = useNotify()
 
     // Methods
-    const onSubmit = async () => {
-        await callback()
-        closeModal(CurrentModal)
-        notify("schedule_edited_successfully", "success")
+    const onSubmit = async (form: I_ScheduleFormData) => {
+        const { data, error } = await API.Client.EditSchedule({
+            body: {
+                token: schedule.token,
+                title: form.title,
+                start_date: form.startDate ? form.startDate.toDateString() : new Date().toDateString(),
+                end_date: form.endDate ? form.endDate.toDateString() : null,
+                start_time: form.startTime ? convertDateToTimeString(form.startTime) : "00:00:00",
+                end_time: form.endTime ? convertDateToTimeString(form.endTime) : "23:59:59",
+            },
+        })
+
+        if (data) {
+            await callback()
+            notify("schedule_edited_successfully", "success")
+            closeModal(CurrentModal)
+        }
+
+        if (error) toast.error(error)
     }
 
     // Render
