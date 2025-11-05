@@ -53,6 +53,12 @@ export type CreateDeviceRq = {
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CreateIdentifierRq = {
+  number: Scalars['String']['input'];
+  serial: Scalars['String']['input'];
+  type: E_IdentifierType;
+};
+
 export type CreateNewRoleRq = {
   name: Scalars['String']['input'];
   permissions: Array<Scalars['String']['input']>;
@@ -97,7 +103,13 @@ export enum E_ClientType {
 
 export enum E_DeviceType {
   Camera = 'CAMERA',
+  Reader = 'READER',
   Relay = 'RELAY'
+}
+
+export enum E_IdentifierType {
+  Card = 'CARD',
+  Tag = 'TAG'
 }
 
 export type EditAccessControlRq = {
@@ -126,6 +138,13 @@ export type EditDeviceRq = {
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type EditIdentifierRq = {
+  number?: InputMaybe<Scalars['String']['input']>;
+  serial?: InputMaybe<Scalars['String']['input']>;
+  token: Scalars['String']['input'];
+  type?: InputMaybe<E_IdentifierType>;
+};
+
 export type EditScheduleRq = {
   end_date?: InputMaybe<Scalars['String']['input']>;
   end_time?: InputMaybe<Scalars['String']['input']>;
@@ -149,6 +168,17 @@ export type FetchAccessControlByTokenRq = {
   token: Scalars['String']['input'];
 };
 
+export type FetchIdentifiersRq = {
+  limit: Scalars['Int']['input'];
+  page: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FetchIdentifiersRs = {
+  count: Scalars['Float']['output'];
+  items: Array<Identifier>;
+};
+
 export type FetchRoleByTokenRq = {
   token: Scalars['String']['input'];
 };
@@ -167,10 +197,19 @@ export type FetchUsersListRs = {
   items: Array<User>;
 };
 
+export type Identifier = {
+  available: Scalars['Boolean']['output'];
+  number: Scalars['String']['output'];
+  serial: Scalars['String']['output'];
+  token: Scalars['String']['output'];
+  type: E_IdentifierType;
+};
+
 export type Mutation = {
   createAccessControl: Scalars['Boolean']['output'];
   createClient: Scalars['Boolean']['output'];
   createDevice: Scalars['Boolean']['output'];
+  createIdentifier: Scalars['Boolean']['output'];
   createNewRole: Scalars['Boolean']['output'];
   createSchedule: Scalars['Boolean']['output'];
   createUser: Scalars['Boolean']['output'];
@@ -178,8 +217,10 @@ export type Mutation = {
   editAccessControl: Scalars['Boolean']['output'];
   editClient: Scalars['Boolean']['output'];
   editDevice: Scalars['Boolean']['output'];
+  editIdentifier: Scalars['Boolean']['output'];
   editSchedule: Scalars['Boolean']['output'];
   editUser: Scalars['Boolean']['output'];
+  toggleIdentifierStatus: Scalars['Boolean']['output'];
   toggleUserStatus: Scalars['Boolean']['output'];
   updateParkingLicense: Scalars['Boolean']['output'];
   updateRole: Scalars['Boolean']['output'];
@@ -199,6 +240,11 @@ export type MutationCreateClientArgs = {
 
 export type MutationCreateDeviceArgs = {
   body: CreateDeviceRq;
+};
+
+
+export type MutationCreateIdentifierArgs = {
+  body: CreateIdentifierRq;
 };
 
 
@@ -237,6 +283,11 @@ export type MutationEditDeviceArgs = {
 };
 
 
+export type MutationEditIdentifierArgs = {
+  body: EditIdentifierRq;
+};
+
+
 export type MutationEditScheduleArgs = {
   body: EditScheduleRq;
 };
@@ -244,6 +295,11 @@ export type MutationEditScheduleArgs = {
 
 export type MutationEditUserArgs = {
   body: EditUserRq;
+};
+
+
+export type MutationToggleIdentifierStatusArgs = {
+  body: ToggleIdentifierStatusRq;
 };
 
 
@@ -293,6 +349,7 @@ export type Query = {
   fetchAccessControls: Array<AccessControl>;
   fetchClients: Array<Client>;
   fetchDevices: Array<Device>;
+  fetchIdentifiers: FetchIdentifiersRs;
   fetchRoleByToken: Role;
   fetchRoles: Array<Role>;
   fetchScheduleByToken: Schedule;
@@ -305,6 +362,11 @@ export type Query = {
 
 export type QueryFetchAccessControlByTokenArgs = {
   body: FetchAccessControlByTokenRq;
+};
+
+
+export type QueryFetchIdentifiersArgs = {
+  body: FetchIdentifiersRq;
 };
 
 
@@ -336,6 +398,10 @@ export type Schedule = {
   start_time: Scalars['String']['output'];
   title: Scalars['String']['output'];
   token: Scalars['String']['output'];
+};
+
+export type ToggleIdentifierStatusRq = {
+  token: Scalars['String']['input'];
 };
 
 export type ToggleUserStatus = {
