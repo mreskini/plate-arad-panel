@@ -34,7 +34,7 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
     })
 
     // Flags
-    const isCSN = card.type === E_OwnerCardType.CSN
+    const isCard = card.type === E_OwnerCardType.Card
 
     // Methods
     const onSubmit = async () => {
@@ -45,7 +45,7 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
     return (
         <Modal
             name={currentModal}
-            title={<Text contentKey="edit_card" variant="title-1" className="text-neutral-700" weight={600} />}
+            title={<Text contentKey="edit_identifier" variant="title-1" className="text-neutral-700" weight={600} />}
             closeButton
         >
             <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-3xl">
@@ -54,12 +54,12 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
                     <Input.DropDown
                         options={[
                             {
-                                value: E_OwnerCardType.CSN,
-                                labelKey: "CSN",
+                                value: E_OwnerCardType.Card,
+                                labelKey: "card",
                             },
                             {
-                                value: E_OwnerCardType.UHF,
-                                labelKey: "UHF",
+                                value: E_OwnerCardType.Tag,
+                                labelKey: "tag",
                             },
                         ]}
                         value={card.type}
@@ -70,9 +70,9 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
                 </div>
 
                 <div className="flex w-full items-center gap-4 mb-4">
-                    <Input.Label labelKey="card_number" className="grow" required />
+                    <Input.Label labelKey="identifier_number" className="grow" required />
                     <Input
-                        placeholder="enter_card_number"
+                        placeholder="enter_identifier_number"
                         disabled={isSubmitting}
                         className="w-full max-w-lg"
                         {...register("cardNumber", {
@@ -82,9 +82,9 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
                     />
                 </div>
 
-                {isCSN && (
+                {isCard && (
                     <div className="flex w-full items-center gap-4 mb-4">
-                        <Input.Label labelKey="CSN" className="grow" required />
+                        <Input.Label labelKey="serial" className="grow" required />
                         <Input
                             placeholder="CSN_example"
                             disabled={isSubmitting}
@@ -97,9 +97,9 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
                     </div>
                 )}
 
-                {!isCSN && (
+                {!isCard && (
                     <div className="flex w-full items-center gap-4 mb-4">
-                        <Input.Label labelKey="UHF" className="grow" required />
+                        <Input.Label labelKey="serial" className="grow" required />
                         <Input
                             placeholder="UHF_example"
                             disabled={isSubmitting}

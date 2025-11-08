@@ -12,7 +12,7 @@ interface I_Props {
     device: T_Device
 }
 
-const CurrentModal = Modals.Hardware.Devices.View
+const CurrentModal = Modals.Access.Devices.View
 
 export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
     // States and Hooks

@@ -20,7 +20,7 @@ const CurrentModal = Modals.Management.Card.AddCard
 export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     // States and Hooks
     const { closeModal } = useModal()
-    const [cardType, setCardType] = useState<E_OwnerCardType>(E_OwnerCardType.CSN)
+    const [cardType, setCardType] = useState<E_OwnerCardType>(E_OwnerCardType.Card)
 
     const {
         register,
@@ -31,7 +31,7 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     })
 
     // Flags
-    const isCSN = cardType === E_OwnerCardType.CSN
+    const isCard = cardType === E_OwnerCardType.Card
 
     // Methods
     const onSubmitSingle = async () => {
@@ -43,16 +43,16 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     return (
         <form onSubmit={handleSubmit(onSubmitSingle)} className="sm:min-w-3xl">
             <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="card_type" className="grow" required />
+                <Input.Label labelKey="identifier_type" className="grow" required />
                 <Input.DropDown
                     options={[
                         {
-                            value: E_OwnerCardType.CSN,
-                            labelKey: "CSN",
+                            value: E_OwnerCardType.Card,
+                            labelKey: "card",
                         },
                         {
-                            value: E_OwnerCardType.UHF,
-                            labelKey: "UHF",
+                            value: E_OwnerCardType.Tag,
+                            labelKey: "tag",
                         },
                     ]}
                     value={cardType}
@@ -62,9 +62,9 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
             </div>
 
             <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="card_number" className="grow" required />
+                <Input.Label labelKey="identifier_number" className="grow" required />
                 <Input
-                    placeholder="enter_card_number"
+                    placeholder="enter_identifier_number"
                     disabled={isSubmitting}
                     className="w-full max-w-lg"
                     {...register("cardNumber", {
@@ -74,9 +74,9 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                 />
             </div>
 
-            {isCSN && (
+            {isCard && (
                 <div className="flex w-full items-center gap-4 mb-4">
-                    <Input.Label labelKey="CSN" className="grow" required />
+                    <Input.Label labelKey="serial" className="grow" required />
                     <Input
                         placeholder="CSN_example"
                         disabled={isSubmitting}
@@ -89,9 +89,9 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                 </div>
             )}
 
-            {!isCSN && (
+            {!isCard && (
                 <div className="flex w-full items-center gap-4 mb-4">
-                    <Input.Label labelKey="UHF" className="grow" required />
+                    <Input.Label labelKey="serial" className="grow" required />
                     <Input
                         placeholder="UHF_example"
                         disabled={isSubmitting}

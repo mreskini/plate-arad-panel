@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next"
 
 const PageSize = 7
 
-export const CardsList = () => {
+export const IdentifiersList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
@@ -26,7 +26,7 @@ export const CardsList = () => {
 
     const tableColumns = [
         {
-            name: t("card_number"),
+            name: t("identifier_number"),
             selector: (row: T_Card) => row.card_number,
         },
         {
@@ -36,12 +36,12 @@ export const CardsList = () => {
         {
             name: t("type"),
             cell: (row: T_Card) => {
-                const isUHF = row.type === E_OwnerCardType.UHF
+                const isCard = row.type === E_OwnerCardType.Card
                 return (
                     <Status
-                        contentKey={isUHF ? "UHF" : "CSN"}
-                        variant={isUHF ? "info" : "warning"}
-                        icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
+                        contentKey={isCard ? "card" : "tag"}
+                        variant={isCard ? "info" : "warning"}
+                        icon={isCard ? <Money size={20} /> : <Cards size={20} />}
                     />
                 )
             },
@@ -83,7 +83,7 @@ export const CardsList = () => {
             count: 10,
             items: range(0, 7).map(_ => ({
                 token: `${_}`,
-                type: _ % 2 === 0 ? E_OwnerCardType.CSN : E_OwnerCardType.UHF,
+                type: _ % 2 === 0 ? E_OwnerCardType.Card : E_OwnerCardType.Tag,
                 serial: `TestSerial000${_}`,
                 is_active: _ % 2 === 0,
                 card_number: `1000${_}`,
@@ -116,7 +116,7 @@ export const CardsList = () => {
 
             <div className="mb-4">
                 <Input
-                    placeholder="search_by_card_number"
+                    placeholder="search_by_identifier_number"
                     icon={<SearchNormal1 />}
                     value={searchValue}
                     onChange={e => setSearchValue(e.target.value)}
@@ -124,7 +124,7 @@ export const CardsList = () => {
             </div>
 
             <Table
-                title="cards_list"
+                title="identifiers_list"
                 data={tableData.items}
                 columns={tableColumns}
                 rowsPerPage={PageSize}

@@ -1,6 +1,6 @@
 import { AppRoutes } from "@core/utilities"
 import type { FlatNamespace, KeysWithoutReturnObjects } from "i18next"
-import { Book, Camera, Code, Element4, UserSquare } from "iconsax-reactjs"
+import { Book, Camera, Element4, People, Setting2, UserSquare } from "iconsax-reactjs"
 import type { JSXElementConstructor, ReactElement } from "react"
 
 export type T_MenuCategory = "dashboard"
@@ -48,6 +48,29 @@ export const SidebarItems: T_Sidebar[] = [
                 link: AppRoutes.index,
             },
             {
+                icon: <UserSquare className="size-6" />,
+                titleContentKey: "management",
+                subItems: [
+                    {
+                        titleContentKey: "users_list",
+                        link: AppRoutes.management.users,
+                    },
+                    {
+                        titleContentKey: "users_roles",
+                        link: AppRoutes.management.roles.index,
+                    },
+                    {
+                        titleContentKey: "identifiers_list",
+                        link: AppRoutes.management.cards,
+                    },
+                ],
+            },
+            {
+                icon: <People className="size-6" />,
+                titleContentKey: "owners",
+                link: AppRoutes.owners,
+            },
+            {
                 icon: <Book className="size-6" />,
                 titleContentKey: "reports",
                 subItems: [
@@ -70,60 +93,38 @@ export const SidebarItems: T_Sidebar[] = [
                 ],
             },
             {
-                icon: <UserSquare className="size-6" />,
-                titleContentKey: "management",
+                icon: <Camera className="size-6" />,
+                titleContentKey: "access",
                 subItems: [
                     {
-                        titleContentKey: "users_list",
-                        link: AppRoutes.management.users,
+                        titleContentKey: "access_control",
+                        link: AppRoutes.access.accessControl,
                     },
                     {
-                        titleContentKey: "users_roles",
-                        link: AppRoutes.management.roles.index,
+                        titleContentKey: "schedule",
+                        link: AppRoutes.access.schedule,
                     },
                     {
-                        titleContentKey: "cards_list",
-                        link: AppRoutes.management.cards,
+                        titleContentKey: "devices",
+                        link: AppRoutes.access.devices,
                     },
                     {
-                        titleContentKey: "owners",
-                        link: AppRoutes.management.owners,
+                        titleContentKey: "doors",
+                        link: AppRoutes.access.clients,
                     },
                 ],
             },
             {
-                icon: <Code className="size-6" />,
-                titleContentKey: "software",
+                icon: <Setting2 className="size-6" />,
+                titleContentKey: "settings",
                 subItems: [
                     {
                         titleContentKey: "license",
                         link: AppRoutes.software.license,
                     },
                     {
-                        titleContentKey: "settings",
+                        titleContentKey: "configuration",
                         link: AppRoutes.software.settings,
-                    },
-                ],
-            },
-            {
-                icon: <Camera className="size-6" />,
-                titleContentKey: "hardware",
-                subItems: [
-                    {
-                        titleContentKey: "schedule",
-                        link: AppRoutes.hardware.schedule,
-                    },
-                    {
-                        titleContentKey: "devices",
-                        link: AppRoutes.hardware.devices,
-                    },
-                    {
-                        titleContentKey: "clients",
-                        link: AppRoutes.hardware.clients,
-                    },
-                    {
-                        titleContentKey: "access_control",
-                        link: AppRoutes.hardware.accessControl,
                     },
                 ],
             },

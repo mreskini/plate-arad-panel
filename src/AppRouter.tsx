@@ -7,12 +7,12 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "re
 import Dashboard from "./pages"
 import { Login } from "./pages/auth/login"
 import { Logout } from "./pages/auth/logout"
-import { Clients } from "./pages/hardware/clients"
 import { HardwareDevices } from "./pages/hardware/devices"
+import { Doors } from "./pages/hardware/doors"
 import { AccessControl } from "./pages/management/access-control"
 import { AddRole } from "./pages/management/add-role"
-import { CardsList } from "./pages/management/cards-list"
 import { EditRole } from "./pages/management/edit-role"
+import { IdentifiersList } from "./pages/management/identifiers-list"
 import { OwnersList } from "./pages/management/owners-list"
 import { ScheduleList } from "./pages/management/schedule-list"
 import { UsersList } from "./pages/management/users-list"
@@ -22,7 +22,7 @@ import { ReportsTrafficWithCardList } from "./pages/reports/traffic-with-card-li
 import { ReportsTrafficWithEmergencyList } from "./pages/reports/traffic-with-emergency-list"
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
 import { License } from "./pages/software/license"
-import { Settings } from "./pages/software/settings"
+import { Configuration } from "./pages/software/settings"
 
 const CommonProviderWrapper = () => {
     // Render
@@ -57,18 +57,18 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.roles.index} element={<UsersRoles />} />
                 <Route path={AppRoutes.management.roles.add} element={<AddRole />} />
                 <Route path={`${AppRoutes.management.roles.edit}/:token`} element={<EditRole />} />
-                <Route path={AppRoutes.management.owners} element={<OwnersList />} />
-                <Route path={AppRoutes.management.cards} element={<CardsList />} />
+                <Route path={AppRoutes.owners} element={<OwnersList />} />
+                <Route path={AppRoutes.management.cards} element={<IdentifiersList />} />
 
                 {/* Software */}
-                <Route path={AppRoutes.software.settings} element={<Settings />} />
+                <Route path={AppRoutes.software.settings} element={<Configuration />} />
                 <Route path={AppRoutes.software.license} element={<License />} />
 
-                {/* Hardware */}
-                <Route path={AppRoutes.hardware.clients} element={<Clients />} />
-                <Route path={AppRoutes.hardware.devices} element={<HardwareDevices />} />
-                <Route path={AppRoutes.hardware.schedule} element={<ScheduleList />} />
-                <Route path={AppRoutes.hardware.accessControl} element={<AccessControl />} />
+                {/* Access */}
+                <Route path={AppRoutes.access.clients} element={<Doors />} />
+                <Route path={AppRoutes.access.devices} element={<HardwareDevices />} />
+                <Route path={AppRoutes.access.schedule} element={<ScheduleList />} />
+                <Route path={AppRoutes.access.accessControl} element={<AccessControl />} />
             </Route>
         </Route>
     )

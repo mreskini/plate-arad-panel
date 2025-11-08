@@ -135,5 +135,18 @@
   "camera_ip": "IP دوربین",
   "relay_name": "نام برد رله",
   "relay_channel_number": "شماره کانال برد رله",
-  "relay_ip": "IP برد رله"
+  "relay_ip": "IP برد رله",
+  "search_by_identifier_number": "جستجو بر اساس شماره شناسه",
+  "identifier_type": "نوع شناسه",
+  "identifier_number": "شماره شناسه",
+  "enter_identifier_number": "شماره شناسه را وارد کنید",
+  "card": "کارت",
+  "tag": "تگ",
+  "serial": "سریال",
+  "door_name": "نام درب",
+  "door_type": "نوع درب",
+  "controller": "کنترلر",
+  "reader": "ریدر",
+  "reader_name": "نام ریدر",
+  "controller_name": "نام کنترلر"
 }

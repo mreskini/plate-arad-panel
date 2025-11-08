@@ -52,5 +52,13 @@
   "camera_ip": "IP دوربین",
   "relay_board_ip": "IP برد رله",
   "camera_brand": "برند دوربین",
-  "relay_board_channel_number": "شماره کانال برد رله"
+  "relay_board_channel_number": "شماره کانال برد رله",
+  "identifier_number": "شماره شناسه",
+  "doors": "درب‌ها",
+  "door_name": "نام درب",
+  "door_type": "نوع درب",
+  "controller_ip": "IP کنترلر",
+  "controller_channel_number": "شماره کانال کنترلر",
+  "reader_ip": "IP ریدر",
+  "reader_brand": "برند ریدر"
 }

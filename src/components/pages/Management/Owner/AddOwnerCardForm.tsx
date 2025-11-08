@@ -60,15 +60,15 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         <Input.DropDown
                             options={[
                                 {
-                                    value: E_OwnerCardType.CSN,
-                                    labelKey: "CSN",
+                                    value: E_OwnerCardType.Card,
+                                    labelKey: "card",
                                 },
                                 {
-                                    value: E_OwnerCardType.UHF,
-                                    labelKey: "UHF",
+                                    value: E_OwnerCardType.Tag,
+                                    labelKey: "tag",
                                 },
                                 {
-                                    value: E_OwnerCardType.PLATE,
+                                    value: E_OwnerCardType.Plate,
                                     labelKey: "plate",
                                 },
                             ]}
@@ -80,9 +80,9 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
 
                     <Divider className="mb-4" />
 
-                    {watch("cardType") === E_OwnerCardType.CSN && (
+                    {watch("cardType") === E_OwnerCardType.Card && (
                         <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="CSN" className="min-w-24" required />
+                            <Input.Label labelKey="card" className="min-w-24" required />
                             <Input
                                 placeholder="please_enter_id"
                                 value={getValues("cardToken")}
@@ -92,9 +92,9 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.UHF && (
+                    {watch("cardType") === E_OwnerCardType.Tag && (
                         <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="UHF" className="min-w-24" required />
+                            <Input.Label labelKey="tag" className="min-w-24" required />
                             <Input
                                 placeholder="please_enter_id"
                                 value={getValues("cardToken")}
@@ -104,7 +104,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.PLATE && (
+                    {watch("cardType") === E_OwnerCardType.Plate && (
                         <>
                             <div className="flex w-full items-center gap-2 mb-4">
                                 <Input.Label labelKey="plate_number" className="min-w-32" required />

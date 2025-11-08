@@ -13,6 +13,7 @@ export interface I_ClientFormData {
     type: E_ClientType
     relay_token: string
     camera_token: string
+    reader_token: string
 }
 
 interface I_Props {
@@ -26,6 +27,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
     const [isFetching, setIsFetching] = useState(true)
     const [cameraOptions, setCameraOptions] = useState<T_InputDropdownOption[]>([])
     const [relayOptions, setRelayOptions] = useState<T_InputDropdownOption[]>([])
+    const [readerOptions, setReaderOptions] = useState<T_InputDropdownOption[]>([])
 
     const {
         register,
@@ -43,15 +45,20 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
         const { data } = await API.Device.FetchDevices()
 
         const CameraDevices = data?.fetchDevices.filter(device => device.type === E_DeviceType.Camera)
-        if (!CameraDevices || CameraDevices?.length === 0) return
-        const CameraOptionItems: T_InputDropdownOption[] = CameraDevices.map(_ => ({ label: _.name, value: _.token }))
+        const CameraOptionItems: T_InputDropdownOption[] =
+            CameraDevices?.map(_ => ({ label: _.name, value: _.token })) || []
 
         const RelayDevices = data?.fetchDevices.filter(device => device.type === E_DeviceType.Relay)
-        if (!RelayDevices || RelayDevices?.length === 0) return
-        const RelayOptionItems: T_InputDropdownOption[] = RelayDevices.map(_ => ({ label: _.name, value: _.token }))
+        const RelayOptionItems: T_InputDropdownOption[] =
+            RelayDevices?.map(_ => ({ label: _.name, value: _.token })) || []
+
+        const ReaderDevices = data?.fetchDevices.filter(device => device.type === E_DeviceType.Reader)
+        const ReaderOptionItems: T_InputDropdownOption[] =
+            ReaderDevices?.map(_ => ({ label: _.name, value: _.token })) || []
 
         setCameraOptions(CameraOptionItems)
         setRelayOptions(RelayOptionItems)
+        setReaderOptions(ReaderOptionItems)
 
         setIsFetching(false)
     }
@@ -62,6 +69,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
         setValue("type", client.type)
         setValue("relay_token", client.relay?.token || "")
         setValue("camera_token", client.camera?.token || "")
+        setValue("reader_token", client.reader?.token || "")
     }
 
     useEffect(() => {
@@ -73,15 +81,15 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
     return (
         <>
             {isFetching && (
-                <div className="sm:min-w-3xl flex items-center justify-center py-10">
+                <div className="sm:min-w-xl flex items-center justify-center py-44">
                     <Spinner />
                 </div>
             )}
 
             {!isFetching && (
-                <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-3xl grid grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-xl flex flex-col gap-4">
                     <div className="flex w-full items-center gap-2">
-                        <Input.Label labelKey="client_name" className="min-w-24" required />
+                        <Input.Label labelKey="door_name" className="min-w-24" required />
                         <Input
                             placeholder="client_name_placeholder"
                             disabled={isSubmitting}
@@ -91,7 +99,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                     </div>
 
                     <div className="flex w-full items-center gap-2">
-                        <Input.Label labelKey="client_type" className="min-w-24" required />
+                        <Input.Label labelKey="door_type" className="min-w-24" required />
                         <Input.DropDown
                             options={Object.keys(ClientTypeKeyMap).map((_: string) => {
                                 return {
@@ -118,7 +126,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                     </div>
 
                     <div className="flex w-full items-center gap-2">
-                        <Input.Label labelKey="relay_board" className="min-w-24" />
+                        <Input.Label labelKey="controller" className="min-w-24" />
                         <Input.DropDown
                             options={relayOptions}
                             disabled={isSubmitting}
@@ -128,7 +136,18 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-4 mt-8 col-span-2">
+                    <div className="flex w-full items-center gap-2">
+                        <Input.Label labelKey="reader" className="min-w-24" />
+                        <Input.DropDown
+                            options={readerOptions}
+                            disabled={isSubmitting}
+                            value={getValues("reader_token")}
+                            setValue={(_: string) => setValue("reader_token", _)}
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-4 mt-8">
                         <Button
                             contentKey={client ? "save" : "add"}
                             type="submit"

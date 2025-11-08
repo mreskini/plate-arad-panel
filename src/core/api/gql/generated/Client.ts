@@ -30,6 +30,16 @@ export const FetchClientsDocument = gql`
       brand_name
       channel
     }
+    reader {
+      token
+      name
+      ip
+      type
+      username
+      password
+      brand_name
+      channel
+    }
   }
 }
     `;

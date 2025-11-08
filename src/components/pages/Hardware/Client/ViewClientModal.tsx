@@ -11,7 +11,7 @@ interface I_Props {
     client: T_Client
 }
 
-const CurrentModal = Modals.Hardware.Client.View
+const CurrentModal = Modals.Access.Client.View
 
 export const ViewClientModal: FC<I_Props> = ({ client }) => {
     // States and hooks
@@ -21,6 +21,7 @@ export const ViewClientModal: FC<I_Props> = ({ client }) => {
     // Flags
     const isCameraAvailable = client.camera?.token
     const isRelayAvailable = client.relay?.token
+    const isReaderAvailable = client.reader?.token
 
     // Render
     return (
@@ -71,19 +72,19 @@ export const ViewClientModal: FC<I_Props> = ({ client }) => {
                         <Divider />
 
                         <div className="flex items-center justify-between">
-                            <Text contentKey="relay_name" ns="input" />
+                            <Text contentKey="controller_name" ns="input" />
                             <Text content={client.relay?.name} variant="meta-1" />
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <Text contentKey="relay_channel_number" ns="input" />
+                            <Text contentKey="controller_channel_number" ns="tables" />
 
                             {client.relay?.channel === 0 && <Text contentKey="zero" variant="meta-2" />}
                             {client.relay?.channel === 1 && <Text contentKey="one" variant="meta-2" />}
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <Text contentKey="relay_ip" ns="input" />
+                            <Text contentKey="controller_ip" ns="tables" />
                             <Text content={client.relay?.ip} variant="meta-1" className="font-courier" />
                         </div>
 
@@ -95,6 +96,32 @@ export const ViewClientModal: FC<I_Props> = ({ client }) => {
                         <div className="flex items-center justify-between">
                             <Text contentKey="password" />
                             <Text content={client.relay?.password!} variant="meta-1" className="font-courier" />
+                        </div>
+                    </>
+                )}
+
+                {isReaderAvailable && (
+                    <>
+                        <Divider />
+
+                        <div className="flex items-center justify-between">
+                            <Text contentKey="reader_name" ns="input" />
+                            <Text content={client.reader?.name} variant="meta-1" />
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <Text contentKey="reader_ip" ns="tables" />
+                            <Text content={client.reader?.ip} variant="meta-1" className="font-courier" />
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <Text contentKey="username" />
+                            <Text content={client.reader?.username!} variant="meta-1" className="font-courier" />
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <Text contentKey="password" />
+                            <Text content={client.reader?.password!} variant="meta-1" className="font-courier" />
                         </div>
                     </>
                 )}

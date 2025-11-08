@@ -12,7 +12,7 @@ interface I_Props {
     callback: Function
 }
 
-const CurrentModal = Modals.Hardware.Client.Add
+const CurrentModal = Modals.Access.Client.Add
 
 export const AddClientModal: FC<I_Props> = ({ callback }) => {
     // States and hooks
@@ -27,6 +27,7 @@ export const AddClientModal: FC<I_Props> = ({ callback }) => {
                 type: form.type,
                 camera_token: form.camera_token,
                 relay_token: form.relay_token,
+                reader_token: form.reader_token,
             },
         })
 
@@ -43,7 +44,7 @@ export const AddClientModal: FC<I_Props> = ({ callback }) => {
     return (
         <Modal
             name={CurrentModal}
-            title={<Text contentKey="add_client" variant="title-1" className="text-neutral-700" weight={600} />}
+            title={<Text contentKey="add_door" variant="title-1" className="text-neutral-700" weight={600} />}
             closeButton
         >
             <ClientForm onSubmit={createClient} onClose={() => closeModal(CurrentModal)} />

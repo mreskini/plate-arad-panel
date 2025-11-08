@@ -1,6 +1,7 @@
 export const AppRoutes = {
     index: "/",
     logout: "/logout",
+    owners: "/management/owners",
 
     auth: {
         login: "/auth/login",
@@ -20,16 +21,14 @@ export const AppRoutes = {
             edit: "/management/roles/edit",
         },
         users: "/management/users",
-        owners: "/management/owners",
         cards: "/management/cards",
     },
-
     software: {
         settings: "/software/settings",
         license: "/software/license",
     },
 
-    hardware: {
+    access: {
         devices: "/hardware/devices",
         clients: "/hardware/clients",
         schedule: "/hardware/schedule",
