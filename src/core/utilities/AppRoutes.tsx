@@ -1,7 +1,7 @@
 export const AppRoutes = {
     index: "/",
     logout: "/logout",
-    owners: "/management/owners",
+    owners: "/owners",
 
     auth: {
         login: "/auth/login",
@@ -29,9 +29,9 @@ export const AppRoutes = {
     },
 
     access: {
-        devices: "/hardware/devices",
-        clients: "/hardware/clients",
-        schedule: "/hardware/schedule",
-        accessControl: "/hardware/access-control",
+        devices: "/access/devices",
+        clients: "/access/clients",
+        schedule: "/access/schedule",
+        accessControl: "/access/access-control",
     },
 } as const
