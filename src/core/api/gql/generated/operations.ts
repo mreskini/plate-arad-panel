@@ -34,7 +34,7 @@ export type DeleteClientMutation = { deleteClient: boolean };
 export type FetchSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string }> };
+export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string, allowed_days: Array<Types.E_DayOfWeek> }> };
 
 export type FetchFlatSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

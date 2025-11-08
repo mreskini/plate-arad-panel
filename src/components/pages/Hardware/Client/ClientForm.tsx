@@ -122,6 +122,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                             value={getValues("camera_token")}
                             setValue={(_: string) => setValue("camera_token", _)}
                             className="w-full"
+                            clearable
                         />
                     </div>
 
@@ -133,6 +134,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                             value={getValues("relay_token")}
                             setValue={(_: string) => setValue("relay_token", _)}
                             className="w-full"
+                            clearable
                         />
                     </div>
 
@@ -144,6 +146,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                             value={getValues("reader_token")}
                             setValue={(_: string) => setValue("reader_token", _)}
                             className="w-full"
+                            clearable
                         />
                     </div>
 

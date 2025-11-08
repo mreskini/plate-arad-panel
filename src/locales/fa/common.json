@@ -88,5 +88,12 @@
   "card": "کارت",
   "tag": "تگ",
   "add_door": "افزودن درب",
-  "edit_door": "ویرایش درب"
+  "edit_door": "ویرایش درب",
+  "saturday": "شنبه",
+  "sunday": "یک‌شنبه",
+  "monday": "دوشنبه",
+  "tuesday": "سه‌شنبه",
+  "wednesday": "چهارشنبه",
+  "thursday": "پنج‌شنبه",
+  "friday": "جمعه"
 }

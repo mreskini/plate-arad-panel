@@ -148,5 +148,7 @@
   "controller": "کنترلر",
   "reader": "ریدر",
   "reader_name": "نام ریدر",
-  "controller_name": "نام کنترلر"
+  "controller_name": "نام کنترلر",
+  "all_days": "همه روزها",
+  "traffic_days": "روزهای تردد"
 }

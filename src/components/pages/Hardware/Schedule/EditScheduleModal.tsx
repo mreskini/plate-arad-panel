@@ -31,6 +31,7 @@ export const EditScheduleModal: FC<I_Props> = ({ callback, schedule }) => {
                 end_date: form.endDate ? form.endDate.toDateString() : null,
                 start_time: form.startTime ? convertDateToTimeString(form.startTime) : "00:00:00",
                 end_time: form.endTime ? convertDateToTimeString(form.endTime) : "23:59:59",
+                allowed_days: form.allowedDays,
             },
         })
 

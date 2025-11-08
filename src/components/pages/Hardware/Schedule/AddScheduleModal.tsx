@@ -29,7 +29,7 @@ export const AddScheduleModal: FC<I_Props> = ({ callback }) => {
                 end_date: form.endDate ? form.endDate.toDateString() : null,
                 start_time: form.startTime ? convertDateToTimeString(form.startTime) : "00:00:00",
                 end_time: form.endTime ? convertDateToTimeString(form.endTime) : "23:59:59",
-                allowed_days: [],
+                allowed_days: form.allowedDays,
             },
         })
 
@@ -49,7 +49,7 @@ export const AddScheduleModal: FC<I_Props> = ({ callback }) => {
             title={<Text contentKey="add_schedule" variant="title-1" className="text-neutral-700" weight={600} />}
             closeButton
         >
-            <ScheduleForm onSubmit={onSubmit} onClose={() => closeModal(CurrentModal)} />
+            <ScheduleForm onSubmit={onSubmit} onClose={() => closeModal(CurrentModal)} allDaysAllowed />
         </Modal>
     )
 }

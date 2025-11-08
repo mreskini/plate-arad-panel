@@ -64,6 +64,7 @@ query FetchSchedules {
     end_date
     start_time
     end_time
+    allowed_days
   }
 }
 

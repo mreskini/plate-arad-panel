@@ -76,6 +76,7 @@ export const FetchSchedulesDocument = gql`
     end_date
     start_time
     end_time
+    allowed_days
   }
 }
     `;
