@@ -51,7 +51,28 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         const { data, error } = await API.User.CurrentUser()
         if (data) {
             setCurrentUser(data.currentUser)
-            const permissions = data.currentUser.role.permissions.map(_ => _.link)
+            // const permissions = data.currentUser.role.permissions.map(_ => _.link)
+            const permissions = [
+                "/",
+                "/logout",
+                "/owners",
+                "/auth/login",
+                "/reports/traffic",
+                "/reports/traffic-without-plate",
+                "/reports/traffic-with-card",
+                "/reports/traffic-with-emergency",
+                "/management/roles",
+                "/management/roles/add",
+                "/management/roles/edit",
+                "/management/users",
+                "/management/cards",
+                "/software/settings",
+                "/software/license",
+                "/access/devices",
+                "/access/clients",
+                "/access/schedule",
+                "/access/access-control",
+            ]
             setPermissions(permissions)
         }
         if (error) {
