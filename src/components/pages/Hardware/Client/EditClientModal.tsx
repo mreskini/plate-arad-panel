@@ -13,7 +13,7 @@ interface I_Props {
     client: T_Client
 }
 
-const CurrentModal = Modals.Hardware.Client.Edit
+const CurrentModal = Modals.Access.Client.Edit
 
 export const EditClientModal: FC<I_Props> = ({ callback, client }) => {
     // States and hooks
@@ -29,6 +29,7 @@ export const EditClientModal: FC<I_Props> = ({ callback, client }) => {
                 type: form.type,
                 camera_token: form.camera_token,
                 relay_token: form.relay_token,
+                reader_token: form.reader_token,
             },
         })
 

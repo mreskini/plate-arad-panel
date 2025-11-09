@@ -78,5 +78,22 @@
   "zero": "صفر",
   "one": "یک",
   "username": "نام کاربری",
-  "password": "رمز عبور"
+  "password": "رمز عبور",
+  "identifiers_list": "لیست شناسه‌ها",
+  "access": "دسترسی",
+  "doors": "درب‌ها",
+  "configuration": "پیکربندی",
+  "add_identifier": "افزودن شناسه",
+  "edit_identifier": "ویرایش شناسه",
+  "card": "کارت",
+  "tag": "تگ",
+  "add_door": "افزودن درب",
+  "edit_door": "ویرایش درب",
+  "saturday": "شنبه",
+  "sunday": "یک‌شنبه",
+  "monday": "دوشنبه",
+  "tuesday": "سه‌شنبه",
+  "wednesday": "چهارشنبه",
+  "thursday": "پنج‌شنبه",
+  "friday": "جمعه"
 }

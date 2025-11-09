@@ -57,14 +57,14 @@ export const OwnersList = () => {
         {
             name: t("id_type"),
             cell: (row: T_Owner) => {
-                const isUHF = row.card?.type === E_OwnerCardType.UHF && Number(row.card?.token) % 3 === 0
+                const isCard = row.card?.type === E_OwnerCardType.Card && Number(row.card?.token) % 3 === 0
                 return (
                     <>
                         {row.card?.token ? (
                             <Status
-                                contentKey={isUHF ? "UHF" : "CSN"}
-                                variant={isUHF ? "info" : "warning"}
-                                icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
+                                contentKey={isCard ? "card" : "tag"}
+                                variant={isCard ? "info" : "warning"}
+                                icon={isCard ? <Money size={20} /> : <Cards size={20} />}
                             />
                         ) : (
                             ""
@@ -151,7 +151,7 @@ export const OwnersList = () => {
                         _ % 2 === 0
                             ? {
                                   card_number: `CARD-1034${_}`,
-                                  type: E_OwnerCardType.UHF,
+                                  type: E_OwnerCardType.Card,
                                   is_active: true,
                                   serial: `SERIAL-1034${_}`,
                                   token: _.toString(),

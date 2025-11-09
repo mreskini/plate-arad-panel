@@ -13,9 +13,9 @@
   "owner_id_assigned_successfully": "شناسه با موفقیت به مراجع تخصیص داده شد",
   "device_created_successfully": "دستگاه با موفقیت ایجاد شد",
   "device_updated_successfully": "دستگاه با موفقیت ویرایش شد",
-  "client_deleted_successfully": "کلاینت با موفقیت حذف شد",
-  "client_added_successfully": "کلاینت جدید با موفقیت ایجاد شد",
-  "client_edited_successfully": "کلاینت با موفقیت ویرایش شد",
+  "client_deleted_successfully": "درب با موفقیت حذف شد",
+  "client_added_successfully": "درب جدید با موفقیت ایجاد شد",
+  "client_edited_successfully": "درب با موفقیت ویرایش شد",
   "invalid_license_file_type_error": "فرمت فایل انتخابی صحیح نیست",
   "invalid_license_file_size_error": "سایز فایل انتخابی مناسب نیست",
   "license_updated_successfully": "لایسنس با موفقیت به‌روزرسانی شد",
@@ -28,5 +28,6 @@
   "access_control_added_successfully": "کنترل دسترسی با موفقیت اضافه شد",
   "access_control_edited_successfully": "کنترل دسترسی با موفقیت ویرایش شد",
   "role_added_successfully": "نقش جدید با موفقیت ایجاد شد",
-  "role_edited_successfully": "نقش مورد نظر با موفقیت ویرایش شد"
+  "role_edited_successfully": "نقش مورد نظر با موفقیت ویرایش شد",
+  "configuration": "پیکربندی"
 }

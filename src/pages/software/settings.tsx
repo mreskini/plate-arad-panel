@@ -3,10 +3,10 @@ import { SettingsWrapper } from "@components/pages/Software"
 import { Button, Input } from "@components/template"
 import { formatNumber } from "@core/functions"
 
-export const Settings = () => {
+export const Configuration = () => {
     return (
         <Layout.Dashboard>
-            <SettingsWrapper title="settings">
+            <SettingsWrapper title="configuration">
                 <div className="w-full flex gap-4">
                     <div className="w-full flex flex-col gap-4">
                         <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">

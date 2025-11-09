@@ -24,7 +24,7 @@ export const AddCardModal: FC<I_Props> = ({ callback }) => {
     return (
         <Modal
             name={CurrentModal}
-            title={<Text contentKey="add_card" variant="title-1" className="text-neutral-700" weight={600} />}
+            title={<Text contentKey="add_identifier" variant="title-1" className="text-neutral-700" weight={600} />}
             closeButton
         >
             <div className="flex w-full items-center gap-4 mb-4">

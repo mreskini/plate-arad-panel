@@ -30,6 +30,16 @@ export const FetchClientsDocument = gql`
       brand_name
       channel
     }
+    reader {
+      token
+      name
+      ip
+      type
+      username
+      password
+      brand_name
+      channel
+    }
   }
 }
     `;
@@ -66,6 +76,7 @@ export const FetchSchedulesDocument = gql`
     end_date
     start_time
     end_time
+    allowed_days
   }
 }
     `;

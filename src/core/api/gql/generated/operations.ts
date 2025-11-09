@@ -3,7 +3,7 @@ import * as Types from './schemas';
 export type FetchClientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type FetchClientsQuery = { fetchClients: Array<{ token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }> };
+export type FetchClientsQuery = { fetchClients: Array<{ token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, reader?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }> };
 
 export type FetchFlatClientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -34,7 +34,7 @@ export type DeleteClientMutation = { deleteClient: boolean };
 export type FetchSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string }> };
+export type FetchSchedulesQuery = { fetchSchedules: Array<{ token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string, allowed_days: Array<Types.E_DayOfWeek> }> };
 
 export type FetchFlatSchedulesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

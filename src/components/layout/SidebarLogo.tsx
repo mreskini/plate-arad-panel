@@ -11,7 +11,7 @@ export const SidebarLogo = () => {
 
     // Render
     return (
-        <div className="py-8 lg:py-5 border-b border-zinc-200">
+        <div className="py-8 lg:py-6 border-b border-zinc-200">
             <div className="flex h-full items-center gap-2 px-4 lg:px-8">
                 <Link to={AppRoutes.index} onClick={onLogoClick} className="w-full">
                     <img src={Images.OriginalLogo} alt="Logo" className="h-16 w-auto me-auto" />

@@ -33,7 +33,7 @@ export const Modals = {
         },
     },
 
-    Hardware: {
+    Access: {
         Devices: {
             View: "hardware-view-device",
             Add: "hardware-add-device",

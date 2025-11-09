@@ -20,7 +20,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "react-toastify"
 
-export const Clients = () => {
+export const Doors = () => {
     // States and hooks
     const { parking } = useApp()
     const { fetchParkingInfo } = useCommon()
@@ -35,11 +35,11 @@ export const Clients = () => {
 
     const tableColumns = [
         {
-            name: t("client_name"),
+            name: t("door_name"),
             selector: (row: T_Client) => row.name,
         },
         {
-            name: t("client_type"),
+            name: t("door_type"),
             selector: (row: T_Client) => tCommon(ClientTypeKeyMap[row.type]),
         },
         {
@@ -61,18 +61,32 @@ export const Clients = () => {
                 ),
         },
         {
-            name: t("relay_board_ip"),
+            name: t("controller_ip"),
             cell: (row: T_Client) =>
                 row.relay?.ip ? <Text content={row.relay?.ip} variant="meta-1" className="font-courier" /> : "",
         },
         {
-            name: t("relay_board_channel_number"),
+            name: t("controller_channel_number"),
             cell: (row: T_Client) => (
                 <>
                     {row.relay?.channel === 0 && <Text contentKey="zero" variant="meta-2" />}
                     {row.relay?.channel === 1 && <Text contentKey="one" variant="meta-2" />}
                 </>
             ),
+        },
+        {
+            name: t("reader_ip"),
+            cell: (row: T_Client) =>
+                row.camera?.ip ? <Text content={row.reader?.ip} variant="meta-1" className="font-courier" /> : "",
+        },
+        {
+            name: t("reader_brand"),
+            cell: (row: T_Client) =>
+                row.reader?.brand_name ? (
+                    <Text content={row.reader?.brand_name} variant="meta-1" className="font-courier" />
+                ) : (
+                    ""
+                ),
         },
         {
             width: "150px",
@@ -83,7 +97,7 @@ export const Clients = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(row)
-                            openModal(Modals.Hardware.Client.View)
+                            openModal(Modals.Access.Client.View)
                         }}
                     >
                         <Eye size={20} className="text-neutral-700" />
@@ -93,7 +107,7 @@ export const Clients = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(row)
-                            openModal(Modals.Hardware.Client.Edit)
+                            openModal(Modals.Access.Client.Edit)
                         }}
                     >
                         <Edit2 size={20} className="text-neutral-700" />
@@ -108,7 +122,7 @@ export const Clients = () => {
             <Button
                 variant="primary"
                 contentKey={isAddClientButtonDisabled ? "capacity_full" : "add"}
-                onClick={() => openModal(Modals.Hardware.Client.Add)}
+                onClick={() => openModal(Modals.Access.Client.Add)}
                 disabled={isAddClientButtonDisabled || isFetching}
             />
         </div>
@@ -135,13 +149,13 @@ export const Clients = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Hardware.Client.Add] && <AddClientModal callback={fetchClients} />}
+            {modalVisibility[Modals.Access.Client.Add] && <AddClientModal callback={fetchClients} />}
 
-            {modalVisibility[Modals.Hardware.Client.Edit] && (
+            {modalVisibility[Modals.Access.Client.Edit] && (
                 <EditClientModal callback={fetchClients} client={selected!} />
             )}
 
-            {modalVisibility[Modals.Hardware.Client.View] && <ViewClientModal client={selected!} />}
+            {modalVisibility[Modals.Access.Client.View] && <ViewClientModal client={selected!} />}
 
             {!isLicenseAvailable && (
                 <Notice
@@ -152,7 +166,7 @@ export const Clients = () => {
             )}
 
             <Table
-                title="clients"
+                title="doors"
                 data={clients}
                 columns={tableColumns}
                 rowsPerPage={10}

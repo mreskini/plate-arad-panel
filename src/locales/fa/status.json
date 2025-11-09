@@ -31,5 +31,7 @@
   "license_not_available": "لایسنس در دسترس نیست",
   "UHF": "UHF",
   "card_type": "نوع کارت",
-  "camera": "دوربین"
+  "camera": "دوربین",
+  "card": "کارت",
+  "tag": "تگ"
 }

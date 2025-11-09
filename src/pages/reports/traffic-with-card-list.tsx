@@ -81,12 +81,12 @@ export const ReportsTrafficWithCardList = () => {
         {
             name: t("card_type"),
             cell: (row: T_TrafficWithCard) => {
-                const isUHF = row.card.type === E_OwnerCardType.UHF
+                const isCard = row.card.type === E_OwnerCardType.Card
                 return (
                     <Status
-                        contentKey={isUHF ? "UHF" : "CSN"}
-                        variant={isUHF ? "info" : "warning"}
-                        icon={isUHF ? <Money size={20} /> : <Cards size={20} />}
+                        contentKey={isCard ? "card" : "tag"}
+                        variant={isCard ? "info" : "warning"}
+                        icon={isCard ? <Money size={20} /> : <Cards size={20} />}
                     />
                 )
             },
@@ -128,7 +128,7 @@ export const ReportsTrafficWithCardList = () => {
                     permission: "همه",
                     card: {
                         card_number: `123456789${_}`,
-                        type: _ % 2 === 0 ? E_OwnerCardType.CSN : E_OwnerCardType.UHF,
+                        type: _ % 2 === 0 ? E_OwnerCardType.Card : E_OwnerCardType.Tag,
                         token: `card-token-${_}`,
                     },
                 }

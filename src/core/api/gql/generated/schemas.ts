@@ -25,6 +25,7 @@ export type AccessControl = {
 export type Client = {
   camera?: Maybe<Device>;
   name: Scalars['String']['output'];
+  reader?: Maybe<Device>;
   relay?: Maybe<Device>;
   token: Scalars['String']['output'];
   type: E_ClientType;
@@ -39,6 +40,7 @@ export type CreateAccessControlRq = {
 export type CreateClientRq = {
   camera_token?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  reader_token?: InputMaybe<Scalars['String']['input']>;
   relay_token?: InputMaybe<Scalars['String']['input']>;
   type: E_ClientType;
 };
@@ -65,6 +67,7 @@ export type CreateNewRoleRq = {
 };
 
 export type CreateScheduleRq = {
+  allowed_days: Array<E_DayOfWeek>;
   end_date?: InputMaybe<Scalars['String']['input']>;
   end_time?: InputMaybe<Scalars['String']['input']>;
   start_date?: InputMaybe<Scalars['String']['input']>;
@@ -101,6 +104,16 @@ export enum E_ClientType {
   Output = 'OUTPUT'
 }
 
+export enum E_DayOfWeek {
+  Friday = 'FRIDAY',
+  Monday = 'MONDAY',
+  Saturday = 'SATURDAY',
+  Sunday = 'SUNDAY',
+  Thursday = 'THURSDAY',
+  Tuesday = 'TUESDAY',
+  Wednesday = 'WEDNESDAY'
+}
+
 export enum E_DeviceType {
   Camera = 'CAMERA',
   Reader = 'READER',
@@ -122,6 +135,7 @@ export type EditAccessControlRq = {
 export type EditClientRq = {
   camera_token?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+  reader_token?: InputMaybe<Scalars['String']['input']>;
   relay_token?: InputMaybe<Scalars['String']['input']>;
   token: Scalars['String']['input'];
   type: E_ClientType;
@@ -146,6 +160,7 @@ export type EditIdentifierRq = {
 };
 
 export type EditScheduleRq = {
+  allowed_days?: InputMaybe<Array<E_DayOfWeek>>;
   end_date?: InputMaybe<Scalars['String']['input']>;
   end_time?: InputMaybe<Scalars['String']['input']>;
   start_date?: InputMaybe<Scalars['String']['input']>;
@@ -392,6 +407,7 @@ export type Role = {
 };
 
 export type Schedule = {
+  allowed_days: Array<E_DayOfWeek>;
   end_date?: Maybe<Scalars['String']['output']>;
   end_time: Scalars['String']['output'];
   start_date: Scalars['String']['output'];

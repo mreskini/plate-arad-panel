@@ -48,7 +48,7 @@ export const HardwareDevices = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(_)
-                            openModal(Modals.Hardware.Devices.View)
+                            openModal(Modals.Access.Devices.View)
                         }}
                     >
                         <Eye size={20} className="text-neutral-700" />
@@ -58,7 +58,7 @@ export const HardwareDevices = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(_)
-                            openModal(Modals.Hardware.Devices.Edit)
+                            openModal(Modals.Access.Devices.Edit)
                         }}
                     >
                         <Edit2 size={20} className="text-neutral-700" />
@@ -71,7 +71,7 @@ export const HardwareDevices = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Hardware.Devices.Add)} />
+            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Access.Devices.Add)} />
         </div>
     )
 
@@ -88,10 +88,10 @@ export const HardwareDevices = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Hardware.Devices.Add] && <CreateDeviceModal callback={fetchDevicesList} />}
-            {modalVisibility[Modals.Hardware.Devices.View] && <ViewDeviceModal device={selected!} />}
+            {modalVisibility[Modals.Access.Devices.Add] && <CreateDeviceModal callback={fetchDevicesList} />}
+            {modalVisibility[Modals.Access.Devices.View] && <ViewDeviceModal device={selected!} />}
 
-            {modalVisibility[Modals.Hardware.Devices.Edit] && (
+            {modalVisibility[Modals.Access.Devices.Edit] && (
                 <EditDeviceModal callback={fetchDevicesList} device={selected!} />
             )}
 
