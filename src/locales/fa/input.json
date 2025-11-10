@@ -150,5 +150,6 @@
   "reader_name": "نام ریدر",
   "controller_name": "نام کنترلر",
   "all_days": "همه روزها",
-  "traffic_days": "روزهای تردد"
+  "traffic_days": "روزهای تردد",
+  "vehicle": "خودرو"
 }
