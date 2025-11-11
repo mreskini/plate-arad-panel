@@ -122,7 +122,8 @@ export enum E_DeviceType {
 
 export enum E_IdentifierType {
   Card = 'CARD',
-  Tag = 'TAG'
+  Tag = 'TAG',
+  Vehicle = 'VEHICLE'
 }
 
 export type EditAccessControlRq = {

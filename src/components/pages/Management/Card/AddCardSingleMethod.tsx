@@ -1,12 +1,12 @@
 import { Button, Input } from "@components/template"
-import { E_OwnerCardType } from "@core/api/gql/types"
+import { E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC, useState } from "react"
 import { useForm } from "react-hook-form"
 
 interface I_FormData {
-    type: E_OwnerCardType
+    type: E_IdentifierType
     cardNumber: string
     code: string
 }
@@ -20,7 +20,7 @@ const CurrentModal = Modals.Management.Card.AddCard
 export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     // States and Hooks
     const { closeModal } = useModal()
-    const [cardType, setCardType] = useState<E_OwnerCardType>(E_OwnerCardType.Card)
+    const [cardType, setCardType] = useState<E_IdentifierType>(E_IdentifierType.Card)
 
     const {
         register,
@@ -31,7 +31,7 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
     })
 
     // Flags
-    const isCard = cardType === E_OwnerCardType.Card
+    const isCard = cardType === E_IdentifierType.Card
 
     // Methods
     const onSubmitSingle = async () => {
@@ -47,16 +47,16 @@ export const AddCardSingleMethod: FC<I_Props> = ({ callback }) => {
                 <Input.DropDown
                     options={[
                         {
-                            value: E_OwnerCardType.Card,
+                            value: E_IdentifierType.Card,
                             labelKey: "card",
                         },
                         {
-                            value: E_OwnerCardType.Tag,
+                            value: E_IdentifierType.Tag,
                             labelKey: "tag",
                         },
                     ]}
                     value={cardType}
-                    setValue={(_: string) => setCardType(_ as E_OwnerCardType)}
+                    setValue={(_: string) => setCardType(_ as E_IdentifierType)}
                     wrapperClassName="max-w-lg"
                 />
             </div>

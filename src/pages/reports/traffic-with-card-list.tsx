@@ -3,7 +3,7 @@ import { ExportProgressModal, Status } from "@components/common"
 import { Layout } from "@components/layout"
 import { type I_OwnerFieldFilter, OwnerFieldFilter, ReportsFiltersWrapper } from "@components/pages/Reports"
 import { Button, Input, Table } from "@components/template"
-import { E_OwnerCardType, type T_FetchTrafficWithCard, type T_TrafficWithCard } from "@core/api"
+import { E_IdentifierType, type T_FetchTrafficWithCard, type T_TrafficWithCard } from "@core/api"
 import { formatDateTime, formatNumber, sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Images, Modals } from "@core/utilities"
@@ -81,7 +81,7 @@ export const ReportsTrafficWithCardList = () => {
         {
             name: t("card_type"),
             cell: (row: T_TrafficWithCard) => {
-                const isCard = row.card.type === E_OwnerCardType.Card
+                const isCard = row.card.type === E_IdentifierType.Card
                 return (
                     <Status
                         contentKey={isCard ? "card" : "tag"}
@@ -128,7 +128,7 @@ export const ReportsTrafficWithCardList = () => {
                     permission: "همه",
                     card: {
                         card_number: `123456789${_}`,
-                        type: _ % 2 === 0 ? E_OwnerCardType.Card : E_OwnerCardType.Tag,
+                        type: _ % 2 === 0 ? E_IdentifierType.Card : E_IdentifierType.Tag,
                         token: `card-token-${_}`,
                     },
                 }

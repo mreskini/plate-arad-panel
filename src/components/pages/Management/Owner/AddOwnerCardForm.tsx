@@ -1,5 +1,5 @@
 import { Button, Divider, Input, Spinner } from "@components/template"
-import { E_OwnerCardType } from "@core/api/gql/types"
+import { E_IdentifierType } from "@core/api"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -11,7 +11,7 @@ interface I_Props {
 }
 
 export interface I_AddOwnerCardFormData {
-    cardType: E_OwnerCardType
+    cardType: E_IdentifierType
     cardToken: string
     plate: string
     model: string
@@ -60,27 +60,27 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         <Input.DropDown
                             options={[
                                 {
-                                    value: E_OwnerCardType.Card,
+                                    value: E_IdentifierType.Card,
                                     labelKey: "card",
                                 },
                                 {
-                                    value: E_OwnerCardType.Tag,
+                                    value: E_IdentifierType.Tag,
                                     labelKey: "tag",
                                 },
                                 {
-                                    value: E_OwnerCardType.Plate,
-                                    labelKey: "plate",
+                                    value: E_IdentifierType.Vehicle,
+                                    labelKey: "vehicle",
                                 },
                             ]}
                             value={getValues("cardType")}
-                            setValue={(_: string) => setValue("cardType", _ as E_OwnerCardType)}
+                            setValue={(_: string) => setValue("cardType", _ as E_IdentifierType)}
                             wrapperClassName="max-w-lg"
                         />
                     </div>
 
                     <Divider className="mb-4" />
 
-                    {watch("cardType") === E_OwnerCardType.Card && (
+                    {watch("cardType") === E_IdentifierType.Card && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card" className="min-w-24" required />
                             <Input
@@ -92,7 +92,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.Tag && (
+                    {watch("cardType") === E_IdentifierType.Tag && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="tag" className="min-w-24" required />
                             <Input
@@ -104,7 +104,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         </div>
                     )}
 
-                    {watch("cardType") === E_OwnerCardType.Plate && (
+                    {watch("cardType") === E_IdentifierType.Vehicle && (
                         <>
                             <div className="flex w-full items-center gap-2 mb-4">
                                 <Input.Label labelKey="plate_number" className="min-w-32" required />

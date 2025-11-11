@@ -1,5 +1,5 @@
 import { Button, Text } from "@components/template"
-import type { E_OwnerCardType } from "@core/api/gql/types"
+import type { E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { DocumentDownload } from "iconsax-reactjs"
@@ -18,7 +18,7 @@ const CurrentModal = Modals.Management.Card.AddCard
 export type T_GroupCardInput = {
     serial: string
     card_number: string
-    type: E_OwnerCardType
+    type: E_IdentifierType
 }
 
 export const AddCardGroupMethod: FC<I_Props> = ({ callback }) => {

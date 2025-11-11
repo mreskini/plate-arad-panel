@@ -1,5 +1,5 @@
 import { Button, Input, Modal, Text } from "@components/template"
-import { E_OwnerCardType, type T_Card } from "@core/api"
+import { E_IdentifierType, type T_Card } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC } from "react"
@@ -34,7 +34,7 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
     })
 
     // Flags
-    const isCard = card.type === E_OwnerCardType.Card
+    const isCard = card.type === E_IdentifierType.Card
 
     // Methods
     const onSubmit = async () => {
@@ -54,11 +54,11 @@ export const EditCardModal: FC<I_Props> = ({ callback, card }) => {
                     <Input.DropDown
                         options={[
                             {
-                                value: E_OwnerCardType.Card,
+                                value: E_IdentifierType.Card,
                                 labelKey: "card",
                             },
                             {
-                                value: E_OwnerCardType.Tag,
+                                value: E_IdentifierType.Tag,
                                 labelKey: "tag",
                             },
                         ]}

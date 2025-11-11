@@ -1,5 +1,6 @@
 import type {
     CurrentUserQuery,
+    E_IdentifierType,
     FetchAccessControlsQuery,
     FetchClientsQuery,
     FetchDevicesQuery,
@@ -74,17 +75,11 @@ export type T_FetchOwners = {
 
 export type T_Owner = T_FetchOwners["items"][number]
 
-export enum E_OwnerCardType {
-    Card = "Card",
-    Tag = "Tag",
-    Plate = "Plate",
-}
-
 export type T_FetchCards = {
     count: number
     items: {
         token: string
-        type: E_OwnerCardType
+        type: E_IdentifierType
         serial: string
         is_active: boolean
         card_number: string
@@ -111,7 +106,7 @@ export type T_FetchTrafficWithCard = {
         permission: string
         card: {
             token: string
-            type: E_OwnerCardType
+            type: E_IdentifierType
             card_number: string
         }
     }[]

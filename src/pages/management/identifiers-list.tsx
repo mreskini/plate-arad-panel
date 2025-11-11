@@ -3,8 +3,7 @@ import { Status } from "@components/common"
 import { Layout } from "@components/layout"
 import { AddCardModal, EditCardModal } from "@components/pages/Management"
 import { Button, Input, Switch, Table } from "@components/template"
-import type { T_Card, T_FetchCards } from "@core/api"
-import { E_OwnerCardType } from "@core/api/gql/types"
+import { E_IdentifierType, type T_Card, type T_FetchCards } from "@core/api"
 import { sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
@@ -36,7 +35,7 @@ export const IdentifiersList = () => {
         {
             name: t("type"),
             cell: (row: T_Card) => {
-                const isCard = row.type === E_OwnerCardType.Card
+                const isCard = row.type === E_IdentifierType.Card
                 return (
                     <Status
                         contentKey={isCard ? "card" : "tag"}
@@ -83,7 +82,7 @@ export const IdentifiersList = () => {
             count: 10,
             items: range(0, 7).map(_ => ({
                 token: `${_}`,
-                type: _ % 2 === 0 ? E_OwnerCardType.Card : E_OwnerCardType.Tag,
+                type: _ % 2 === 0 ? E_IdentifierType.Card : E_IdentifierType.Tag,
                 serial: `TestSerial000${_}`,
                 is_active: _ % 2 === 0,
                 card_number: `1000${_}`,
