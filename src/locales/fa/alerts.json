@@ -29,5 +29,7 @@
   "access_control_edited_successfully": "کنترل دسترسی با موفقیت ویرایش شد",
   "role_added_successfully": "نقش جدید با موفقیت ایجاد شد",
   "role_edited_successfully": "نقش مورد نظر با موفقیت ویرایش شد",
-  "configuration": "پیکربندی"
+  "configuration": "پیکربندی",
+  "identifier_edited_successfully": "شناسه با موفقیت ویرایش شد",
+  "identifier_added_successfully": "شناسه با موفقیت افزوده شد"
 }
