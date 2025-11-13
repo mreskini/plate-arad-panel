@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Hardware"
+import { AddScheduleModal, EditScheduleModal } from "@components/pages/Access"
 import { Button, Table } from "@components/template"
-import { API, type T_AccessControl } from "@core/api"
+import { API, type T_Schedule } from "@core/api"
+import { formatDate, formatTime } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2 } from "iconsax-reactjs"
@@ -13,35 +14,39 @@ import { toast } from "react-toastify"
 
 const PageSize = 7
 
-export const AccessControl = () => {
+export const Schedules = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
-    const [tableData, setTableData] = useState<T_AccessControl[]>([])
-    const [selected, setSelected] = useState<T_AccessControl | null>(null)
+    const [tableData, setTableData] = useState<T_Schedule[]>([])
+    const [selected, setSelected] = useState<T_Schedule | null>(null)
     const [isFetching, setIsFetching] = useState<boolean>(true)
 
-    const tableColumns: TableColumn<T_AccessControl>[] = [
+    const tableColumns: TableColumn<T_Schedule>[] = [
         {
             name: t("title"),
-            selector: (row: T_AccessControl) => row.title,
+            selector: (row: T_Schedule) => row.title,
         },
         {
-            name: t("client"),
-            selector: (row: T_AccessControl) => row.client.name,
+            name: t("start_date"),
+            selector: (row: T_Schedule) => formatDate(new Date(row.start_date)),
         },
         {
-            name: t("schedule"),
-            selector: (row: T_AccessControl) => row.schedule.title,
+            name: t("end_date"),
+            selector: (row: T_Schedule) => (row.end_date ? formatDate(new Date(row.end_date)) : ""),
         },
         {
-            name: t("access_type"),
-            selector: (_row: T_AccessControl, index?: number) => ((index ?? 0) % 3 === 0 ? "UHF و CSN" : "پلاک و CSN"), // TODO: Replace with real access type --- IGNORE ---
+            name: t("start_time"),
+            selector: (row: T_Schedule) => formatTime(row.start_time),
+        },
+        {
+            name: t("end_time"),
+            selector: (row: T_Schedule) => formatTime(row.end_time),
         },
         {
             width: "80px",
             name: t("actions"),
-            cell: (row: T_AccessControl) => (
+            cell: (row: T_Schedule) => (
                 <div className="flex items-center gap-2">
                     <Button variant="ghost">
                         <Edit2
@@ -49,7 +54,7 @@ export const AccessControl = () => {
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.AccessControl.EditAccessControl)
+                                openModal(Modals.Access.Schedule.Edit)
                             }}
                         />
                     </Button>
@@ -60,39 +65,33 @@ export const AccessControl = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button
-                variant="primary"
-                contentKey="add"
-                onClick={() => openModal(Modals.Management.AccessControl.AddAccessControl)}
-            />
+            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Access.Schedule.Add)} />
         </div>
     )
 
     // Methods
-    const fetchAccessControls = async () => {
-        const { data, error } = await API.Client.FetchAccessControls()
-        if (data) setTableData(data.fetchAccessControls)
+    const fetchSchedules = async () => {
+        const { data, error } = await API.Client.FetchSchedules()
+        if (data) setTableData(data.fetchSchedules)
         if (error) toast.error(error)
         setIsFetching(false)
     }
 
     useEffect(() => {
-        fetchAccessControls()
+        fetchSchedules()
     }, [])
 
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Management.AccessControl.AddAccessControl] && (
-                <AddAccessControlModal callback={fetchAccessControls} />
-            )}
+            {modalVisibility[Modals.Access.Schedule.Add] && <AddScheduleModal callback={fetchSchedules} />}
 
-            {modalVisibility[Modals.Management.AccessControl.EditAccessControl] && (
-                <EditAccessControlModal callback={fetchAccessControls} accessControl={selected!} />
+            {modalVisibility[Modals.Access.Schedule.Edit] && (
+                <EditScheduleModal callback={fetchSchedules} schedule={selected!} />
             )}
 
             <Table
-                title="access_control"
+                title="schedule"
                 data={tableData}
                 columns={tableColumns}
                 rowsPerPage={PageSize}

@@ -13,7 +13,7 @@ interface I_Props {
     accessControl: T_AccessControl
 }
 
-const CurrentModal = Modals.Management.AccessControl.EditAccessControl
+const CurrentModal = Modals.Access.AccessControl.Edit
 export const EditAccessControlModal: FC<I_Props> = ({ callback, accessControl }) => {
     // States and hooks
     const { closeModal } = useModal()

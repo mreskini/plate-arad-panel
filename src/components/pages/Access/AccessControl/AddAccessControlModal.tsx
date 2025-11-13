@@ -12,7 +12,7 @@ interface I_Props {
     callback: Function
 }
 
-const CurrentModal = Modals.Management.AccessControl.AddAccessControl
+const CurrentModal = Modals.Access.AccessControl.Add
 
 export const AddAccessControlModal: FC<I_Props> = ({ callback }) => {
     // States and hooks

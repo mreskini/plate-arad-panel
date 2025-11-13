@@ -23,26 +23,26 @@ export const Modals = {
             AddCard: "management-add-card",
             EditCard: "management-edit-card",
         },
-        Schedule: {
-            AddSchedule: "management-add-schedule",
-            EditSchedule: "management-edit-schedule",
-        },
-        AccessControl: {
-            AddAccessControl: "management-add-access-control",
-            EditAccessControl: "management-edit-access-control",
-        },
     },
 
     Access: {
-        Devices: {
-            View: "hardware-view-device",
-            Add: "hardware-add-device",
-            Edit: "hardware-edit-device",
+        AccessControl: {
+            Add: "access-add-access-control",
+            Edit: "access-edit-access-control",
         },
-        Client: {
-            Add: "hardware-add-client",
-            Edit: "hardware-edit-client",
-            View: "hardware-view-client",
+        Schedule: {
+            Add: "access-add-schedule",
+            Edit: "access-edit-schedule",
+        },
+        Devices: {
+            View: "access-view-device",
+            Add: "access-add-device",
+            Edit: "access-edit-device",
+        },
+        Door: {
+            Add: "access-add-door",
+            Edit: "access-edit-door",
+            View: "access-view-door",
         },
     },
 }

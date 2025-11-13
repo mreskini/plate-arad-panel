@@ -1,6 +1,6 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
-import { LicenseFileInput } from "@components/pages/Software"
+import { LicenseFileInput } from "@components/pages/Settings"
 import { Button, Notice, Text, useNotify } from "@components/template"
 import { API } from "@core/api"
 import { useCommon } from "@core/contexts"
