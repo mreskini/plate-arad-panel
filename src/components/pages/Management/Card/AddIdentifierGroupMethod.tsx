@@ -42,7 +42,7 @@ export const AddIdentifierGroupMethod: FC<I_Props> = ({ callback }) => {
             <div className="bg-blue-50 p-2 flex items-center justify-between border border-blue-500 rounded-lg">
                 <Text contentKey="please_download_excel_like_example" className="text-blue-600" />
 
-                <Link to="/bulk-card-upload-template.xlsx" target="_blank">
+                <Link to="/bulk-identifier-upload-template.xlsx" target="_blank">
                     <Button contentKey="download_example" icon={<DocumentDownload size={20} />} />
                 </Link>
             </div>
