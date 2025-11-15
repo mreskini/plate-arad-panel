@@ -110,7 +110,7 @@ export const SidebarItems: T_Sidebar[] = [
                     },
                     {
                         titleContentKey: "doors",
-                        link: AppRoutes.access.clients,
+                        link: AppRoutes.access.doors,
                     },
                 ],
             },
@@ -120,11 +120,11 @@ export const SidebarItems: T_Sidebar[] = [
                 subItems: [
                     {
                         titleContentKey: "license",
-                        link: AppRoutes.software.license,
+                        link: AppRoutes.settings.license,
                     },
                     {
                         titleContentKey: "configuration",
-                        link: AppRoutes.software.settings,
+                        link: AppRoutes.settings.configuration,
                     },
                 ],
             },

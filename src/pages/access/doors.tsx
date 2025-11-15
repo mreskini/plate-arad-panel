@@ -7,7 +7,7 @@ import {
     ClientTypeKeyMap,
     EditClientModal,
     ViewClientModal,
-} from "@components/pages/Hardware"
+} from "@components/pages/Access"
 import { Button, Notice, Table, Text } from "@components/template"
 import type { T_Client } from "@core/api"
 import { API } from "@core/api"
@@ -97,7 +97,7 @@ export const Doors = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(row)
-                            openModal(Modals.Access.Client.View)
+                            openModal(Modals.Access.Door.View)
                         }}
                     >
                         <Eye size={20} className="text-neutral-700" />
@@ -107,7 +107,7 @@ export const Doors = () => {
                         variant="ghost"
                         onClick={() => {
                             setSelected(row)
-                            openModal(Modals.Access.Client.Edit)
+                            openModal(Modals.Access.Door.Edit)
                         }}
                     >
                         <Edit2 size={20} className="text-neutral-700" />
@@ -122,7 +122,7 @@ export const Doors = () => {
             <Button
                 variant="primary"
                 contentKey={isAddClientButtonDisabled ? "capacity_full" : "add"}
-                onClick={() => openModal(Modals.Access.Client.Add)}
+                onClick={() => openModal(Modals.Access.Door.Add)}
                 disabled={isAddClientButtonDisabled || isFetching}
             />
         </div>
@@ -149,13 +149,10 @@ export const Doors = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Access.Client.Add] && <AddClientModal callback={fetchClients} />}
+            {modalVisibility[Modals.Access.Door.Add] && <AddClientModal callback={fetchClients} />}
+            {modalVisibility[Modals.Access.Door.Edit] && <EditClientModal callback={fetchClients} client={selected!} />}
 
-            {modalVisibility[Modals.Access.Client.Edit] && (
-                <EditClientModal callback={fetchClients} client={selected!} />
-            )}
-
-            {modalVisibility[Modals.Access.Client.View] && <ViewClientModal client={selected!} />}
+            {modalVisibility[Modals.Access.Door.View] && <ViewClientModal client={selected!} />}
 
             {!isLicenseAvailable && (
                 <Notice

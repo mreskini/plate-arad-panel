@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Hardware"
+import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Access"
 import { Button, Table } from "@components/template"
 import { API, type T_AccessControl } from "@core/api"
 import { useModal } from "@core/stores"
@@ -13,7 +13,7 @@ import { toast } from "react-toastify"
 
 const PageSize = 7
 
-export const AccessControl = () => {
+export const AccessControls = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
@@ -49,7 +49,7 @@ export const AccessControl = () => {
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.AccessControl.EditAccessControl)
+                                openModal(Modals.Access.AccessControl.Edit)
                             }}
                         />
                     </Button>
@@ -60,11 +60,7 @@ export const AccessControl = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button
-                variant="primary"
-                contentKey="add"
-                onClick={() => openModal(Modals.Management.AccessControl.AddAccessControl)}
-            />
+            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Access.AccessControl.Add)} />
         </div>
     )
 
@@ -83,11 +79,11 @@ export const AccessControl = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Management.AccessControl.AddAccessControl] && (
+            {modalVisibility[Modals.Access.AccessControl.Add] && (
                 <AddAccessControlModal callback={fetchAccessControls} />
             )}
 
-            {modalVisibility[Modals.Management.AccessControl.EditAccessControl] && (
+            {modalVisibility[Modals.Access.AccessControl.Edit] && (
                 <EditAccessControlModal callback={fetchAccessControls} accessControl={selected!} />
             )}
 

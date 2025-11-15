@@ -23,14 +23,15 @@ export const AppRoutes = {
         users: "/management/users",
         identifiers: "/management/identifiers",
     },
-    software: {
-        settings: "/software/settings",
-        license: "/software/license",
+
+    settings: {
+        configuration: "/settings/configuration",
+        license: "/settings/license",
     },
 
     access: {
         devices: "/access/devices",
-        clients: "/access/clients",
+        doors: "/access/doors",
         schedule: "/access/schedule",
         accessControl: "/access/access-control",
     },

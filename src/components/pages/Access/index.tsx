@@ -1,4 +1,4 @@
 export * from "./AccessControl"
-export * from "./Client"
 export * from "./Device"
+export * from "./Door"
 export * from "./Schedule"

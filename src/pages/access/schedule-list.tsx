@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddScheduleModal, EditScheduleModal, ViewScheduleModal } from "@components/pages/Hardware"
+import { AddScheduleModal, EditScheduleModal, ViewScheduleModal } from "@components/pages/Access"
 import { Button, Table } from "@components/template"
 import { API, type T_Schedule } from "@core/api"
 import { formatDate, formatTime } from "@core/functions"
@@ -14,7 +14,7 @@ import { toast } from "react-toastify"
 
 const PageSize = 7
 
-export const ScheduleList = () => {
+export const Schedules = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()

@@ -11,7 +11,7 @@ interface I_Props {
     client: T_Client
 }
 
-const CurrentModal = Modals.Access.Client.View
+const CurrentModal = Modals.Access.Door.View
 
 export const ViewClientModal: FC<I_Props> = ({ client }) => {
     // States and hooks

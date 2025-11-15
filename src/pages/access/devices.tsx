@@ -7,7 +7,7 @@ import {
     DeviceTypeKeyMap,
     EditDeviceModal,
     ViewDeviceModal,
-} from "@components/pages/Hardware"
+} from "@components/pages/Access"
 import { Button, Table, Text } from "@components/template"
 import type { T_Device } from "@core/api"
 import { API } from "@core/api"
@@ -17,7 +17,7 @@ import { Edit2, Eye } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-export const HardwareDevices = () => {
+export const Devices = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { openModal, modalVisibility } = useModal()

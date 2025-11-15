@@ -23,10 +23,6 @@ export const Modals = {
             Add: "management-add-identifier",
             Edit: "management-edit-identifier",
         },
-        AccessControl: {
-            AddAccessControl: "management-add-access-control",
-            EditAccessControl: "management-edit-access-control",
-        },
     },
     Access: {
         Devices: {
