@@ -25,15 +25,19 @@ export const Modals = {
         },
     },
     Access: {
+        AccessControl: {
+            Add: "access-add-access-control",
+            Edit: "access-edit-access-control",
+        },
         Devices: {
             View: "access-view-device",
             Add: "access-add-device",
             Edit: "access-edit-device",
         },
-        Client: {
-            Add: "access-add-client",
-            Edit: "access-edit-client",
-            View: "access-view-client",
+        Door: {
+            Add: "access-add-door",
+            Edit: "access-edit-door",
+            View: "access-view-door",
         },
         Schedule: {
             Add: "access-add-schedule",
