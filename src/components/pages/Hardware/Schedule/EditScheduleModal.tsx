@@ -14,7 +14,7 @@ interface I_Props {
     schedule: T_Schedule
 }
 
-const CurrentModal = Modals.Management.Schedule.EditSchedule
+const CurrentModal = Modals.Access.Schedule.Edit
 
 export const EditScheduleModal: FC<I_Props> = ({ callback, schedule }) => {
     // States and hooks

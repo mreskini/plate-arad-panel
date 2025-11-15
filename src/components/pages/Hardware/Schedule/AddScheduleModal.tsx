@@ -13,7 +13,7 @@ interface I_Props {
     callback: Function
 }
 
-const CurrentModal = Modals.Management.Schedule.AddSchedule
+const CurrentModal = Modals.Access.Schedule.Add
 
 export const AddScheduleModal: FC<I_Props> = ({ callback }) => {
     // States and hooks
