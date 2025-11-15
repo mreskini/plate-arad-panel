@@ -61,7 +61,7 @@ export const SidebarItems: T_Sidebar[] = [
                     },
                     {
                         titleContentKey: "identifiers_list",
-                        link: AppRoutes.management.cards,
+                        link: AppRoutes.management.identifiers,
                     },
                 ],
             },

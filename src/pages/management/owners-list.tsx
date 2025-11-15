@@ -51,7 +51,7 @@ export const OwnersList = () => {
         },
         {
             name: t("id_number"),
-            selector: (row: T_Owner) => (row.card?.token ? row.card.card_number : ""),
+            selector: (row: T_Owner) => (row.card?.token ? row.card.number : ""),
         },
         {
             name: t("id_type"),
@@ -149,9 +149,9 @@ export const OwnersList = () => {
                     card:
                         _ % 2 === 0
                             ? {
-                                  card_number: `CARD-1034${_}`,
+                                  number: `CARD-1034${_}`,
                                   type: E_IdentifierType.Card,
-                                  is_active: true,
+                                  available: true,
                                   serial: `SERIAL-1034${_}`,
                                   token: _.toString(),
                               }
