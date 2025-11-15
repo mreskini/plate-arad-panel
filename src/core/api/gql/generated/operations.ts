@@ -98,6 +98,34 @@ export type PingAllDevicesQueryVariables = Types.Exact<{ [key: string]: never; }
 
 export type PingAllDevicesQuery = { pingAllDevices: Array<{ name: string, ip: string, type: Types.E_DeviceType, is_alive: boolean }> };
 
+export type FetchIdentifiersQueryVariables = Types.Exact<{
+  body: Types.FetchIdentifiersRq;
+}>;
+
+
+export type FetchIdentifiersQuery = { fetchIdentifiers: { count: number, items: Array<{ token: string, serial: string, number: string, type: Types.E_IdentifierType, available: boolean }> } };
+
+export type CreateIdentifierMutationVariables = Types.Exact<{
+  body: Types.CreateIdentifierRq;
+}>;
+
+
+export type CreateIdentifierMutation = { createIdentifier: boolean };
+
+export type EditIdentifierMutationVariables = Types.Exact<{
+  body: Types.EditIdentifierRq;
+}>;
+
+
+export type EditIdentifierMutation = { editIdentifier: boolean };
+
+export type ToggleIdentifierStatusMutationVariables = Types.Exact<{
+  body: Types.ToggleIdentifierStatusRq;
+}>;
+
+
+export type ToggleIdentifierStatusMutation = { toggleIdentifierStatus: boolean };
+
 export type ParkingInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

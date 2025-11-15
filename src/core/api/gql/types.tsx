@@ -4,6 +4,7 @@ import type {
     FetchAccessControlsQuery,
     FetchClientsQuery,
     FetchDevicesQuery,
+    FetchIdentifiersQuery,
     FetchRolesQuery,
     FetchSchedulesQuery,
     FetchUsersListQuery,
@@ -68,25 +69,16 @@ export type T_FetchOwners = {
             vehicle_year: string
             vehicle_image?: string
         }[]
-        card?: T_Card | null
+        card?: T_Identifier | null
         apb: boolean
     }[]
 }
 
 export type T_Owner = T_FetchOwners["items"][number]
 
-export type T_FetchCards = {
-    count: number
-    items: {
-        token: string
-        type: E_IdentifierType
-        serial: string
-        is_active: boolean
-        card_number: string
-    }[]
-}
+export type T_FetchIdentifiers = FetchIdentifiersQuery["fetchIdentifiers"]
+export type T_Identifier = T_FetchIdentifiers["items"][number]
 
-export type T_Card = T_FetchCards["items"][number]
 export type T_Device = FetchDevicesQuery["fetchDevices"][number]
 export type T_PingAllDevices = PingAllDevicesQuery["pingAllDevices"][number]
 

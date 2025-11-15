@@ -58,7 +58,7 @@ export const AppRouter = createBrowserRouter(
                 <Route path={AppRoutes.management.roles.add} element={<AddRole />} />
                 <Route path={`${AppRoutes.management.roles.edit}/:token`} element={<EditRole />} />
                 <Route path={AppRoutes.owners} element={<OwnersList />} />
-                <Route path={AppRoutes.management.cards} element={<IdentifiersList />} />
+                <Route path={AppRoutes.management.identifiers} element={<IdentifiersList />} />
 
                 {/* Settings */}
                 <Route path={AppRoutes.settings.configuration} element={<Configuration />} />

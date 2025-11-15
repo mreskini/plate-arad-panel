@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
-import { AddScheduleModal, EditScheduleModal } from "@components/pages/Access"
+import { AddScheduleModal, EditScheduleModal, ViewScheduleModal } from "@components/pages/Access"
 import { Button, Table } from "@components/template"
 import { API, type T_Schedule } from "@core/api"
 import { formatDate, formatTime } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Edit2 } from "iconsax-reactjs"
+import { Edit2, Eye } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
@@ -44,10 +44,21 @@ export const Schedules = () => {
             selector: (row: T_Schedule) => formatTime(row.end_time),
         },
         {
-            width: "80px",
+            width: "120px",
             name: t("actions"),
             cell: (row: T_Schedule) => (
                 <div className="flex items-center gap-2">
+                    <Button variant="ghost">
+                        <Eye
+                            size={20}
+                            className="text-neutral-700"
+                            onClick={() => {
+                                setSelected(row)
+                                openModal(Modals.Access.Schedule.View)
+                            }}
+                        />
+                    </Button>
+
                     <Button variant="ghost">
                         <Edit2
                             size={20}
@@ -85,6 +96,7 @@ export const Schedules = () => {
     return (
         <Layout.Dashboard>
             {modalVisibility[Modals.Access.Schedule.Add] && <AddScheduleModal callback={fetchSchedules} />}
+            {modalVisibility[Modals.Access.Schedule.View] && <ViewScheduleModal schedule={selected!} />}
 
             {modalVisibility[Modals.Access.Schedule.Edit] && (
                 <EditScheduleModal callback={fetchSchedules} schedule={selected!} />

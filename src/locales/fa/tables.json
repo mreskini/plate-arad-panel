@@ -60,5 +60,6 @@
   "controller_ip": "IP کنترلر",
   "controller_channel_number": "شماره کانال کنترلر",
   "reader_ip": "IP ریدر",
-  "reader_brand": "برند ریدر"
+  "reader_brand": "برند ریدر",
+  "number": "شماره"
 }

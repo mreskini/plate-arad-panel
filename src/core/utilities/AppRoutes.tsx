@@ -21,7 +21,7 @@ export const AppRoutes = {
             edit: "/management/roles/edit",
         },
         users: "/management/users",
-        cards: "/management/cards",
+        identifiers: "/management/identifiers",
     },
 
     settings: {

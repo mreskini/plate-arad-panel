@@ -13,20 +13,20 @@ interface I_Props {
     callback: Function
 }
 
-const CurrentModal = Modals.Management.Card.AddCard
+const CurrentModal = Modals.Management.Identifier.Add
 
-export type T_GroupCardInput = {
+export type T_GroupIdentifierInput = {
+    number: string
     serial: string
-    card_number: string
     type: E_IdentifierType
 }
 
-export const AddCardGroupMethod: FC<I_Props> = ({ callback }) => {
+export const AddIdentifierGroupMethod: FC<I_Props> = ({ callback }) => {
     // States and Hooks
     const { closeModal } = useModal()
     const [isLoading, setIsLoading] = useState(false)
-    const [cardInputs, setCardInputs] = useState<T_GroupCardInput[]>([])
-    const isValid = cardInputs.length > 0
+    const [identifierInputs, setIdentifierInputs] = useState<T_GroupIdentifierInput[]>([])
+    const isValid = identifierInputs.length > 0
 
     // Methods
     const onSubmit = async () => {
@@ -38,7 +38,7 @@ export const AddCardGroupMethod: FC<I_Props> = ({ callback }) => {
 
     // Render
     return (
-        <form className="sm:min-w-3xl">
+        <form className="sm:min-w-xl">
             <div className="bg-blue-50 p-2 flex items-center justify-between border border-blue-500 rounded-lg">
                 <Text contentKey="please_download_excel_like_example" className="text-blue-600" />
 
@@ -48,10 +48,10 @@ export const AddCardGroupMethod: FC<I_Props> = ({ callback }) => {
             </div>
 
             <div className="mt-4">
-                <UploadExcel setCardInputs={setCardInputs} />
+                <UploadExcel setIdentifierInputs={setIdentifierInputs} />
             </div>
 
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-4 mt-8">
                 <Button
                     contentKey="add"
                     type="submit"

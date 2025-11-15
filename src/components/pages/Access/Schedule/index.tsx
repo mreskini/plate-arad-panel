@@ -1,4 +1,6 @@
 export * from "./AddScheduleModal"
 export * from "./EditScheduleModal"
 export * from "./ScheduleForm"
+export * from "./ViewScheduleModal"
 export * from "./WeekDaysSelect"
+export * from "./WeekDaysView"
