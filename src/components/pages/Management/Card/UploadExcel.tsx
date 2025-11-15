@@ -7,13 +7,13 @@ import type { ChangeEvent, DragEvent, FC } from "react"
 import { useState } from "react"
 import * as XLSX from "xlsx"
 
-import type { T_GroupCardInput } from "./AddCardGroupMethod"
+import type { T_GroupIdentifierInput } from "./AddIdentifierGroupMethod"
 
 interface I_Props {
-    setCardInputs: Function
+    setIdentifierInputs: Function
 }
 
-export const UploadExcel: FC<I_Props> = ({ setCardInputs }) => {
+export const UploadExcel: FC<I_Props> = ({ setIdentifierInputs }) => {
     // States and Hooks
     const [fileName, setFileName] = useState<string | null>(null)
     const [isDragging, setIsDragging] = useState(false)
@@ -28,10 +28,10 @@ export const UploadExcel: FC<I_Props> = ({ setCardInputs }) => {
             const workbook = XLSX.read(data)
             const firstSheetName = workbook.SheetNames[0]
             const worksheet = workbook.Sheets[firstSheetName]
-            const jsonData: T_GroupCardInput[] = XLSX.utils.sheet_to_json(worksheet)
+            const jsonData: T_GroupIdentifierInput[] = XLSX.utils.sheet_to_json(worksheet)
 
             // Log all rows to console
-            setCardInputs(jsonData)
+            setIdentifierInputs(jsonData)
 
             return jsonData
         } catch (err) {

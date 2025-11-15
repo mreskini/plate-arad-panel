@@ -1,16 +1,17 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Status } from "@components/common"
 import { Layout } from "@components/layout"
-import { AddCardModal, EditCardModal } from "@components/pages/Management"
+import { AddIdentifierModal, EditIdentifierModal } from "@components/pages/Management"
 import { Button, Input, Switch, Table } from "@components/template"
-import { E_IdentifierType, type T_Card, type T_FetchCards } from "@core/api"
-import { sleep } from "@core/functions"
+import type { T_FetchIdentifiers, T_Identifier } from "@core/api"
+import { API, E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Cards, Edit2, Money, SearchNormal1 } from "iconsax-reactjs"
-import { range } from "lodash"
 import { useEffect, useState } from "react"
+import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const PageSize = 7
 
@@ -18,24 +19,35 @@ export const IdentifiersList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
-    const [tableData, setTableData] = useState<T_FetchCards>({ count: 0, items: [] })
-    const [selectedCard, setSelectedCard] = useState<T_Card | null>(null)
+    const [tableData, setTableData] = useState<T_FetchIdentifiers>({ count: 0, items: [] })
+    const [selectedIdentifier, setSelectedIdentifier] = useState<T_Identifier | null>(null)
     const [isFetching, setIsFetching] = useState(true)
     const [searchValue, setSearchValue] = useState("")
+    const [current, setCurrent] = useState(1)
 
-    const tableColumns = [
+    const tableColumns: TableColumn<T_Identifier>[] = [
         {
-            name: t("identifier_number"),
-            selector: (row: T_Card) => row.card_number,
+            name: t("number"),
+            selector: (row: T_Identifier) => row.number,
         },
         {
             name: t("serial"),
-            selector: (row: T_Card) => row.serial,
+            selector: (row: T_Identifier) => row.serial,
+        },
+        {
+            name: t("status"),
+            cell: (row: T_Identifier) =>
+                row.available ? (
+                    <div className="bg-green-100 text-green-500 px-2 py-1 rounded-md">{t("active")}</div>
+                ) : (
+                    <div className="bg-red-100 text-red-400 px-2 py-1 rounded-md">{t("inactive")}</div>
+                ),
         },
         {
             name: t("type"),
-            cell: (row: T_Card) => {
+            cell: (row: T_Identifier) => {
                 const isCard = row.type === E_IdentifierType.Card
+
                 return (
                     <Status
                         contentKey={isCard ? "card" : "tag"}
@@ -47,58 +59,70 @@ export const IdentifiersList = () => {
         },
         {
             name: t("activation"),
-            cell: (row: T_Card) => <Switch checked={row.is_active} onSwitchToggle={() => {}} />,
+            cell: (row: T_Identifier) => (
+                <Switch checked={row.available} onSwitchToggle={() => toggleIdentifierAvailability(row.token)} />
+            ),
         },
         {
             name: t("actions"),
-            cell: (row: T_Card) => (
+            cell: (row: T_Identifier) => (
                 <div className="flex items-center gap-2">
                     <Button variant="ghost">
                         <Edit2
                             size={20}
                             className="text-neutral-700"
                             onClick={() => {
-                                setSelectedCard(row)
-                                openModal(Modals.Management.Card.EditCard)
+                                setSelectedIdentifier(row)
+                                openModal(Modals.Management.Identifier.Edit)
                             }}
                         />
                     </Button>
                 </div>
             ),
+            maxWidth: "120px",
         },
     ]
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Management.Card.AddCard)} />
+            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Management.Identifier.Add)} />
         </div>
     )
 
     // Methods
-    const fetchCardsList = async () => {
-        await sleep(2000)
+    const fetchIdentifiers = async (page?: number) => {
+        const target = page ?? current
+        if (page) setCurrent(page)
 
-        setTableData({
-            count: 10,
-            items: range(0, 7).map(_ => ({
-                token: `${_}`,
-                type: _ % 2 === 0 ? E_IdentifierType.Card : E_IdentifierType.Tag,
-                serial: `TestSerial000${_}`,
-                is_active: _ % 2 === 0,
-                card_number: `1000${_}`,
-            })),
+        const { data } = await API.Identifier.FetchIdentifiers({
+            body: {
+                page: target,
+                limit: PageSize,
+                ...(searchValue && { search: searchValue }),
+            },
         })
+
+        if (data) setTableData(data.fetchIdentifiers)
 
         setIsFetching(false)
     }
 
+    const toggleIdentifierAvailability = async (token: string) => {
+        const { data, error } = await API.Identifier.ToggleIdentifierStatus({ body: { token } })
+        if (data) await fetchIdentifiers(current)
+        if (error) toast.error(error)
+    }
+
+    // Use effects
     useEffect(() => {
-        fetchCardsList()
+        fetchIdentifiers()
     }, [])
 
     useEffect(() => {
         if (isFetching) return () => {}
-        const handler = setTimeout(() => fetchCardsList(), 500)
+
+        const handler = setTimeout(() => fetchIdentifiers(), 500)
+
         return () => {
             clearTimeout(handler)
         }
@@ -107,10 +131,10 @@ export const IdentifiersList = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Management.Card.AddCard] && <AddCardModal callback={fetchCardsList} />}
+            {modalVisibility[Modals.Management.Identifier.Add] && <AddIdentifierModal callback={fetchIdentifiers} />}
 
-            {modalVisibility[Modals.Management.Card.EditCard] && (
-                <EditCardModal callback={fetchCardsList} card={selectedCard!} />
+            {modalVisibility[Modals.Management.Identifier.Edit] && (
+                <EditIdentifierModal callback={fetchIdentifiers} identifier={selectedIdentifier!} />
             )}
 
             <div className="mb-4">
@@ -131,7 +155,7 @@ export const IdentifiersList = () => {
                 loading={isFetching}
                 paginationType="Remote"
                 totalRows={tableData.count}
-                onChangePage={fetchCardsList}
+                onChangePage={fetchIdentifiers}
             />
         </Layout.Dashboard>
     )

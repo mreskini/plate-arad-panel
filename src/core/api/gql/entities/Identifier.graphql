@@ -1,0 +1,24 @@
+query FetchIdentifiers($body: FetchIdentifiersRq!) {
+  fetchIdentifiers(body: $body) {
+    count
+    items {
+      token
+      serial
+      number
+      type
+      available
+    }
+  }
+}
+
+mutation CreateIdentifier($body: CreateIdentifierRq!) {
+  createIdentifier(body: $body)
+}
+
+mutation EditIdentifier($body: EditIdentifierRq!) {
+  editIdentifier(body: $body)
+}
+
+mutation ToggleIdentifierStatus($body: ToggleIdentifierStatusRq!) {
+  toggleIdentifierStatus(body: $body)
+}

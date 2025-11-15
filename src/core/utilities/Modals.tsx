@@ -19,9 +19,9 @@ export const Modals = {
             AddCard: "management-add-owner-card",
             RemoveCard: "management-remove-owner-card",
         },
-        Card: {
-            AddCard: "management-add-card",
-            EditCard: "management-edit-card",
+        Identifier: {
+            Add: "management-add-identifier",
+            Edit: "management-edit-identifier",
         },
         AccessControl: {
             AddAccessControl: "management-add-access-control",

@@ -2,8 +2,8 @@ import { Input, Modal, Text } from "@components/template"
 import { Modals } from "@core/utilities"
 import { type FC, useState } from "react"
 
-import { AddCardGroupMethod } from "./AddCardGroupMethod"
-import { AddCardSingleMethod } from "./AddCardSingleMethod"
+import { AddIdentifierGroupMethod } from "./AddIdentifierGroupMethod"
+import { AddIdentifierSingleMethod } from "./AddIdentifierSingleMethod"
 
 interface I_Props {
     callback: Function
@@ -14,9 +14,9 @@ enum E_OperationType {
     Group = "Group",
 }
 
-const CurrentModal = Modals.Management.Card.AddCard
+const CurrentModal = Modals.Management.Identifier.Add
 
-export const AddCardModal: FC<I_Props> = ({ callback }) => {
+export const AddIdentifierModal: FC<I_Props> = ({ callback }) => {
     // States and hooks
     const [operationType, setOperationType] = useState<E_OperationType>(E_OperationType.Single)
 
@@ -28,7 +28,7 @@ export const AddCardModal: FC<I_Props> = ({ callback }) => {
             closeButton
         >
             <div className="flex w-full items-center gap-4 mb-4">
-                <Input.Label labelKey="add_type" className="grow" required />
+                <Input.Label labelKey="add_type" className="min-w-24" required />
                 <Input.DropDown
                     options={[
                         {
@@ -42,12 +42,11 @@ export const AddCardModal: FC<I_Props> = ({ callback }) => {
                     ]}
                     value={operationType}
                     setValue={(_: string) => setOperationType(_ as E_OperationType)}
-                    wrapperClassName="max-w-lg"
                 />
             </div>
 
-            {operationType === E_OperationType.Single && <AddCardSingleMethod callback={callback} />}
-            {operationType === E_OperationType.Group && <AddCardGroupMethod callback={callback} />}
+            {operationType === E_OperationType.Single && <AddIdentifierSingleMethod callback={callback} />}
+            {operationType === E_OperationType.Group && <AddIdentifierGroupMethod callback={callback} />}
         </Modal>
     )
 }
