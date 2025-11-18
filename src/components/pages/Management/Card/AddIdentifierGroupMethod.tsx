@@ -1,11 +1,12 @@
-import { Button, Text } from "@components/template"
-import type { E_IdentifierType } from "@core/api"
+import { Button, Text, useNotify } from "@components/template"
+import { API, type E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { DocumentDownload } from "iconsax-reactjs"
 import type { FC } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import { UploadExcel } from "./UploadExcel"
 
@@ -24,6 +25,7 @@ export type T_GroupIdentifierInput = {
 export const AddIdentifierGroupMethod: FC<I_Props> = ({ callback }) => {
     // States and Hooks
     const { closeModal } = useModal()
+    const { notify } = useNotify()
     const [isLoading, setIsLoading] = useState(false)
     const [identifierInputs, setIdentifierInputs] = useState<T_GroupIdentifierInput[]>([])
     const isValid = identifierInputs.length > 0
@@ -31,7 +33,22 @@ export const AddIdentifierGroupMethod: FC<I_Props> = ({ callback }) => {
     // Methods
     const onSubmit = async () => {
         setIsLoading(true)
-        await callback()
+
+        const mappedIdentifiers: T_GroupIdentifierInput[] = identifierInputs.map(_ => ({
+            number: _.number.toString(),
+            serial: _.serial.toString(),
+            type: _.type.toUpperCase().toString() as E_IdentifierType,
+        }))
+
+        const { data, error } = await API.Identifier.BulkCreateIdentifiers({ body: { identifiers: mappedIdentifiers } })
+
+        if (data) {
+            await callback()
+            notify("identifiers_group_added_successfully", "success")
+        }
+
+        if (error) toast.error(error)
+
         closeModal(CurrentModal)
         setIsLoading(false)
     }

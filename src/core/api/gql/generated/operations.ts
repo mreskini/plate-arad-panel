@@ -112,6 +112,13 @@ export type CreateIdentifierMutationVariables = Types.Exact<{
 
 export type CreateIdentifierMutation = { createIdentifier: boolean };
 
+export type BulkCreateIdentifiersMutationVariables = Types.Exact<{
+  body: Types.BulkCreateIdentifiersRq;
+}>;
+
+
+export type BulkCreateIdentifiersMutation = { bulkCreateIdentifiers: boolean };
+
 export type EditIdentifierMutationVariables = Types.Exact<{
   body: Types.EditIdentifierRq;
 }>;
