@@ -61,5 +61,7 @@
   "controller_channel_number": "شماره کانال کنترلر",
   "reader_ip": "IP ریدر",
   "reader_brand": "برند ریدر",
-  "number": "شماره"
+  "number": "شماره",
+  "creation_date": "تاریخ ایجاد",
+  "phone_number": "شماره تماس"
 }

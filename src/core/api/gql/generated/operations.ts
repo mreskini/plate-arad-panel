@@ -74,6 +74,34 @@ export type FetchAccessControlsQueryVariables = Types.Exact<{ [key: string]: nev
 
 export type FetchAccessControlsQuery = { fetchAccessControls: Array<{ token: string, title: string, client: { token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }, schedule: { token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string } }> };
 
+export type FetchCustomersQueryVariables = Types.Exact<{
+  body: Types.FetchCustomersRq;
+}>;
+
+
+export type FetchCustomersQuery = { fetchCustomers: { count: number, items: Array<{ token: string, first_name: string, last_name: string, mobile: string, national_code: string, description?: string | null, apb: boolean, created_at: any }> } };
+
+export type CreateCustomerMutationVariables = Types.Exact<{
+  body: Types.CreateCustomerRq;
+}>;
+
+
+export type CreateCustomerMutation = { createCustomer: boolean };
+
+export type EditCustomerMutationVariables = Types.Exact<{
+  body: Types.EditCustomerRq;
+}>;
+
+
+export type EditCustomerMutation = { editCustomer: boolean };
+
+export type ToggleCustomerApbMutationVariables = Types.Exact<{
+  body: Types.ToggleCustomerApbRq;
+}>;
+
+
+export type ToggleCustomerApbMutation = { toggleCustomerApb: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

@@ -1,0 +1,27 @@
+query FetchCustomers($body: FetchCustomersRq!) {
+  fetchCustomers(body: $body) {
+    count
+    items {
+      token
+      first_name
+      last_name
+      mobile
+      national_code
+      description
+      apb
+      created_at
+    }
+  }
+}
+
+mutation CreateCustomer($body: CreateCustomerRq!) {
+  createCustomer(body: $body)
+}
+
+mutation EditCustomer($body: EditCustomerRq!) {
+  editCustomer(body: $body)
+}
+
+mutation ToggleCustomerApb($body: ToggleCustomerApbRq!) {
+  toggleCustomerApb(body: $body)
+}

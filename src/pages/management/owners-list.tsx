@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/no-unstable-nested-components */
-import { Status } from "@components/common"
 import { Layout } from "@components/layout"
 import {
     AddOwnerCardModal,
@@ -12,15 +11,16 @@ import {
     ViewOwnerVehiclesModal,
 } from "@components/pages/Management"
 import { Button, Input, Switch, Table } from "@components/template"
-import { E_IdentifierType, type T_FetchOwners, type T_Owner } from "@core/api"
-import { formatDate, formatNumber, sleep } from "@core/functions"
+import type { T_Customer, T_FetchCustomers } from "@core/api"
+import { API } from "@core/api"
+import { formatDate, formatPhoneNumber } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, CardAdd, Cards, Edit2, Money } from "iconsax-reactjs"
-import { range } from "lodash"
+import { Car, CardAdd, Edit2 } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { toast } from "react-toastify"
 
 const PageSize = 7
 
@@ -28,60 +28,61 @@ export const OwnersList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { modalVisibility, openModal } = useModal()
-    const [tableData, setTableData] = useState<T_FetchOwners>({ count: 0, items: [] })
-    const [selected, setSelected] = useState<T_Owner | null>(null)
+    const [tableData, setTableData] = useState<T_FetchCustomers>({ count: 0, items: [] })
+    const [selected, setSelected] = useState<T_Customer | null>(null)
     const [isFetching, setIsFetching] = useState<boolean>(true)
+    const [current, setCurrent] = useState(1)
 
-    const tableColumns: TableColumn<T_Owner>[] = [
+    const tableColumns: TableColumn<T_Customer>[] = [
         {
             name: t("firstname"),
-            selector: (row: T_Owner) => row.firstname,
+            selector: (row: T_Customer) => row.first_name,
         },
         {
             name: t("lastname"),
-            selector: (row: T_Owner) => row.lastname,
+            selector: (row: T_Customer) => row.last_name,
         },
         {
-            name: t("date"),
-            selector: (row: T_Owner) => formatDate(new Date(row.created_at)),
+            name: t("phone_number"),
+            selector: (row: T_Customer) => formatPhoneNumber(row.mobile),
+        },
+        {
+            name: t("creation_date"),
+            selector: (row: T_Customer) => formatDate(new Date(row.created_at)),
+        },
+        // {
+        //     name: t("id_type"),
+        //     cell: (row: T_Customer) => {
+        //         const isCard = row.?.type === E_IdentifierType.Card && Number(row.card?.token) % 3 === 0
+        //         return (
+        //             <>
+        //                 {row.card?.token ? (
+        //                     <Status
+        //                         contentKey={isCard ? "card" : "tag"}
+        //                         variant={isCard ? "info" : "warning"}
+        //                         icon={isCard ? <Money size={20} /> : <Cards size={20} />}
+        //                     />
+        //                 ) : (
+        //                     ""
+        //                 )}
+        //             </>
+        //         )
+        //     },
+        // },
+        {
+            name: "APB",
+            cell: (row: T_Customer) => (
+                <Switch checked={row.apb} onSwitchToggle={() => toggleAntiPassBack(row.token)} />
+            ),
         },
         {
             name: t("descriptions"),
-            selector: (row: T_Owner) => row.descriptions,
-        },
-        {
-            name: t("id_number"),
-            selector: (row: T_Owner) => (row.card?.token ? row.card.number : ""),
-        },
-        {
-            name: t("id_type"),
-            cell: (row: T_Owner) => {
-                const isCard = row.card?.type === E_IdentifierType.Card && Number(row.card?.token) % 3 === 0
-                return (
-                    <>
-                        {row.card?.token ? (
-                            <Status
-                                contentKey={isCard ? "card" : "tag"}
-                                variant={isCard ? "info" : "warning"}
-                                icon={isCard ? <Money size={20} /> : <Cards size={20} />}
-                            />
-                        ) : (
-                            ""
-                        )}
-                    </>
-                )
-            },
-        },
-        {
-            name: "APB",
-            cell: (row: T_Owner) => (
-                <Switch checked={row.apb} onSwitchToggle={() => toggleAntiPassBack(row.national_code)} />
-            ),
+            selector: (row: T_Customer) => (row.description ? row.description : ""),
         },
         {
             width: "150px",
             name: t("actions"),
-            cell: (row: T_Owner) => (
+            cell: (row: T_Customer) => (
                 <div className="flex items-center gap-2">
                     <Button variant="ghost">
                         <Car
@@ -127,56 +128,18 @@ export const OwnersList = () => {
     )
 
     // Methods
-    const fetchOwners = async () => {
-        await sleep(2000)
-
-        const MockTableData: T_FetchOwners = {
-            count: 10,
-            items: range(1, 7).map(_ => {
-                return {
-                    firstname: "عباس",
-                    lastname: "اکبری",
-                    national_code: `${formatNumber(971234560)}${formatNumber(_)}`,
-                    phone_number: `${formatNumber(912100100)}${formatNumber(_)}`,
-                    descriptions: `توضیحات مراجع شماره ${formatNumber(_)}`,
-                    created_at: new Date(),
-                    vehicles: range(1, 4).map(v => ({
-                        plate_number: "IR15-546b55",
-                        vehicle_model: `مدل خودرو ${formatNumber(v)}`,
-                        vehicle_color: `رنگ خودرو ${formatNumber(v)}`,
-                        vehicle_year: `${1400 + v}`,
-                    })),
-                    card:
-                        _ % 2 === 0
-                            ? {
-                                  number: `CARD-1034${_}`,
-                                  type: E_IdentifierType.Card,
-                                  available: true,
-                                  serial: `SERIAL-1034${_}`,
-                                  token: _.toString(),
-                              }
-                            : null,
-                    apb: _ % 2 === 0,
-                }
-            }),
-        }
-
-        setTableData(MockTableData)
+    const fetchOwners = async (page?: number) => {
+        const target = page ?? current
+        if (page) setCurrent(page)
+        const { data } = await API.Customer.FetchCustomers({ body: { page: target, limit: PageSize } })
+        if (data) setTableData(data.fetchCustomers)
         setIsFetching(false)
     }
 
-    const toggleAntiPassBack = async (nationalCode: string) => {
-        await sleep(1000)
-
-        setTableData(prevState => {
-            const updatedItems = prevState.items.map(item => {
-                if (item.national_code === nationalCode) {
-                    return { ...item, apb: !item.apb }
-                }
-                return item
-            })
-            return { ...prevState, items: updatedItems }
-        })
+    const toggleAntiPassBack = async (token: string) => {
+        const { data, error } = await API.Customer.ToggleCustomerApb({ body: { token } })
+        if (data) await fetchOwners(current)
+        if (error) toast.error(error)
     }
 
     // Use effects

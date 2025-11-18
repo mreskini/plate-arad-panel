@@ -3,6 +3,7 @@ import type {
     E_IdentifierType,
     FetchAccessControlsQuery,
     FetchClientsQuery,
+    FetchCustomersQuery,
     FetchDevicesQuery,
     FetchIdentifiersQuery,
     FetchRolesQuery,
@@ -52,29 +53,8 @@ export type T_WithoutPlateTraffic = T_FetchWithoutPlateTraffic["items"][number]
 export type T_FetchUsersList = FetchUsersListQuery["fetchUsersList"]
 export type T_Role = FetchRolesQuery["fetchRoles"][number]
 
-export type T_FetchOwners = {
-    count: number
-    items: {
-        firstname: string
-        lastname: string
-        national_code: string
-        phone_number: string
-        descriptions: string
-        profile_image?: string
-        created_at: any
-        vehicles: {
-            plate_number: string
-            vehicle_model: string
-            vehicle_color: string
-            vehicle_year: string
-            vehicle_image?: string
-        }[]
-        card?: T_Identifier | null
-        apb: boolean
-    }[]
-}
-
-export type T_Owner = T_FetchOwners["items"][number]
+export type T_FetchCustomers = FetchCustomersQuery["fetchCustomers"]
+export type T_Customer = T_FetchCustomers["items"][number]
 
 export type T_FetchIdentifiers = FetchIdentifiersQuery["fetchIdentifiers"]
 export type T_Identifier = T_FetchIdentifiers["items"][number]

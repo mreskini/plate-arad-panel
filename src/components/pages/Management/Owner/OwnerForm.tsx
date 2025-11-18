@@ -1,5 +1,5 @@
 import { Button, Divider, Input, Spinner } from "@components/template"
-import type { T_Owner } from "@core/api"
+import type { T_Customer } from "@core/api"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -8,7 +8,7 @@ import { UploadOwnerProfileImage } from "./UploadOwnerProfileImage"
 interface I_Props {
     onSubmit: (data: I_OwnerFormData) => Promise<void>
     onClose: Function
-    owner?: T_Owner
+    owner?: T_Customer
 }
 
 export interface I_OwnerFormData {
@@ -44,12 +44,11 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
     const formDataBinding = () => {
         if (!owner) return
 
-        setValue("firstname", owner.firstname)
-        setValue("lastname", owner.lastname)
+        setValue("firstname", owner.first_name)
+        setValue("lastname", owner.last_name)
         setValue("nationalCode", owner.national_code)
-        setValue("phoneNumber", owner.phone_number)
-        setValue("descriptions", owner.descriptions)
-        setValue("profileImageUrl", owner.profile_image ?? "")
+        setValue("phoneNumber", owner.mobile)
+        setValue("descriptions", owner.description ?? "")
     }
 
     useEffect(() => {
