@@ -2,13 +2,11 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
 import {
-    AddOwnerCardModal,
+    AddOwnerIdentifierModal,
     AddOwnerModal,
-    AddOwnerVehicleModal,
     EditOwnerModal,
     ManagementFiltersWrapper,
-    RemoveOwnerCardModal,
-    ViewOwnerVehiclesModal,
+    ViewOwnerModal,
 } from "@components/pages/Management"
 import { Button, Input, Switch, Table } from "@components/template"
 import type { T_Customer, T_FetchCustomers } from "@core/api"
@@ -16,7 +14,7 @@ import { API } from "@core/api"
 import { formatDate, formatPhoneNumber } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Car, CardAdd, Edit2 } from "iconsax-reactjs"
+import { CardAdd, Edit2, Eye } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
@@ -50,25 +48,6 @@ export const OwnersList = () => {
             name: t("creation_date"),
             selector: (row: T_Customer) => formatDate(new Date(row.created_at)),
         },
-        // {
-        //     name: t("id_type"),
-        //     cell: (row: T_Customer) => {
-        //         const isCard = row.?.type === E_IdentifierType.Card && Number(row.card?.token) % 3 === 0
-        //         return (
-        //             <>
-        //                 {row.card?.token ? (
-        //                     <Status
-        //                         contentKey={isCard ? "card" : "tag"}
-        //                         variant={isCard ? "info" : "warning"}
-        //                         icon={isCard ? <Money size={20} /> : <Cards size={20} />}
-        //                     />
-        //                 ) : (
-        //                     ""
-        //                 )}
-        //             </>
-        //         )
-        //     },
-        // },
         {
             name: "APB",
             cell: (row: T_Customer) => (
@@ -85,12 +64,12 @@ export const OwnersList = () => {
             cell: (row: T_Customer) => (
                 <div className="flex items-center gap-2">
                     <Button variant="ghost">
-                        <Car
+                        <Eye
                             size={20}
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.Owner.ViewVehicles)
+                                openModal(Modals.Owner.View)
                             }}
                         />
                     </Button>
@@ -101,7 +80,7 @@ export const OwnersList = () => {
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.Owner.AddCard)
+                                openModal(Modals.Owner.AddIdentifier)
                             }}
                         />
                     </Button>
@@ -112,7 +91,7 @@ export const OwnersList = () => {
                             className="text-neutral-700"
                             onClick={() => {
                                 setSelected(row)
-                                openModal(Modals.Management.Owner.EditOwner)
+                                openModal(Modals.Owner.Edit)
                             }}
                         />
                     </Button>
@@ -123,7 +102,7 @@ export const OwnersList = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
-            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Management.Owner.AddOwner)} />
+            <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Owner.Add)} />
         </div>
     )
 
@@ -150,22 +129,13 @@ export const OwnersList = () => {
     // Render
     return (
         <Layout.Dashboard>
-            {modalVisibility[Modals.Management.Owner.AddOwner] && <AddOwnerModal callback={fetchOwners} />}
+            {modalVisibility[Modals.Owner.Add] && <AddOwnerModal callback={fetchOwners} />}
+            {modalVisibility[Modals.Owner.Edit] && <EditOwnerModal callback={fetchOwners} owner={selected!} />}
+            {modalVisibility[Modals.Owner.View] && <ViewOwnerModal owner={selected!} />}
 
-            {modalVisibility[Modals.Management.Owner.EditOwner] && (
-                <EditOwnerModal callback={fetchOwners} owner={selected!} />
+            {modalVisibility[Modals.Owner.AddIdentifier] && (
+                <AddOwnerIdentifierModal callback={fetchOwners} owner={selected!} />
             )}
-
-            {modalVisibility[Modals.Management.Owner.AddVehicle] && <AddOwnerVehicleModal callback={fetchOwners} />}
-
-            {modalVisibility[Modals.Management.Owner.AddCard] && (
-                <AddOwnerCardModal callback={fetchOwners} owner={selected!} />
-            )}
-
-            {modalVisibility[Modals.Management.Owner.RemoveCard] && (
-                <RemoveOwnerCardModal callback={fetchOwners} owner={selected!} />
-            )}
-            {modalVisibility[Modals.Management.Owner.ViewVehicles] && <ViewOwnerVehiclesModal owner={selected!} />}
 
             <ManagementFiltersWrapper>
                 <div className="grid grid-cols-4 gap-6">

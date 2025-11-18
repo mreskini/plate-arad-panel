@@ -13,7 +13,7 @@ interface I_Props {
     callback: Function
 }
 
-const CurrentModal = Modals.Management.Owner.AddOwner
+const CurrentModal = Modals.Owner.Add
 
 export const AddOwnerModal: FC<I_Props> = ({ callback }) => {
     // States and hooks

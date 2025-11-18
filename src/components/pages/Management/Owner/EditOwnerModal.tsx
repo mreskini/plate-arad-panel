@@ -15,7 +15,7 @@ interface I_Props {
     owner: T_Customer
 }
 
-const CurrentModal = Modals.Management.Owner.EditOwner
+const CurrentModal = Modals.Owner.Edit
 
 export const EditOwnerModal: FC<I_Props> = ({ callback, owner }) => {
     // States and hooks
