@@ -31,5 +31,6 @@
   "role_edited_successfully": "نقش مورد نظر با موفقیت ویرایش شد",
   "configuration": "پیکربندی",
   "identifier_edited_successfully": "شناسه با موفقیت ویرایش شد",
-  "identifier_added_successfully": "شناسه با موفقیت افزوده شد"
+  "identifier_added_successfully": "شناسه با موفقیت افزوده شد",
+  "identifiers_group_added_successfully": "گروه شناسه‌ها با موفقیت افزوده شد"
 }

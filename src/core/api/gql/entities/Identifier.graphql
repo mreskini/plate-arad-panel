@@ -15,6 +15,10 @@ mutation CreateIdentifier($body: CreateIdentifierRq!) {
   createIdentifier(body: $body)
 }
 
+mutation BulkCreateIdentifiers($body: BulkCreateIdentifiersRq!) {
+  bulkCreateIdentifiers(body: $body)
+}
+
 mutation EditIdentifier($body: EditIdentifierRq!) {
   editIdentifier(body: $body)
 }

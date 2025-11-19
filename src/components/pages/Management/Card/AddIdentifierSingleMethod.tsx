@@ -56,7 +56,7 @@ export const AddIdentifierSingleMethod: FC<I_Props> = ({ callback }) => {
 
     // Render
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-xl">
             <div className="flex w-full items-center gap-4 mb-4">
                 <Input.Label labelKey="type" className="min-w-24" required />
                 <Input.DropDown

@@ -22,6 +22,16 @@ export type AccessControl = {
   token: Scalars['String']['output'];
 };
 
+export type BulkCreateIdentifiersRq = {
+  identifiers: Array<BulkIdentifierItem>;
+};
+
+export type BulkIdentifierItem = {
+  number: Scalars['String']['input'];
+  serial: Scalars['String']['input'];
+  type: E_IdentifierType;
+};
+
 export type Client = {
   camera?: Maybe<Device>;
   name: Scalars['String']['output'];
@@ -43,6 +53,14 @@ export type CreateClientRq = {
   reader_token?: InputMaybe<Scalars['String']['input']>;
   relay_token?: InputMaybe<Scalars['String']['input']>;
   type: E_ClientType;
+};
+
+export type CreateCustomerRq = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  first_name: Scalars['String']['input'];
+  last_name: Scalars['String']['input'];
+  mobile: Scalars['String']['input'];
+  national_code: Scalars['String']['input'];
 };
 
 export type CreateDeviceRq = {
@@ -82,6 +100,17 @@ export type CreateUserRq = {
   profile_image_url?: InputMaybe<Scalars['String']['input']>;
   role_token: Scalars['String']['input'];
   username: Scalars['String']['input'];
+};
+
+export type Customer = {
+  apb: Scalars['Boolean']['output'];
+  created_at: Scalars['DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  first_name: Scalars['String']['output'];
+  last_name: Scalars['String']['output'];
+  mobile: Scalars['String']['output'];
+  national_code: Scalars['String']['output'];
+  token: Scalars['String']['output'];
 };
 
 export type DeleteClientRq = {
@@ -142,6 +171,15 @@ export type EditClientRq = {
   type: E_ClientType;
 };
 
+export type EditCustomerRq = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+  mobile?: InputMaybe<Scalars['String']['input']>;
+  national_code?: InputMaybe<Scalars['String']['input']>;
+  token: Scalars['String']['input'];
+};
+
 export type EditDeviceRq = {
   brand_name?: InputMaybe<Scalars['String']['input']>;
   channel?: InputMaybe<Scalars['Float']['input']>;
@@ -184,6 +222,17 @@ export type FetchAccessControlByTokenRq = {
   token: Scalars['String']['input'];
 };
 
+export type FetchCustomersRq = {
+  limit?: Scalars['Int']['input'];
+  page?: Scalars['Int']['input'];
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FetchCustomersRs = {
+  count: Scalars['Float']['output'];
+  items: Array<Customer>;
+};
+
 export type FetchIdentifiersRq = {
   limit: Scalars['Int']['input'];
   page: Scalars['Int']['input'];
@@ -222,8 +271,10 @@ export type Identifier = {
 };
 
 export type Mutation = {
+  bulkCreateIdentifiers: Scalars['Boolean']['output'];
   createAccessControl: Scalars['Boolean']['output'];
   createClient: Scalars['Boolean']['output'];
+  createCustomer: Scalars['Boolean']['output'];
   createDevice: Scalars['Boolean']['output'];
   createIdentifier: Scalars['Boolean']['output'];
   createNewRole: Scalars['Boolean']['output'];
@@ -232,15 +283,22 @@ export type Mutation = {
   deleteClient: Scalars['Boolean']['output'];
   editAccessControl: Scalars['Boolean']['output'];
   editClient: Scalars['Boolean']['output'];
+  editCustomer: Scalars['Boolean']['output'];
   editDevice: Scalars['Boolean']['output'];
   editIdentifier: Scalars['Boolean']['output'];
   editSchedule: Scalars['Boolean']['output'];
   editUser: Scalars['Boolean']['output'];
+  toggleCustomerApb: Scalars['Boolean']['output'];
   toggleIdentifierStatus: Scalars['Boolean']['output'];
   toggleUserStatus: Scalars['Boolean']['output'];
   updateParkingLicense: Scalars['Boolean']['output'];
   updateRole: Scalars['Boolean']['output'];
   userLogin: Scalars['String']['output'];
+};
+
+
+export type MutationBulkCreateIdentifiersArgs = {
+  body: BulkCreateIdentifiersRq;
 };
 
 
@@ -251,6 +309,11 @@ export type MutationCreateAccessControlArgs = {
 
 export type MutationCreateClientArgs = {
   body: CreateClientRq;
+};
+
+
+export type MutationCreateCustomerArgs = {
+  body: CreateCustomerRq;
 };
 
 
@@ -294,6 +357,11 @@ export type MutationEditClientArgs = {
 };
 
 
+export type MutationEditCustomerArgs = {
+  body: EditCustomerRq;
+};
+
+
 export type MutationEditDeviceArgs = {
   body: EditDeviceRq;
 };
@@ -311,6 +379,11 @@ export type MutationEditScheduleArgs = {
 
 export type MutationEditUserArgs = {
   body: EditUserRq;
+};
+
+
+export type MutationToggleCustomerApbArgs = {
+  body: ToggleCustomerApbRq;
 };
 
 
@@ -364,6 +437,7 @@ export type Query = {
   fetchAccessControlByToken: AccessControl;
   fetchAccessControls: Array<AccessControl>;
   fetchClients: Array<Client>;
+  fetchCustomers: FetchCustomersRs;
   fetchDevices: Array<Device>;
   fetchIdentifiers: FetchIdentifiersRs;
   fetchRoleByToken: Role;
@@ -378,6 +452,11 @@ export type Query = {
 
 export type QueryFetchAccessControlByTokenArgs = {
   body: FetchAccessControlByTokenRq;
+};
+
+
+export type QueryFetchCustomersArgs = {
+  body: FetchCustomersRq;
 };
 
 
@@ -415,6 +494,10 @@ export type Schedule = {
   start_time: Scalars['String']['output'];
   title: Scalars['String']['output'];
   token: Scalars['String']['output'];
+};
+
+export type ToggleCustomerApbRq = {
+  token: Scalars['String']['input'];
 };
 
 export type ToggleIdentifierStatusRq = {

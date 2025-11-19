@@ -23,6 +23,11 @@ export const CreateIdentifierDocument = gql`
   createIdentifier(body: $body)
 }
     `;
+export const BulkCreateIdentifiersDocument = gql`
+    mutation BulkCreateIdentifiers($body: BulkCreateIdentifiersRq!) {
+  bulkCreateIdentifiers(body: $body)
+}
+    `;
 export const EditIdentifierDocument = gql`
     mutation EditIdentifier($body: EditIdentifierRq!) {
   editIdentifier(body: $body)
@@ -46,6 +51,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CreateIdentifier(variables: Types.CreateIdentifierMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateIdentifierMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateIdentifierMutation>(CreateIdentifierDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateIdentifier', 'mutation');
+    },
+    BulkCreateIdentifiers(variables: Types.BulkCreateIdentifiersMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.BulkCreateIdentifiersMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.BulkCreateIdentifiersMutation>(BulkCreateIdentifiersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'BulkCreateIdentifiers', 'mutation');
     },
     EditIdentifier(variables: Types.EditIdentifierMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditIdentifierMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.EditIdentifierMutation>(EditIdentifierDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditIdentifier', 'mutation');
