@@ -6,18 +6,17 @@ export const Modals = {
         OpenDoor: "monitoring-open-door",
     },
 
+    Owner: {
+        Add: "add-owner",
+        Edit: "edit-owner",
+        View: "view-owner",
+        AddIdentifier: "add-owner-identifier",
+    },
+
     Management: {
         User: {
             AddUser: "management-add-user",
             EditUser: "management-edit-user",
-        },
-        Owner: {
-            AddOwner: "management-add-owner",
-            EditOwner: "management-edit-owner",
-            AddVehicle: "management-add-owner-vehicle",
-            ViewVehicles: "management-view-owner-vehicles",
-            AddCard: "management-add-owner-card",
-            RemoveCard: "management-remove-owner-card",
         },
         Identifier: {
             Add: "management-add-identifier",
