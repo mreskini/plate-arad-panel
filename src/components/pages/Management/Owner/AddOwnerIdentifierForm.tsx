@@ -1,29 +1,33 @@
+import type { T_InputDropdownOption } from "@components/template"
 import { Button, Divider, Input, Spinner } from "@components/template"
 import { E_IdentifierType } from "@core/api"
+import { useCommon } from "@core/contexts"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import { UploadOwnerVehicleImage } from "./UploadOwnerVehicleImage"
 
 interface I_Props {
-    onSubmit: (data: I_AddOwnerCardFormData) => Promise<void>
+    onSubmit: (data: I_AddOwnerIdentifierFormData) => Promise<void>
     onClose: Function
 }
 
-export interface I_AddOwnerCardFormData {
-    cardType: E_IdentifierType
-    cardToken: string
+export interface I_AddOwnerIdentifierFormData {
+    identifierType: E_IdentifierType
+    identifierToken: string
     plate: string
-    model: string
-    color: string
-    year: string
+    model?: string
+    color?: string
+    year?: string
     imageUrl?: string
     imageFile: File | null
 }
 
-export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
+export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
     // States and hooks
     const [isFetching, setIsFetching] = useState(true)
+    const { onIdentifierSearch } = useCommon()
+    const [initialIdentifiers, setInitialIdentifiers] = useState<T_InputDropdownOption[]>([])
 
     const {
         handleSubmit,
@@ -32,7 +36,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
         watch,
         register,
         formState: { isSubmitting },
-    } = useForm<I_AddOwnerCardFormData>({
+    } = useForm<I_AddOwnerIdentifierFormData>({
         mode: "onChange",
     })
 
@@ -43,6 +47,7 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
 
     useEffect(() => {
         init()
+        onIdentifierSearch("").then(_ => setInitialIdentifiers(_))
     }, [])
 
     // Render
@@ -72,44 +77,52 @@ export const AddOwnerCardForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                     labelKey: "vehicle",
                                 },
                             ]}
-                            value={getValues("cardType")}
-                            setValue={(_: string) => setValue("cardType", _ as E_IdentifierType)}
+                            value={getValues("identifierType")}
+                            setValue={(_: string) => setValue("identifierType", _ as E_IdentifierType)}
                             wrapperClassName="max-w-lg"
                         />
                     </div>
 
                     <Divider className="mb-4" />
 
-                    {watch("cardType") === E_IdentifierType.Card && (
+                    {watch("identifierType") === E_IdentifierType.Card && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card" className="min-w-24" required />
-                            <Input
-                                placeholder="please_enter_id"
-                                value={getValues("cardToken")}
-                                onChange={e => setValue("cardToken", e.target.value)}
-                                className="w-full"
+                            <Input.DropDown
+                                options={initialIdentifiers}
+                                value={watch("identifierToken")}
+                                setValue={(_: string) => setValue("identifierToken", _)}
+                                disabled={isFetching}
+                                placeholder="please_search_identifier"
+                                onSearch={onIdentifierSearch}
                             />
                         </div>
                     )}
 
-                    {watch("cardType") === E_IdentifierType.Tag && (
+                    {watch("identifierType") === E_IdentifierType.Tag && (
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="tag" className="min-w-24" required />
-                            <Input
-                                placeholder="please_enter_id"
-                                value={getValues("cardToken")}
-                                onChange={e => setValue("cardToken", e.target.value)}
-                                className="w-full"
+                            <Input.DropDown
+                                options={initialIdentifiers}
+                                value={watch("identifierToken")}
+                                setValue={(_: string) => setValue("identifierToken", _)}
+                                disabled={isFetching}
+                                placeholder="please_search_identifier"
+                                onSearch={onIdentifierSearch}
                             />
                         </div>
                     )}
 
-                    {watch("cardType") === E_IdentifierType.Vehicle && (
+                    {watch("identifierType") === E_IdentifierType.Vehicle && (
                         <>
                             <div className="flex w-full items-center gap-2 mb-4">
                                 <Input.Label labelKey="plate_number" className="min-w-32" required />
                                 <div className="flex items-center gap-2">
-                                    <Input.PlateNumber disabled={isFetching} clearable />
+                                    <Input.PlateNumber
+                                        disabled={isSubmitting}
+                                        className="w-full"
+                                        setValue={(_: string) => setValue("plate", _)}
+                                    />
                                 </div>
                             </div>
 

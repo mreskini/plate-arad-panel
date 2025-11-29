@@ -1,4 +1,4 @@
-export * from "./AddOwnerCardForm"
+export * from "./AddOwnerIdentifierForm"
 export * from "./AddOwnerIdentifierModal"
 export * from "./AddOwnerModal"
 export * from "./EditOwnerModal"
