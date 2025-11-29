@@ -77,6 +77,11 @@ export const AddIdentifierToCustomerDocument = gql`
   addIdentifierToCustomer(body: $body)
 }
     `;
+export const CreateVehicleDocument = gql`
+    mutation CreateVehicle($body: CreateVehicleRq!) {
+  createVehicle(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -102,6 +107,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     AddIdentifierToCustomer(variables: Types.AddIdentifierToCustomerMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.AddIdentifierToCustomerMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.AddIdentifierToCustomerMutation>(AddIdentifierToCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddIdentifierToCustomer', 'mutation');
+    },
+    CreateVehicle(variables: Types.CreateVehicleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateVehicleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateVehicleMutation>(CreateVehicleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateVehicle', 'mutation');
     }
   };
 }

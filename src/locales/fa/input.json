@@ -154,5 +154,6 @@
   "vehicle": "خودرو",
   "number": "شماره",
   "owner_vehicles": "خودروهای مراجع",
-  "please_search_identifier": "لطفا شماره شناسه را جستجو کنید"
+  "please_search_identifier": "لطفا شماره شناسه را جستجو کنید",
+  "manufacture_year": "سال ساخت"
 }

@@ -16,9 +16,9 @@ export interface I_AddOwnerIdentifierFormData {
     identifierType: E_IdentifierType
     identifierToken: string
     plate: string
-    model: string
-    color: string
-    year: string
+    model?: string
+    color?: string
+    year?: string
     imageUrl?: string
     imageFile: File | null
 }
@@ -118,7 +118,11 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                             <div className="flex w-full items-center gap-2 mb-4">
                                 <Input.Label labelKey="plate_number" className="min-w-32" required />
                                 <div className="flex items-center gap-2">
-                                    <Input.PlateNumber disabled={isFetching} clearable />
+                                    <Input.PlateNumber
+                                        disabled={isSubmitting}
+                                        className="w-full"
+                                        setValue={(_: string) => setValue("plate", _)}
+                                    />
                                 </div>
                             </div>
 

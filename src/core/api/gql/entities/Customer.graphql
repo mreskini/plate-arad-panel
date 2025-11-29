@@ -64,3 +64,7 @@ mutation ToggleCustomerBlocked($body: ToggleCustomerBlockedRq!) {
 mutation AddIdentifierToCustomer($body: AddIdentifierToCustomerRq!) {
   addIdentifierToCustomer(body: $body)
 }
+
+mutation CreateVehicle($body: CreateVehicleRq!) {
+  createVehicle(body: $body)
+}

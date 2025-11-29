@@ -116,6 +116,13 @@ export type AddIdentifierToCustomerMutationVariables = Types.Exact<{
 
 export type AddIdentifierToCustomerMutation = { addIdentifierToCustomer: boolean };
 
+export type CreateVehicleMutationVariables = Types.Exact<{
+  body: Types.CreateVehicleRq;
+}>;
+
+
+export type CreateVehicleMutation = { createVehicle: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
