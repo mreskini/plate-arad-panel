@@ -13,11 +13,12 @@ import type { T_Customer, T_FetchCustomers } from "@core/api"
 import { API } from "@core/api"
 import { formatDate, formatPhoneNumber } from "@core/functions"
 import { useModal } from "@core/stores"
-import { Modals } from "@core/utilities"
+import { Images, Modals } from "@core/utilities"
 import { CardAdd, Edit2, Eye } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const PageSize = 7
@@ -32,6 +33,17 @@ export const OwnersList = () => {
     const [current, setCurrent] = useState(1)
 
     const tableColumns: TableColumn<T_Customer>[] = [
+        {
+            name: t("image"),
+            cell: (row: T_Customer) =>
+                row.image_url ? (
+                    <Link to={row.image_url} target="_blank">
+                        <img src={Images.UserProfilePlaceholder} alt={`${row.first_name} ${row.last_name} profile`} />
+                    </Link>
+                ) : (
+                    ""
+                ),
+        },
         {
             name: t("firstname"),
             selector: (row: T_Customer) => row.first_name,

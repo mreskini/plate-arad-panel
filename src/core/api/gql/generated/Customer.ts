@@ -16,6 +16,37 @@ export const FetchCustomersDocument = gql`
       national_code
       description
       apb
+      blocked
+      image_url
+      vehicles {
+        token
+        plate_number
+        model
+        color
+        manufacture_year
+        image_url
+      }
+      access {
+        token
+        title
+        schedule {
+          token
+          title
+          start_date
+          end_date
+          start_time
+          end_time
+          allowed_days
+        }
+      }
+      identifiers {
+        token
+        serial
+        number
+        type
+        available
+        in_use
+      }
       created_at
     }
   }

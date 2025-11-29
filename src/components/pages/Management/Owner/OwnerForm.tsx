@@ -49,6 +49,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
         setValue("nationalCode", owner.national_code)
         setValue("phoneNumber", owner.mobile)
         setValue("descriptions", owner.description ?? "")
+        setValue("profileImageUrl", owner.image_url ?? "")
     }
 
     useEffect(() => {
