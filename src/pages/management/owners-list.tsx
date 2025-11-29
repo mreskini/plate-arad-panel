@@ -67,6 +67,10 @@ export const OwnersList = () => {
             ),
         },
         {
+            name: t("black_list"),
+            cell: (row: T_Customer) => <Switch checked={row.blocked} onSwitchToggle={() => toggleBlocked(row.token)} />,
+        },
+        {
             name: t("descriptions"),
             selector: (row: T_Customer) => (row.description ? row.description : ""),
         },
@@ -129,6 +133,12 @@ export const OwnersList = () => {
 
     const toggleAntiPassBack = async (token: string) => {
         const { data, error } = await API.Customer.ToggleCustomerApb({ body: { token } })
+        if (data) await fetchOwners(current)
+        if (error) toast.error(error)
+    }
+
+    const toggleBlocked = async (token: string) => {
+        const { data, error } = await API.Customer.ToggleCustomerBlocked({ body: { token } })
         if (data) await fetchOwners(current)
         if (error) toast.error(error)
     }

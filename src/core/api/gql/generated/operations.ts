@@ -102,6 +102,13 @@ export type ToggleCustomerApbMutationVariables = Types.Exact<{
 
 export type ToggleCustomerApbMutation = { toggleCustomerApb: boolean };
 
+export type ToggleCustomerBlockedMutationVariables = Types.Exact<{
+  body: Types.ToggleCustomerBlockedRq;
+}>;
+
+
+export type ToggleCustomerBlockedMutation = { toggleCustomerBlocked: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

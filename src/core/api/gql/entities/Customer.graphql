@@ -56,3 +56,7 @@ mutation EditCustomer($body: EditCustomerRq!) {
 mutation ToggleCustomerApb($body: ToggleCustomerApbRq!) {
   toggleCustomerApb(body: $body)
 }
+
+mutation ToggleCustomerBlocked($body: ToggleCustomerBlockedRq!) {
+  toggleCustomerBlocked(body: $body)
+}

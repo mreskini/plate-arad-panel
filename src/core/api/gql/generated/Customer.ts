@@ -67,6 +67,11 @@ export const ToggleCustomerApbDocument = gql`
   toggleCustomerApb(body: $body)
 }
     `;
+export const ToggleCustomerBlockedDocument = gql`
+    mutation ToggleCustomerBlocked($body: ToggleCustomerBlockedRq!) {
+  toggleCustomerBlocked(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -86,6 +91,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ToggleCustomerApb(variables: Types.ToggleCustomerApbMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleCustomerApbMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleCustomerApbMutation>(ToggleCustomerApbDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleCustomerApb', 'mutation');
+    },
+    ToggleCustomerBlocked(variables: Types.ToggleCustomerBlockedMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleCustomerBlockedMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleCustomerBlockedMutation>(ToggleCustomerBlockedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleCustomerBlocked', 'mutation');
     }
   };
 }

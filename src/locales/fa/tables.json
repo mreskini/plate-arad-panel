@@ -63,5 +63,6 @@
   "reader_brand": "برند ریدر",
   "number": "شماره",
   "creation_date": "تاریخ ایجاد",
-  "phone_number": "شماره تماس"
+  "phone_number": "شماره تماس",
+  "black_list": "لیست سیاه"
 }
