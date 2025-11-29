@@ -1,10 +1,11 @@
 import { Modal, Text, useNotify } from "@components/template"
-import type { T_Customer } from "@core/api"
+import { API, type T_Customer } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC } from "react"
+import { toast } from "react-toastify"
 
-import { AddOwnerCardForm } from "./AddOwnerCardForm"
+import { AddOwnerIdentifierForm, type I_AddOwnerIdentifierFormData } from "./AddOwnerIdentifierForm"
 
 interface I_Props {
     callback: Function
@@ -19,10 +20,23 @@ export const AddOwnerIdentifierModal: FC<I_Props> = ({ callback, owner }) => {
     const { notify } = useNotify()
 
     // Methods
-    const onSubmit = async () => {
-        await callback()
-        closeModal(CurrentModal)
-        notify("owner_id_assigned_successfully", "success")
+    const onSubmit = async (formValues: I_AddOwnerIdentifierFormData) => {
+        // let vehicleImage
+        // const file = formValues.imageFile
+        // if (file) vehicleImage = await uploadFile(OWNER_VEHICLE_IMAGE_UPLOAD_ROUTE, file)
+
+        const { data, error } = await API.Customer.AddIdentifierToCustomer({
+            body: {
+                customer_token: owner.token,
+                identifier_token: formValues.identifierToken,
+            },
+        })
+        if (data && data.addIdentifierToCustomer) {
+            await callback()
+            notify("owner_id_assigned_successfully", "success")
+            closeModal(CurrentModal)
+        }
+        if (error) toast.error(error)
     }
 
     // Render
@@ -42,7 +56,7 @@ export const AddOwnerIdentifierModal: FC<I_Props> = ({ callback, owner }) => {
             }
             closeButton
         >
-            <AddOwnerCardForm onSubmit={onSubmit} onClose={() => closeModal(CurrentModal)} />
+            <AddOwnerIdentifierForm onSubmit={onSubmit} onClose={() => closeModal(CurrentModal)} />
         </Modal>
     )
 }
