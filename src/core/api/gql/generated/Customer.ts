@@ -16,6 +16,37 @@ export const FetchCustomersDocument = gql`
       national_code
       description
       apb
+      blocked
+      image_url
+      vehicles {
+        token
+        plate_number
+        model
+        color
+        manufacture_year
+        image_url
+      }
+      access {
+        token
+        title
+        schedule {
+          token
+          title
+          start_date
+          end_date
+          start_time
+          end_time
+          allowed_days
+        }
+      }
+      identifiers {
+        token
+        serial
+        number
+        type
+        available
+        in_use
+      }
       created_at
     }
   }
@@ -34,6 +65,21 @@ export const EditCustomerDocument = gql`
 export const ToggleCustomerApbDocument = gql`
     mutation ToggleCustomerApb($body: ToggleCustomerApbRq!) {
   toggleCustomerApb(body: $body)
+}
+    `;
+export const ToggleCustomerBlockedDocument = gql`
+    mutation ToggleCustomerBlocked($body: ToggleCustomerBlockedRq!) {
+  toggleCustomerBlocked(body: $body)
+}
+    `;
+export const AddIdentifierToCustomerDocument = gql`
+    mutation AddIdentifierToCustomer($body: AddIdentifierToCustomerRq!) {
+  addIdentifierToCustomer(body: $body)
+}
+    `;
+export const CreateVehicleDocument = gql`
+    mutation CreateVehicle($body: CreateVehicleRq!) {
+  createVehicle(body: $body)
 }
     `;
 
@@ -55,6 +101,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ToggleCustomerApb(variables: Types.ToggleCustomerApbMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleCustomerApbMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleCustomerApbMutation>(ToggleCustomerApbDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleCustomerApb', 'mutation');
+    },
+    ToggleCustomerBlocked(variables: Types.ToggleCustomerBlockedMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleCustomerBlockedMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleCustomerBlockedMutation>(ToggleCustomerBlockedDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleCustomerBlocked', 'mutation');
+    },
+    AddIdentifierToCustomer(variables: Types.AddIdentifierToCustomerMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.AddIdentifierToCustomerMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.AddIdentifierToCustomerMutation>(AddIdentifierToCustomerDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddIdentifierToCustomer', 'mutation');
+    },
+    CreateVehicle(variables: Types.CreateVehicleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateVehicleMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateVehicleMutation>(CreateVehicleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateVehicle', 'mutation');
     }
   };
 }

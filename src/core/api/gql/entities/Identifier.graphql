@@ -26,3 +26,14 @@ mutation EditIdentifier($body: EditIdentifierRq!) {
 mutation ToggleIdentifierStatus($body: ToggleIdentifierStatusRq!) {
   toggleIdentifierStatus(body: $body)
 }
+
+query SearchIdentifiers($body: SearchIdentifiersRq!) {
+  searchIdentifiers(body: $body) {
+    token
+    serial
+    number
+    type
+    available
+    in_use
+  }
+}

@@ -33,7 +33,7 @@ export const AddOwnerModal: FC<I_Props> = ({ callback }) => {
                 mobile: formValues.phoneNumber.trim(),
                 national_code: formValues.nationalCode.trim(),
                 ...(formValues.descriptions && { description: formValues.descriptions.trim() }),
-                ...(profileImage && { profile_image_url: profileImage.url }),
+                ...(profileImage && { image_url: profileImage.url }),
             },
         })
 

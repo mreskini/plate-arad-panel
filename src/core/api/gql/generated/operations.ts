@@ -79,7 +79,7 @@ export type FetchCustomersQueryVariables = Types.Exact<{
 }>;
 
 
-export type FetchCustomersQuery = { fetchCustomers: { count: number, items: Array<{ token: string, first_name: string, last_name: string, mobile: string, national_code: string, description?: string | null, apb: boolean, created_at: any }> } };
+export type FetchCustomersQuery = { fetchCustomers: { count: number, items: Array<{ token: string, first_name: string, last_name: string, mobile: string, national_code: string, description?: string | null, apb: boolean, blocked: boolean, image_url?: string | null, created_at: any, vehicles: Array<{ token: string, plate_number: string, model?: string | null, color?: string | null, manufacture_year?: string | null, image_url?: string | null }>, access?: { token: string, title: string, schedule: { token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string, allowed_days: Array<Types.E_DayOfWeek> } } | null, identifiers?: Array<{ token: string, serial: string, number: string, type: Types.E_IdentifierType, available: boolean, in_use: boolean }> | null }> } };
 
 export type CreateCustomerMutationVariables = Types.Exact<{
   body: Types.CreateCustomerRq;
@@ -101,6 +101,27 @@ export type ToggleCustomerApbMutationVariables = Types.Exact<{
 
 
 export type ToggleCustomerApbMutation = { toggleCustomerApb: boolean };
+
+export type ToggleCustomerBlockedMutationVariables = Types.Exact<{
+  body: Types.ToggleCustomerBlockedRq;
+}>;
+
+
+export type ToggleCustomerBlockedMutation = { toggleCustomerBlocked: boolean };
+
+export type AddIdentifierToCustomerMutationVariables = Types.Exact<{
+  body: Types.AddIdentifierToCustomerRq;
+}>;
+
+
+export type AddIdentifierToCustomerMutation = { addIdentifierToCustomer: boolean };
+
+export type CreateVehicleMutationVariables = Types.Exact<{
+  body: Types.CreateVehicleRq;
+}>;
+
+
+export type CreateVehicleMutation = { createVehicle: boolean };
 
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -160,6 +181,13 @@ export type ToggleIdentifierStatusMutationVariables = Types.Exact<{
 
 
 export type ToggleIdentifierStatusMutation = { toggleIdentifierStatus: boolean };
+
+export type SearchIdentifiersQueryVariables = Types.Exact<{
+  body: Types.SearchIdentifiersRq;
+}>;
+
+
+export type SearchIdentifiersQuery = { searchIdentifiers: Array<{ token: string, serial: string, number: string, type: Types.E_IdentifierType, available: boolean, in_use: boolean }> };
 
 export type ParkingInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

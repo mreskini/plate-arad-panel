@@ -21,6 +21,7 @@ interface I_Context {
     fetchFlatClients: Function
     fetchFlatSchedules: Function
     isLicenseAvailable: boolean
+    onIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
 }
 
 const Initials: I_Context = {
@@ -31,6 +32,7 @@ const Initials: I_Context = {
     fetchFlatClients: () => undefined,
     fetchFlatSchedules: () => undefined,
     isLicenseAvailable: false,
+    onIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -96,6 +98,14 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         if (data) return data.fetchSchedules
         return []
     }
+
+    const onIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        const { data } = await API.Identifier.SearchIdentifiers({ body: { search: searchTerm } })
+        if (data && data.searchIdentifiers)
+            return data.searchIdentifiers.map(_ => ({ label: _.number, value: _.token }))
+        return []
+    }
+
     // Data binding
     const value = {
         fetchCurrentUser,
@@ -105,6 +115,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         fetchFlatClients,
         fetchFlatSchedules,
         isLicenseAvailable,
+        onIdentifierSearch,
     }
 
     // Render

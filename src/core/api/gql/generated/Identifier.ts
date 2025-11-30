@@ -38,6 +38,18 @@ export const ToggleIdentifierStatusDocument = gql`
   toggleIdentifierStatus(body: $body)
 }
     `;
+export const SearchIdentifiersDocument = gql`
+    query SearchIdentifiers($body: SearchIdentifiersRq!) {
+  searchIdentifiers(body: $body) {
+    token
+    serial
+    number
+    type
+    available
+    in_use
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -60,6 +72,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ToggleIdentifierStatus(variables: Types.ToggleIdentifierStatusMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ToggleIdentifierStatusMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ToggleIdentifierStatusMutation>(ToggleIdentifierStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ToggleIdentifierStatus', 'mutation');
+    },
+    SearchIdentifiers(variables: Types.SearchIdentifiersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.SearchIdentifiersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.SearchIdentifiersQuery>(SearchIdentifiersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SearchIdentifiers', 'query');
     }
   };
 }
