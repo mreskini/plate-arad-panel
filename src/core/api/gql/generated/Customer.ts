@@ -82,6 +82,22 @@ export const CreateVehicleDocument = gql`
   createVehicle(body: $body)
 }
     `;
+export const SearchCustomersDocument = gql`
+    query SearchCustomers($body: SearchCustomersRq!) {
+  searchCustomers(body: $body) {
+    token
+    first_name
+    last_name
+    mobile
+    national_code
+  }
+}
+    `;
+export const CreateUnauthorizedTrafficDocument = gql`
+    mutation CreateUnauthorizedTraffic($body: CreateUnauthorizedTrafficRq!) {
+  createUnauthorizedTraffic(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -110,6 +126,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CreateVehicle(variables: Types.CreateVehicleMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateVehicleMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateVehicleMutation>(CreateVehicleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateVehicle', 'mutation');
+    },
+    SearchCustomers(variables: Types.SearchCustomersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.SearchCustomersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.SearchCustomersQuery>(SearchCustomersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SearchCustomers', 'query');
+    },
+    CreateUnauthorizedTraffic(variables: Types.CreateUnauthorizedTrafficMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateUnauthorizedTrafficMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateUnauthorizedTrafficMutation>(CreateUnauthorizedTrafficDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUnauthorizedTraffic', 'mutation');
     }
   };
 }

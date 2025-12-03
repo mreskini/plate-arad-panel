@@ -67,6 +67,15 @@ export const EditUserDocument = gql`
   editUser(body: $body)
 }
     `;
+export const SearchUsersByFullnameDocument = gql`
+    query SearchUsersByFullname($body: SearchUsersByFullnameRq!) {
+  searchUsersByFullname(body: $body) {
+    token
+    username
+    fullname
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -92,6 +101,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     EditUser(variables: Types.EditUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.EditUserMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.EditUserMutation>(EditUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'EditUser', 'mutation');
+    },
+    SearchUsersByFullname(variables: Types.SearchUsersByFullnameQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.SearchUsersByFullnameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.SearchUsersByFullnameQuery>(SearchUsersByFullnameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SearchUsersByFullname', 'query');
     }
   };
 }

@@ -54,3 +54,11 @@ mutation CreateUser($body: CreateUserRq!) {
 mutation EditUser($body: EditUserRq!) {
   editUser(body: $body)
 }
+
+query SearchUsersByFullname($body: SearchUsersByFullnameRq!) {
+  searchUsersByFullname(body: $body) {
+    token
+    username
+    fullname
+  }
+}

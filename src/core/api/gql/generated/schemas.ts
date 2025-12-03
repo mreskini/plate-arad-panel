@@ -169,6 +169,11 @@ export type Device = {
   username?: Maybe<Scalars['String']['output']>;
 };
 
+export type DownloadReportRs = {
+  data: Scalars['String']['output'];
+  format: Scalars['String']['output'];
+};
+
 export enum E_ClientType {
   Input = 'INPUT',
   Output = 'OUTPUT'
@@ -335,6 +340,7 @@ export type Mutation = {
   editIdentifier: Scalars['Boolean']['output'];
   editSchedule: Scalars['Boolean']['output'];
   editUser: Scalars['Boolean']['output'];
+  exportReportTrafficList: DownloadReportRs;
   toggleCustomerApb: Scalars['Boolean']['output'];
   toggleCustomerBlocked: Scalars['Boolean']['output'];
   toggleIdentifierStatus: Scalars['Boolean']['output'];
@@ -448,6 +454,11 @@ export type MutationEditScheduleArgs = {
 
 export type MutationEditUserArgs = {
   body: EditUserRq;
+};
+
+
+export type MutationExportReportTrafficListArgs = {
+  body: ReportTrafficListRq;
 };
 
 
@@ -627,6 +638,7 @@ export type SearchCustomersRq = {
 
 export type SearchIdentifiersRq = {
   search?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<E_IdentifierType>;
 };
 
 export type SearchUsersByFullnameRq = {

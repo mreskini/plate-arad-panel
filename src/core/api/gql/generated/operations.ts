@@ -123,6 +123,20 @@ export type CreateVehicleMutationVariables = Types.Exact<{
 
 export type CreateVehicleMutation = { createVehicle: boolean };
 
+export type SearchCustomersQueryVariables = Types.Exact<{
+  body: Types.SearchCustomersRq;
+}>;
+
+
+export type SearchCustomersQuery = { searchCustomers: Array<{ token: string, first_name: string, last_name: string, mobile: string, national_code: string }> };
+
+export type CreateUnauthorizedTrafficMutationVariables = Types.Exact<{
+  body: Types.CreateUnauthorizedTrafficRq;
+}>;
+
+
+export type CreateUnauthorizedTrafficMutation = { createUnauthorizedTraffic: boolean };
+
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -201,6 +215,13 @@ export type UpdateParkingLicenseMutationVariables = Types.Exact<{
 
 export type UpdateParkingLicenseMutation = { updateParkingLicense: boolean };
 
+export type ReportTrafficListQueryVariables = Types.Exact<{
+  body: Types.ReportTrafficListRq;
+}>;
+
+
+export type ReportTrafficListQuery = { reportTrafficList: { count: number, items: Array<{ client_name?: string | null, user_name?: string | null, plate_serial?: string | null, customer_name?: string | null, tag_serial?: string | null, card_serial?: string | null, created_at: any, plate_image?: string | null, driver_image?: string | null, authorized?: boolean | null, type?: Types.E_ClientType | null, description?: string | null }> } };
+
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -266,3 +287,10 @@ export type EditUserMutationVariables = Types.Exact<{
 
 
 export type EditUserMutation = { editUser: boolean };
+
+export type SearchUsersByFullnameQueryVariables = Types.Exact<{
+  body: Types.SearchUsersByFullnameRq;
+}>;
+
+
+export type SearchUsersByFullnameQuery = { searchUsersByFullname: Array<{ token: string, username: string, fullname: string }> };

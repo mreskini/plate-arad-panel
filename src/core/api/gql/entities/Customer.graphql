@@ -68,3 +68,17 @@ mutation AddIdentifierToCustomer($body: AddIdentifierToCustomerRq!) {
 mutation CreateVehicle($body: CreateVehicleRq!) {
   createVehicle(body: $body)
 }
+
+query SearchCustomers($body: SearchCustomersRq!) {
+  searchCustomers(body: $body) {
+    token
+    first_name
+    last_name
+    mobile
+    national_code
+  }
+}
+
+mutation CreateUnauthorizedTraffic($body: CreateUnauthorizedTrafficRq!) {
+  createUnauthorizedTraffic(body: $body)
+}

@@ -7,6 +7,7 @@ import { getSdk as getCustomerSdk } from "./generated/Customer"
 import { getSdk as getDeviceSdk } from "./generated/Device"
 import { getSdk as getIdentifierSdk } from "./generated/Identifier"
 import { getSdk as getParkingSdk } from "./generated/Parking"
+import { getSdk as getReportSdk } from "./generated/Report"
 import { getSdk as getRoleSdk } from "./generated/Role"
 import { getSdk as getUserSdk } from "./generated/User"
 
@@ -64,6 +65,7 @@ export const API = {
     Client: createAsyncProxy(getClientSdk(gqlClient)),
     Identifier: createAsyncProxy(getIdentifierSdk(gqlClient)),
     Customer: createAsyncProxy(getCustomerSdk(gqlClient)),
+    Report: createAsyncProxy(getReportSdk(gqlClient)),
 }
 
 export * from "./generated"
