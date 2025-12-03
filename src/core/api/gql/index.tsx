@@ -5,6 +5,7 @@ import { GraphQLClient } from "graphql-request"
 import { getSdk as getClientSdk } from "./generated/Client"
 import { getSdk as getCustomerSdk } from "./generated/Customer"
 import { getSdk as getDeviceSdk } from "./generated/Device"
+import { getSdk as getExportSdk } from "./generated/Export"
 import { getSdk as getIdentifierSdk } from "./generated/Identifier"
 import { getSdk as getParkingSdk } from "./generated/Parking"
 import { getSdk as getReportSdk } from "./generated/Report"
@@ -66,6 +67,7 @@ export const API = {
     Identifier: createAsyncProxy(getIdentifierSdk(gqlClient)),
     Customer: createAsyncProxy(getCustomerSdk(gqlClient)),
     Report: createAsyncProxy(getReportSdk(gqlClient)),
+    Export: createAsyncProxy(getExportSdk(gqlClient)),
 }
 
 export * from "./generated"

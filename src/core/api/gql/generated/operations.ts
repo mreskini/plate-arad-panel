@@ -161,6 +161,13 @@ export type PingAllDevicesQueryVariables = Types.Exact<{ [key: string]: never; }
 
 export type PingAllDevicesQuery = { pingAllDevices: Array<{ name: string, ip: string, type: Types.E_DeviceType, is_alive: boolean }> };
 
+export type ExportReportTrafficListMutationVariables = Types.Exact<{
+  body: Types.ReportTrafficListRq;
+}>;
+
+
+export type ExportReportTrafficListMutation = { exportReportTrafficList: { data: string, format: string } };
+
 export type FetchIdentifiersQueryVariables = Types.Exact<{
   body: Types.FetchIdentifiersRq;
 }>;

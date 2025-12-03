@@ -1,0 +1,6 @@
+mutation ExportReportTrafficList($body: ReportTrafficListRq!) {
+  exportReportTrafficList(body: $body) {
+    data
+    format
+  }
+}
