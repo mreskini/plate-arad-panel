@@ -26,8 +26,9 @@ export interface I_AddOwnerIdentifierFormData {
 export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
     // States and hooks
     const [isFetching, setIsFetching] = useState(true)
-    const { onIdentifierSearch } = useCommon()
-    const [initialIdentifiers, setInitialIdentifiers] = useState<T_InputDropdownOption[]>([])
+    const { onCardIdentifierSearch, onTagIdentifierSearch } = useCommon()
+    const [initialCardIdentifiers, setInitialCardIdentifiers] = useState<T_InputDropdownOption[]>([])
+    const [initialTagIdentifiers, setInitialTagIdentifiers] = useState<T_InputDropdownOption[]>([])
 
     const {
         handleSubmit,
@@ -47,7 +48,8 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
 
     useEffect(() => {
         init()
-        onIdentifierSearch("").then(_ => setInitialIdentifiers(_))
+        onCardIdentifierSearch("").then(_ => setInitialCardIdentifiers(_))
+        onTagIdentifierSearch("").then(_ => setInitialTagIdentifiers(_))
     }, [])
 
     // Render
@@ -58,6 +60,7 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                     <Spinner />
                 </div>
             )}
+
             {!isFetching && (
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-lg">
                     <div className="flex w-full items-center gap-4 mb-4">
@@ -89,12 +92,12 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="card" className="min-w-24" required />
                             <Input.DropDown
-                                options={initialIdentifiers}
+                                options={initialCardIdentifiers}
                                 value={watch("identifierToken")}
                                 setValue={(_: string) => setValue("identifierToken", _)}
                                 disabled={isFetching}
                                 placeholder="please_search_identifier"
-                                onSearch={onIdentifierSearch}
+                                onSearch={onCardIdentifierSearch}
                             />
                         </div>
                     )}
@@ -103,12 +106,12 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                         <div className="flex w-full items-center gap-4 mb-4">
                             <Input.Label labelKey="tag" className="min-w-24" required />
                             <Input.DropDown
-                                options={initialIdentifiers}
+                                options={initialTagIdentifiers}
                                 value={watch("identifierToken")}
                                 setValue={(_: string) => setValue("identifierToken", _)}
                                 disabled={isFetching}
                                 placeholder="please_search_identifier"
-                                onSearch={onIdentifierSearch}
+                                onSearch={onTagIdentifierSearch}
                             />
                         </div>
                     )}

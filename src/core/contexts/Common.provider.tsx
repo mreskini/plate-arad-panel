@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import type { T_InputDropdownOption } from "@components/template"
 import type { T_FlatClient, T_FlatSchedule, T_Role } from "@core/api"
-import { API } from "@core/api"
+import { API, E_IdentifierType } from "@core/api"
 import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
 import { AppRoutes } from "@core/utilities"
@@ -21,7 +21,8 @@ interface I_Context {
     fetchFlatClients: Function
     fetchFlatSchedules: Function
     isLicenseAvailable: boolean
-    onIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    onCardIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    onTagIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
 }
 
 const Initials: I_Context = {
@@ -32,7 +33,8 @@ const Initials: I_Context = {
     fetchFlatClients: () => undefined,
     fetchFlatSchedules: () => undefined,
     isLicenseAvailable: false,
-    onIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    onCardIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    onTagIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -99,10 +101,25 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
-    const onIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
-        const { data } = await API.Identifier.SearchIdentifiers({ body: { search: searchTerm } })
+    const onCardIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        const { data } = await API.Identifier.SearchIdentifiers({
+            body: { search: searchTerm, type: E_IdentifierType.Card },
+        })
+
         if (data && data.searchIdentifiers)
             return data.searchIdentifiers.map(_ => ({ label: _.number, value: _.token }))
+
+        return []
+    }
+
+    const onTagIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        const { data } = await API.Identifier.SearchIdentifiers({
+            body: { search: searchTerm, type: E_IdentifierType.Tag },
+        })
+
+        if (data && data.searchIdentifiers)
+            return data.searchIdentifiers.map(_ => ({ label: _.number, value: _.token }))
+
         return []
     }
 
@@ -115,7 +132,8 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         fetchFlatClients,
         fetchFlatSchedules,
         isLicenseAvailable,
-        onIdentifierSearch,
+        onCardIdentifierSearch,
+        onTagIdentifierSearch,
     }
 
     // Render
