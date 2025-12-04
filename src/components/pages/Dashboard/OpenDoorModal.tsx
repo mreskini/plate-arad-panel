@@ -30,7 +30,7 @@ export const OpenDoorModal: FC<I_Props> = ({ door }) => {
             closeModal(CurrentModal)
         }
 
-        if (error) if (error) toast.error(error)
+        if (error) toast.error(error)
     }
 
     // Render
