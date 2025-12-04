@@ -2,7 +2,6 @@
 import type { T_InputDropdownOption } from "@components/template"
 import type { T_FlatClient, T_FlatSchedule, T_Role } from "@core/api"
 import { API, E_IdentifierType } from "@core/api"
-import { sleep } from "@core/functions"
 import { useApp } from "@core/stores"
 import { AppRoutes } from "@core/utilities"
 import type { FC, ReactNode } from "react"
@@ -16,25 +15,27 @@ interface I_Props {
 interface I_Context {
     fetchCurrentUser: Function
     fetchParkingInfo: Function
-    onOwnerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     fetchRoles: Function
     fetchFlatClients: Function
     fetchFlatSchedules: Function
     isLicenseAvailable: boolean
     onCardIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     onTagIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    onUserSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    onCustomerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
 }
 
 const Initials: I_Context = {
     fetchCurrentUser: () => undefined,
     fetchParkingInfo: () => undefined,
-    onOwnerSearch: async (): Promise<T_InputDropdownOption[]> => [],
     fetchRoles: () => undefined,
     fetchFlatClients: () => undefined,
     fetchFlatSchedules: () => undefined,
     isLicenseAvailable: false,
     onCardIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
     onTagIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    onUserSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    onCustomerSearch: async (): Promise<T_InputDropdownOption[]> => [],
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -67,20 +68,6 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
     const fetchParkingInfo = async () => {
         const { data } = await API.Parking.ParkingInfo()
         if (data) setParking(data.parkingInfo)
-    }
-
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const onOwnerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
-        // eslint-disable-next-line no-console
-        console.log(searchTerm)
-        // const { data } = await API.Owner.SearchOwnersByFullname({ body: { search: searchTerm } })
-
-        // if (data && data.searchOwnersByFullname)
-        //     return data.searchOwnersByFullname.map(_ => ({ label: _.fullname, value: _.token }))
-
-        await sleep(2000)
-
-        return []
     }
 
     const fetchRoles = async (): Promise<T_Role[]> => {
@@ -123,17 +110,36 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
+    const onUserSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        const { data } = await API.User.SearchUsersByFullname({ body: { search: searchTerm } })
+
+        if (data && data.searchUsersByFullname)
+            return data.searchUsersByFullname.map(_ => ({ label: _.fullname, value: _.token }))
+
+        return []
+    }
+
+    const onCustomerSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+        const { data } = await API.Customer.SearchCustomers({ body: { search: searchTerm } })
+
+        if (data && data.searchCustomers)
+            return data.searchCustomers.map(_ => ({ label: `${_.first_name} ${_.last_name}`, value: _.token }))
+
+        return []
+    }
+
     // Data binding
     const value = {
         fetchCurrentUser,
         fetchParkingInfo,
-        onOwnerSearch,
         fetchRoles,
         fetchFlatClients,
         fetchFlatSchedules,
         isLicenseAvailable,
         onCardIdentifierSearch,
         onTagIdentifierSearch,
+        onUserSearch,
+        onCustomerSearch,
     }
 
     // Render

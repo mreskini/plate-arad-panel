@@ -25,7 +25,7 @@ export const Doors = () => {
     const { parking } = useApp()
     const { fetchParkingInfo } = useCommon()
     const { t } = useTranslation("tables")
-    const { t: tCommon } = useTranslation("common")
+    const { t: tInput } = useTranslation("input")
     const { openModal, modalVisibility } = useModal()
     const [clients, setClients] = useState<T_Client[]>([])
     const [selected, setSelected] = useState<T_Client | null>(null)
@@ -40,7 +40,7 @@ export const Doors = () => {
         },
         {
             name: t("door_type"),
-            selector: (row: T_Client) => tCommon(ClientTypeKeyMap[row.type]),
+            selector: (row: T_Client) => tInput(ClientTypeKeyMap[row.type]),
         },
         {
             name: t("camera_ip"),
