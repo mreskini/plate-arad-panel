@@ -4,7 +4,6 @@ import { DashboardWrapper, OpenDoorModal } from "@components/pages/Dashboard"
 import { Button } from "@components/template"
 import type { T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
-import { sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import clsx from "clsx"
@@ -30,8 +29,6 @@ const Dashboard = () => {
         setIsFetching(false)
     }
 
-    const openDoorCallback = async () => sleep(2000)
-
     // Use effects
     useEffect(() => {
         initialization()
@@ -40,9 +37,7 @@ const Dashboard = () => {
     // Render
     return (
         <Layout.Dashboard className="pb-8">
-            {modalVisibility[Modals.Monitoring.OpenDoor] && (
-                <OpenDoorModal door={selectedDoor!} callback={openDoorCallback} />
-            )}
+            {modalVisibility[Modals.Monitoring.OpenDoor] && <OpenDoorModal door={selectedDoor!} />}
 
             {isFetching && <Loading.Screen />}
 
