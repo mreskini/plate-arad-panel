@@ -75,21 +75,22 @@ export const SidebarItems: T_Sidebar[] = [
                 titleContentKey: "reports",
                 subItems: [
                     {
-                        titleContentKey: "normal_traffic",
+                        titleContentKey: "traffic",
                         link: AppRoutes.reports.traffic,
                     },
-                    {
-                        titleContentKey: "traffic_without_plate",
-                        link: AppRoutes.reports.trafficWithoutPlate,
-                    },
-                    {
-                        titleContentKey: "traffic_with_card",
-                        link: AppRoutes.reports.trafficWithCard,
-                    },
-                    {
-                        titleContentKey: "traffic_with_emergency",
-                        link: AppRoutes.reports.trafficWithEmergency,
-                    },
+                    // TODO: Remove unneeded report links or implement them
+                    // {
+                    //     titleContentKey: "traffic_without_plate",
+                    //     link: AppRoutes.reports.trafficWithoutPlate,
+                    // },
+                    // {
+                    //     titleContentKey: "traffic_with_card",
+                    //     link: AppRoutes.reports.trafficWithCard,
+                    // },
+                    // {
+                    //     titleContentKey: "traffic_with_emergency",
+                    //     link: AppRoutes.reports.trafficWithEmergency,
+                    // },
                 ],
             },
             {

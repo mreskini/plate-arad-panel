@@ -13,8 +13,8 @@
   "camera_name": "نام دوربین",
   "camera_name_example": "مثال: آوا",
   "please_search_owner_fullname": "لطفا نام مراجع را جستجو کنید",
-  "start_date_and_time": "تاریخ و زمان شروع",
-  "end_date_and_time": "تاریخ و زمان پایان",
+  "start_date_and_time": "زمان شروع",
+  "end_date_and_time": "زمان پایان",
   "permission": "مجوز",
   "direction": "جهت",
   "all": "همه",
@@ -155,5 +155,16 @@
   "number": "شماره",
   "owner_vehicles": "خودروهای مراجع",
   "please_search_identifier": "لطفا شماره شناسه را جستجو کنید",
-  "manufacture_year": "سال ساخت"
+  "manufacture_year": "سال ساخت",
+  "user_name": "نام کاربر",
+  "customer_name": "نام مراجع",
+  "please_search_user_name": "لطفا نام کاربر را جستجو کنید",
+  "please_search_customer_name": "لطفا نام مراجع را جستجو کنید",
+  "please_search_door_name": "لطفا نام درب را جستجو کنید",
+  "please_search": "لطفا جستجو کنید",
+  "card_identifier": "شناسه کارت",
+  "tag_identifier": "شناسه تگ",
+  "has_driver_image": "دارای تصویر راننده",
+  "has_plate_image": "دارای تصویر پلاک",
+  "is_authorized": "مجاز بودن"
 }

@@ -33,7 +33,7 @@ export const ViewClientModal: FC<I_Props> = ({ client }) => {
             <div className="sm:min-w-lg flex flex-col gap-y-4">
                 <div className="flex items-center justify-between">
                     <Text contentKey="client_type" ns="input" />
-                    <Text contentKey={ClientTypeKeyMap[client.type]} />
+                    <Text contentKey={ClientTypeKeyMap[client.type]} ns="input" />
                 </div>
 
                 {isCameraAvailable && (

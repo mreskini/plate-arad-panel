@@ -11,28 +11,15 @@ import type {
     FetchUsersListQuery,
     ParkingInfoQuery,
     PingAllDevicesQuery,
+    ReportTrafficListQuery,
 } from "./generated"
 
 // User
 export type T_User = CurrentUserQuery["currentUser"]
 
 // Report
-export type T_FetchTraffic = {
-    count: number
-    items: {
-        camera_name: string
-        plate_serial?: string | null | undefined
-        owner_name: string
-        entrance: any
-        exit?: any
-        entrance_image?: string | null | undefined
-        exit_image?: string | null | undefined
-        direction: string
-        permission: string
-    }[]
-}
-
-export type T_Traffic = T_FetchTraffic["items"][number]
+export type T_FetchTrafficReport = ReportTrafficListQuery["reportTrafficList"]
+export type T_TrafficReport = T_FetchTrafficReport["items"][number]
 
 export type T_FetchWithoutPlateTraffic = {
     count: number

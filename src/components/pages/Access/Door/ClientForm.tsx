@@ -104,7 +104,7 @@ export const ClientForm: FC<I_Props> = ({ onSubmit, onClose, client }) => {
                             options={Object.keys(ClientTypeKeyMap).map((_: string) => {
                                 return {
                                     value: _,
-                                    label: t(ClientTypeKeyMap[_ as E_ClientType]),
+                                    label: t(ClientTypeKeyMap[_ as E_ClientType], { ns: "input" }),
                                 }
                             })}
                             value={getValues("type")}

@@ -64,5 +64,12 @@
   "number": "شماره",
   "creation_date": "تاریخ ایجاد",
   "phone_number": "شماره تماس",
-  "black_list": "لیست سیاه"
+  "black_list": "لیست سیاه",
+  "user_name": "نام کاربر",
+  "customer_name": "نام مراجع",
+  "card_identifier": "شناسه کارت",
+  "tag_identifier": "شناسه تگ",
+  "driver_image": "تصویر راننده",
+  "plate_image": "تصویر پلاک",
+  "authorized": "مجاز"
 }
