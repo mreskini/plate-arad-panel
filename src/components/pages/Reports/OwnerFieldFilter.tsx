@@ -1,7 +1,6 @@
 import type { T_InputDropdownOption } from "@components/template"
 import { Input } from "@components/template"
-import { useCommon } from "@core/contexts"
-import { type FC, useEffect, useState } from "react"
+import { type FC, useState } from "react"
 
 export interface I_OwnerFieldFilter {
     ownerToken: string
@@ -11,13 +10,14 @@ export interface I_OwnerFieldFilter {
 
 export const OwnerFieldFilter: FC<I_OwnerFieldFilter> = ({ ownerToken, setOwnerToken, isFetching }) => {
     // States and hooks
-    const { onOwnerSearch } = useCommon()
-    const [initialOwners, setInitialOwners] = useState<T_InputDropdownOption[]>([])
+    // const { onOwnerSearch } = useCommon()
+    // const [initialOwners, setInitialOwners] = useState<T_InputDropdownOption[]>([])
+    const [initialOwners] = useState<T_InputDropdownOption[]>([])
 
     // Use effects
-    useEffect(() => {
-        onOwnerSearch("").then(_ => setInitialOwners(_))
-    }, [])
+    // useEffect(() => {
+    //     onOwnerSearch("").then(_ => setInitialOwners(_))
+    // }, [])
 
     // Render
     return (
@@ -27,7 +27,7 @@ export const OwnerFieldFilter: FC<I_OwnerFieldFilter> = ({ ownerToken, setOwnerT
             setValue={(_: string) => setOwnerToken(_)}
             disabled={isFetching}
             placeholder="please_search_owner_fullname"
-            onSearch={onOwnerSearch}
+            // onSearch={onOwnerSearch}
             clearable
         />
     )
