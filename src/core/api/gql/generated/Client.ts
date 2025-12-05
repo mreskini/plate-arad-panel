@@ -149,6 +149,17 @@ export const FetchAccessControlsDocument = gql`
   }
 }
     `;
+export const FetchFlatAccessControlsDocument = gql`
+    query FetchFlatAccessControls {
+  fetchAccessControls {
+    token
+    title
+    schedule {
+      title
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -192,6 +203,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     FetchAccessControls(variables?: Types.FetchAccessControlsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchAccessControlsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchAccessControlsQuery>(FetchAccessControlsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchAccessControls', 'query');
+    },
+    FetchFlatAccessControls(variables?: Types.FetchFlatAccessControlsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchFlatAccessControlsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchFlatAccessControlsQuery>(FetchFlatAccessControlsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchFlatAccessControls', 'query');
     }
   };
 }

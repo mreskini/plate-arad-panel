@@ -130,3 +130,13 @@ query FetchAccessControls {
     }
   }
 }
+
+query FetchFlatAccessControls {
+  fetchAccessControls {
+    token
+    title
+    schedule {
+      title
+    }
+  }
+}
