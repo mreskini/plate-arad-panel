@@ -11,6 +11,7 @@ export const Modals = {
         Edit: "edit-owner",
         View: "view-owner",
         AddIdentifier: "add-owner-identifier",
+        AddAccess: "add-owner-access",
     },
 
     Management: {

@@ -74,6 +74,11 @@ export type FetchAccessControlsQueryVariables = Types.Exact<{ [key: string]: nev
 
 export type FetchAccessControlsQuery = { fetchAccessControls: Array<{ token: string, title: string, client: { token: string, name: string, type: Types.E_ClientType, camera?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null, relay?: { token: string, name: string, ip: string, type: Types.E_DeviceType, username?: string | null, password?: string | null, brand_name?: string | null, channel?: number | null } | null }, schedule: { token: string, title: string, start_date: string, end_date?: string | null, start_time: string, end_time: string } }> };
 
+export type FetchFlatAccessControlsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type FetchFlatAccessControlsQuery = { fetchAccessControls: Array<{ token: string, title: string, schedule: { title: string } }> };
+
 export type FetchCustomersQueryVariables = Types.Exact<{
   body: Types.FetchCustomersRq;
 }>;
@@ -136,6 +141,13 @@ export type CreateUnauthorizedTrafficMutationVariables = Types.Exact<{
 
 
 export type CreateUnauthorizedTrafficMutation = { createUnauthorizedTraffic: boolean };
+
+export type UpdateCustomerAccessMutationVariables = Types.Exact<{
+  body: Types.UpdateCustomerAccessRq;
+}>;
+
+
+export type UpdateCustomerAccessMutation = { updateCustomerAccess: boolean };
 
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

@@ -82,3 +82,7 @@ query SearchCustomers($body: SearchCustomersRq!) {
 mutation CreateUnauthorizedTraffic($body: CreateUnauthorizedTrafficRq!) {
   createUnauthorizedTraffic(body: $body)
 }
+
+mutation UpdateCustomerAccess($body: UpdateCustomerAccessRq!) {
+  updateCustomerAccess(body: $body)
+}

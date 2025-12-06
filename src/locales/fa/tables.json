@@ -71,5 +71,6 @@
   "tag_identifier": "شناسه تگ",
   "driver_image": "تصویر راننده",
   "plate_image": "تصویر پلاک",
-  "authorized": "مجاز"
+  "authorized": "مجاز",
+  "access_level": "سطح دسترسی"
 }

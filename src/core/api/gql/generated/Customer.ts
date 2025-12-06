@@ -98,6 +98,11 @@ export const CreateUnauthorizedTrafficDocument = gql`
   createUnauthorizedTraffic(body: $body)
 }
     `;
+export const UpdateCustomerAccessDocument = gql`
+    mutation UpdateCustomerAccess($body: UpdateCustomerAccessRq!) {
+  updateCustomerAccess(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -132,6 +137,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     CreateUnauthorizedTraffic(variables: Types.CreateUnauthorizedTrafficMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.CreateUnauthorizedTrafficMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.CreateUnauthorizedTrafficMutation>(CreateUnauthorizedTrafficDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUnauthorizedTraffic', 'mutation');
+    },
+    UpdateCustomerAccess(variables: Types.UpdateCustomerAccessMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UpdateCustomerAccessMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.UpdateCustomerAccessMutation>(UpdateCustomerAccessDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateCustomerAccess', 'mutation');
     }
   };
 }

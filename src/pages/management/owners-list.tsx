@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Layout } from "@components/layout"
 import {
+    AddOwnerAccessModal,
     AddOwnerIdentifierModal,
     AddOwnerModal,
     EditOwnerModal,
@@ -14,7 +15,7 @@ import { API } from "@core/api"
 import { formatDate, formatPhoneNumber } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Images, Modals } from "@core/utilities"
-import { CardAdd, Edit2, Eye } from "iconsax-reactjs"
+import { CardAdd, Edit2, Eye, Key } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
@@ -71,6 +72,10 @@ export const OwnersList = () => {
             cell: (row: T_Customer) => <Switch checked={row.blocked} onSwitchToggle={() => toggleBlocked(row.token)} />,
         },
         {
+            name: t("access_level"),
+            selector: (row: T_Customer) => row.access?.title || "",
+        },
+        {
             name: t("descriptions"),
             selector: (row: T_Customer) => (row.description ? row.description : ""),
         },
@@ -86,6 +91,17 @@ export const OwnersList = () => {
                             onClick={() => {
                                 setSelected(row)
                                 openModal(Modals.Owner.View)
+                            }}
+                        />
+                    </Button>
+
+                    <Button variant="ghost">
+                        <Key
+                            size={20}
+                            className="text-neutral-700"
+                            onClick={() => {
+                                setSelected(row)
+                                openModal(Modals.Owner.AddAccess)
                             }}
                         />
                     </Button>
@@ -157,6 +173,10 @@ export const OwnersList = () => {
 
             {modalVisibility[Modals.Owner.AddIdentifier] && (
                 <AddOwnerIdentifierModal callback={fetchOwners} owner={selected!} />
+            )}
+
+            {modalVisibility[Modals.Owner.AddAccess] && (
+                <AddOwnerAccessModal callback={fetchOwners} owner={selected!} />
             )}
 
             <ManagementFiltersWrapper>

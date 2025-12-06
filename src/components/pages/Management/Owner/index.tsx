@@ -1,3 +1,5 @@
+export * from "./AddOwnerAccessForm"
+export * from "./AddOwnerAccessModal"
 export * from "./AddOwnerIdentifierForm"
 export * from "./AddOwnerIdentifierModal"
 export * from "./AddOwnerModal"
