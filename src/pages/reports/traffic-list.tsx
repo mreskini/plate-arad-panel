@@ -83,17 +83,6 @@ export const ReportsTrafficList = () => {
             cell: (row: T_TrafficReport) => (row.tag_serial ? row.tag_serial : ""),
         },
         {
-            name: t("driver_image"),
-            cell: (row: T_TrafficReport) =>
-                row.driver_image ? (
-                    <Link to={row.driver_image} target="_blank">
-                        <img src={Images.UserProfilePlaceholder} alt={`${row.customer_name} driver`} />
-                    </Link>
-                ) : (
-                    ""
-                ),
-        },
-        {
             name: t("plate_image"),
             cell: (row: T_TrafficReport) =>
                 row.plate_image ? (
