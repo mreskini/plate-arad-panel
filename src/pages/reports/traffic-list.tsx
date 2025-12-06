@@ -113,6 +113,7 @@ export const ReportsTrafficList = () => {
             minWidth: "250px",
         },
         {
+            minWidth: "200px",
             name: t("descriptions"),
             selector: (row: T_TrafficReport) => (row.description ? row.description : ""),
             wrap: true,
@@ -170,7 +171,7 @@ export const ReportsTrafficList = () => {
                 ...(hasDriverImage && { has_driver_image: hasDriverImage }),
                 ...(hasPlateImage && { has_plate_image: hasDriverImage }),
                 ...(isAuthorized && { authorized: isAuthorized }),
-                ...(plateSerial && { plate_serial: plateSerial }),
+                ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
             },
         })
 
