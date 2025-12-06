@@ -35,6 +35,7 @@ export const OwnersList = () => {
 
     const tableColumns: TableColumn<T_Customer>[] = [
         {
+            width: "100px",
             name: t("image"),
             cell: (row: T_Customer) =>
                 row.image_url ? (
@@ -58,16 +59,19 @@ export const OwnersList = () => {
             selector: (row: T_Customer) => formatPhoneNumber(row.mobile),
         },
         {
+            width: "150px",
             name: t("creation_date"),
             selector: (row: T_Customer) => formatDate(new Date(row.created_at)),
         },
         {
+            width: "100px",
             name: "APB",
             cell: (row: T_Customer) => (
                 <Switch checked={row.apb} onSwitchToggle={() => toggleAntiPassBack(row.token)} />
             ),
         },
         {
+            width: "100px",
             name: t("black_list"),
             cell: (row: T_Customer) => <Switch checked={row.blocked} onSwitchToggle={() => toggleBlocked(row.token)} />,
         },
