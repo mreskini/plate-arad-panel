@@ -45,7 +45,7 @@ export const ReportsTrafficList = () => {
     const [clientToken, setClientToken] = useState<string>()
     const [tagSerial, setTagSerial] = useState<string>()
     const [cardSerial, setCardSerial] = useState<string>()
-    const [hasDriverImage, setHasDriverImage] = useState<boolean>(false)
+    // const [hasDriverImage, setHasDriverImage] = useState<boolean>(false)
     const [hasPlateImage, setHasPlateImage] = useState<boolean>(false)
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [plateSerial, setPlateSerial] = useState<string>()
@@ -140,8 +140,8 @@ export const ReportsTrafficList = () => {
                                 ...(clientToken && { client_token: clientToken }),
                                 ...(cardSerial && { card_serial: cardSerial }),
                                 ...(tagSerial && { tag_serial: tagSerial }),
-                                ...(hasDriverImage && { has_driver_image: hasDriverImage }),
-                                ...(hasPlateImage && { has_plate_image: hasDriverImage }),
+                                // ...(hasDriverImage && { has_driver_image: hasDriverImage }),
+                                ...(hasPlateImage && { has_plate_image: hasPlateImage }),
                                 ...(isAuthorized && { authorized: isAuthorized }),
                                 ...(plateSerial && { plate_serial: plateSerial }),
                             },
@@ -168,8 +168,8 @@ export const ReportsTrafficList = () => {
                 ...(clientToken && { client_token: clientToken }),
                 ...(cardSerial && { card_serial: cardSerial }),
                 ...(tagSerial && { tag_serial: tagSerial }),
-                ...(hasDriverImage && { has_driver_image: hasDriverImage }),
-                ...(hasPlateImage && { has_plate_image: hasDriverImage }),
+                // ...(hasDriverImage && { has_driver_image: hasDriverImage }),
+                ...(hasPlateImage && { has_plate_image: hasPlateImage }),
                 ...(isAuthorized && { authorized: isAuthorized }),
                 ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
             },
@@ -317,14 +317,14 @@ export const ReportsTrafficList = () => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-2 w-full col-span-2">
+                    {/* <div className="flex items-center gap-2 w-full col-span-2">
                         <Input.Checkbox
                             labelKey="has_driver_image"
                             checked={hasDriverImage}
                             onChange={e => setHasDriverImage(e.target.checked)}
                             disabled={isFetching}
                         />
-                    </div>
+                    </div> */}
 
                     <div className="flex items-center gap-2 w-full col-span-2">
                         <Input.Checkbox
