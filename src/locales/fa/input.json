@@ -166,5 +166,6 @@
   "tag_identifier": "شناسه تگ",
   "has_driver_image": "دارای تصویر راننده",
   "has_plate_image": "دارای تصویر پلاک",
-  "is_authorized": "مجاز بودن"
+  "is_authorized": "مجاز بودن",
+  "phone_number_placeholder": "مثال: ۰۹۱۲۱۲۳۴۵۶۷"
 }

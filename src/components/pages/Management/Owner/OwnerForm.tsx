@@ -35,6 +35,8 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
     } = useForm<I_OwnerFormData>({
         mode: "onChange",
     })
+    const isValid =
+        watch("firstname") && watch("lastname") && watch("phoneNumber")?.length === 11 && watch("nationalCode")
 
     // Methods
     const init = async () => {
@@ -100,7 +102,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                     <div className="flex w-full items-center gap-2 mb-4">
                         <Input.Label labelKey="phone_number" className="min-w-24" required />
                         <Input
-                            placeholder="owner_phone_number_here"
+                            placeholder="phone_number_placeholder"
                             disabled={isSubmitting}
                             className="w-full"
                             {...register("phoneNumber", { required: true })}
@@ -139,7 +141,7 @@ export const OwnerForm: FC<I_Props> = ({ onSubmit, onClose, owner }) => {
                             type="submit"
                             className="w-full"
                             loading={isSubmitting}
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || !isValid}
                         />
 
                         <Button
