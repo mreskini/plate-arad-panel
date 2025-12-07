@@ -58,7 +58,7 @@ export const AddOwnerAccessForm: FC<I_Props> = ({ onSubmit, onClose }) => {
             {!isFetching && (
                 <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-xl">
                     <div className="flex w-full items-center gap-4 mb-4">
-                        <Input.Label labelKey="id_type" className="min-w-24" />
+                        <Input.Label labelKey="access_type" className="min-w-24" />
                         <Input.DropDown
                             options={accessControlOptions}
                             value={getValues("accessControlToken")}
