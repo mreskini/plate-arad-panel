@@ -1,31 +1,30 @@
 import { Loading, Status } from "@components/common"
 import { Layout } from "@components/layout"
-import { DashboardWrapper, OpenDoorModal } from "@components/pages/Dashboard"
-import { Button } from "@components/template"
-import type { T_Door } from "@core/api"
+import { CameraViewer, DashboardWrapper, OpenDoorModal } from "@components/pages/Dashboard"
+import { Button, Text } from "@components/template"
+import type { T_Client, T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
-import { Modals } from "@core/utilities"
+import { Images, Modals } from "@core/utilities"
 import clsx from "clsx"
 import { Key } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
-import { range } from "lodash"
 import { useEffect, useState } from "react"
 
 const Dashboard = () => {
     // States and Hooks
-    const [isFetching, setIsFetching] = useState<boolean>(true)
-    const { fetchParkingInfo, fetchCurrentUser } = useCommon()
+    const { fetchClients } = useCommon()
     const { modalVisibility, openModal } = useModal()
+    const [isFetching, setIsFetching] = useState<boolean>(true)
     const [selectedDoor, setSelectedDoor] = useState<T_Door>()
+    const [clients, setClients] = useState<T_Client[]>([])
 
-    // TODO: Remove testing camerasCount after API integration
-    const [camerasCount] = useState<number>(4)
+    const camerasCount = clients.length
 
     // Methods
     const initialization = async () => {
-        await fetchCurrentUser()
-        await fetchParkingInfo()
+        const data = await fetchClients()
+        setClients(data)
         setIsFetching(false)
     }
 
@@ -41,7 +40,29 @@ const Dashboard = () => {
 
             {isFetching && <Loading.Screen />}
 
-            {!isFetching && (
+            {!isFetching && camerasCount === 0 && (
+                <div className="flex items-center justify-center size-full">
+                    <div className="text-center">
+                        <div>
+                            <img
+                                src={Images.DashboardDefaultThumbnail}
+                                alt="Dashboard default thumbnail"
+                                className="mx-auto"
+                            />
+                        </div>
+                        <div className="mt-8">
+                            <Text
+                                variant="heading-6"
+                                className="text-neutral-700"
+                                weight={600}
+                                contentKey="no_clients_found_indicator"
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {!isFetching && camerasCount > 0 && (
                 <DashboardWrapper>
                     <div
                         className={clsx([
@@ -51,10 +72,15 @@ const Dashboard = () => {
                             camerasCount >= 3 && "grid-cols-3",
                         ])}
                     >
-                        {range(0, camerasCount).map(_ => (
-                            <div key={_} className="flex h-full flex-col">
-                                <div className="flex-1 bg-zinc-100 rounded-xl mb-4">
-                                    <div className="w-full h-full rounded-xl bg-zinc-200 flex items-center justify-center" />
+                        {clients.map(_ => (
+                            <div key={_.token} className="flex h-full flex-col">
+                                <div className="mb-4">
+                                    {_.camera && <CameraViewer client={_} />}
+                                    {!_.camera && (
+                                        <div className="flex-1 bg-zinc-100 rounded-xl aspect-video">
+                                            <div className="w-full h-full rounded-xl bg-zinc-200 flex items-center justify-center" />
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="flex items-end justify-end gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">

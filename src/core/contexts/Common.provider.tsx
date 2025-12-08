@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import type { T_InputDropdownOption } from "@components/template"
-import type { T_FlatClient, T_FlatSchedule, T_Role } from "@core/api"
+import type { T_Client, T_FlatClient, T_FlatSchedule, T_Role } from "@core/api"
 import { API, E_IdentifierType } from "@core/api"
 import { useApp } from "@core/stores"
 import { AppRoutes } from "@core/utilities"
 import type { FC, ReactNode } from "react"
 import { createContext, useContext, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 interface I_Props {
     children: ReactNode
@@ -23,6 +24,7 @@ interface I_Context {
     onTagIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     onUserSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     onCustomerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    fetchClients: () => Promise<T_Client[]>
 }
 
 const Initials: I_Context = {
@@ -36,6 +38,7 @@ const Initials: I_Context = {
     onTagIdentifierSearch: async (): Promise<T_InputDropdownOption[]> => [],
     onUserSearch: async (): Promise<T_InputDropdownOption[]> => [],
     onCustomerSearch: async (): Promise<T_InputDropdownOption[]> => [],
+    fetchClients: async (): Promise<T_Client[]> => [],
 }
 
 const Context = createContext<I_Context>(Initials)
@@ -128,6 +131,14 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
+    const fetchClients = async (): Promise<T_Client[]> => {
+        const { data, error } = await API.Client.FetchClients()
+        if (error) toast.error(error)
+        if (data) return data.fetchClients
+
+        return []
+    }
+
     // Data binding
     const value = {
         fetchCurrentUser,
@@ -135,6 +146,7 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         fetchRoles,
         fetchFlatClients,
         fetchFlatSchedules,
+        fetchClients,
         isLicenseAvailable,
         onCardIdentifierSearch,
         onTagIdentifierSearch,

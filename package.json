@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 4000",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix",
@@ -27,6 +27,7 @@
     "framer-motion": "^12.9.2",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
+    "hls.js": "^1.6.15",
     "i18next": "^23.11.2",
     "iconsax-reactjs": "^0.0.8",
     "immer": "^10.0.1",
