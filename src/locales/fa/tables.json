@@ -72,5 +72,9 @@
   "driver_image": "تصویر راننده",
   "plate_image": "تصویر پلاک",
   "authorized": "مجاز",
-  "access_level": "سطح دسترسی"
+  "access_level": "سطح دسترسی",
+  "tag_and_card": "کارت و تگ",
+  "plate_and_card": "پلاک و کارت",
+  "tag_or_card": "کارت یا تگ",
+  "plate_or_card": "پلاک یا کارت"
 }
