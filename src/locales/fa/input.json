@@ -167,5 +167,9 @@
   "has_driver_image": "دارای تصویر راننده",
   "has_plate_image": "دارای تصویر پلاک",
   "is_authorized": "مجاز بودن",
-  "phone_number_placeholder": "مثال: ۰۹۱۲۱۲۳۴۵۶۷"
+  "phone_number_placeholder": "مثال: ۰۹۱۲۱۲۳۴۵۶۷",
+  "disabled_apb": "APB غیرفعال",
+  "black_list": "لیست سیاه",
+  "access_control": "کنترل دسترسی",
+  "search": "جستجو"
 }

@@ -9,6 +9,7 @@ import {
     ManagementFiltersWrapper,
     ViewOwnerModal,
 } from "@components/pages/Management"
+import type { T_InputDropdownOption } from "@components/template"
 import { Button, Input, Switch, Table } from "@components/template"
 import type { T_Customer, T_FetchCustomers } from "@core/api"
 import { API } from "@core/api"
@@ -32,6 +33,14 @@ export const OwnersList = () => {
     const [selected, setSelected] = useState<T_Customer | null>(null)
     const [isFetching, setIsFetching] = useState<boolean>(true)
     const [current, setCurrent] = useState(1)
+    const [accessControlOptions, setAccessControlOptions] = useState<T_InputDropdownOption[]>([])
+
+    const [creationDate, setCreationDate] = useState<Date | null>(null)
+    const [disabledApb, setDisabledApb] = useState<boolean>(false)
+    const [blocked, setBlocked] = useState<boolean>(false)
+    const [plateSerial, setPlateSerial] = useState<string>("")
+    const [accessControlToken, setAccessControlToken] = useState<string>("")
+    const [searchToken, setSearchToken] = useState<string>("")
 
     const tableColumns: TableColumn<T_Customer>[] = [
         {
@@ -146,7 +155,18 @@ export const OwnersList = () => {
     const fetchOwners = async (page?: number) => {
         const target = page ?? current
         if (page) setCurrent(page)
-        const { data } = await API.Customer.FetchCustomers({ body: { page: target, limit: PageSize } })
+        const { data } = await API.Customer.FetchCustomers({
+            body: {
+                page: target,
+                limit: PageSize,
+                ...(creationDate && { creation_date: creationDate.toDateString() }),
+                ...(accessControlToken && { access_control_token: accessControlToken }),
+                ...(searchToken && { search: searchToken }),
+                ...(disabledApb && { apb: !disabledApb }),
+                ...(blocked && { blocked }),
+                ...(plateSerial && { plate_serial: plateSerial }),
+            },
+        })
         if (data) setTableData(data.fetchCustomers)
         setIsFetching(false)
     }
@@ -163,8 +183,18 @@ export const OwnersList = () => {
         if (error) toast.error(error)
     }
 
+    const fetchAccessControlOptions = async () => {
+        const { data } = await API.Client.FetchFlatAccessControls()
+        if (data?.fetchAccessControls) {
+            setAccessControlOptions(
+                data.fetchAccessControls.map(_ => ({ value: _.token, label: `${_.title} (${_.schedule.title})` }))
+            )
+        }
+    }
+
     // Use effects
     useEffect(() => {
+        fetchAccessControlOptions()
         fetchOwners()
     }, [])
 
@@ -184,61 +214,79 @@ export const OwnersList = () => {
             )}
 
             <ManagementFiltersWrapper>
-                <div className="grid grid-cols-4 gap-6">
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="submission_date" className="min-w-32" />
+                <div className="grid grid-cols-12 gap-6">
+                    <div className="flex items-center gap-2 w-full col-span-3">
+                        <Input.Label labelKey="submission_date" className="min-w-24" />
                         <div className="w-full">
-                            <Input.DateTimePicker disabled={isFetching} clearable />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="owner_firstname" className="min-w-32" />
-                        <div className="w-full">
-                            <Input placeholder="owner_firstname_here" disabled={isFetching} />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="owner_lastname" className="min-w-32" />
-                        <div className="w-full">
-                            <Input placeholder="owner_lastname_here" disabled={isFetching} />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="plate_number" className="min-w-32" />
-                        <div className="flex items-center gap-2">
-                            <Input.PlateNumber disabled={isFetching} clearable />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="vehicle_model" className="min-w-32" />
-                        <div className="w-full">
-                            <Input placeholder="vehicle_model_here" disabled={isFetching} />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full col-span-1">
-                        <Input.Label labelKey="vehicle_color" className="min-w-32" />
-                        <div className="w-full">
-                            <Input placeholder="vehicle_color_here" disabled={isFetching} />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center col-span-1">
-                        <div className="w-full col-span-1 flex">
-                            <Button
-                                contentKey="apply"
-                                loading={isFetching}
+                            <Input.DatePicker
                                 disabled={isFetching}
-                                onClick={() => {
-                                    setIsFetching(true)
-                                    fetchOwners()
-                                }}
+                                value={creationDate}
+                                onChange={(e: Date | null) => setCreationDate(e)}
+                                clearable
                             />
                         </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 w-full col-span-3">
+                        <Input.Label labelKey="access_control" className="min-w-24" />
+                        <Input.DropDown
+                            options={accessControlOptions}
+                            value={accessControlToken}
+                            setValue={(_: string) => setAccessControlToken(_ as string)}
+                            disabled={isFetching}
+                            clearable
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-2 w-full col-span-3">
+                        <Input.Label labelKey="search" className="min-w-24" />
+                        <div className="w-full">
+                            <Input
+                                placeholder="please_search"
+                                disabled={isFetching}
+                                value={searchToken}
+                                onChange={e => setSearchToken(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 w-full col-span-3">
+                        <Input.Label labelKey="plate_number" className="min-w-24" />
+                        <Input.PlateNumber
+                            setValue={(value: string) => setPlateSerial(value)}
+                            value={plateSerial}
+                            disabled={isFetching}
+                            clearable
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-2 w-full col-span-1">
+                        <Input.Checkbox
+                            labelKey="black_list"
+                            checked={blocked}
+                            onChange={e => setBlocked(e.target.checked)}
+                            disabled={isFetching}
+                        />
+                    </div>
+                    <div className="flex items-center gap-2 w-full col-span-1">
+                        <Input.Checkbox
+                            labelKey="disabled_apb"
+                            checked={disabledApb}
+                            onChange={e => setDisabledApb(e.target.checked)}
+                            disabled={isFetching}
+                        />
+                    </div>
+
+                    <div className="w-full col-span-10 flex">
+                        <Button
+                            contentKey="apply"
+                            loading={isFetching}
+                            disabled={isFetching}
+                            onClick={() => {
+                                setIsFetching(true)
+                                fetchOwners()
+                            }}
+                        />
                     </div>
                 </div>
             </ManagementFiltersWrapper>
