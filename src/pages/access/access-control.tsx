@@ -36,7 +36,8 @@ export const AccessControls = () => {
         },
         {
             name: t("access_type"),
-            selector: (_row: T_AccessControl, index?: number) => ((index ?? 0) % 3 === 0 ? "UHF و CSN" : "پلاک و CSN"), // TODO: Replace with real access type --- IGNORE ---
+            selector: (_row: T_AccessControl, index?: number) =>
+                (index ?? 0) % 3 === 0 ? t("tag_and_card") : t("plate_and_card"), // TODO: Replace with real access type --- IGNORE ---
         },
         {
             width: "80px",

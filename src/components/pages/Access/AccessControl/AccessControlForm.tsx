@@ -105,13 +105,13 @@ export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessContro
                         <Input.Label labelKey="access_type" className="min-w-32" required />
                         <Input.DropDown
                             options={[
-                                { labelKey: "UHF", value: "UHF" },
-                                { labelKey: "CSN", value: "CSN" },
+                                { labelKey: "tag", value: "UHF" },
+                                { labelKey: "card", value: "CSN" },
                                 { labelKey: "plate", value: "PLATE" },
-                                { labelKey: "UHF_and_CSN", value: "UHF&&CSN" },
-                                { labelKey: "plate_and_CSN", value: "PLATE&&CSN" },
-                                { labelKey: "UHF_or_CSN", value: "UHF||CSN" },
-                                { labelKey: "plate_or_CSN", value: "PLATE||CSN" },
+                                { labelKey: "tag_and_card", value: "UHF&&CSN" },
+                                { labelKey: "plate_and_card", value: "PLATE&&CSN" },
+                                { labelKey: "tag_or_card", value: "UHF||CSN" },
+                                { labelKey: "plate_or_card", value: "PLATE||CSN" },
                             ]}
                             disabled={isSubmitting}
                             className="w-full"
