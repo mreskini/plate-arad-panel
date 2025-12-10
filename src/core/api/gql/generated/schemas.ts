@@ -270,8 +270,13 @@ export type FetchAccessControlByTokenRq = {
 };
 
 export type FetchCustomersRq = {
+  access_control_token?: InputMaybe<Scalars['String']['input']>;
+  apb?: InputMaybe<Scalars['Boolean']['input']>;
+  blocked?: InputMaybe<Scalars['Boolean']['input']>;
+  creation_date?: InputMaybe<Scalars['DateTime']['input']>;
   limit?: Scalars['Int']['input'];
   page?: Scalars['Int']['input'];
+  plate_serial?: InputMaybe<Scalars['String']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
 };
 
