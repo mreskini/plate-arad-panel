@@ -171,7 +171,7 @@ export const ReportsTrafficList = () => {
                 // ...(hasDriverImage && { has_driver_image: hasDriverImage }),
                 ...(hasPlateImage && { has_plate_image: hasPlateImage }),
                 ...(isAuthorized && { authorized: isAuthorized }),
-                ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
+                ...(plateSerial && { plate_serial: plateSerial }),
             },
         })
 

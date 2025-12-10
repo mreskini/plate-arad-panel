@@ -53,7 +53,14 @@ export const PlateNumber: FC<I_PlateNumber> = ({
     }, [])
 
     // Methods
-    const onChangeHandler = () => setValue(`IR${fourthPart}-${thirdPart}${secondPart}${firstPart}`)
+    const onChangeHandler = () => {
+        if (firstPart && secondPart && thirdPart && fourthPart) {
+            const plateNumber = `IR${fourthPart}-${thirdPart}${secondPart}${firstPart}`
+            setValue(plateNumber)
+        } else {
+            setValue("")
+        }
+    }
 
     const handleFirstPartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.slice(0, 2)
