@@ -4,3 +4,10 @@ mutation ExportReportTrafficList($body: ReportTrafficListRq!) {
     format
   }
 }
+
+mutation ExportCustomerList($body: FetchCustomersRq!) {
+  exportCustomerList(body: $body) {
+    data
+    format
+  }
+}

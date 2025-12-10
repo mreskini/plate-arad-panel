@@ -12,6 +12,14 @@ export const ExportReportTrafficListDocument = gql`
   }
 }
     `;
+export const ExportCustomerListDocument = gql`
+    mutation ExportCustomerList($body: FetchCustomersRq!) {
+  exportCustomerList(body: $body) {
+    data
+    format
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -22,6 +30,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     ExportReportTrafficList(variables: Types.ExportReportTrafficListMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ExportReportTrafficListMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.ExportReportTrafficListMutation>(ExportReportTrafficListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ExportReportTrafficList', 'mutation');
+    },
+    ExportCustomerList(variables: Types.ExportCustomerListMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.ExportCustomerListMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.ExportCustomerListMutation>(ExportCustomerListDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ExportCustomerList', 'mutation');
     }
   };
 }

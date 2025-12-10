@@ -180,6 +180,13 @@ export type ExportReportTrafficListMutationVariables = Types.Exact<{
 
 export type ExportReportTrafficListMutation = { exportReportTrafficList: { data: string, format: string } };
 
+export type ExportCustomerListMutationVariables = Types.Exact<{
+  body: Types.FetchCustomersRq;
+}>;
+
+
+export type ExportCustomerListMutation = { exportCustomerList: { data: string, format: string } };
+
 export type FetchIdentifiersQueryVariables = Types.Exact<{
   body: Types.FetchIdentifiersRq;
 }>;

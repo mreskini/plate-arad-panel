@@ -14,9 +14,10 @@ import { Button, Input, Switch, Table } from "@components/template"
 import type { T_Customer, T_FetchCustomers } from "@core/api"
 import { API } from "@core/api"
 import { formatDate, formatPhoneNumber } from "@core/functions"
+import { useReportExport } from "@core/hooks"
 import { useModal } from "@core/stores"
 import { Images, Modals } from "@core/utilities"
-import { CardAdd, Edit2, Eye, Key } from "iconsax-reactjs"
+import { CardAdd, Edit2, ExportSquare, Eye, Key } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
@@ -28,6 +29,7 @@ const PageSize = 7
 export const OwnersList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
+    const { handleExport } = useReportExport("customers_list_report")
     const { modalVisibility, openModal } = useModal()
     const [tableData, setTableData] = useState<T_FetchCustomers>({ count: 0, items: [] })
     const [selected, setSelected] = useState<T_Customer | null>(null)
@@ -147,6 +149,27 @@ export const OwnersList = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
+            <Button
+                variant="primary"
+                contentKey="excel_export"
+                icon={<ExportSquare size={16} />}
+                onClick={() =>
+                    handleExport(
+                        API.Export.ExportCustomerList({
+                            body: {
+                                page: 0,
+                                limit: 0,
+                                ...(creationDate && { creation_date: creationDate.toDateString() }),
+                                ...(accessControlToken && { access_control_token: accessControlToken }),
+                                ...(searchToken && { search: searchToken }),
+                                ...(disabledApb && { apb: !disabledApb }),
+                                ...(blocked && { blocked }),
+                                ...(plateSerial && { plate_serial: plateSerial }),
+                            },
+                        })
+                    )
+                }
+            />
             <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Owner.Add)} />
         </div>
     )

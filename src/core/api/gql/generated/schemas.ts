@@ -345,6 +345,7 @@ export type Mutation = {
   editIdentifier: Scalars['Boolean']['output'];
   editSchedule: Scalars['Boolean']['output'];
   editUser: Scalars['Boolean']['output'];
+  exportCustomerList: DownloadReportRs;
   exportReportTrafficList: DownloadReportRs;
   toggleCustomerApb: Scalars['Boolean']['output'];
   toggleCustomerBlocked: Scalars['Boolean']['output'];
@@ -459,6 +460,11 @@ export type MutationEditScheduleArgs = {
 
 export type MutationEditUserArgs = {
   body: EditUserRq;
+};
+
+
+export type MutationExportCustomerListArgs = {
+  body: FetchCustomersRq;
 };
 
 
