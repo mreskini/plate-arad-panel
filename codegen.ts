@@ -18,7 +18,7 @@ const config: CodegenConfig = {
     overwrite: true,
     debug: true,
     verbose: true, // keep true for debugging
-    schema: "https://arad-plate-graph.idealink.dev/graphql",
+    schema: "http://192.168.20.87/api/graphql",
     generates: {
         ...{
             "src/core/api/gql/generated/schemas.ts": {
