@@ -21,8 +21,7 @@ export const useUHFWebSocket = (clientIp?: string) => {
     useEffect(() => {
         if (!clientIp) return
 
-        // Construct WebSocket URL
-        const wsUrl = `ws://${clientIp}:3456`
+        const wsUrl = import.meta.env.VITE_PUBLIC_WS_URL
 
         console.log(`🔗 Connecting to UHF WebSocket at ${wsUrl}...`)
 
