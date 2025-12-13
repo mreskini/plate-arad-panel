@@ -100,5 +100,6 @@
   "traffic_report": "گزارش تردد",
   "logout": "خروج از سیستم",
   "no_clients_found_indicator": "لطفا ابتدا درب‌ها را تعریف کنید",
-  "camera_not_connected": "دوربین وصل نشد"
+  "camera_not_connected": "دوربین وصل نشد",
+  "reader": "ریدر"
 }

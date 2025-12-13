@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 // src/components/pages/Dashboard/ClientCard.tsx
+import { Status } from "@components/common"
 import { CameraViewer } from "@components/pages/Dashboard"
 import { Button, Text } from "@components/template"
 import type { T_Client, T_Door } from "@core/api"
@@ -19,7 +20,7 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
     // States and Hooks
     const { openModal } = useModal()
     // TODO: Make this connection dynamic
-    const { isConnected, messages, error } = useUHFWebSocket("192.168.20.87")
+    const { isConnected, messages } = useUHFWebSocket("192.168.20.87")
 
     if (messages.length > 0) {
         const latestMessage = messages[0]
@@ -28,8 +29,13 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
 
     // Render
     return (
-        <div className="pb-8 h-full">
+        <div className="pb-8 h-full relative">
             <div className="flex h-full flex-col border border-neutral-100 rounded-xl">
+                <div className="flex items-center gap-1.5 absolute right-2 top-2 z-10 bg-zinc-200/30 rounded-full py-1.5 px-4">
+                    <div className={`w-2.5 h-2.5 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`} />
+                    <Text variant="meta-1" contentKey="reader" weight={600} />
+                </div>
+
                 <div className="mb-4">
                     {client.camera && <CameraViewer client={client} />}
                     {!client.camera && (
@@ -54,16 +60,7 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
                     <div className="w-auto aspect-square h-full bg-zinc-200 rounded-lg flex-shrink-0" />
 
                     <div className="flex flex-col gap-2 items-end">
-                        <div className="flex items-center gap-2">
-                            <div className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`} />
-                            <Text variant="meta-1" content={`UHF: ${isConnected ? "Connected" : "Disconnected"}`} />
-                        </div>
-                        {messages[0] && (
-                            <div className="text-xs text-gray-600 max-w-[150px] truncate">
-                                {messages[0].ascii || messages[0].type}
-                            </div>
-                        )}
-                        {error && <Text variant="meta-1" className="text-red-600" content={`Error: ${error}`} />}
+                        <Status contentKey="not_allowed" variant="error" wrapperClassName="w-full justify-center" />
                         <div>
                             <IranLicensePlate serial="IR60-321b12" className="w-20" />
                         </div>
