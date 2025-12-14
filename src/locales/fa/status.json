@@ -34,5 +34,7 @@
   "camera": "دوربین",
   "card": "کارت",
   "tag": "تگ",
-  "vehicle": "خودرو"
+  "vehicle": "خودرو",
+  "connected": "متصل",
+  "disconnected": "قطع شده"
 }

@@ -1,6 +1,6 @@
 import { ProtectedRoute } from "@components/layout"
 import { Toast } from "@components/template"
-import { CommonProvider } from "@core/contexts"
+import { CommonProvider, UHFWebSocketProvider } from "@core/contexts"
 import { AppRoutes } from "@core/utilities"
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "react-router-dom"
 
@@ -28,8 +28,10 @@ const CommonProviderWrapper = () => {
     // Render
     return (
         <CommonProvider>
-            <Toast />
-            <Outlet />
+            <UHFWebSocketProvider>
+                <Toast />
+                <Outlet />
+            </UHFWebSocketProvider>
         </CommonProvider>
     )
 }
