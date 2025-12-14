@@ -3,6 +3,7 @@ import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 
 type T_States = {
+    // TODO: Delete the UHF related stuff
     currentUHF: string
     currentUser: T_User | null
     permissions: string[]
@@ -10,6 +11,7 @@ type T_States = {
 }
 
 type T_Actions = {
+    // TODO: Delete the UHF related stuff
     setCurrentUHF: (by: string) => void
     setCurrentUser: (by: T_User | null) => void
     setPermissions: (by: string[]) => void

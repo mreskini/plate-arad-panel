@@ -48,8 +48,8 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
 
     useEffect(() => {
         init()
-        onCardIdentifierSearch("").then(_ => setInitialCardIdentifiers(_))
-        onTagIdentifierSearch("").then(_ => setInitialTagIdentifiers(_))
+        onCardIdentifierSearch("", true).then(_ => setInitialCardIdentifiers(_))
+        onTagIdentifierSearch("", true).then(_ => setInitialTagIdentifiers(_))
     }, [])
 
     // Render

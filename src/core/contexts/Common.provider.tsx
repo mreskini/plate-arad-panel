@@ -20,8 +20,8 @@ interface I_Context {
     fetchFlatClients: Function
     fetchFlatSchedules: Function
     isLicenseAvailable: boolean
-    onCardIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
-    onTagIdentifierSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
+    onCardIdentifierSearch: (searchTerm: string, onlyAvailable?: boolean) => Promise<T_InputDropdownOption[]>
+    onTagIdentifierSearch: (searchTerm: string, onlyAvailable?: boolean) => Promise<T_InputDropdownOption[]>
     onUserSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     onCustomerSearch: (searchTerm: string) => Promise<T_InputDropdownOption[]>
     fetchClients: () => Promise<T_Client[]>
@@ -91,9 +91,12 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
-    const onCardIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+    const onCardIdentifierSearch = async (
+        searchTerm: string,
+        onlyAvailable?: boolean
+    ): Promise<T_InputDropdownOption[]> => {
         const { data } = await API.Identifier.SearchIdentifiers({
-            body: { search: searchTerm, type: E_IdentifierType.Card },
+            body: { search: searchTerm, type: E_IdentifierType.Card, ...(onlyAvailable && { only_available: true }) },
         })
 
         if (data && data.searchIdentifiers)
@@ -102,9 +105,12 @@ const CommonProvider: FC<I_Props> = ({ children }) => {
         return []
     }
 
-    const onTagIdentifierSearch = async (searchTerm: string): Promise<T_InputDropdownOption[]> => {
+    const onTagIdentifierSearch = async (
+        searchTerm: string,
+        onlyAvailable?: boolean
+    ): Promise<T_InputDropdownOption[]> => {
         const { data } = await API.Identifier.SearchIdentifiers({
-            body: { search: searchTerm, type: E_IdentifierType.Tag },
+            body: { search: searchTerm, type: E_IdentifierType.Tag, ...(onlyAvailable && { only_available: true }) },
         })
 
         if (data && data.searchIdentifiers)

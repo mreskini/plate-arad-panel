@@ -269,6 +269,10 @@ export type FetchAccessControlByTokenRq = {
   token: Scalars['String']['input'];
 };
 
+export type FetchCustomerByUhfRq = {
+  uhf: Scalars['String']['input'];
+};
+
 export type FetchCustomersRq = {
   access_control_token?: InputMaybe<Scalars['String']['input']>;
   apb?: InputMaybe<Scalars['Boolean']['input']>;
@@ -538,6 +542,7 @@ export type Query = {
   fetchAccessControlByToken: AccessControl;
   fetchAccessControls: Array<AccessControl>;
   fetchClients: Array<Client>;
+  fetchCustomerByUHF: Customer;
   fetchCustomers: FetchCustomersRs;
   fetchDevices: Array<Device>;
   fetchIdentifiers: FetchIdentifiersRs;
@@ -557,6 +562,11 @@ export type Query = {
 
 export type QueryFetchAccessControlByTokenArgs = {
   body: FetchAccessControlByTokenRq;
+};
+
+
+export type QueryFetchCustomerByUhfArgs = {
+  body: FetchCustomerByUhfRq;
 };
 
 
@@ -648,6 +658,7 @@ export type SearchCustomersRq = {
 };
 
 export type SearchIdentifiersRq = {
+  only_available?: InputMaybe<Scalars['Boolean']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<E_IdentifierType>;
 };
