@@ -5,7 +5,8 @@ import { CameraViewer } from "@components/pages/Dashboard"
 import { Button, Text } from "@components/template"
 import type { T_Client, T_Door } from "@core/api"
 import { useUHFWebSocket } from "@core/contexts"
-import { useModal } from "@core/stores"
+import { stopCameraStream } from "@core/functions"
+import { useApp, useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Key } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
@@ -19,8 +20,8 @@ interface I_ClientCardProps {
 
 export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
     // States and Hooks
-    // TODO: Add the port to the reader device
     const { openModal } = useModal()
+    const { currentUHF, setCurrentUHF } = useApp()
     const { connectDevice, messages, connections } = useUHFWebSocket()
 
     // Device configuration
@@ -47,42 +48,32 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
             const latestMessage = deviceMessages[0]
             console.log(`📡 ${client.name}:`, latestMessage)
 
-            // You can trigger actions based on RFID data here
-            if (latestMessage.type === "data" && latestMessage.ascii) {
-                console.log(`🏷️ RFID data from ${client.name}:`, latestMessage.ascii)
-
-                // Example: Trigger door opening on specific tag
-                if (latestMessage.ascii.includes("VALID_TAG")) {
-                    console.log(`🚪 Triggering door for ${client.name}...`)
-                    // Your door opening logic here
-                }
-            }
+            if (latestMessage.type === "data" && latestMessage.ascii) setCurrentUHF(latestMessage.ascii)
         }
     }, [deviceMessages, client.name])
 
-    // useEffect(() => {
-    //     return () => {
-    //         if (client && client.camera && client.camera.ip) stopCameraStream(client.camera.ip)
-    //     }
-    // }, [])
+    useEffect(() => {
+        return () => {
+            if (client && client.camera && client.camera.ip) stopCameraStream(client.camera.ip)
+        }
+    }, [])
 
     // Render
     return (
         <div className="pb-8 h-full relative">
             <div className="flex h-full flex-col border border-neutral-100 rounded-xl">
-                {/* UHF Reader Status Indicator */}
+                {/* UHF Status */}
                 <div className="flex items-center gap-1.5 absolute right-2 top-2 z-10 bg-zinc-200/30 rounded-full py-1.5 px-4">
                     <div className={`w-2.5 h-2.5 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`} />
                     <Text variant="meta-1" contentKey="reader" weight={600} />
                 </div>
-
-                {/* Latest RFID Data Display */}
-                {deviceMessages[0]?.type === "data" && deviceMessages[0].ascii && (
+                {currentUHF && (
                     <div className="absolute left-2 top-2 z-10 bg-zinc-200/30 rounded-full py-1 px-3">
-                        <Text content={deviceMessages[0].ascii} variant="meta-1" className="text-zinc-700 truncate" />
+                        <Text content={currentUHF} variant="meta-1" className="text-zinc-700 truncate" />
                     </div>
                 )}
 
+                {/* Camera */}
                 <div className="mb-4">
                     {client.camera && <CameraViewer client={client} />}
                     {!client.camera && (
@@ -92,6 +83,7 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect }) => {
                     )}
                 </div>
 
+                {/* Stats */}
                 <div className="flex items-end justify-end gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">
                     <Button
                         variant="ghost"
