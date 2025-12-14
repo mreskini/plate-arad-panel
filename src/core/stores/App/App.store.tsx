@@ -3,12 +3,14 @@ import { create } from "zustand"
 import { immer } from "zustand/middleware/immer"
 
 type T_States = {
+    currentUHF: string
     currentUser: T_User | null
     permissions: string[]
     parking: T_Parking | null
 }
 
 type T_Actions = {
+    setCurrentUHF: (by: string) => void
     setCurrentUser: (by: T_User | null) => void
     setPermissions: (by: string[]) => void
     setParking: (by: T_Parking | null) => void
@@ -16,9 +18,15 @@ type T_Actions = {
 
 export const useApp = create(
     immer<T_States & T_Actions>(set => ({
+        currentUHF: "",
         parking: null,
         currentUser: null,
         permissions: [],
+        setCurrentUHF(by) {
+            set(state => {
+                state.currentUHF = by
+            })
+        },
         setCurrentUser(by) {
             set(state => {
                 state.currentUser = by
