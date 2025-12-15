@@ -351,6 +351,7 @@ export type Mutation = {
   editUser: Scalars['Boolean']['output'];
   exportCustomerList: DownloadReportRs;
   exportReportTrafficList: DownloadReportRs;
+  testTraffic: Scalars['Boolean']['output'];
   toggleCustomerApb: Scalars['Boolean']['output'];
   toggleCustomerBlocked: Scalars['Boolean']['output'];
   toggleIdentifierStatus: Scalars['Boolean']['output'];
@@ -474,6 +475,11 @@ export type MutationExportCustomerListArgs = {
 
 export type MutationExportReportTrafficListArgs = {
   body: ReportTrafficListRq;
+};
+
+
+export type MutationTestTrafficArgs = {
+  token: Scalars['String']['input'];
 };
 
 
@@ -667,6 +673,15 @@ export type SearchUsersByFullnameRq = {
   search: Scalars['String']['input'];
 };
 
+export type Subscription = {
+  clientLast10TrafficsSub: Array<Traffic>;
+};
+
+
+export type SubscriptionClientLast10TrafficsSubArgs = {
+  token: Scalars['String']['input'];
+};
+
 export type ToggleCustomerApbRq = {
   token: Scalars['String']['input'];
 };
@@ -681,6 +696,21 @@ export type ToggleIdentifierStatusRq = {
 
 export type ToggleUserStatus = {
   token: Scalars['String']['input'];
+};
+
+export type Traffic = {
+  authorized: Scalars['Boolean']['output'];
+  card_serial?: Maybe<Scalars['String']['output']>;
+  client?: Maybe<Client>;
+  created_at: Scalars['DateTime']['output'];
+  customer?: Maybe<Customer>;
+  description?: Maybe<Scalars['String']['output']>;
+  driver_image?: Maybe<Scalars['String']['output']>;
+  plate_image?: Maybe<Scalars['String']['output']>;
+  plate_serial?: Maybe<Scalars['String']['output']>;
+  tag_serial?: Maybe<Scalars['String']['output']>;
+  token: Scalars['String']['output'];
+  user?: Maybe<User>;
 };
 
 export type TrafficItem = {
