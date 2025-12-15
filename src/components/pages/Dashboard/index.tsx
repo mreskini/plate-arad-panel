@@ -1,4 +1,5 @@
 export * from "./CameraViewer"
+export * from "./ClientCameraModal"
 export * from "./ClientCard"
 export * from "./DashboardWrapper"
 export * from "./EmptyDashboard"

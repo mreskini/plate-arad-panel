@@ -1,6 +1,6 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
-import { ClientCard, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
+import { ClientCameraModal, ClientCard, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
 import type { T_Client, T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [isFetching, setIsFetching] = useState<boolean>(true)
     const [selectedDoor, setSelectedDoor] = useState<T_Door>()
     const [clients, setClients] = useState<T_Client[]>([])
+    const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
 
     const camerasCount = clients.length
 
@@ -34,6 +35,7 @@ const Dashboard = () => {
     return (
         <Layout.Dashboard>
             {modalVisibility[Modals.Monitoring.OpenDoor] && <OpenDoorModal door={selectedDoor!} />}
+            {modalVisibility[Modals.Monitoring.CameraModal] && <ClientCameraModal client={currentClient!} />}
 
             {isFetching && <Loading.Screen />}
 
@@ -43,7 +45,12 @@ const Dashboard = () => {
                 <div className="w-full h-full">
                     <div className={clsx(["grid gap-x-8 grid-cols-3"])}>
                         {clients.map(_ => (
-                            <ClientCard key={_.token} client={_} onDoorSelect={setSelectedDoor} />
+                            <ClientCard
+                                key={_.token}
+                                client={_}
+                                onDoorSelect={setSelectedDoor}
+                                setCurrentClient={setCurrentClient}
+                            />
                         ))}
                     </div>
                 </div>
