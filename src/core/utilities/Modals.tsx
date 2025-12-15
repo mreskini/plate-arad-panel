@@ -4,6 +4,7 @@ export const Modals = {
 
     Monitoring: {
         OpenDoor: "monitoring-open-door",
+        CameraModal: "monitoring-camera-modal",
     },
 
     Owner: {
