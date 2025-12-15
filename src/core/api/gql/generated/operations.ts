@@ -248,6 +248,13 @@ export type ReportTrafficListQueryVariables = Types.Exact<{
 
 export type ReportTrafficListQuery = { reportTrafficList: { count: number, items: Array<{ client_name?: string | null, user_name?: string | null, plate_serial?: string | null, customer_name?: string | null, tag_serial?: string | null, card_serial?: string | null, created_at: any, plate_image?: string | null, driver_image?: string | null, authorized?: boolean | null, type?: Types.E_ClientType | null, description?: string | null }> } };
 
+export type ClientLast10TrafficsSubSubscriptionVariables = Types.Exact<{
+  token: Types.Scalars['String']['input'];
+}>;
+
+
+export type ClientLast10TrafficsSubSubscription = { clientLast10TrafficsSub: Array<{ token: string, customer?: { first_name: string } | null }> };
+
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

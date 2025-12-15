@@ -1,7 +1,9 @@
+import { ApolloProvider } from "@apollo/client/react"
 import { ProtectedRoute } from "@components/layout"
 import { Toast } from "@components/template"
-import { CommonProvider, UHFWebSocketProvider } from "@core/contexts"
+import { CommonProvider } from "@core/contexts"
 import { AppRoutes } from "@core/utilities"
+import { apolloClient } from "@core/utilities/ApolloClient"
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route } from "react-router-dom"
 
 import Dashboard from "./pages"
@@ -27,12 +29,12 @@ import { License } from "./pages/settings/license"
 const CommonProviderWrapper = () => {
     // Render
     return (
-        <CommonProvider>
-            <UHFWebSocketProvider>
+        <ApolloProvider client={apolloClient}>
+            <CommonProvider>
                 <Toast />
                 <Outlet />
-            </UHFWebSocketProvider>
-        </CommonProvider>
+            </CommonProvider>
+        </ApolloProvider>
     )
 }
 

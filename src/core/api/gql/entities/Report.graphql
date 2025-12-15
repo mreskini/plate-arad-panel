@@ -17,3 +17,12 @@ query ReportTrafficList($body: ReportTrafficListRq!) {
     }
   }
 }
+
+subscription ClientLast10TrafficsSub($token: String!) {
+  clientLast10TrafficsSub(token: $token) {
+    token
+    customer {
+      first_name
+    }
+  }
+}
