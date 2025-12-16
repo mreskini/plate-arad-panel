@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Images } from "@core/utilities"
+import clsx from "clsx"
 import type { KeysWithoutReturnObjects } from "i18next"
 import type { ReactNode } from "react"
 import type { TableColumn, TableProps } from "react-data-table-component"
@@ -35,10 +36,11 @@ export const Table = <T,>({
     rowsPerPage = 7,
     totalRows,
     onChangePage,
+    className,
 }: I_Table<T>) => {
     // Render
     return (
-        <div className="flex flex-col border border-solid border-neutral-200 p-6 rounded-2xl">
+        <div className={clsx(["flex flex-col border border-solid border-neutral-200 p-6 rounded-2xl", className])}>
             <div className="flex items-center justify-between mb-4">
                 {title && (
                     <div>
