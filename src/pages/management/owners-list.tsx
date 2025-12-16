@@ -21,7 +21,6 @@ import { CardAdd, Edit2, ExportSquare, Eye, Key } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 const PageSize = 7
@@ -50,11 +49,17 @@ export const OwnersList = () => {
             name: t("image"),
             cell: (row: T_Customer) =>
                 row.image_url ? (
-                    <Link to={row.image_url} target="_blank">
-                        <img src={Images.UserProfilePlaceholder} alt={`${row.first_name} ${row.last_name} profile`} />
-                    </Link>
+                    <img
+                        src={row.image_url}
+                        className="w-12 rounded-full"
+                        alt={`${row.first_name} ${row.last_name} profile`}
+                    />
                 ) : (
-                    ""
+                    <img
+                        src={Images.UserProfilePlaceholder}
+                        className="w-12 rounded-full"
+                        alt={`${row.first_name} ${row.last_name} profile`}
+                    />
                 ),
         },
         {

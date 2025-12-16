@@ -16,9 +16,10 @@ import { useTranslation } from "react-i18next"
 
 interface I_Props {
     client: T_Client
+    setSelected: Function
 }
 
-export const ClientTraffics: FC<I_Props> = ({ client }) => {
+export const ClientTraffics: FC<I_Props> = ({ client, setSelected }) => {
     // States and hooks
     const { t } = useTranslation("tables")
     const [isFetching, setIsFetching] = useState(true)
@@ -62,8 +63,8 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
         },
         {
             name: t("actions"),
-            cell: () => (
-                <Button variant="ghost">
+            cell: (row: T_LastTraffic) => (
+                <Button variant="ghost" onClick={() => setSelected(row)}>
                     <More />
                 </Button>
             ),
@@ -78,7 +79,10 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
     // Methods
     const init = async () => {
         const { data: d } = await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
-        if (d) setRecentTraffics(d.fetchClientLast10Traffics)
+        if (d) {
+            setRecentTraffics(d.fetchClientLast10Traffics)
+            setSelected(d.fetchClientLast10Traffics[0])
+        }
         setIsFetching(false)
     }
 

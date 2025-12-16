@@ -28,7 +28,7 @@ export const UploadOwnerProfileImage = ({ file, setFile, imageUrl, onDelete }: I
                 return
             }
 
-            if (selectedFile.size > 250 * 1024) {
+            if (selectedFile.size > 1024 * 1024) {
                 setError("invalid_image_file_size_error")
                 return
             }
