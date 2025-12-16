@@ -75,6 +75,7 @@ export type CreateDeviceRq = {
   ip: Scalars['String']['input'];
   name: Scalars['String']['input'];
   password?: InputMaybe<Scalars['String']['input']>;
+  port?: InputMaybe<Scalars['Float']['input']>;
   type: E_DeviceType;
   username?: InputMaybe<Scalars['String']['input']>;
 };
@@ -164,6 +165,7 @@ export type Device = {
   ip: Scalars['String']['output'];
   name: Scalars['String']['output'];
   password?: Maybe<Scalars['String']['output']>;
+  port?: Maybe<Scalars['Float']['output']>;
   token: Scalars['String']['output'];
   type: E_DeviceType;
   username?: Maybe<Scalars['String']['output']>;
@@ -233,6 +235,7 @@ export type EditDeviceRq = {
   ip?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  port?: InputMaybe<Scalars['Float']['input']>;
   token: Scalars['String']['input'];
   type?: InputMaybe<E_DeviceType>;
   username?: InputMaybe<Scalars['String']['input']>;

@@ -131,6 +131,7 @@
   "expiration_date": " تاریخ اعتبار",
   "channel_number": "شماره کانال‌",
   "enter_channel_number": "شماره کانال را وارد کنید",
+  "enter_port_number": "شماره پورت را وارد کنید",
   "camera_brand": "برند دوربین",
   "camera_ip": "IP دوربین",
   "relay_name": "نام برد رله",
@@ -175,5 +176,6 @@
   "disabled_apb": "APB غیرفعال",
   "black_list": "لیست سیاه",
   "access_control": "کنترل دسترسی",
-  "search": "جستجو"
+  "search": "جستجو",
+  "port": "پورت"
 }

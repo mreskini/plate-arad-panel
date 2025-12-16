@@ -20,6 +20,7 @@ export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
 
     const isCameraType = device.type === E_DeviceType.Camera
     const isRelayType = device.type === E_DeviceType.Relay
+    const isReader = device.type === E_DeviceType.Reader
 
     // Render
     return (
@@ -88,6 +89,12 @@ export const ViewDeviceModal: FC<I_Props> = ({ device }) => {
                             <Text content={device.password!} />
                         </div>
                     </>
+                )}
+                {isReader && (
+                    <div className="flex w-full items-center justify-between gap-4 mb-4">
+                        <Input.Label labelKey="port" />
+                        <Text content={device.port!} />
+                    </div>
                 )}
             </div>
         </Modal>
