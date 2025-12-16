@@ -27,8 +27,8 @@ export const CLIENT_LAST_TRAFFICS_SUB = gql`
                         type
                     }
                 }
-                created_at
             }
+            created_at
         }
     }
 `
