@@ -1,6 +1,6 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
-import { ClientCameraModal, ClientCard, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
+import { ClientCameraModal, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
 import { type T_Client, type T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
@@ -12,9 +12,11 @@ const Dashboard = () => {
     const { fetchClients } = useCommon()
     const { modalVisibility } = useModal()
     const [isFetching, setIsFetching] = useState<boolean>(true)
-    const [selectedDoor, setSelectedDoor] = useState<T_Door>()
+    // const [selectedDoor, setSelectedDoor] = useState<T_Door>()
+    const [selectedDoor] = useState<T_Door>()
     const [clients, setClients] = useState<T_Client[]>([])
-    const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
+    // const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
+    const [currentClient] = useState<T_Client | null>(null)
 
     // Methods
     const initialization = async () => {
@@ -38,7 +40,7 @@ const Dashboard = () => {
 
             {!isFetching && clients.length === 0 && <EmptyDashboard />}
 
-            {!isFetching && clients.length > 0 && (
+            {/* {!isFetching && clients.length > 0 && (
                 <div className="w-full h-full">
                     <div className="grid gap-x-8 grid-cols-2">
                         {clients.map(_ => (
@@ -51,7 +53,7 @@ const Dashboard = () => {
                         ))}
                     </div>
                 </div>
-            )}
+            )} */}
         </Layout.Dashboard>
     )
 }
