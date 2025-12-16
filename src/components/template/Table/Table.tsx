@@ -12,7 +12,7 @@ import { Text } from "../Text"
 type T_PaginationType = "Basic" | "Remote"
 
 interface I_Table<T> extends TableProps<T> {
-    title: KeysWithoutReturnObjects["common"]
+    title?: KeysWithoutReturnObjects["common"]
     data: T[]
     columns: TableColumn<T>[]
     actions?: ReactNode
@@ -40,9 +40,11 @@ export const Table = <T,>({
     return (
         <div className="flex flex-col border border-solid border-neutral-200 p-6 rounded-2xl">
             <div className="flex items-center justify-between mb-4">
-                <div>
-                    <Text contentKey={title} variant="title-1" className="text-blue-500" weight={600} />
-                </div>
+                {title && (
+                    <div>
+                        <Text contentKey={title} variant="title-1" className="text-blue-500" weight={600} />
+                    </div>
+                )}
 
                 <div>{actions}</div>
             </div>
