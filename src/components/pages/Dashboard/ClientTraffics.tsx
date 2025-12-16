@@ -7,6 +7,7 @@ import { Button, Table, Text } from "@components/template"
 import type { T_Client, T_LastTraffic, T_LastTrafficsSub } from "@core/api"
 import { API, CLIENT_LAST_TRAFFICS_SUB } from "@core/api"
 import { formatDateTime } from "@core/functions"
+import clsx from "clsx"
 import { More } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
 import type { FC } from "react"
@@ -16,10 +17,11 @@ import { useTranslation } from "react-i18next"
 
 interface I_Props {
     client: T_Client
+    selected: T_LastTraffic | null
     setSelected: Function
 }
 
-export const ClientTraffics: FC<I_Props> = ({ client, setSelected }) => {
+export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) => {
     // States and hooks
     const { t } = useTranslation("tables")
     const [isFetching, setIsFetching] = useState(true)
@@ -65,7 +67,9 @@ export const ClientTraffics: FC<I_Props> = ({ client, setSelected }) => {
             name: t("actions"),
             cell: (row: T_LastTraffic) => (
                 <Button variant="ghost" onClick={() => setSelected(row)}>
-                    <More />
+                    <More
+                        className={clsx([selected && selected.token === row.token ? "text-blue-500" : "text-zinc-800"])}
+                    />
                 </Button>
             ),
         },
@@ -97,6 +101,13 @@ export const ClientTraffics: FC<I_Props> = ({ client, setSelected }) => {
 
     // Render
     return (
-        <Table data={recentTraffics} columns={tableColumns} rowsPerPage={10} loading={isFetching} pagination={false} />
+        <Table
+            data={recentTraffics}
+            columns={tableColumns}
+            rowsPerPage={10}
+            loading={isFetching}
+            pagination={false}
+            className="rounded-t-none"
+        />
     )
 }
