@@ -8,6 +8,11 @@ query FetchClientLast10Traffics($body: FetchClientLast10TrafficsRq!){
     driver_image
     description
     authorized
+    client {
+        token
+        type
+        name
+    }
     customer {
         token
         first_name
@@ -24,8 +29,8 @@ query FetchClientLast10Traffics($body: FetchClientLast10TrafficsRq!){
                 type
             }
         }
-        created_at
     }
+    created_at
   }
 }
 
@@ -39,6 +44,11 @@ subscription ClientLast10TrafficsSub($token: String!) {
             driver_image
             description
             authorized
+            client {
+                token
+                type
+                name
+            }
             customer {
                 token
                 first_name
@@ -55,7 +65,7 @@ subscription ClientLast10TrafficsSub($token: String!) {
                         type
                     }
                 }
-                created_at
             }
+            created_at
         }
     }

@@ -1,15 +1,13 @@
-/* eslint-disable no-console */
-// src/components/pages/Dashboard/ClientCard.tsx
-import { useSubscription } from "@apollo/client/react"
 import { Status } from "@components/common"
-import { Button, Spinner } from "@components/template"
-import type { T_Client, T_Door, T_LastTraffic, T_LastTrafficsSub } from "@core/api"
-import { API, CLIENT_LAST_TRAFFICS_SUB } from "@core/api"
+import { Button } from "@components/template"
+import type { T_Client, T_Door } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Eye, Key } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
-import { type FC, useEffect, useState } from "react"
+import { type FC } from "react"
+
+import { ClientTraffics } from "./ClientTraffics"
 
 interface I_ClientCardProps {
     client: T_Client
@@ -21,29 +19,6 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
     // States and Hooks
     const { token } = client
     const { openModal } = useModal()
-    const [isFetching, setIsFetching] = useState(true)
-    const [recentTraffics, setRecentTraffics] = useState<T_LastTraffic[]>([])
-
-    const { data } = useSubscription<T_LastTrafficsSub>(CLIENT_LAST_TRAFFICS_SUB, {
-        onError: error => console.error("Subscription error:", error),
-        variables: { token: client.token },
-    })
-
-    // Methods
-    const init = async () => {
-        const { data: d } = await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
-        if (d) setRecentTraffics(d.fetchClientLast10Traffics)
-        setIsFetching(false)
-    }
-
-    // Use Effects
-    useEffect(() => {
-        if (data && data.clientLast10TrafficsSub) setRecentTraffics(data.clientLast10TrafficsSub)
-    }, [data])
-
-    useEffect(() => {
-        init()
-    }, [])
 
     // Render
     return (
@@ -86,23 +61,10 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
                         </div>
                     </div>
                 </div>
+
                 {/* Recent traffics go here */}
                 <div className="w-full">
-                    {isFetching && (
-                        <div className="flex justify-center items-center w-full py-8">
-                            <Spinner />
-                        </div>
-                    )}
-                    {/* TODO: Convert this into Table */}
-                    {!isFetching &&
-                        recentTraffics.map(_ => {
-                            return (
-                                <div
-                                    key={_.token}
-                                    className="w-full py-4 px-2"
-                                >{`${_.customer?.first_name} ${_.customer?.last_name}`}</div>
-                            )
-                        })}
+                    <ClientTraffics client={client} />
                 </div>
             </div>
         </div>

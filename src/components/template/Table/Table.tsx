@@ -18,6 +18,7 @@ interface I_Table<T> extends TableProps<T> {
     actions?: ReactNode
     loading?: boolean
     rowsPerPage?: number
+    pagination?: boolean
     paginationType?: T_PaginationType
     totalRows?: number
     onChangePage?: PaginationChangePage
@@ -29,6 +30,7 @@ export const Table = <T,>({
     columns,
     actions,
     loading = false,
+    pagination = true,
     paginationType = "Basic",
     rowsPerPage = 7,
     totalRows,
@@ -49,7 +51,7 @@ export const Table = <T,>({
                 columns={columns}
                 data={data}
                 striped
-                pagination
+                pagination={pagination}
                 paginationPerPage={rowsPerPage}
                 {...(paginationType === "Remote" && {
                     paginationServer: true,

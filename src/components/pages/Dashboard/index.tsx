@@ -1,6 +1,7 @@
 export * from "./CameraViewer"
 export * from "./ClientCameraModal"
 export * from "./ClientCard"
+export * from "./ClientTraffics"
 export * from "./DashboardWrapper"
 export * from "./EmptyDashboard"
 export * from "./OpenDoorForm"
