@@ -42,7 +42,7 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
         {
             name: t("customer_name"),
             cell: (row: T_LastTraffic) => (row.customer ? `${row.customer.first_name} ${row.customer.last_name}` : ""),
-            width: "150px",
+            width: "140px",
         },
         {
             name: t("authorized"),
@@ -61,7 +61,7 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
                 ) : (
                     ""
                 ),
-            minWidth: "180px",
+            minWidth: "210px",
         },
         {
             name: t("actions"),
@@ -104,9 +104,8 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
         <Table
             data={recentTraffics}
             columns={tableColumns}
-            rowsPerPage={10}
+            rowsPerPage={8}
             loading={isFetching}
-            pagination={false}
             className="rounded-t-none"
         />
     )
