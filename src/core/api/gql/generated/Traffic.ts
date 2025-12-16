@@ -15,6 +15,11 @@ export const FetchClientLast10TrafficsDocument = gql`
     driver_image
     description
     authorized
+    client {
+      token
+      type
+      name
+    }
     customer {
       token
       first_name
@@ -31,8 +36,8 @@ export const FetchClientLast10TrafficsDocument = gql`
           type
         }
       }
-      created_at
     }
+    created_at
   }
 }
     `;
@@ -47,6 +52,11 @@ export const ClientLast10TrafficsSubDocument = gql`
     driver_image
     description
     authorized
+    client {
+      token
+      type
+      name
+    }
     customer {
       token
       first_name
@@ -63,8 +73,8 @@ export const ClientLast10TrafficsSubDocument = gql`
           type
         }
       }
-      created_at
     }
+    created_at
   }
 }
     `;

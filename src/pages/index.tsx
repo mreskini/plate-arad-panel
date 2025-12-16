@@ -5,7 +5,6 @@ import { type T_Client, type T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import clsx from "clsx"
 import { useEffect, useState } from "react"
 
 const Dashboard = () => {
@@ -16,8 +15,6 @@ const Dashboard = () => {
     const [selectedDoor, setSelectedDoor] = useState<T_Door>()
     const [clients, setClients] = useState<T_Client[]>([])
     const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
-
-    const camerasCount = clients.length
 
     // Methods
     const initialization = async () => {
@@ -39,11 +36,11 @@ const Dashboard = () => {
 
             {isFetching && <Loading.Screen />}
 
-            {!isFetching && camerasCount === 0 && <EmptyDashboard />}
+            {!isFetching && clients.length === 0 && <EmptyDashboard />}
 
-            {!isFetching && camerasCount > 0 && (
+            {!isFetching && clients.length > 0 && (
                 <div className="w-full h-full">
-                    <div className={clsx(["grid gap-x-8 grid-cols-3"])}>
+                    <div className="grid gap-x-8 grid-cols-2">
                         {clients.map(_ => (
                             <ClientCard
                                 key={_.token}
