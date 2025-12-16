@@ -269,6 +269,10 @@ export type FetchAccessControlByTokenRq = {
   token: Scalars['String']['input'];
 };
 
+export type FetchClientLast10TrafficsRq = {
+  client_token: Scalars['String']['input'];
+};
+
 export type FetchCustomerByUhfRq = {
   uhf: Scalars['String']['input'];
 };
@@ -351,7 +355,6 @@ export type Mutation = {
   editUser: Scalars['Boolean']['output'];
   exportCustomerList: DownloadReportRs;
   exportReportTrafficList: DownloadReportRs;
-  testTraffic: Scalars['Boolean']['output'];
   toggleCustomerApb: Scalars['Boolean']['output'];
   toggleCustomerBlocked: Scalars['Boolean']['output'];
   toggleIdentifierStatus: Scalars['Boolean']['output'];
@@ -478,11 +481,6 @@ export type MutationExportReportTrafficListArgs = {
 };
 
 
-export type MutationTestTrafficArgs = {
-  token: Scalars['String']['input'];
-};
-
-
 export type MutationToggleCustomerApbArgs = {
   body: ToggleCustomerApbRq;
 };
@@ -547,6 +545,7 @@ export type Query = {
   currentUser: User;
   fetchAccessControlByToken: AccessControl;
   fetchAccessControls: Array<AccessControl>;
+  fetchClientLast10Traffics: Scalars['Boolean']['output'];
   fetchClients: Array<Client>;
   fetchCustomerByUHF: Customer;
   fetchCustomers: FetchCustomersRs;
@@ -568,6 +567,11 @@ export type Query = {
 
 export type QueryFetchAccessControlByTokenArgs = {
   body: FetchAccessControlByTokenRq;
+};
+
+
+export type QueryFetchClientLast10TrafficsArgs = {
+  body: FetchClientLast10TrafficsRq;
 };
 
 

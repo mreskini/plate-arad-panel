@@ -10,6 +10,7 @@ import { getSdk as getIdentifierSdk } from "./generated/Identifier"
 import { getSdk as getParkingSdk } from "./generated/Parking"
 import { getSdk as getReportSdk } from "./generated/Report"
 import { getSdk as getRoleSdk } from "./generated/Role"
+import { getSdk as getTrafficSdk } from "./generated/Traffic"
 import { getSdk as getUserSdk } from "./generated/User"
 
 export const StaticGlobalErrorMessage = "مشکلی رخ داده است"
@@ -68,7 +69,9 @@ export const API = {
     Customer: createAsyncProxy(getCustomerSdk(gqlClient)),
     Report: createAsyncProxy(getReportSdk(gqlClient)),
     Export: createAsyncProxy(getExportSdk(gqlClient)),
+    Traffic: createAsyncProxy(getTrafficSdk(gqlClient)),
 }
 
 export * from "./generated"
+export * from "./static"
 export * from "./types"

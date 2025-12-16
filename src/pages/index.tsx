@@ -1,11 +1,10 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
 import { ClientCameraModal, ClientCard, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
-import type { T_Client, T_Door } from "@core/api"
+import { type T_Client, type T_Door } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { useTrafficSubscription } from "@core/utilities/ApolloClient"
 import clsx from "clsx"
 import { useEffect, useState } from "react"
 
@@ -17,7 +16,6 @@ const Dashboard = () => {
     const [selectedDoor, setSelectedDoor] = useState<T_Door>()
     const [clients, setClients] = useState<T_Client[]>([])
     const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
-    useTrafficSubscription()
 
     const camerasCount = clients.length
 
