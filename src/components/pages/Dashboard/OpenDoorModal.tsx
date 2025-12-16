@@ -22,7 +22,10 @@ export const OpenDoorModal: FC<I_Props> = ({ door }) => {
     // Methods
     const onSubmit = async (formValues: I_OpenDoorFormData) => {
         const { data, error } = await API.Customer.CreateUnauthorizedTraffic({
-            body: { description: formValues.descriptions },
+            body: {
+                client_token: formValues.token,
+                description: formValues.descriptions,
+            },
         })
 
         if (data?.createUnauthorizedTraffic) {

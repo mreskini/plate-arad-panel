@@ -3,10 +3,11 @@
 import { useSubscription } from "@apollo/client/react"
 import { Status } from "@components/common"
 import { ClientTypeKeyMap } from "@components/pages/Access"
-import { Table, Text } from "@components/template"
+import { Button, Table, Text } from "@components/template"
 import type { T_Client, T_LastTraffic, T_LastTrafficsSub } from "@core/api"
 import { API, CLIENT_LAST_TRAFFICS_SUB } from "@core/api"
 import { formatDateTime } from "@core/functions"
+import { More } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
 import type { FC } from "react"
 import { useEffect, useState } from "react"
@@ -25,15 +26,15 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
 
     const tableColumns: TableColumn<T_LastTraffic>[] = [
         {
-            name: t("time"),
+            name: t("traffic_date_and_time"),
             cell: (row: T_LastTraffic) => formatDateTime(new Date(row.created_at)),
-            width: "150px",
+            width: "140px",
         },
         {
             name: t("client_type"),
             cell: (row: T_LastTraffic) =>
                 row.client ? <Text contentKey={ClientTypeKeyMap[row.client.type]} variant="meta-2" /> : "",
-            width: "100px",
+            width: "80px",
         },
         {
             name: t("customer_name"),
@@ -45,7 +46,7 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
             cell: (row: T_LastTraffic) => (
                 <Status contentKey={row.authorized ? "yes" : "no"} variant={row.authorized ? "success" : "error"} />
             ),
-            width: "80px",
+            width: "70px",
         },
         {
             name: t("plate_number"),
@@ -57,7 +58,15 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
                 ) : (
                     ""
                 ),
-            minWidth: "250px",
+            minWidth: "180px",
+        },
+        {
+            name: t("actions"),
+            cell: () => (
+                <Button variant="ghost">
+                    <More />
+                </Button>
+            ),
         },
     ]
 
@@ -84,13 +93,6 @@ export const ClientTraffics: FC<I_Props> = ({ client }) => {
 
     // Render
     return (
-        <Table
-            title="traffic"
-            data={recentTraffics}
-            columns={tableColumns}
-            rowsPerPage={10}
-            loading={isFetching}
-            pagination={false}
-        />
+        <Table data={recentTraffics} columns={tableColumns} rowsPerPage={10} loading={isFetching} pagination={false} />
     )
 }
