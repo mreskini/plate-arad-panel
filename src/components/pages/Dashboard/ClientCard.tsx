@@ -31,7 +31,8 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
 
     // Methods
     const init = async () => {
-        await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
+        const { data: d } = await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
+        if (d) setRecentTraffics(d.fetchClientLast10Traffics)
         setIsFetching(false)
     }
 
@@ -48,10 +49,6 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
     return (
         <div className="pb-8 h-full relative">
             <div className="flex h-full flex-col border border-neutral-100 rounded-xl">
-                {/* TODO: Delete later on */}
-                {/* <div className="flex-1 rounded-xl aspect-video mb-4">
-                    <div className="w-full h-full rounded-xl bg-zinc-100 flex items-center justify-center" />
-                </div> */}
                 {/* Stats */}
                 <div className="flex items-end justify-between gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">
                     <div className="flex items-center gap-2 flex-col">

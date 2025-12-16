@@ -279,7 +279,7 @@ export type FetchClientLast10TrafficsQueryVariables = Types.Exact<{
 }>;
 
 
-export type FetchClientLast10TrafficsQuery = { fetchClientLast10Traffics: boolean };
+export type FetchClientLast10TrafficsQuery = { fetchClientLast10Traffics: Array<{ token: string, plate_serial?: string | null, tag_serial?: string | null, card_serial?: string | null, plate_image?: string | null, driver_image?: string | null, description?: string | null, authorized: boolean, customer?: { token: string, first_name: string, last_name: string, apb: boolean, blocked: boolean, image_url?: string | null, created_at: any, access?: { token: string, title: string, client: { token: string, name: string, type: Types.E_ClientType } } | null } | null }> };
 
 export type ClientLast10TrafficsSubSubscriptionVariables = Types.Exact<{
   token: Types.Scalars['String']['input'];

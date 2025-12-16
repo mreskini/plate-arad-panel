@@ -545,7 +545,7 @@ export type Query = {
   currentUser: User;
   fetchAccessControlByToken: AccessControl;
   fetchAccessControls: Array<AccessControl>;
-  fetchClientLast10Traffics: Scalars['Boolean']['output'];
+  fetchClientLast10Traffics: Array<Traffic>;
   fetchClients: Array<Client>;
   fetchCustomerByUHF: Customer;
   fetchCustomers: FetchCustomersRs;
