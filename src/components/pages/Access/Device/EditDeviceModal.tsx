@@ -20,6 +20,7 @@ interface I_FormData {
     name: string
     type: E_DeviceType
     ip: string
+    port?: number
     brand?: string
     username?: string
     password?: string
@@ -47,6 +48,7 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
             name: device.name,
             type: device.type,
             ip: device.ip,
+            port: device.port || 0,
             brand: device.brand_name || "",
             channel: device.channel || 0,
             username: device.username || "",
@@ -59,13 +61,14 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
     const isReaderType = watch("type") === E_DeviceType.Reader
 
     const channel = watch("channel")
+    const port = watch("port")
 
     const isValid =
         watch("name") &&
         watch("type") &&
         watch("ip") &&
         (!isCameraType || (watch("brand") && watch("username") && watch("password"))) &&
-        (!isReaderType || (watch("username") && watch("password"))) &&
+        (!isReaderType || port?.toString()) &&
         (!isRelayType || (channel !== undefined && channel > -1 && watch("username") && watch("password")))
 
     // Methods
@@ -87,8 +90,7 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
                     password: formData.password,
                 }),
                 ...(isReaderType && {
-                    username: formData.username,
-                    password: formData.password,
+                    port: formData.port,
                 }),
             },
         })
@@ -233,34 +235,16 @@ export const EditDeviceModal: FC<I_Props> = ({ callback, device }) => {
                 )}
 
                 {isReaderType && (
-                    <>
-                        <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="username" className="min-w-20" required />
-                            <Input
-                                placeholder="enter_username"
-                                disabled={isSubmitting}
-                                className="w-full"
-                                {...register("username", {
-                                    required: true,
-                                    minLength: 1,
-                                })}
-                            />
-                        </div>
-
-                        <div className="flex w-full items-center gap-4 mb-4">
-                            <Input.Label labelKey="password" className="min-w-20" required />
-                            <div className="w-full">
-                                <Input.Password
-                                    placeholder="your_password_here"
-                                    disabled={isSubmitting}
-                                    {...register("password", {
-                                        required: true,
-                                        minLength: 1,
-                                    })}
-                                />
-                            </div>
-                        </div>
-                    </>
+                    <div className="flex w-full items-center gap-4 mb-4">
+                        <Input.Label labelKey="port" className="min-w-20" required />
+                        <Input.Number
+                            placeholder="enter_port_number"
+                            disabled={isSubmitting}
+                            className="w-full"
+                            value={getValues("port")}
+                            setValue={value => setValue("port", value)}
+                        />
+                    </div>
                 )}
 
                 <div className="flex items-center gap-4 mt-8">

@@ -152,7 +152,7 @@ export type UpdateCustomerAccessMutation = { updateCustomerAccess: boolean };
 export type FetchDevicesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type FetchDevicesQuery = { fetchDevices: Array<{ token: string, type: Types.E_DeviceType, ip: string, name: string, brand_name?: string | null, username?: string | null, password?: string | null, channel?: number | null }> };
+export type FetchDevicesQuery = { fetchDevices: Array<{ token: string, type: Types.E_DeviceType, ip: string, port?: number | null, name: string, brand_name?: string | null, username?: string | null, password?: string | null, channel?: number | null }> };
 
 export type CreateDeviceMutationVariables = Types.Exact<{
   body: Types.CreateDeviceRq;

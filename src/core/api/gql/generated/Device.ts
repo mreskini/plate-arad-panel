@@ -10,6 +10,7 @@ export const FetchDevicesDocument = gql`
     token
     type
     ip
+    port
     name
     brand_name
     username
