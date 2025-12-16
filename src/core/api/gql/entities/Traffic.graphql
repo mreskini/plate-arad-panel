@@ -1,6 +1,32 @@
-
 query FetchClientLast10Traffics($body: FetchClientLast10TrafficsRq!){
-  fetchClientLast10Traffics(body: $body)
+  fetchClientLast10Traffics(body: $body) {
+    token
+    plate_serial
+    tag_serial
+    card_serial
+    plate_image
+    driver_image
+    description
+    authorized
+    customer {
+        token
+        first_name
+        last_name
+        apb
+        blocked
+        image_url
+        access {
+            token
+            title
+            client {
+                token
+                name
+                type
+            }
+        }
+        created_at
+    }
+  }
 }
 
 subscription ClientLast10TrafficsSub($token: String!) {
