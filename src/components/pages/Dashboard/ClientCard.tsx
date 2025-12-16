@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
 // src/components/pages/Dashboard/ClientCard.tsx
+import { useSubscription } from "@apollo/client/react"
 import { Status } from "@components/common"
-import { Button } from "@components/template"
-import type { T_Client, T_Door } from "@core/api"
+import { Button, Spinner } from "@components/template"
+import type { T_Client, T_Door, T_LastTraffic, T_LastTrafficsSub } from "@core/api"
+import { API, CLIENT_LAST_TRAFFICS_SUB } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Eye, Key } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
-import type { FC } from "react"
+import { type FC, useEffect, useState } from "react"
 
 interface I_ClientCardProps {
     client: T_Client
@@ -19,14 +21,37 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
     // States and Hooks
     const { token } = client
     const { openModal } = useModal()
+    const [isFetching, setIsFetching] = useState(true)
+    const [recentTraffics, setRecentTraffics] = useState<T_LastTraffic[]>([])
+
+    const { data } = useSubscription<T_LastTrafficsSub>(CLIENT_LAST_TRAFFICS_SUB, {
+        onError: error => console.error("Subscription error:", error),
+        variables: { token: client.token },
+    })
+
+    // Methods
+    const init = async () => {
+        await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
+        setIsFetching(false)
+    }
+
+    // Use Effects
+    useEffect(() => {
+        if (data && data.clientLast10TrafficsSub) setRecentTraffics(data.clientLast10TrafficsSub)
+    }, [data])
+
+    useEffect(() => {
+        init()
+    }, [])
 
     // Render
     return (
         <div className="pb-8 h-full relative">
             <div className="flex h-full flex-col border border-neutral-100 rounded-xl">
-                <div className="flex-1 rounded-xl aspect-video mb-4">
+                {/* TODO: Delete later on */}
+                {/* <div className="flex-1 rounded-xl aspect-video mb-4">
                     <div className="w-full h-full rounded-xl bg-zinc-100 flex items-center justify-center" />
-                </div>
+                </div> */}
                 {/* Stats */}
                 <div className="flex items-end justify-between gap-4 w-full rounded-xl bg-zinc-50 p-3 flex-shrink-0">
                     <div className="flex items-center gap-2 flex-col">
@@ -63,6 +88,24 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
                             </div>
                         </div>
                     </div>
+                </div>
+                {/* Recent traffics go here */}
+                <div className="w-full">
+                    {isFetching && (
+                        <div className="flex justify-center items-center w-full py-8">
+                            <Spinner />
+                        </div>
+                    )}
+                    {/* TODO: Convert this into Table */}
+                    {!isFetching &&
+                        recentTraffics.map(_ => {
+                            return (
+                                <div
+                                    key={_.token}
+                                    className="w-full py-4 px-2"
+                                >{`${_.customer?.first_name} ${_.customer?.last_name}`}</div>
+                            )
+                        })}
                 </div>
             </div>
         </div>

@@ -248,13 +248,6 @@ export type ReportTrafficListQueryVariables = Types.Exact<{
 
 export type ReportTrafficListQuery = { reportTrafficList: { count: number, items: Array<{ client_name?: string | null, user_name?: string | null, plate_serial?: string | null, customer_name?: string | null, tag_serial?: string | null, card_serial?: string | null, created_at: any, plate_image?: string | null, driver_image?: string | null, authorized?: boolean | null, type?: Types.E_ClientType | null, description?: string | null }> } };
 
-export type ClientLast10TrafficsSubSubscriptionVariables = Types.Exact<{
-  token: Types.Scalars['String']['input'];
-}>;
-
-
-export type ClientLast10TrafficsSubSubscription = { clientLast10TrafficsSub: Array<{ token: string, customer?: { first_name: string } | null }> };
-
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -280,6 +273,20 @@ export type UpdateRoleMutationVariables = Types.Exact<{
 
 
 export type UpdateRoleMutation = { updateRole: boolean };
+
+export type FetchClientLast10TrafficsQueryVariables = Types.Exact<{
+  body: Types.FetchClientLast10TrafficsRq;
+}>;
+
+
+export type FetchClientLast10TrafficsQuery = { fetchClientLast10Traffics: boolean };
+
+export type ClientLast10TrafficsSubSubscriptionVariables = Types.Exact<{
+  token: Types.Scalars['String']['input'];
+}>;
+
+
+export type ClientLast10TrafficsSubSubscription = { clientLast10TrafficsSub: Array<{ token: string, plate_serial?: string | null, tag_serial?: string | null, card_serial?: string | null, plate_image?: string | null, driver_image?: string | null, description?: string | null, authorized: boolean, customer?: { token: string, first_name: string, last_name: string, apb: boolean, blocked: boolean, image_url?: string | null, created_at: any, access?: { token: string, title: string, client: { token: string, name: string, type: Types.E_ClientType } } | null } | null }> };
 
 export type CurrentUserQueryVariables = Types.Exact<{ [key: string]: never; }>;
 

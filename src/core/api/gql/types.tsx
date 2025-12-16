@@ -1,4 +1,5 @@
 import type {
+    ClientLast10TrafficsSubSubscription,
     CurrentUserQuery,
     E_IdentifierType,
     FetchAccessControlsQuery,
@@ -109,3 +110,5 @@ export type T_Client = FetchClientsQuery["fetchClients"][number]
 export type T_FlatClient = Pick<T_Client, "token" | "name" | "type">
 export type T_Schedule = FetchSchedulesQuery["fetchSchedules"][number]
 export type T_FlatSchedule = Pick<T_Schedule, "token" | "title">
+export type T_LastTrafficsSub = ClientLast10TrafficsSubSubscription
+export type T_LastTraffic = ClientLast10TrafficsSubSubscription["clientLast10TrafficsSub"][number]
