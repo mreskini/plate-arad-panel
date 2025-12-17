@@ -11,6 +11,11 @@ export const CLIENT_LAST_TRAFFICS_SUB = gql`
             driver_image
             description
             authorized
+            client {
+                token
+                type
+                name
+            }
             customer {
                 token
                 first_name
