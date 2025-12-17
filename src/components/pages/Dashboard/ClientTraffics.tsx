@@ -83,10 +83,7 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
     // Methods
     const init = async () => {
         const { data: d } = await API.Traffic.FetchClientLast10Traffics({ body: { client_token: client.token } })
-        if (d) {
-            setRecentTraffics(d.fetchClientLast10Traffics)
-            setSelected(d.fetchClientLast10Traffics[0])
-        }
+        if (d) setRecentTraffics(d.fetchClientLast10Traffics)
         setIsFetching(false)
     }
 
@@ -98,6 +95,10 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
     useEffect(() => {
         init()
     }, [])
+
+    useEffect(() => {
+        if (recentTraffics.length > 0) setSelected(recentTraffics[0])
+    }, [recentTraffics])
 
     // Render
     return (
