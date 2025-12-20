@@ -61,10 +61,10 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
                 ) : (
                     ""
                 ),
-            minWidth: "210px",
         },
         {
-            name: t("actions"),
+            name: "",
+            width: "80px",
             cell: (row: T_LastTraffic) => (
                 <Button variant="ghost" onClick={() => setSelected(row)}>
                     <More
