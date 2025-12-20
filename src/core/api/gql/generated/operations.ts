@@ -79,6 +79,13 @@ export type FetchFlatAccessControlsQueryVariables = Types.Exact<{ [key: string]:
 
 export type FetchFlatAccessControlsQuery = { fetchAccessControls: Array<{ token: string, title: string, schedule: { title: string } }> };
 
+export type OpenClientGateMutationVariables = Types.Exact<{
+  body: Types.OpenClientGateRq;
+}>;
+
+
+export type OpenClientGateMutation = { openClientGate: boolean };
+
 export type FetchCustomersQueryVariables = Types.Exact<{
   body: Types.FetchCustomersRq;
 }>;
