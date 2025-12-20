@@ -268,7 +268,7 @@ export const ReportsTrafficList = () => {
                     </div> */}
 
                     <div className="flex items-center gap-2 w-full col-span-3">
-                        <Input.Label labelKey="access_control" className="min-w-24" />
+                        <Input.Label labelKey="access" className="min-w-20" />
                         <Input.DropDown
                             options={accessControlOptions}
                             value={accessControlToken}

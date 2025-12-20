@@ -176,6 +176,7 @@
   "disabled_apb": "APB غیرفعال",
   "black_list": "لیست سیاه",
   "access_control": "کنترل دسترسی",
+  "access": "دسترسی",
   "search": "جستجو",
   "port": "پورت"
 }
