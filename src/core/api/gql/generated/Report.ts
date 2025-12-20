@@ -10,7 +10,7 @@ export const ReportTrafficListDocument = gql`
     count
     items {
       client_name
-      user_name
+      access_control_name
       plate_serial
       customer_name
       tag_serial

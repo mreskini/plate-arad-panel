@@ -92,9 +92,12 @@ export type CreateNewRoleRq = {
 };
 
 export type CreateNormalTrafficRq = {
+  access_control_token?: InputMaybe<Scalars['String']['input']>;
+  authorized?: InputMaybe<Scalars['Boolean']['input']>;
   card_serial?: InputMaybe<Scalars['String']['input']>;
   client_token?: InputMaybe<Scalars['String']['input']>;
   customer_token?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   driver_image?: InputMaybe<Scalars['String']['input']>;
   plate_image?: InputMaybe<Scalars['String']['input']>;
   plate_serial?: InputMaybe<Scalars['String']['input']>;
@@ -148,6 +151,7 @@ export type Customer = {
   first_name: Scalars['String']['output'];
   identifiers?: Maybe<Array<Identifier>>;
   image_url?: Maybe<Scalars['String']['output']>;
+  inside_parking: Scalars['Boolean']['output'];
   last_name: Scalars['String']['output'];
   mobile: Scalars['String']['output'];
   national_code: Scalars['String']['output'];
@@ -565,6 +569,7 @@ export type Query = {
   searchCustomers: Array<Customer>;
   searchIdentifiers: Array<Identifier>;
   searchUsersByFullname: Array<User>;
+  validateCustomerAccess: ValidateCustomerAccessRs;
 };
 
 
@@ -625,6 +630,11 @@ export type QuerySearchIdentifiersArgs = {
 
 export type QuerySearchUsersByFullnameArgs = {
   body: SearchUsersByFullnameRq;
+};
+
+
+export type QueryValidateCustomerAccessArgs = {
+  body: ValidateCustomerAccessRq;
 };
 
 export type ReportTrafficListRq = {
@@ -706,6 +716,7 @@ export type ToggleUserStatus = {
 };
 
 export type Traffic = {
+  access_control?: Maybe<AccessControl>;
   authorized: Scalars['Boolean']['output'];
   card_serial?: Maybe<Scalars['String']['output']>;
   client?: Maybe<Client>;
@@ -721,6 +732,7 @@ export type Traffic = {
 };
 
 export type TrafficItem = {
+  access_control_name?: Maybe<Scalars['String']['output']>;
   authorized?: Maybe<Scalars['Boolean']['output']>;
   card_serial?: Maybe<Scalars['String']['output']>;
   client_name?: Maybe<Scalars['String']['output']>;
@@ -732,7 +744,6 @@ export type TrafficItem = {
   plate_serial?: Maybe<Scalars['String']['output']>;
   tag_serial?: Maybe<Scalars['String']['output']>;
   type?: Maybe<E_ClientType>;
-  user_name?: Maybe<Scalars['String']['output']>;
 };
 
 export type UpdateCustomerAccessRq = {
@@ -768,6 +779,16 @@ export type User = {
 export type UserLoginRq = {
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
+};
+
+export type ValidateCustomerAccessRq = {
+  client_token: Scalars['String']['input'];
+  customer_token: Scalars['String']['input'];
+};
+
+export type ValidateCustomerAccessRs = {
+  has_access: Scalars['Boolean']['output'];
+  message: Scalars['String']['output'];
 };
 
 export type Vehicle = {

@@ -63,8 +63,8 @@ export const ReportsTrafficList = () => {
             width: "100px",
         },
         {
-            name: t("user_name"),
-            cell: (row: T_TrafficReport) => (row.user_name ? row.user_name : ""),
+            name: t("access_level"),
+            cell: (row: T_TrafficReport) => (row.access_control_name ? row.access_control_name : ""),
         },
         {
             name: t("customer_name"),

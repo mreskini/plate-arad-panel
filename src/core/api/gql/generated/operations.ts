@@ -246,7 +246,7 @@ export type ReportTrafficListQueryVariables = Types.Exact<{
 }>;
 
 
-export type ReportTrafficListQuery = { reportTrafficList: { count: number, items: Array<{ client_name?: string | null, user_name?: string | null, plate_serial?: string | null, customer_name?: string | null, tag_serial?: string | null, card_serial?: string | null, created_at: any, plate_image?: string | null, driver_image?: string | null, authorized?: boolean | null, type?: Types.E_ClientType | null, description?: string | null }> } };
+export type ReportTrafficListQuery = { reportTrafficList: { count: number, items: Array<{ client_name?: string | null, access_control_name?: string | null, plate_serial?: string | null, customer_name?: string | null, tag_serial?: string | null, card_serial?: string | null, created_at: any, plate_image?: string | null, driver_image?: string | null, authorized?: boolean | null, type?: Types.E_ClientType | null, description?: string | null }> } };
 
 export type FetchRolesQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
