@@ -638,6 +638,7 @@ export type QueryValidateCustomerAccessArgs = {
 };
 
 export type ReportTrafficListRq = {
+  access_control_token?: InputMaybe<Scalars['String']['input']>;
   authorized?: InputMaybe<Scalars['Boolean']['input']>;
   card_serial?: InputMaybe<Scalars['String']['input']>;
   client_token?: InputMaybe<Scalars['String']['input']>;
@@ -651,7 +652,6 @@ export type ReportTrafficListRq = {
   start?: InputMaybe<Scalars['DateTime']['input']>;
   tag_serial?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<E_ClientType>;
-  user_token?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ReportTrafficListRs = {
