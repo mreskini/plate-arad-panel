@@ -363,6 +363,7 @@ export type Mutation = {
   exportCustomerList: DownloadReportRs;
   exportIdentifierList: DownloadReportRs;
   exportReportTrafficList: DownloadReportRs;
+  openClientGate: Scalars['Boolean']['output'];
   toggleCustomerApb: Scalars['Boolean']['output'];
   toggleCustomerBlocked: Scalars['Boolean']['output'];
   toggleIdentifierStatus: Scalars['Boolean']['output'];
@@ -494,6 +495,11 @@ export type MutationExportReportTrafficListArgs = {
 };
 
 
+export type MutationOpenClientGateArgs = {
+  body: OpenClientGateRq;
+};
+
+
 export type MutationToggleCustomerApbArgs = {
   body: ToggleCustomerApbRq;
 };
@@ -531,6 +537,10 @@ export type MutationUpdateRoleArgs = {
 
 export type MutationUserLoginArgs = {
   body: UserLoginRq;
+};
+
+export type OpenClientGateRq = {
+  token: Scalars['String']['input'];
 };
 
 export type Parking = {

@@ -30,6 +30,7 @@ export const OpenDoorModal: FC<I_Props> = ({ door }) => {
 
         if (data?.createUnauthorizedTraffic) {
             notify("door_opened_successfully", "success")
+            await API.Client.OpenClientGate({ body: { token: formValues.token } })
             closeModal(CurrentModal)
         }
 

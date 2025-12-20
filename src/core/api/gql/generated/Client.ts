@@ -160,6 +160,11 @@ export const FetchFlatAccessControlsDocument = gql`
   }
 }
     `;
+export const OpenClientGateDocument = gql`
+    mutation OpenClientGate($body: OpenClientGateRq!) {
+  openClientGate(body: $body)
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -206,6 +211,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     FetchFlatAccessControls(variables?: Types.FetchFlatAccessControlsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.FetchFlatAccessControlsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.FetchFlatAccessControlsQuery>(FetchFlatAccessControlsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'FetchFlatAccessControls', 'query');
+    },
+    OpenClientGate(variables: Types.OpenClientGateMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.OpenClientGateMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.OpenClientGateMutation>(OpenClientGateDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'OpenClientGate', 'mutation');
     }
   };
 }

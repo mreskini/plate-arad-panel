@@ -140,3 +140,7 @@ query FetchFlatAccessControls {
     }
   }
 }
+
+mutation OpenClientGate($body: OpenClientGateRq!){
+  openClientGate(body: $body)
+}
