@@ -35,6 +35,7 @@ export const ReportsTrafficList = () => {
     const [clientOptions, setClientOptions] = useState<T_InputDropdownOption[]>([])
     const [initialCardIdentifiers, setInitialCardIdentifiers] = useState<T_InputDropdownOption[]>([])
     const [initialTagIdentifiers, setInitialTagIdentifiers] = useState<T_InputDropdownOption[]>([])
+    const [accessControlOptions, setAccessControlOptions] = useState<T_InputDropdownOption[]>([])
 
     const [startDateAndTime, setStartDateAndTime] = useState<Date | null>(null)
     const [endDateAndTime, setEndDateAndTime] = useState<Date | null>(null)
@@ -48,6 +49,7 @@ export const ReportsTrafficList = () => {
     const [hasPlateImage, setHasPlateImage] = useState<boolean>(false)
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [plateSerial, setPlateSerial] = useState<string>()
+    const [accessControlToken, setAccessControlToken] = useState<string>("")
 
     const tableColumns: TableColumn<T_TrafficReport>[] = [
         {
@@ -178,6 +180,15 @@ export const ReportsTrafficList = () => {
         setIsFetching(false)
     }
 
+    const fetchAccessControlOptions = async () => {
+        const { data } = await API.Client.FetchFlatAccessControls()
+        if (data?.fetchAccessControls) {
+            setAccessControlOptions(
+                data.fetchAccessControls.map(_ => ({ value: _.token, label: `${_.title} (${_.schedule.title})` }))
+            )
+        }
+    }
+
     const fetchClientOptions = async () => {
         const clients = await fetchFlatClients()
 
@@ -193,6 +204,7 @@ export const ReportsTrafficList = () => {
     useEffect(() => {
         fetchClientOptions()
         fetchTableData()
+        fetchAccessControlOptions()
         // onUserSearch("").then(_ => setInitialUsers(_))
         onCustomerSearch("").then(_ => setInitialCustomers(_))
         onCardIdentifierSearch("").then(_ => setInitialCardIdentifiers(_))
@@ -254,6 +266,17 @@ export const ReportsTrafficList = () => {
                             clearable
                         />
                     </div> */}
+
+                    <div className="flex items-center gap-2 w-full col-span-3">
+                        <Input.Label labelKey="access_control" className="min-w-24" />
+                        <Input.DropDown
+                            options={accessControlOptions}
+                            value={accessControlToken}
+                            setValue={(_: string) => setAccessControlToken(_ as string)}
+                            disabled={isFetching}
+                            clearable
+                        />
+                    </div>
 
                     <div className="flex items-center gap-2 w-full col-span-3">
                         <Input.Label labelKey="customer_name" className="min-w-20" />
@@ -343,7 +366,7 @@ export const ReportsTrafficList = () => {
                         />
                     </div>
 
-                    <div className="flex items-center justify-end w-full col-span-8">
+                    <div className="flex items-center justify-end w-full col-span-5">
                         <Button
                             contentKey="apply"
                             loading={isFetching}
