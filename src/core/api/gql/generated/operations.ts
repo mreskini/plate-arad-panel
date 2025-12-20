@@ -187,6 +187,13 @@ export type ExportCustomerListMutationVariables = Types.Exact<{
 
 export type ExportCustomerListMutation = { exportCustomerList: { data: string, format: string } };
 
+export type ExportIdentifierListMutationVariables = Types.Exact<{
+  body: Types.FetchIdentifiersRq;
+}>;
+
+
+export type ExportIdentifierListMutation = { exportIdentifierList: { data: string, format: string } };
+
 export type FetchIdentifiersQueryVariables = Types.Exact<{
   body: Types.FetchIdentifiersRq;
 }>;
