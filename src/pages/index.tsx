@@ -42,7 +42,7 @@ const Dashboard = () => {
 
             {/* {!isFetching && clients.length > 0 && (
                 <div className="w-full h-full">
-                    <div className="grid gap-x-8 grid-cols-2">
+                    <div className={clsx(["grid", clients.length === 1 ? "grid-cols-1" : "gap-x-8 grid-cols-2"])}>
                         {clients.map(_ => (
                             <ClientCard
                                 key={_.token}
