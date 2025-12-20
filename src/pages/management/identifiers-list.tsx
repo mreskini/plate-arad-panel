@@ -5,9 +5,10 @@ import { AddIdentifierModal, EditIdentifierModal } from "@components/pages/Manag
 import { Button, Input, Switch, Table } from "@components/template"
 import type { T_FetchIdentifiers, T_Identifier } from "@core/api"
 import { API, E_IdentifierType } from "@core/api"
+import { useReportExport } from "@core/hooks"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { Cards, Edit2, Money, SearchNormal1 } from "iconsax-reactjs"
+import { Cards, Edit2, ExportSquare, Money, SearchNormal1 } from "iconsax-reactjs"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
@@ -18,6 +19,7 @@ const PageSize = 7
 export const IdentifiersList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
+    const { handleExport } = useReportExport("identifier_list_report")
     const { modalVisibility, openModal } = useModal()
     const [tableData, setTableData] = useState<T_FetchIdentifiers>({ count: 0, items: [] })
     const [selectedIdentifier, setSelectedIdentifier] = useState<T_Identifier | null>(null)
@@ -85,6 +87,22 @@ export const IdentifiersList = () => {
 
     const tableActions = (
         <div className="flex items-stretch gap-2">
+            <Button
+                variant="primary"
+                contentKey="excel_export"
+                icon={<ExportSquare size={16} />}
+                onClick={() =>
+                    handleExport(
+                        API.Export.ExportIdentifierList({
+                            body: {
+                                page: 0,
+                                limit: 0,
+                                ...(searchValue && { search: searchValue }),
+                            },
+                        })
+                    )
+                }
+            />
             <Button variant="primary" contentKey="add" onClick={() => openModal(Modals.Management.Identifier.Add)} />
         </div>
     )

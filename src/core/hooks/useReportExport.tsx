@@ -1,5 +1,4 @@
 // @core/hooks/useExport.ts
-import { sleep } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { useState } from "react"
@@ -12,9 +11,6 @@ export const useReportExport = (filename: string) => {
     const handleExport = async (exportPromise: Promise<any>) => {
         setIsExporting(true)
         openModal(Modals.ExportFile)
-
-        await sleep(5000)
-
         try {
             const { data, error } = await exportPromise
 

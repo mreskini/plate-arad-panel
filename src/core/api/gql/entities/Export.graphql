@@ -11,3 +11,10 @@ mutation ExportCustomerList($body: FetchCustomersRq!) {
     format
   }
 }
+
+mutation ExportIdentifierList($body: FetchIdentifiersRq!){
+  exportIdentifierList(body: $body) {
+    data
+    format
+  }
+}
