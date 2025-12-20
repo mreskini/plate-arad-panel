@@ -26,12 +26,11 @@ export const ReportsTrafficList = () => {
     const { t } = useTranslation("tables")
     const { handleExport } = useReportExport("traffic_list_report")
     const { modalVisibility } = useModal()
-    const { onCustomerSearch, onUserSearch, onCardIdentifierSearch, onTagIdentifierSearch, fetchFlatClients } =
-        useCommon()
+    const { onCustomerSearch, onCardIdentifierSearch, onTagIdentifierSearch, fetchFlatClients } = useCommon()
     const [isFetching, setIsFetching] = useState(true)
     const [tableData, setTableData] = useState<T_FetchTrafficReport>({ count: 0, items: [] })
     const [current, setCurrent] = useState(1)
-    const [initialUsers, setInitialUsers] = useState<T_InputDropdownOption[]>([])
+    // const [initialUsers, setInitialUsers] = useState<T_InputDropdownOption[]>([])
     const [initialCustomers, setInitialCustomers] = useState<T_InputDropdownOption[]>([])
     const [clientOptions, setClientOptions] = useState<T_InputDropdownOption[]>([])
     const [initialCardIdentifiers, setInitialCardIdentifiers] = useState<T_InputDropdownOption[]>([])
@@ -40,7 +39,7 @@ export const ReportsTrafficList = () => {
     const [startDateAndTime, setStartDateAndTime] = useState<Date | null>(null)
     const [endDateAndTime, setEndDateAndTime] = useState<Date | null>(null)
     const [clientType, setClientType] = useState<E_ClientType>()
-    const [userToken, setUserToken] = useState<string>()
+    // const [userToken, setUserToken] = useState<string>()
     const [customerToken, setCustomerToken] = useState<string>()
     const [clientToken, setClientToken] = useState<string>()
     const [tagSerial, setTagSerial] = useState<string>()
@@ -135,7 +134,7 @@ export const ReportsTrafficList = () => {
                                 ...(startDateAndTime && { start: startDateAndTime.toString() }),
                                 ...(endDateAndTime && { end: endDateAndTime.toString() }),
                                 ...(clientType && { type: clientType }),
-                                ...(userToken && { user_token: userToken }),
+                                // ...(userToken && { user_token: userToken }),
                                 ...(customerToken && { customer_token: customerToken }),
                                 ...(clientToken && { client_token: clientToken }),
                                 ...(cardSerial && { card_serial: cardSerial }),
@@ -163,7 +162,7 @@ export const ReportsTrafficList = () => {
                 ...(startDateAndTime && { start: startDateAndTime.toString() }),
                 ...(endDateAndTime && { end: endDateAndTime.toString() }),
                 ...(clientType && { type: clientType }),
-                ...(userToken && { user_token: userToken }),
+                // ...(userToken && { user_token: userToken }),
                 ...(customerToken && { customer_token: customerToken }),
                 ...(clientToken && { client_token: clientToken }),
                 ...(cardSerial && { card_serial: cardSerial }),
@@ -194,7 +193,7 @@ export const ReportsTrafficList = () => {
     useEffect(() => {
         fetchClientOptions()
         fetchTableData()
-        onUserSearch("").then(_ => setInitialUsers(_))
+        // onUserSearch("").then(_ => setInitialUsers(_))
         onCustomerSearch("").then(_ => setInitialCustomers(_))
         onCardIdentifierSearch("").then(_ => setInitialCardIdentifiers(_))
         onTagIdentifierSearch("").then(_ => setInitialTagIdentifiers(_))
@@ -243,7 +242,7 @@ export const ReportsTrafficList = () => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-2 w-full col-span-3">
+                    {/* <div className="flex items-center gap-2 w-full col-span-3">
                         <Input.Label labelKey="user_name" className="min-w-20" />
                         <Input.DropDown
                             options={initialUsers}
@@ -254,7 +253,7 @@ export const ReportsTrafficList = () => {
                             onSearch={onUserSearch}
                             clearable
                         />
-                    </div>
+                    </div> */}
 
                     <div className="flex items-center gap-2 w-full col-span-3">
                         <Input.Label labelKey="customer_name" className="min-w-20" />
@@ -344,7 +343,7 @@ export const ReportsTrafficList = () => {
                         />
                     </div>
 
-                    <div className="flex items-center justify-end w-full col-span-3">
+                    <div className="flex items-center justify-end w-full col-span-8">
                         <Button
                             contentKey="apply"
                             loading={isFetching}
