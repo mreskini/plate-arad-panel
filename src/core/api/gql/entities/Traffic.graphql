@@ -14,6 +14,7 @@ query FetchClientLast10Traffics($body: FetchClientLast10TrafficsRq!){
         name
     }
     customer {
+        id
         token
         first_name
         last_name
@@ -50,6 +51,7 @@ subscription ClientLast10TrafficsSub($token: String!) {
                 name
             }
             customer {
+                id
                 token
                 first_name
                 last_name

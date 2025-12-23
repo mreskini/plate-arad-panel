@@ -149,6 +149,7 @@ export type Customer = {
   created_at: Scalars['DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
   first_name: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
   identifiers?: Maybe<Array<Identifier>>;
   image_url?: Maybe<Scalars['String']['output']>;
   inside_parking: Scalars['Boolean']['output'];

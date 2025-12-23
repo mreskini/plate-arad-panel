@@ -17,6 +17,7 @@ export const CLIENT_LAST_TRAFFICS_SUB = gql`
                 name
             }
             customer {
+                id
                 token
                 first_name
                 last_name

@@ -55,13 +55,13 @@ export const ReportsTrafficList = () => {
         {
             name: t("date"),
             cell: (row: T_TrafficReport) => formatDateTime(new Date(row.created_at)),
-            width: "150px",
+            width: "135px",
         },
         {
             name: t("client_type"),
             cell: (row: T_TrafficReport) =>
                 row.type ? <Text contentKey={ClientTypeKeyMap[row.type]} variant="meta-2" /> : "",
-            width: "100px",
+            width: "80px",
         },
         {
             name: t("access_level"),
@@ -69,7 +69,8 @@ export const ReportsTrafficList = () => {
         },
         {
             name: t("customer_name"),
-            cell: (row: T_TrafficReport) => (row.customer_name ? row.customer_name : ""),
+            minWidth: "150px",
+            cell: (row: T_TrafficReport) => (row.customer_name ? <span className="">{row.customer_name}</span> : ""),
         },
         {
             name: t("client_name"),
@@ -77,10 +78,12 @@ export const ReportsTrafficList = () => {
         },
         {
             name: t("card_identifier"),
+            minWidth: "100px",
             cell: (row: T_TrafficReport) => (row.card_serial ? row.card_serial : ""),
         },
         {
             name: t("tag_identifier"),
+            minWidth: "200px",
             cell: (row: T_TrafficReport) => (row.tag_serial ? row.tag_serial : ""),
         },
         {
