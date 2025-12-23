@@ -9,6 +9,7 @@ export const FetchCustomersDocument = gql`
   fetchCustomers(body: $body) {
     count
     items {
+      id
       token
       first_name
       last_name
