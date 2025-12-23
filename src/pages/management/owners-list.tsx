@@ -63,12 +63,8 @@ export const OwnersList = () => {
                 ),
         },
         {
-            name: t("firstname"),
-            selector: (row: T_Customer) => row.first_name,
-        },
-        {
-            name: t("lastname"),
-            selector: (row: T_Customer) => row.last_name,
+            name: t("fullname"),
+            selector: (row: T_Customer) => `${row.first_name} ${row.last_name} - ${row.id}`,
         },
         {
             name: t("phone_number"),
