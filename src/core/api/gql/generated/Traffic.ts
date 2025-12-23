@@ -21,6 +21,7 @@ export const FetchClientLast10TrafficsDocument = gql`
       name
     }
     customer {
+      id
       token
       first_name
       last_name
@@ -58,6 +59,7 @@ export const ClientLast10TrafficsSubDocument = gql`
       name
     }
     customer {
+      id
       token
       first_name
       last_name

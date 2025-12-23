@@ -41,8 +41,9 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
         },
         {
             name: t("customer_name"),
-            cell: (row: T_LastTraffic) => (row.customer ? `${row.customer.first_name} ${row.customer.last_name}` : ""),
-            width: "140px",
+            cell: (row: T_LastTraffic) =>
+                row.customer ? `${row.customer.first_name} ${row.customer.last_name} - ${row.customer.id}` : "",
+            width: "160px",
         },
         {
             name: t("authorized"),
