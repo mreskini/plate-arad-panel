@@ -3,7 +3,7 @@ import type { T_Identifier } from "@core/api"
 import { API, E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { type FC } from "react"
+import { type FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 
@@ -28,6 +28,8 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
     const {
         register,
         handleSubmit,
+        watch,
+        setValue,
         formState: { isValid, isSubmitting },
     } = useForm<I_FormData>({
         mode: "onChange",
@@ -55,6 +57,14 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
 
         if (error) toast.error(error)
     }
+
+    useEffect(() => {
+        if (!isCard) {
+            const num = watch("number")
+            if (num.length > 0) setValue("serial", num.padStart(6, "0"))
+            else setValue("serial", "")
+        }
+    }, [watch("number")])
 
     // Render
     return (
@@ -89,7 +99,7 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
                         placeholder="enter_identifier_number"
                         disabled={isSubmitting}
                         className="w-full"
-                        {...register("number", { required: true, minLength: 1 })}
+                        {...register("number", { required: true, minLength: 1, ...(!isCard && { maxLength: 6 }) })}
                     />
                 </div>
 
@@ -99,7 +109,11 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
                         placeholder={isCard ? "CSN_example" : "UHF_example"}
                         disabled={isSubmitting}
                         className="w-full"
-                        {...register("serial", { required: true, minLength: 1 })}
+                        {...register("serial", {
+                            required: true,
+                            minLength: 1,
+                            ...(!isCard && { minLength: 6, maxLength: 6 }),
+                        })}
                     />
                 </div>
 
