@@ -94,7 +94,7 @@
   "plate_reader": "پلاک‌خوان",
   "pos": "کارتخوان",
   "CSN_example": "مثال: 12345678",
-  "UHF_example": "مثال: 0000000012345678",
+  "UHF_example": "مثال: 000012",
   "disable_apb": "غیرفعال‌سازی APB",
   "input": "ورودی",
   "output": "خروجی",
