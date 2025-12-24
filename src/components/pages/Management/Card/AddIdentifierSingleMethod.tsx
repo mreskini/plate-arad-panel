@@ -2,7 +2,7 @@ import { Button, Input, useNotify } from "@components/template"
 import { API, E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { type FC } from "react"
+import { type FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 
@@ -54,6 +54,14 @@ export const AddIdentifierSingleMethod: FC<I_Props> = ({ callback }) => {
         if (error) toast.error(error)
     }
 
+    useEffect(() => {
+        if (!isCard) {
+            const number = watch("number")
+            if (number.length > 0) setValue("serial", number.padStart(6, "0"))
+            else setValue("serial", "")
+        }
+    }, [watch("number")])
+
     // Render
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="sm:min-w-xl">
@@ -81,7 +89,7 @@ export const AddIdentifierSingleMethod: FC<I_Props> = ({ callback }) => {
                     placeholder="enter_identifier_number"
                     disabled={isSubmitting}
                     className="w-full"
-                    {...register("number", { required: true, minLength: 1 })}
+                    {...register("number", { required: true, minLength: 1, ...(!isCard && { maxLength: 6 }) })}
                 />
             </div>
 
@@ -91,7 +99,11 @@ export const AddIdentifierSingleMethod: FC<I_Props> = ({ callback }) => {
                     placeholder={isCard ? "CSN_example" : "UHF_example"}
                     disabled={isSubmitting}
                     className="w-full"
-                    {...register("serial", { required: true, minLength: 1 })}
+                    {...register("serial", {
+                        required: true,
+                        minLength: 1,
+                        ...(!isCard && { minLength: 6, maxLength: 6 }),
+                    })}
                 />
             </div>
 
