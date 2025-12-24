@@ -3,7 +3,7 @@ import type { T_Identifier } from "@core/api"
 import { API, E_IdentifierType } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
-import { type FC, useEffect } from "react"
+import { type FC, useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 
@@ -30,7 +30,7 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
         handleSubmit,
         watch,
         setValue,
-        formState: { isValid, isSubmitting },
+        formState: { isValid, isSubmitting, isDirty },
     } = useForm<I_FormData>({
         mode: "onChange",
         defaultValues: { number, serial },
@@ -38,6 +38,7 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
 
     // Flags
     const isCard = identifier.type === E_IdentifierType.Card
+    const isFirst = useRef(true)
 
     // Methods
     const onSubmit = async (formValues: I_FormData) => {
@@ -59,6 +60,9 @@ export const EditIdentifierModal: FC<I_Props> = ({ callback, identifier }) => {
     }
 
     useEffect(() => {
+        if (isDirty) isFirst.current = false
+        if (isFirst.current) return
+
         if (!isCard) {
             const num = watch("number")
             if (num.length > 0) setValue("serial", num.padStart(6, "0"))
