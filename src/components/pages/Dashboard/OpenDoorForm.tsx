@@ -1,12 +1,12 @@
 import { Button, Input, Spinner, Text } from "@components/template"
-import type { T_Door } from "@core/api"
+import type { T_Client } from "@core/api"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 interface I_Props {
     onSubmit: (data: I_OpenDoorFormData) => Promise<void>
     onClose: Function
-    door: T_Door
+    door: T_Client
 }
 
 export interface I_OpenDoorFormData {
