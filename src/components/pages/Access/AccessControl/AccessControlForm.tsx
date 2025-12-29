@@ -1,6 +1,7 @@
 import type { T_InputDropdownOption } from "@components/template"
 import { Button, Input, Spinner } from "@components/template"
 import type { T_AccessControl, T_Client, T_Schedule } from "@core/api"
+import { E_AccessControl } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { type FC, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -15,6 +16,7 @@ export interface I_AccessControlFormData {
     title: string
     clientToken: string
     scheduleToken: string
+    type: E_AccessControl
 }
 
 export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessControl }) => {
@@ -36,7 +38,7 @@ export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessContro
     })
 
     // Flags
-    const isValid = watch("title") && watch("clientToken") && watch("scheduleToken")
+    const isValid = watch("title") && watch("clientToken") && watch("scheduleToken") && watch("type")
 
     // Methods
     const init = async () => {
@@ -50,6 +52,7 @@ export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessContro
     const formDataBinding = () => {
         if (!accessControl) return
 
+        setValue("type", accessControl.type)
         setValue("title", accessControl.title)
         setValue("clientToken", accessControl.client.token)
         setValue("scheduleToken", accessControl.schedule.token)
@@ -105,17 +108,18 @@ export const AccessControlForm: FC<I_Props> = ({ onSubmit, onClose, accessContro
                         <Input.Label labelKey="access_type" className="min-w-32" required />
                         <Input.DropDown
                             options={[
-                                { labelKey: "tag", value: "UHF" },
-                                { labelKey: "card", value: "CSN" },
-                                { labelKey: "plate", value: "PLATE" },
-                                { labelKey: "tag_and_card", value: "UHF&&CSN" },
-                                { labelKey: "plate_and_card", value: "PLATE&&CSN" },
-                                { labelKey: "tag_or_card", value: "UHF||CSN" },
-                                { labelKey: "plate_or_card", value: "PLATE||CSN" },
+                                { labelKey: "tag", value: E_AccessControl.Tag.toString() },
+                                { labelKey: "plate", value: E_AccessControl.Plate.toString() },
+                                // { labelKey: "card", value: "CSN" },
+                                // { labelKey: "tag_and_card", value: "UHF&&CSN" },
+                                // { labelKey: "plate_and_card", value: "PLATE&&CSN" },
+                                // { labelKey: "tag_or_card", value: "UHF||CSN" },
+                                // { labelKey: "plate_or_card", value: "PLATE||CSN" },
                             ]}
                             disabled={isSubmitting}
                             className="w-full"
-                            setValue={() => {}}
+                            value={getValues("type")}
+                            setValue={(value: E_AccessControl) => setValue("type", value)}
                         />
                     </div>
 

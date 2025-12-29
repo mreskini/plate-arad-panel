@@ -113,6 +113,7 @@ export const FetchAccessControlsDocument = gql`
   fetchAccessControls {
     token
     title
+    type
     client {
       token
       name

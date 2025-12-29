@@ -26,6 +26,7 @@ export const AddAccessControlModal: FC<I_Props> = ({ callback }) => {
                 client_token: form.clientToken,
                 schedule_token: form.scheduleToken,
                 title: form.title,
+                type: form.type,
             },
         })
 
