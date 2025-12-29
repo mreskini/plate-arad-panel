@@ -20,6 +20,7 @@ export type AccessControl = {
   schedule: Schedule;
   title: Scalars['String']['output'];
   token: Scalars['String']['output'];
+  type: E_AccessControl;
 };
 
 export type AddIdentifierToCustomerRq = {
@@ -50,6 +51,7 @@ export type CreateAccessControlRq = {
   client_token: Scalars['String']['input'];
   schedule_token: Scalars['String']['input'];
   title: Scalars['String']['input'];
+  type: E_AccessControl;
 };
 
 export type CreateClientRq = {
@@ -181,6 +183,11 @@ export type DownloadReportRs = {
   format: Scalars['String']['output'];
 };
 
+export enum E_AccessControl {
+  Plate = 'PLATE',
+  Tag = 'TAG'
+}
+
 export enum E_ClientType {
   Input = 'INPUT',
   Output = 'OUTPUT'
@@ -213,6 +220,7 @@ export type EditAccessControlRq = {
   schedule_token?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   token: Scalars['String']['input'];
+  type?: InputMaybe<E_AccessControl>;
 };
 
 export type EditClientRq = {

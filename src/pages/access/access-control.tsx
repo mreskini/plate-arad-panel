@@ -2,7 +2,7 @@
 import { Layout } from "@components/layout"
 import { AddAccessControlModal, EditAccessControlModal } from "@components/pages/Access"
 import { Button, Table } from "@components/template"
-import { API, type T_AccessControl } from "@core/api"
+import { API, E_AccessControl, type T_AccessControl } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { Edit2 } from "iconsax-reactjs"
@@ -16,6 +16,7 @@ const PageSize = 7
 export const AccessControls = () => {
     // States and hooks
     const { t } = useTranslation("tables")
+    const { t: tCommon } = useTranslation("common")
     const { modalVisibility, openModal } = useModal()
     const [tableData, setTableData] = useState<T_AccessControl[]>([])
     const [selected, setSelected] = useState<T_AccessControl | null>(null)
@@ -36,8 +37,7 @@ export const AccessControls = () => {
         },
         {
             name: t("access_type"),
-            selector: (_row: T_AccessControl, index?: number) =>
-                (index ?? 0) % 3 === 0 ? t("tag_and_card") : t("plate_and_card"), // TODO: Replace with real access type --- IGNORE ---
+            cell: (row: T_AccessControl) => (row.type === E_AccessControl.Tag ? tCommon("tag") : tCommon("plate")),
         },
         {
             width: "80px",

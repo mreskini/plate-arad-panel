@@ -95,6 +95,7 @@ query FetchAccessControls {
   fetchAccessControls {
     token
     title
+    type
     client {
       token
       name
