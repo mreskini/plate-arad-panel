@@ -1,7 +1,7 @@
 import { Loading } from "@components/common"
 import { Layout } from "@components/layout"
 import { ClientCameraModal, ClientCard, EmptyDashboard, OpenDoorModal } from "@components/pages/Dashboard"
-import { type T_Client, type T_Door } from "@core/api"
+import { type T_Client } from "@core/api"
 import { useCommon } from "@core/contexts"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
@@ -13,7 +13,7 @@ const Dashboard = () => {
     const { fetchClients } = useCommon()
     const { modalVisibility } = useModal()
     const [clients, setClients] = useState<T_Client[]>([])
-    const [selectedDoor, setSelectedDoor] = useState<T_Door>()
+    const [selectedDoor, setSelectedDoor] = useState<T_Client>()
     const [isFetching, setIsFetching] = useState<boolean>(true)
     const [currentClient, setCurrentClient] = useState<T_Client | null>(null)
 

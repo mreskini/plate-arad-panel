@@ -1,5 +1,6 @@
 export * from "./convertDateToTimeString"
 export * from "./convertTimeStringToDate"
+export * from "./fetchCameraFrame"
 export * from "./fetchErrorsFromApi"
 export * from "./filterSidebarItemsByPermissions"
 export * from "./findTimeDiff"

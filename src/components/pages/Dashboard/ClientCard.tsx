@@ -1,5 +1,5 @@
 import { Button, Text } from "@components/template"
-import type { T_Client, T_Door, T_LastTraffic } from "@core/api"
+import type { T_Client, T_LastTraffic } from "@core/api"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import clsx from "clsx"
@@ -11,13 +11,12 @@ import { LastTrafficView } from "./LastTrafficView"
 
 interface I_ClientCardProps {
     client: T_Client
-    onDoorSelect: (door: T_Door) => void
+    onDoorSelect: (door: T_Client) => void
     setCurrentClient: Function
 }
 
 export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCurrentClient }) => {
     // States and Hooks
-    const { token } = client
     const { openModal } = useModal()
     const [selectedTraffic, setSelectedTraffic] = useState<T_LastTraffic | null>(null)
 
@@ -41,7 +40,7 @@ export const ClientCard: FC<I_ClientCardProps> = ({ client, onDoorSelect, setCur
                                 <Button
                                     variant="ghost"
                                     onClick={() => {
-                                        onDoorSelect({ token, name: client.name })
+                                        onDoorSelect(client)
                                         openModal(Modals.Monitoring.OpenDoor)
                                     }}
                                     className="bg-red-400 rounded-lg p-1 w-8 h-8 flex items-center justify-center"

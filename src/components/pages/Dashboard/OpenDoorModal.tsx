@@ -1,5 +1,7 @@
 import { Modal, Text, useNotify } from "@components/template"
-import { API, type T_Door } from "@core/api"
+import type { T_Client } from "@core/api"
+import { API } from "@core/api"
+import { fetchCameraFrame, uploadFile } from "@core/functions"
 import { useModal } from "@core/stores"
 import { Modals } from "@core/utilities"
 import { type FC } from "react"
@@ -9,7 +11,7 @@ import type { I_OpenDoorFormData } from "./OpenDoorForm"
 import { OpenDoorForm } from "./OpenDoorForm"
 
 interface I_Props {
-    door: T_Door
+    door: T_Client
 }
 
 const CurrentModal = Modals.Monitoring.OpenDoor
@@ -21,14 +23,28 @@ export const OpenDoorModal: FC<I_Props> = ({ door }) => {
 
     // Methods
     const onSubmit = async (formValues: I_OpenDoorFormData) => {
+        // 1. First, we try to access the image for this traffic
+        let imageUrl = null
+        if (door?.camera?.ip) {
+            const { ip } = door.camera
+            const file = await fetchCameraFrame(ip)
+            if (file) {
+                const { url } = await uploadFile(`${import.meta.env.VITE_PUBLIC_BASE_UPLOAD_URL}/traffic/image`, file)
+                imageUrl = url
+            }
+        }
+
+        // 2. We try to create the traffic
         const { data, error } = await API.Customer.CreateUnauthorizedTraffic({
             body: {
                 client_token: formValues.token,
                 description: formValues.descriptions,
+                ...(imageUrl && { plate_image: imageUrl }),
             },
         })
 
-        if (data?.createUnauthorizedTraffic) {
+        // 3. Notify the user
+        if (data && data.createUnauthorizedTraffic) {
             notify("door_opened_successfully", "success")
             await API.Client.OpenClientGate({ body: { token: formValues.token } })
             closeModal(CurrentModal)
