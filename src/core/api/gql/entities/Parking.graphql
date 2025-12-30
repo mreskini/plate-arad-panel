@@ -13,3 +13,7 @@ query ParkingInfo {
 mutation UpdateParkingLicense($body: UpdateParkingLicenseRq!) {
   updateParkingLicense(body: $body)
 }
+
+mutation UpdateParkingInfo($body: UpdateParkingInfoRq!){
+  updateParkingInfo(body: $body)
+}
