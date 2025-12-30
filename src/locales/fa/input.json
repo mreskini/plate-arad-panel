@@ -178,5 +178,7 @@
   "access_control": "کنترل دسترسی",
   "access": "دسترسی",
   "search": "جستجو",
-  "port": "پورت"
+  "port": "پورت",
+  "tag_cache_time_in_seconds": "زمان عدم ثبت تگ مشابه (ثانیه)",
+  "plate_cache_time_in_seconds": "زمان عدم ثبت پلاک مشابه (ثانیه)"
 }

@@ -14,12 +14,19 @@ export const ParkingInfoDocument = gql`
     uhf
     csn
     plate_recognition
+    tag_cache_time_in_seconds
+    plate_cache_time_in_seconds
   }
 }
     `;
 export const UpdateParkingLicenseDocument = gql`
     mutation UpdateParkingLicense($body: UpdateParkingLicenseRq!) {
   updateParkingLicense(body: $body)
+}
+    `;
+export const UpdateParkingInfoDocument = gql`
+    mutation UpdateParkingInfo($body: UpdateParkingInfoRq!) {
+  updateParkingInfo(body: $body)
 }
     `;
 
@@ -35,6 +42,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UpdateParkingLicense(variables: Types.UpdateParkingLicenseMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UpdateParkingLicenseMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<Types.UpdateParkingLicenseMutation>(UpdateParkingLicenseDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateParkingLicense', 'mutation');
+    },
+    UpdateParkingInfo(variables: Types.UpdateParkingInfoMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Types.UpdateParkingInfoMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<Types.UpdateParkingInfoMutation>(UpdateParkingInfoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateParkingInfo', 'mutation');
     }
   };
 }
