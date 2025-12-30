@@ -1,80 +1,89 @@
 import { Layout } from "@components/layout"
-import { SettingsWrapper } from "@components/pages/Settings"
-import { Button, Input } from "@components/template"
-import { formatNumber } from "@core/functions"
+import { Button, Input, Text, useNotify } from "@components/template"
+import { API } from "@core/api"
+import { useCommon } from "@core/contexts"
+import { useApp } from "@core/stores"
+import type { FormEvent } from "react"
+import { useEffect, useState } from "react"
 
 export const Configuration = () => {
+    // States and hooks
+    const { parking } = useApp()
+    const { notify } = useNotify()
+    const { fetchParkingInfo } = useCommon()
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [tagCacheTime, setTagCacheTime] = useState<number>(0)
+    const [plateCacheTime, setPlateCacheTime] = useState<number>(0)
+
+    // Methods
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setIsSubmitting(true)
+
+        const { data, error } = await API.Parking.UpdateParkingInfo({
+            body: {
+                tag_cache_time_in_seconds: tagCacheTime,
+                plate_cache_time_in_seconds: plateCacheTime,
+            },
+        })
+
+        if (data && data.updateParkingInfo) {
+            notify("configuration_updated_successfully", "success")
+            await fetchParkingInfo()
+        } else if (error) notify("configuration_update_failed", "error")
+
+        setIsSubmitting(false)
+    }
+
+    // Use effects
+    useEffect(() => {
+        if (parking) {
+            setTagCacheTime(parking.tag_cache_time_in_seconds || 0)
+            setPlateCacheTime(parking.plate_cache_time_in_seconds || 0)
+        }
+    }, [parking])
+
+    // Render
     return (
         <Layout.Dashboard>
-            <SettingsWrapper title="configuration">
-                <div className="w-full flex gap-4">
-                    <div className="w-full flex flex-col gap-4">
-                        <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
-                            <Input.Checkbox labelKey="prevent_submission_of_similar_plate" checked />
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="minimum_difference_between_two_adjacent_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="how_many_minutes_is_permitted_to_submit_similar_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
+            <form onSubmit={onSubmit} className="rounded-2xl border border-neutral-200 p-4">
+                <div className="mb-4">
+                    <Text className="text-blue-500" weight={700} variant="heading-6" contentKey="configuration" />
+                </div>
+                <div className="w-full flex flex-col gap-4">
+                    <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
+                        <div className="flex items-center gap-4">
+                            <Input.Label labelKey="tag_cache_time_in_seconds" className="min-w-52" />
+                            <Input.Number
+                                value={tagCacheTime}
+                                onChange={e => setTagCacheTime(Number(e.target.value) || 0)}
+                                placeholder="enter_value"
+                                className="min-w-64"
+                            />
                         </div>
 
-                        <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
-                            <Input.Checkbox labelKey="prevent_submission_of_similar_plate" checked />
-                            <Input.Checkbox labelKey="compare_only_to_last_plate" checked />
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="minimum_difference_between_two_adjacent_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="how_many_minutes_is_permitted_to_submit_similar_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="w-full flex flex-col gap-4">
-                        <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
-                            <Input.Checkbox labelKey="prevent_submission_of_similar_plate" checked />
-                            <Input.Checkbox labelKey="compare_only_to_last_plate" checked />
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="minimum_difference_between_two_adjacent_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="how_many_minutes_is_permitted_to_submit_similar_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-4 border border-neutral-200 rounded-xl p-4">
-                            <Input.Checkbox labelKey="prevent_submission_of_similar_plate" checked />
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="minimum_difference_between_two_adjacent_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
-
-                            <div className="flex items-center gap-4 justify-between">
-                                <Input.Label labelKey="how_many_minutes_is_permitted_to_submit_similar_plates" />
-                                <Input value={formatNumber(2)} placeholder="enter_value" className="w-20" />
-                            </div>
+                        <div className="flex items-center gap-4">
+                            <Input.Label labelKey="plate_cache_time_in_seconds" className="min-w-52" />
+                            <Input.Number
+                                value={plateCacheTime}
+                                setValue={value => setPlateCacheTime(value)}
+                                placeholder="enter_value"
+                                className="min-w-64"
+                            />
                         </div>
                     </div>
                 </div>
 
                 <div className="flex w-full justify-end">
-                    <Button contentKey="save" className="mt-4" />
+                    <Button
+                        type="submit"
+                        contentKey="save"
+                        className="mt-4"
+                        loading={isSubmitting}
+                        disabled={isSubmitting}
+                    />
                 </div>
-            </SettingsWrapper>
+            </form>
         </Layout.Dashboard>
     )
 }

@@ -7,6 +7,8 @@ query ParkingInfo {
     uhf
     csn
     plate_recognition
+    tag_cache_time_in_seconds
+    plate_cache_time_in_seconds
   }
 }
 

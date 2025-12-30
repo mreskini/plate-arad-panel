@@ -289,6 +289,10 @@ export type FetchClientLast10TrafficsRq = {
   client_token: Scalars['String']['input'];
 };
 
+export type FetchCustomerByPlateRq = {
+  plate_serial: Scalars['String']['input'];
+};
+
 export type FetchCustomerByUhfRq = {
   uhf: Scalars['String']['input'];
 };
@@ -378,6 +382,7 @@ export type Mutation = {
   toggleIdentifierStatus: Scalars['Boolean']['output'];
   toggleUserStatus: Scalars['Boolean']['output'];
   updateCustomerAccess: Scalars['Boolean']['output'];
+  updateParkingInfo: Scalars['Boolean']['output'];
   updateParkingLicense: Scalars['Boolean']['output'];
   updateRole: Scalars['Boolean']['output'];
   userLogin: Scalars['String']['output'];
@@ -534,6 +539,11 @@ export type MutationUpdateCustomerAccessArgs = {
 };
 
 
+export type MutationUpdateParkingInfoArgs = {
+  body: UpdateParkingInfoRq;
+};
+
+
 export type MutationUpdateParkingLicenseArgs = {
   body: UpdateParkingLicenseRq;
 };
@@ -557,8 +567,10 @@ export type Parking = {
   csn: Scalars['Boolean']['output'];
   license?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
+  plate_cache_time_in_seconds: Scalars['Float']['output'];
   plate_recognition: Scalars['Boolean']['output'];
   server_uuid?: Maybe<Scalars['String']['output']>;
+  tag_cache_time_in_seconds: Scalars['Float']['output'];
   uhf: Scalars['Boolean']['output'];
 };
 
@@ -579,6 +591,7 @@ export type Query = {
   fetchAccessControls: Array<AccessControl>;
   fetchClientLast10Traffics: Array<Traffic>;
   fetchClients: Array<Client>;
+  fetchCustomerByPlate: Customer;
   fetchCustomerByUHF: Customer;
   fetchCustomers: FetchCustomersRs;
   fetchDevices: Array<Device>;
@@ -605,6 +618,11 @@ export type QueryFetchAccessControlByTokenArgs = {
 
 export type QueryFetchClientLast10TrafficsArgs = {
   body: FetchClientLast10TrafficsRq;
+};
+
+
+export type QueryFetchCustomerByPlateArgs = {
+  body: FetchCustomerByPlateRq;
 };
 
 
@@ -774,6 +792,11 @@ export type TrafficItem = {
 export type UpdateCustomerAccessRq = {
   access_control_token: Scalars['String']['input'];
   customer_token: Scalars['String']['input'];
+};
+
+export type UpdateParkingInfoRq = {
+  plate_cache_time_in_seconds?: InputMaybe<Scalars['Float']['input']>;
+  tag_cache_time_in_seconds?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UpdateParkingLicenseRq = {

@@ -246,7 +246,7 @@ export type SearchIdentifiersQuery = { searchIdentifiers: Array<{ token: string,
 export type ParkingInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type ParkingInfoQuery = { parkingInfo: { name: string, server_uuid?: string | null, clients_count: number, license?: string | null, uhf: boolean, csn: boolean, plate_recognition: boolean } };
+export type ParkingInfoQuery = { parkingInfo: { name: string, server_uuid?: string | null, clients_count: number, license?: string | null, uhf: boolean, csn: boolean, plate_recognition: boolean, tag_cache_time_in_seconds: number, plate_cache_time_in_seconds: number } };
 
 export type UpdateParkingLicenseMutationVariables = Types.Exact<{
   body: Types.UpdateParkingLicenseRq;
@@ -254,6 +254,13 @@ export type UpdateParkingLicenseMutationVariables = Types.Exact<{
 
 
 export type UpdateParkingLicenseMutation = { updateParkingLicense: boolean };
+
+export type UpdateParkingInfoMutationVariables = Types.Exact<{
+  body: Types.UpdateParkingInfoRq;
+}>;
+
+
+export type UpdateParkingInfoMutation = { updateParkingInfo: boolean };
 
 export type ReportTrafficListQueryVariables = Types.Exact<{
   body: Types.ReportTrafficListRq;
