@@ -1,6 +1,7 @@
 export const Modals = {
     ExportFile: "export_file",
     Logout: "logout",
+    Image: "view-image",
 
     Monitoring: {
         OpenDoor: "monitoring-open-door",

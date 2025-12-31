@@ -2,7 +2,7 @@
 import { ExportProgressModal, Status } from "@components/common"
 import { Layout } from "@components/layout"
 import { ClientTypeKeyMap, ClientTypeOptions } from "@components/pages/Access"
-import { ReportsFiltersWrapper } from "@components/pages/Reports"
+import { ImageModal, ReportsFiltersWrapper } from "@components/pages/Reports"
 import type { T_InputDropdownOption } from "@components/template"
 import { Button, Input, Table, Text } from "@components/template"
 import type { E_ClientType, T_Client, T_FetchTrafficReport, T_TrafficReport } from "@core/api"
@@ -17,7 +17,6 @@ import IranLicensePlate from "iran-license-plate"
 import { useEffect, useState } from "react"
 import type { TableColumn } from "react-data-table-component"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
 
 const PageSize = 5
 
@@ -25,7 +24,7 @@ export const ReportsTrafficList = () => {
     // States and hooks
     const { t } = useTranslation("tables")
     const { handleExport } = useReportExport("traffic_list_report")
-    const { modalVisibility } = useModal()
+    const { modalVisibility, openModal } = useModal()
     const { onCustomerSearch, onCardIdentifierSearch, onTagIdentifierSearch, fetchFlatClients } = useCommon()
     const [isFetching, setIsFetching] = useState(true)
     const [tableData, setTableData] = useState<T_FetchTrafficReport>({ count: 0, items: [] })
@@ -50,6 +49,7 @@ export const ReportsTrafficList = () => {
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false)
     const [plateSerial, setPlateSerial] = useState<string>()
     const [accessControlToken, setAccessControlToken] = useState<string>("")
+    const [selectedImage, setSelectedImage] = useState("")
 
     const tableColumns: TableColumn<T_TrafficReport>[] = [
         {
@@ -90,9 +90,17 @@ export const ReportsTrafficList = () => {
             name: t("plate_image"),
             cell: (row: T_TrafficReport) =>
                 row.plate_image ? (
-                    <Link to={row.plate_image} target="_blank">
+                    <Button
+                        variant="ghost"
+                        onClick={() => {
+                            if (row.plate_image) {
+                                setSelectedImage(row.plate_image)
+                                openModal(Modals.Image)
+                            }
+                        }}
+                    >
                         <img src={Images.UserProfilePlaceholder} alt={`${row.customer_name} plate`} />
-                    </Link>
+                    </Button>
                 ) : (
                     ""
                 ),
@@ -144,7 +152,6 @@ export const ReportsTrafficList = () => {
                                 ...(clientToken && { client_token: clientToken }),
                                 ...(cardSerial && { card_serial: cardSerial }),
                                 ...(tagSerial && { tag_serial: tagSerial }),
-                                // ...(hasDriverImage && { has_driver_image: hasDriverImage }),
                                 ...(hasPlateImage && { has_plate_image: hasPlateImage }),
                                 ...(isAuthorized && { authorized: isAuthorized }),
                                 ...(plateSerial && { plate_serial: plateSerial }),
@@ -172,7 +179,6 @@ export const ReportsTrafficList = () => {
                 ...(clientToken && { client_token: clientToken }),
                 ...(cardSerial && { card_serial: cardSerial }),
                 ...(tagSerial && { tag_serial: tagSerial }),
-                // ...(hasDriverImage && { has_driver_image: hasDriverImage }),
                 ...(hasPlateImage && { has_plate_image: hasPlateImage }),
                 ...(isAuthorized && { authorized: isAuthorized }),
                 ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
@@ -208,7 +214,6 @@ export const ReportsTrafficList = () => {
         fetchClientOptions()
         fetchTableData()
         fetchAccessControlOptions()
-        // onUserSearch("").then(_ => setInitialUsers(_))
         onCustomerSearch("").then(_ => setInitialCustomers(_))
         onCardIdentifierSearch("").then(_ => setInitialCardIdentifiers(_))
         onTagIdentifierSearch("").then(_ => setInitialTagIdentifiers(_))
@@ -218,6 +223,7 @@ export const ReportsTrafficList = () => {
     return (
         <Layout.Dashboard>
             {modalVisibility[Modals.ExportFile] && <ExportProgressModal />}
+            {modalVisibility[Modals.Image] && <ImageModal image={selectedImage} />}
 
             <ReportsFiltersWrapper>
                 <div className="grid grid-cols-12 gap-6">
