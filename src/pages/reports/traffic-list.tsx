@@ -371,7 +371,7 @@ export const ReportsTrafficList = () => {
 
                     <div className="flex items-center justify-end w-full col-span-5">
                         <Button
-                            contentKey="apply"
+                            contentKey="search"
                             loading={isFetching}
                             disabled={isFetching}
                             onClick={() => {
