@@ -104,11 +104,12 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
     // Render
     return (
         <Table
-            data={recentTraffics}
+            data={recentTraffics.slice(0, 8)}
             columns={tableColumns}
             rowsPerPage={8}
             loading={isFetching}
             className="rounded-t-none"
+            pagination={false}
         />
     )
 }
