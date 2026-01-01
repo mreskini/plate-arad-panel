@@ -97,7 +97,7 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                 setValue={(_: string) => setValue("identifierToken", _)}
                                 disabled={isFetching}
                                 placeholder="please_search_identifier"
-                                onSearch={onCardIdentifierSearch}
+                                onSearch={searchTerm => onCardIdentifierSearch(searchTerm, true)}
                             />
                         </div>
                     )}
@@ -111,7 +111,7 @@ export const AddOwnerIdentifierForm: FC<I_Props> = ({ onSubmit, onClose }) => {
                                 setValue={(_: string) => setValue("identifierToken", _)}
                                 disabled={isFetching}
                                 placeholder="please_search_identifier"
-                                onSearch={onTagIdentifierSearch}
+                                onSearch={searchTerm => onTagIdentifierSearch(searchTerm, true)}
                             />
                         </div>
                     )}
