@@ -45,7 +45,7 @@ export const OwnersList = () => {
 
     const tableColumns: TableColumn<T_Customer>[] = [
         {
-            width: "100px",
+            width: "80px",
             name: t("image"),
             cell: (row: T_Customer) =>
                 row.image_url ? (
