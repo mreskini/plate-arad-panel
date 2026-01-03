@@ -8,7 +8,7 @@ import { Button, Input, Table, Text } from "@components/template"
 import type { E_ClientType, T_Client, T_FetchTrafficReport, T_TrafficReport } from "@core/api"
 import { API } from "@core/api"
 import { useCommon } from "@core/contexts"
-import { formatDateTime } from "@core/functions"
+import { formatDateTime, isPlateSerialValid } from "@core/functions"
 import { useReportExport } from "@core/hooks"
 import { useModal } from "@core/stores"
 import { Images, Modals } from "@core/utilities"
@@ -115,9 +115,9 @@ export const ReportsTrafficList = () => {
         {
             name: t("plate_number"),
             cell: (row: T_TrafficReport) =>
-                row.plate_serial ? (
+                isPlateSerialValid(row.plate_serial) ? (
                     <div className="max-w-[175px]">
-                        <IranLicensePlate serial={row.plate_serial} />
+                        <IranLicensePlate serial={row.plate_serial!} />
                     </div>
                 ) : (
                     ""

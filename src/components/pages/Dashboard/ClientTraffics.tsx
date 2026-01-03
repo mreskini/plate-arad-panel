@@ -6,7 +6,7 @@ import { ClientTypeKeyMap } from "@components/pages/Access"
 import { Button, Table, Text } from "@components/template"
 import type { T_Client, T_LastTraffic, T_LastTrafficsSub } from "@core/api"
 import { API, CLIENT_LAST_TRAFFICS_SUB } from "@core/api"
-import { formatDateTime } from "@core/functions"
+import { formatDateTime, isPlateSerialValid } from "@core/functions"
 import clsx from "clsx"
 import { More } from "iconsax-reactjs"
 import IranLicensePlate from "iran-license-plate"
@@ -55,9 +55,9 @@ export const ClientTraffics: FC<I_Props> = ({ client, selected, setSelected }) =
         {
             name: t("plate_number"),
             cell: (row: T_LastTraffic) =>
-                row.plate_serial ? (
+                isPlateSerialValid(row.plate_serial) ? (
                     <div className="max-w-[175px]">
-                        <IranLicensePlate serial={row.plate_serial} />
+                        <IranLicensePlate serial={row.plate_serial!} />
                     </div>
                 ) : (
                     ""
