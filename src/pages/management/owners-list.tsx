@@ -51,7 +51,7 @@ export const OwnersList = () => {
                 row.image_url ? (
                     <img
                         src={row.image_url}
-                        className="w-12 rounded-full"
+                        className="w-12 rounded-full aspect-square object-cover"
                         alt={`${row.first_name} ${row.last_name} profile`}
                     />
                 ) : (
