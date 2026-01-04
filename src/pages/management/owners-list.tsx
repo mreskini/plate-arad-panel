@@ -303,7 +303,7 @@ export const OwnersList = () => {
 
                     <div className="w-full col-span-10 flex">
                         <Button
-                            contentKey="apply"
+                            contentKey="search"
                             loading={isFetching}
                             disabled={isFetching}
                             onClick={() => {

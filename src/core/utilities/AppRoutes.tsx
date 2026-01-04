@@ -27,6 +27,7 @@ export const AppRoutes = {
     settings: {
         configuration: "/settings/configuration",
         license: "/settings/license",
+        ping: "/settings/ping",
     },
 
     access: {

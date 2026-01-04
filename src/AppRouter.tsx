@@ -25,6 +25,7 @@ import { ReportsTrafficWithEmergencyList } from "./pages/reports/traffic-with-em
 import { ReportsWithoutPlateTrafficList } from "./pages/reports/without-plate-traffic-list"
 import { Configuration } from "./pages/settings/configuration"
 import { License } from "./pages/settings/license"
+import { SettingsDevicesPing } from "./pages/settings/ping"
 
 const CommonProviderWrapper = () => {
     // Render
@@ -67,6 +68,7 @@ export const AppRouter = createBrowserRouter(
                 {/* Settings */}
                 <Route path={AppRoutes.settings.configuration} element={<Configuration />} />
                 <Route path={AppRoutes.settings.license} element={<License />} />
+                <Route path={AppRoutes.settings.ping} element={<SettingsDevicesPing />} />
 
                 {/* Access */}
                 <Route path={AppRoutes.access.doors} element={<Doors />} />

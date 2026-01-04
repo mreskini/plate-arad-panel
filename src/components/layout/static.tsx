@@ -124,6 +124,10 @@ export const SidebarItems: T_Sidebar[] = [
                         link: AppRoutes.settings.license,
                     },
                     {
+                        titleContentKey: "ping_devices",
+                        link: AppRoutes.settings.ping,
+                    },
+                    {
                         titleContentKey: "configuration",
                         link: AppRoutes.settings.configuration,
                     },
