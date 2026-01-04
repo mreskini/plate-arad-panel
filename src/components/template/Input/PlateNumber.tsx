@@ -25,7 +25,7 @@ export const PlateNumber: FC<I_PlateNumber> = ({
     const [fourthPart, setFourthPart] = useState<string>("")
 
     const firstPartRef = useRef<HTMLInputElement>(null)
-    const secondPartRef = useRef<HTMLInputElement>(null)
+    const secondPartRef = useRef<any>(null)
     const thirdPartRef = useRef<HTMLInputElement>(null)
     const fourthPartRef = useRef<HTMLInputElement>(null)
 
@@ -55,10 +55,21 @@ export const PlateNumber: FC<I_PlateNumber> = ({
     // Methods
     const onChangeHandler = () => setValue(`IR${fourthPart}-${thirdPart}${secondPart}${firstPart}`)
 
+    const tryOpenDropdown = () => {
+        try {
+            secondPartRef.current?.click?.()
+        } catch {
+            // ignore
+        }
+    }
+
     const handleFirstPartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.slice(0, 2)
         setFirstPart(value)
-        if (value.length === 2) secondPartRef.current?.focus()
+        if (value.length === 2) {
+            secondPartRef.current?.focus?.()
+            tryOpenDropdown()
+        }
     }
 
     const handleThirdPartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -168,6 +179,7 @@ export const PlateNumber: FC<I_PlateNumber> = ({
                     value={secondPart}
                     disabled={disabled}
                     tabIndex={2}
+                    onFocus={() => tryOpenDropdown()}
                 />
             </div>
 
