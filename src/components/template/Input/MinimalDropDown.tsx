@@ -105,6 +105,7 @@ export const MinimalDropDown: FC<I_MinimalDropDown> = ({
     useEffect(() => {
         const option = find(options, { value })
         if (option) setSelectedOption(option)
+        else setSelectedOption(undefined)
     }, [value])
 
     // Render

@@ -29,7 +29,7 @@ export const PlateNumber: FC<I_PlateNumber> = ({
     const thirdPartRef = useRef<HTMLInputElement>(null)
     const fourthPartRef = useRef<HTMLInputElement>(null)
 
-    const isClearButtonAvailable = clearable && (firstPart || thirdPart || fourthPart)
+    const isClearButtonAvailable = clearable && (firstPart || secondPart || thirdPart || fourthPart)
 
     // Parse initial value
     useEffect(() => {
@@ -94,6 +94,7 @@ export const PlateNumber: FC<I_PlateNumber> = ({
 
     const clearPlateSerial = () => {
         setFirstPart("")
+        setSecondPart("")
         setThirdPart("")
         setFourthPart("")
     }
