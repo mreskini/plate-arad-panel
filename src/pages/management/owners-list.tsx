@@ -165,7 +165,7 @@ export const OwnersList = () => {
                                 ...(searchToken && { search: searchToken }),
                                 ...(disabledApb && { apb: !disabledApb }),
                                 ...(blocked && { blocked }),
-                                ...(plateSerial && { plate_serial: plateSerial }),
+                                ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
                             },
                         })
                     )
@@ -188,7 +188,7 @@ export const OwnersList = () => {
                 ...(searchToken && { search: searchToken }),
                 ...(disabledApb && { apb: !disabledApb }),
                 ...(blocked && { blocked }),
-                ...(plateSerial && { plate_serial: plateSerial }),
+                ...(plateSerial && plateSerial !== "IR-" && { plate_serial: plateSerial }),
             },
         })
         if (data) setTableData(data.fetchCustomers)
